@@ -231,7 +231,7 @@ var app = (function () {
         previousBeacon = mNearestBeacon.major;
 
     }
-
+    
     function displayRecentRegionEvent() {
         if (mAppInBackground) {
             // Set notification title.

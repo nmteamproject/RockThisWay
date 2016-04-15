@@ -24,36 +24,72 @@
 
     <script>
         var notificationID = 0;
+        var menuShown = false;
+
         function triggerModal() {
             $("#myModal").modal()
         }
-        
-        function giveAlert(){
-        cordova.plugins.notification.local.schedule({
+
+        function giveAlert() {
+            cordova.plugins.notification.local.schedule({
                 id: ++notificationID,
                 title: "title"
             });
-    }
-
+        }
         
+        function toggleMenu(){
+            
+            if(menuShown == false){
+                $('#right').animate({
+                    left: 200
+                }, 'fast', function () {
+                    
+                });
+                menuShown = true;
+            }else{
+                $('#right').animate({
+                    left: 0
+                }, 'fast', function () {
+                   
+                });
+                menuShown = false;
+            }
+        }
+        
+        function changePage(link){
+            window.location.href = link;
+        }
     </script>
 
 </head>
 
 <body>
+    <div id="menu">
+        <ul>
+            <li onclick="changePage('survey.html')">Retake Survey</li>
+            <li onclick="changePage('lyricgame.html')">Play Lyracle</li>
+            <li onclick="changePage('againstthecrowd.html')">Play Against the Crowd</li>
+            <li onclick="changePage('triviagame.html')">Play Trivia</li>
+            <li onclick="changePage('triviagame.html')">Plan</li>
+            <li>View Map</li>
+        </ul>
+    </div>
 
-    <header>
-        <button class="back" onclick="history.back()">
-            <img src="ui/images/arrow-left.svg" />
-        </button>
+    <div id="right">
 
-        <img src="images/logo2.png" height="50px" />
-
+        <header>
+            <div id="menubar">
+                <div id="button" onclick="toggleMenu()">
+                    &#9776;
+                </div>
+            </div>
+            <img src="images/logo2.png" height="50px" />
+    
     </header>
 
     <ul id="homeScreen" class="dynamic">
         <div style="margin: 0 0.9em 0 0.9em">
-            <p class="lead" style="text-align: center">Start navigating the Rock Hall!</p>
+            <p class="lead" style="text-align: center">Your Plan</p>
         </div>
     </ul>
 
@@ -83,7 +119,7 @@
 
         </div>
     </div>
-
+</div>
 
 </body>
 
