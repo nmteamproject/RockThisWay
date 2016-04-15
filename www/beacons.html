@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Rock This Way</title>
+
+    <style>
+        @import 'ui/css/bootstrap.min.css';
+        @import 'ui/css/evothings-app.css';
+        @import 'ui/css/animate.css';
+        @import 'ui/css/style.css';
+    </style>
+
+    <script src="cordova.js"></script>
+    <script src="libs/jquery/jquery.js"></script>
+    <script src="libs/evothings/evothings.js"></script>
+    <script src="app.js"></script>
+    <script src="libs/bootstrap/bootstrap.min.js"></script>
+
+    <script>
+        var notificationID = 0;
+        function triggerModal() {
+            $("#myModal").modal()
+        }
+        
+        function giveAlert(){
+        cordova.plugins.notification.local.schedule({
+                id: ++notificationID,
+                title: "title"
+            });
+    }
+
+        
+    </script>
+
+</head>
+
+<body>
+
+    <header>
+        <button class="back" onclick="history.back()">
+            <img src="ui/images/arrow-left.svg" />
+        </button>
+
+        <img src="images/logo2.png" height="50px" />
+
+    </header>
+
+    <ul id="homeScreen" class="dynamic">
+        <div style="margin: 0 0.9em 0 0.9em">
+            <p class="lead" style="text-align: center">Start navigating the Rock Hall!</p>
+        </div>
+    </ul>
+
+
+    <ul id="test" class="dynamic"></ul>
+
+
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modalTitle">Play Lyracle</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalDescription">Play a game where you get a clip of a song, then you have to put the rest of the lyrics in order!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalPlay" onclick="playGame(1)">Play</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

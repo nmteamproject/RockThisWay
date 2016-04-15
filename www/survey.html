@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+	<title>Rock This Way</title>
+
+	<style>
+		@import 'ui/css/evothings-app.css';
+        @import 'ui/css/animate.css';
+        @import 'ui/css/style.css';
+        @import 'ui/css/survey.css';
+	</style>
+
+	<script src="cordova.js"></script>
+	<script src="libs/jquery/jquery.js"></script>
+	<script src="libs/evothings/evothings.js"></script>
+    <script src="surveyquestions.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+        <button class="back" onclick="history.back()">
+            <img src="ui/images/arrow-left.svg" />
+        </button>
+
+        Survey
+
+    </header>
+
+    <div id="quizzie">
+      <h1>Rock Hall Route Survey</h1>
+        <ul class="quiz-step step1 current">
+            <div id="questions">
+
+            </div>
+            <div id="answers">
+
+            </div>
+        </ul>
+        <ul id="results">
+            
+        </ul>
+    </div>
+    
+    <script language="javascript" type="text/javascript">
+        $(function(){
+            $('body').hide().fadeIn('slow');
+        });
+        // Quiz result options in a separate object for flexibility
+        var resultOptions = [
+            {   title: 'Rocker Route',
+                desc: '<p>You are a hardcore rocker at heart and love classic rock and roll!</p><br>' +
+                '<img src=\"images/rock.jpg\"><br>' +
+                '<button id=\"skip\" style=\"margin-top:15px\" onclick=\"skip()\">Finish</button>'},
+            {   title: 'Pop Route',
+                desc: '<p>You love all popular music and like to stay contemporary!</p><br>' +
+                '<img src=\"images/pop.jpg\"><br>' +
+                '<button id=\"skip\" style=\"margin-top:15px\" onclick=\"skip()\">Finish</button>'},
+            {   title: 'Country Route',
+                desc: '<p>You like to sit back and listen to the soothing twang of country music!</p><br>' +
+                '<img src=\"images/country.jpg\"><br>' +
+                '<button id=\"skip\" style=\"margin-top:15px\" onclick=\"skip()\">Finish</button>'},
+            {   title: 'Alternative Route',
+                desc: '<p>You like to stray away from the norm and listen to something a little out of the box!</p><br>' +
+                '<img src=\"images/alternative.jpg\"><br>' +
+                '<button id=\"skip\" style=\"margin-top:15px\" onclick=\"skip()\">Finish</button>'}
+        ];
+        
+        function skip(){
+            window.location.href = "beacons.html";
+        }
+        
+        var currentStep = 0;
+        var totalScore = 0;
+        setupQuestion(currentStep);
+        
+        //populate question
+        function setupQuestion(currentStep){
+            var currentQuestion = eval("q" + currentStep + "Answers");
+            document.getElementById("questions").innerHTML = 
+                "<li class=\"question\">" + 
+                    "<div class=\"question-wrap\">" + 
+                        "<p>" + questions[currentStep] + "</p>" + 
+                    "</div>" +
+                "</li>"
+                    
+            for(var i=0; i < currentQuestion.length; i++){
+                var element = document.getElementById("answers");
+                var line = document.createElement("li");
+                $(line).addClass("quiz-answer");
+                element.appendChild(line);
+                
+                var container = document.createElement("div");
+                $(container).addClass("answer-wrap");
+                line.appendChild(container);
+                
+                var para = document.createElement("p");
+                $(para).addClass("answer-text");
+                container.appendChild(para);
+                
+                var answer = currentQuestion[i].answer;
+                var answerText = document.createTextNode(answer);
+                para.appendChild(answerText);
+                
+                var points = currentQuestion[i].points;
+                            
+                container.addEventListener("click", selectAnswer);
+                container.addEventListener("click", function(){console.log((parseInt(points)))});
+            }
+        }
+
+        //update question when answer is clicked
+        function selectAnswer(){
+            currentStep++;
+            if(currentStep < 10){
+                var element = document.getElementById("answers");
+                $(element).empty();
+                setupQuestion(currentStep);
+            } else if(currentStep == 10){
+                calcResults();
+            }
+        }
+        
+        // display scoring results
+        function calcResults() {
+            var element = document.getElementById("answers");
+            $(element).empty();
+            
+            var question = document.getElementById("questions");
+            $(question).empty();
+            
+            var line = document.createElement("li");
+            $(line).addClass("results-inner");
+            element.appendChild(line);
+            
+            var para = document.createElement("p");
+            $(para).addClass("answer-text");
+            line.appendChild(para);
+            
+            var text = document.createTextNode("Your result is:");
+            para.appendChild(text);
+            
+            var heading = document.createElement("h1");
+            line.appendChild(heading);
+            
+            var headingText = resultOptions[0].title;
+            heading.innerHTML = headingText;
+            
+            var desc = document.createElement("p");
+            $(desc).addClass("desc");
+            line.appendChild(desc);
+            
+            var descText = resultOptions[0].desc;
+            desc.innerHTML = descText;
+        }
+    </script>
+</body>
+
+</html>

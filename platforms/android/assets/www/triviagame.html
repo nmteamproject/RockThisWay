@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html style="background:#91bfb4">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Rock This Way</title>
+
+    <style>
+        @import 'ui/css/evothings-app.css';
+    </style>
+
+    <script src="cordova.js"></script>
+    <script src="libs/jquery/jquery.js"></script>
+    <script src="libs/evothings/evothings.js"></script>
+
+
+    <script language="javascript" type="text/javascript">
+        // Array of trivia data
+        var TriviaData = new Array(30)
+        createTwoDimensionalArray(3);
+        var tArrayLength = TriviaData.length;
+        
+        // Variables to track state of the game
+        // i.e. number questions asked, current correct total and current question
+        var questionsAsked = 0;
+        var totalCorrect = 0;
+        var currentQuestion = 0;
+        var selectionValid = false;
+
+        // Questions
+        TriviaData[0][0] = "Taylor Swift\'s song \"Shake It Off\" is from her album \"Red\".";
+        TriviaData[1][0] = "I 100% know how all this code works.";
+        TriviaData[2][0] = "The Rock and Roll hall of fame is in Cleveland Ohio.";
+        TriviaData[3][0] = "Imagine RIT is on August 23rd.";
+        TriviaData[4][0] = "Paul McCartney is a member of The Eagles.";
+        TriviaData[5][0] = "This was coded by Brendan Kenny and a gay girl with blue hair.";
+        TriviaData[6][0] = "This app was built using Cordova.";
+        TriviaData[7][0] = "The Top Grossing Album of all time was made by Justin Beiber.";
+        TriviaData[8][0] = "The lead singer of fun. is Nate Ruess.";
+        TriviaData[9][0] = "The Who is a British Band";
+        TriviaData[10][0] = "Rochester is a bipoler city.";
+
+        // Answers
+        TriviaData[0][1] = "false";
+        TriviaData[1][1] = "false";
+        TriviaData[2][1] = "true";
+        TriviaData[3][1] = "false";
+        TriviaData[4][1] = "false";
+        TriviaData[5][1] = "true";
+        TriviaData[6][1] = "true";
+        TriviaData[7][1] = "false";
+        TriviaData[8][1] = "true";
+        TriviaData[9][1] = "true";
+        TriviaData[10][1] = "true";
+
+        // Has question been asked
+        // -- necessary because we are asking in random order
+        TriviaData[0][2] = "no";
+        TriviaData[1][2] = "no";
+        TriviaData[2][2] = "no";
+        TriviaData[3][2] = "no";
+        TriviaData[4][2] = "no";
+        TriviaData[5][2] = "no";
+        TriviaData[6][2] = "no";
+        TriviaData[7][2] = "no";
+        TriviaData[8][2] = "no";
+        TriviaData[9][2] = "no";
+        TriviaData[10][2] = "no";
+
+        // Load up first question
+        window.onload = setQuestion;
+
+        // Sets question text and indicator so that we know the question has been displayed
+        function setQuestion()
+        {
+            selectionValid = false; // Flag to make sure question has not been asked yet
+            while (selectionValid == false)
+            {
+                currentQuestion = Math.floor(Math.random() * tArrayLength); // randomly select starting question
+                
+                if (TriviaData[currentQuestion][2] == "no")
+                {
+                    selectionValid = true;
+                }
+            }
+            document.getElementById("TriviaQuestion").innerHTML = TriviaData[currentQuestion][0];
+            TriviaData[currentQuestion][2] = "yes";
+            questionsAsked = questionsAsked + 1;
+        }
+
+        function processAnswer(myAnswer)
+        {
+            if (TriviaData[currentQuestion][1] == myAnswer)
+            {
+                // answer correct
+                totalCorrect = totalCorrect + 1;
+            }
+        }
+
+        // This function creates our two dimensional array
+        function createTwoDimensionalArray(arraySize)
+        {
+            for (i = 0; i < TriviaData.length; ++i)
+                TriviaData[i] = new Array(arraySize);
+        }
+
+        // This function checks the answer, updates correct total
+        // and randomly selects the next question
+        function checkAnswer()
+        {
+            if (document.getElementById("RadioTrue").checked)
+            {
+                processAnswer("true");
+            } 
+            else
+            {
+                processAnswer("false");
+            }
+            // get next question if not asked all yet
+            if (questionsAsked < 10)
+            {
+                setQuestion();
+            }
+            // final question asked - disable button and show final results
+            else
+            {
+                alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
+                document.getElementById("ButtonContinue").disabled = true;
+            }
+            // update totals
+            document.getElementById("NumberAsked").innerHTML = questionsAsked;
+            document.getElementById("NumberCorrect").innerHTML = totalCorrect;
+        }
+    </script>
+
+</head>
+
+
+
+
+<body style="background:#91bfb4">
+
+    <header>
+        <button class="back" onclick="history.back()">
+            <img src="ui/images/arrow-left.svg" />
+        </button>
+
+        Trivia!
+
+    </header>
+
+    <center>
+        <p>Now That's What I Call Triva! 37
+            <br /> Question <span id="NumberAsked">1</span> of 10
+            <br>you've got <span id="NumberCorrect">0</span> answer(s) correct</p>
+        <p>
+            <strong><span id="TriviaQuestion">???</span></strong>
+        </p>
+        <p>
+            &nbsp;
+            <input id="RadioTrue" type="radio" value="true" name="answer" checked="checked" /> True &nbsp;&nbsp;&nbsp;
+            <input id="RadioFalse" type="radio" value="false" name="answer" /> False
+        </p>
+        <p>
+            <input id="ButtonContinue" onclick="checkAnswer();" type="button" value="Submit" />
+        </p>
+
+    </center>
+</body>
+
+</html>
