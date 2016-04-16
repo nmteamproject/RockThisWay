@@ -1,0 +1,23 @@
+{
+  "name": "rockthisway",
+  "version": "1.0.0",
+  "description": "somethingsomething interactive installation thing",
+  "main": "index.js",
+  "dependencies": {
+    "cordova": "^6.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmteamproject/RockThisWay.git"
+  },
+  "author": "a bunch of rit kids",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmteamproject/RockThisWay/issues"
+  },
+  "homepage": "https://github.com/nmteamproject/RockThisWay#readme"
+}
