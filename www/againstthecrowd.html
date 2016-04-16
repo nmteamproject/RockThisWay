@@ -10,20 +10,26 @@
     <title>Rock This Way</title>
 
     <style>
-/*        @import 'ui/css/evothings-app.css';*/
+        /*        @import 'ui/css/evothings-app.css';*/
+        
         @import 'ui/css/animate.css';
         @import 'ui/css/style.css';
     </style>
 
     <script src="cordova.js"></script>
     <script src="libs/jquery/jquery.js"></script>
-<!--    <script src="libs/evothings/evothings.js"></script>-->
+    <!--    <script src="libs/evothings/evothings.js"></script>-->
     <script src="crowdanswers.js"></script>
 
     <script type="text/javascript">
-        var points = 0;
+        if (localStorage.getItem("score") != undefined){
+            var points = parseInt(localStorage.score);
+        }else{
+            var points = 0;
+        }
         var questionNumber = 0;
         window.onload = fillQuestions;
+
 
         var strikes = 0;
 
@@ -67,9 +73,12 @@
         function fillQuestions() {
             var questionList = "";
             for (var i = 0; i < questions.length; i++) {
-                questionList += "<div class='crowdQuestion' id='crowdQ" + i + "'>"+(i+1)+"</div>";
+                questionList += "<div class='crowdQuestion' id='crowdQ" + i + "'>" + (i + 1) + "</div>";
             }
             document.getElementById('question').innerHTML = questionList;
+
+            document.getElementById('crowdPoints').innerHTML = points;
+
             loadQuestion();
         }
 
@@ -83,6 +92,10 @@
             document.getElementById(qNum).className += " bounceIn";
             document.getElementById(qNum).innerHTML = questions[questionNumber];
         }
+
+        window.onbeforeunload = function (e) {
+            localStorage.score = points;
+        };
     </script>
 
 </head>
@@ -97,8 +110,8 @@
             <img src="ui/images/arrow-left.svg" />
         </button>
 
-         <img src="images/logo2.png" height="50px" />
-        
+        <img src="images/logo2.png" height="50px" />
+
         <div class="points" id="crowdPoints">0</div>
 
     </header>
@@ -109,9 +122,10 @@
         <br>
         <div id="pointsAwarded"></div>
         <br>
-<center id="strikes"></center>
+        <center id="strikes"></center>
         <div class="submissionForm">
-            <input id="answer" type="texts" name="answer" placeholder="Answer"><br>
+            <input id="answer" type="texts" name="answer" placeholder="Answer">
+            <br>
             <button id="submit" class="submitButton" style="margin-top:15px; margin-bottom:15px" onclick="submit()">Submit</button>
         </div>
     </div>

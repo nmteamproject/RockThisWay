@@ -360,59 +360,48 @@ body::after {
 
 
 
+
 /*  ----------------------------------------------------------
-				 Slide Out Menu
+								Exhibit Page
 	---------------------------------------------------------- */
 
-
-
-#menubar {
-    display: inline-block;
-    background-color:#1D1A22;
-    color: #fff;
-    float: left;
-    font-size: 30px;
-    height: 5px;
-    margin-top: -5px;
-}
-
-#button {
-    cursor:pointer;
-}
-
-#menu, #right {
-    display:inline;
-}
-
-#menu li a {
-    padding: 10px;
-    display: block;
-    color: white;
-    text-decoration: none;
-}
-
-#right {
-    width:100%;
-    background-color: #1D1A22;
-    z-index: 5;
+#exhibitPhoto{
+    text-align: center;
     position: fixed;
-    left: 0px;
-    height: 100%;
-    margin-top: -40px;
+    z-index: 0;
+}
+#exhibitDescription{    
+    font-size: 15px;
+    padding-bottom: 20px;
+    font-weight: 100;
+}
+#exhibitTitle{
+    color:white;
+    font-size: 25px;
+    font-weight: 100;
+}
+
+#exhibitInfo{
+    background:linear-gradient(to right, #c8a11e 0%,#6a5e1a 100%);;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 35px;
+    font-size: 15px;
+    font-weight:bolder;
+    position: relative;
+    z-index: 2;
+    margin-top: 250px;
 }
 
 
 
-#menu {
-    float:left;
-    width: 250px;
-    height: 100%;
-    margin-top: -40px;
-    background-color:#2e2d2d;
-}
-
-#menu li {
-    background-color:#444;
-    border-bottom: 1px solid #888;
-    color: white;
+.playButton{
+    text-align: center;
+    margin: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 1px #c8a11e;
+    color: #c8a11e;
+    position: relative;
+    z-index: 2;
 }
