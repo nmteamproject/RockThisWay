@@ -4,6 +4,12 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var cordova = require('cordova-lib').cordova;
+var browserify = require('browserify');
+var uglify = require('gulp-uglify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var assign = require('lodash.assign');
+var watchify = require('watchify');
 
 // Settings
 var input = './www/ui/scss/*.scss';
@@ -29,13 +35,37 @@ gulp.task('sass', function() {
 /**
  * Watch our sass
  */
-gulp.task('watch', function() {
+gulp.task('watch', ['javascript'], function() {
    return gulp
         .watch(input, ['sass'])
         .on('change', function(e) {
             console.log('File ' + e.path + ' was ' + e.type + ', running tasks...');
         });
 });
+
+/**
+ * Bundle our browserify modules
+ * and uglify the result
+ */
+gulp.task('javascript', bundle);
+var customOpts = {
+    entries: ['./www/js/main.js'],
+    debug: true
+};
+var opts = assign({}, watchify.args, customOpts);
+var b = watchify(browserify(opts));
+
+b.on('update', bundle);
+
+function bundle() {
+    return b.bundle()
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./www/js/'));
+}
 
 /**
  * Build cordova for iOS
