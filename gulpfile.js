@@ -10,6 +10,8 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var assign = require('lodash.assign');
 var watchify = require('watchify');
+var babelify = require('babelify');
+var gutil = require('gulp-util');
 
 // Settings
 var input = './www/ui/scss/*.scss';
@@ -21,6 +23,7 @@ var sassOptions = {
 
 /**
  * Compile our sass
+ * Run autoprefixer on the result (adds vendor prefixes)
  */
 gulp.task('sass', function() {
    return gulp
@@ -33,7 +36,7 @@ gulp.task('sass', function() {
 });
 
 /**
- * Watch our sass
+ * Watch our sass and javascript
  */
 gulp.task('watch', ['javascript'], function() {
    return gulp
@@ -44,10 +47,11 @@ gulp.task('watch', ['javascript'], function() {
 });
 
 /**
- * Bundle our browserify modules
+ * Watch our browserify modules
+ * before we bundle, transform es6 modules to es5
+ * bundle and output to bundle.js
  * and uglify the result
  */
-gulp.task('javascript', bundle);
 var customOpts = {
     entries: ['./www/js/main.js'],
     debug: true
@@ -55,10 +59,14 @@ var customOpts = {
 var opts = assign({}, watchify.args, customOpts);
 var b = watchify(browserify(opts));
 
+gulp.task('javascript', bundle);
 b.on('update', bundle);
+b.on('log', gutil.log);
 
 function bundle() {
-    return b.bundle()
+    return b.transform(babelify, {presets: ['es2015']})
+        .bundle()
+        .on('error', gutil.log.bind(gutil, 'Browserify Error'))
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
@@ -83,7 +91,7 @@ gulp.task('cordova-build', function(callback) {
  * Run cordova for iOS
  * Compiles sass first
  */
-gulp.task('cordova', ['sass'], function(callback) {
+gulp.task('build', ['sass'], function(callback) {
     cordova.run({
         'platforms': ['ios'],
         'options': {
