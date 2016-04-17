@@ -3,6 +3,7 @@
 html,
 body,
 #quizzie {
+    color: white;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -44,6 +45,7 @@ p {
 
 #quizzie ul li.quiz-answer {
     cursor: pointer;
+    margin-top: -35px;
 }
 
 #quizzie ul li.question,
@@ -54,6 +56,7 @@ p {
     text-align: center;
     margin: 0;
     margin-bottom: 2%;
+    font-size: 2em;
 }
 
 #quizzie ul li.results-inner img {
@@ -69,13 +72,12 @@ p {
     display: block;
     padding: 1%;
     margin: 1em 10%;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
 }
 
 #quizzie .answer-wrap {
-    background: Turquoise;
+    background: #1D1A22;
+    border: 1px solid;
+    border-color: #18dad8;
     -moz-transition: background-color 0.5s ease;
     -o-transition: background-color 0.5s ease;
     -webkit-transition: background-color 0.5s ease;
@@ -83,6 +85,7 @@ p {
 }
 
 #quizzie .answer-wrap:hover {
-    background: DarkTurquoise;
+    background: #18dad8;
+    color: black;
 }
 

@@ -14,12 +14,15 @@ var babelify = require('babelify');
 var gutil = require('gulp-util');
 
 // Settings
-var input = './www/ui/scss/*.scss';
-var output = './www/ui/css';
+var sassInput = './www/ui/scss/*.scss';
+var sassOutput = './www/ui/css';
 var sassOptions = {
     errLogToConsole: true,
     outputStyle: 'compressed'
 };
+var jsEntry = './www/js/main.js';
+var jsOutput = './www/js/';
+var jsOutputFile = 'bundle.js';
 
 /**
  * Compile our sass
@@ -27,12 +30,12 @@ var sassOptions = {
  */
 gulp.task('sass', function() {
    return gulp
-        .src(input)
+        .src(sassInput)
         .pipe(sourcemaps.init())
         .pipe(sass(sassOptions).on('error', sass.logError))
         .pipe(sourcemaps.write())
         .pipe(autoprefixer())
-        .pipe(gulp.dest(output)); 
+        .pipe(gulp.dest(sassOutput)); 
 });
 
 /**
@@ -40,7 +43,7 @@ gulp.task('sass', function() {
  */
 gulp.task('watch', ['javascript'], function() {
    return gulp
-        .watch(input, ['sass'])
+        .watch(sassInput, ['sass'])
         .on('change', function(e) {
             console.log('File ' + e.path + ' was ' + e.type + ', running tasks...');
         });
@@ -53,7 +56,7 @@ gulp.task('watch', ['javascript'], function() {
  * and uglify the result
  */
 var customOpts = {
-    entries: ['./www/js/main.js'],
+    entries: [jsEntry],
     debug: true
 };
 var opts = assign({}, watchify.args, customOpts);
@@ -67,12 +70,12 @@ function bundle() {
     return b.transform(babelify, {presets: ['es2015']})
         .bundle()
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-        .pipe(source('bundle.js'))
+        .pipe(source(jsOutputFile))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
-            .pipe(uglify())
+            //.pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./www/js/'));
+        .pipe(gulp.dest(jsOutput));
 }
 
 /**

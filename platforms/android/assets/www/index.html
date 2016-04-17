@@ -1,71 +1,55 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-
     <title>Rock This Way</title>
-
     <style>
+        @import 'ui/css/bootstrap.min.css';
         @import 'ui/css/evothings-app.css';
-        @import 'ui/css/animate.css';
         @import 'ui/css/style.css';
     </style>
-
-    <script src="cordova.js"></script>
-    <script src="libs/jquery/jquery.js"></script>
 </head>
 
 <body>
-
     <header>
-        
+        <button class="back" onclick="history.back()">
+            <img src="ui/images/arrow-left.svg" />
+        </button>
 
-        <img src="images/logo.png" height="50px"/>
-
+        <img src="images/logo2.png" height="50px"/>
     </header>
 
-    <ul id="homeScreen" class="dynamic">
-        <div style="margin: 0 0.9em 0 0.9em">
-            <p class="lead">Welcome to Rock This Way! </p>
-            <p class="lead">The wayfinding Rock Hall App.</p>
-            <br>
-            <p class="lead" id="login">Login</p>
-            <br>
-            <div style="text-align: center;">
-                <form>
-                    Username:
-                    <input id="username" type="text" name="username">
-                    <br>
-                    <br> Password:
-                    <input id="password" type="password" name="password">
-                    <br>
-                    <br>
-                </form>
-                <button id="submit" style="margin-top:15px" onclick="submit()">Submit</button>
-                <br>
-                <br>
-                <p class="hidden">Username/password cannot be blank.</p>
-            </div>
+    <br>
+    <p class="lead" id="login">Plan Your Day</p>
+    
+    <button class="arrow" onclick="takeSurvey()">
+        <img src="images/arrow.png" width="35px" height="40px"/>
+    </button>
 
-
-        </div>
-    </ul>
-
+    <p class="plan">It's time to plan your visit to the Rock and Roll Hall of Fame! Start by planning your day here.
+        <img style="padding-top: 5%" src="images/welcome.png"/>
+    </p>
+    
+    
+    <!-- non blocking loading -->
+    <script src="cordova.js"></script>
+    
     <script type="text/javascript">
-        function submit() {
-            if (($('#username').val() == '') || ($('#password').val() == '')) {
-                $('.hidden').css('opacity', '1.0');
-            } else {
-                window.location.href = "welcome.html";
-            }
+        $(function(){
+            $('body').hide().fadeIn('slow');
+        });
+        function takeSurvey() {
+            window.location.href = "survey.html";
+        }
+
+        function skip() {
+            window.location.href = "beacons.html";
         }
     </script>
-
-
+    
+    <!-- all of our bundled js -->
+    <script src="js/bundle.js"></script>
 </body>
-
 </html>

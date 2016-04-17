@@ -19,7 +19,7 @@
 	<script src="cordova.js"></script>
 	<script src="libs/jquery/jquery.js"></script>
 	<script src="libs/evothings/evothings.js"></script>
-    
+    <script src="surveyquestions.js"></script>
 
 </head>
 
@@ -37,313 +37,22 @@
     <div id="quizzie">
       <h1>Rock Hall Route Survey</h1>
         <ul class="quiz-step step1 current">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #1: What is your age group?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="4">
-                <div class="answer-wrap"> 
-                    <p class="answer-text">Under 18 years old</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="4">
-                <div class="answer-wrap"> 
-                    <p class="answer-text">19-35 years old</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="1">
-                <div class="answer-wrap"> 
-                    <p class="answer-text">36-60 years old</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="1">
-                <div class="answer-wrap"> 
-                    <p class="answer-text">61 years or older</p>
-                </div>
-            </li>
-        </ul>
-        <ul class="quiz-step step2">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #2: Have you been to the Rock Hall before?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap"> 
-                    <p class="answer-text">Yes</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="4">
-                <div class="answer-wrap">
-                    <p class="answer-text">No</p>
-                </div>
-            </li>
-        </ul>
-        <ul class="quiz-step step3">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #3: How long will you spend at the Rock Hall?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">> 1 hour</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="4">
-                <div class="answer-wrap">
-                    <p class="answer-text">About an hour</p>
-                </div>
-            </li>
-             <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">2 hours</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="4">
-                <div class="answer-wrap">
-                    <p class="answer-text">3 hours or more</p>
-                </div>
-            </li>
-        </ul>
-        <ul class="quiz-step step4">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #4: What is your favorite genre of music?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">Rock</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">Pop</p>
-                </div>
-                <li class="quiz-answer low-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">Hip-hop</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="3">
-                <div class="answer-wrap">
-                    <p class="answer-text">Country</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="4">
-                <div class="answer-wrap">
-                    <p class="answer-text">Other</p>
-                </div>
-            </li>
-        </ul>
-        <ul class="quiz-step step5">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #5: What is your favorite era of music?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">50s</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">60s</p>
-                </div>
-                <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">70s</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">80s</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">90s</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="3">
-                <div class="answer-wrap">
-                    <p class="answer-text">00s</p>
-                </div>
-            </li>
-        </ul>
-        <ul class="quiz-step step6">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #6: What is your favorite song from these choices?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">"Jump" by Van Halen</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">"Like a Virgin" by Madonna</p>
-                </div>
-            </li>
-             <li class="quiz-answer low-value" data-quizIndex="3">
-                <div class="answer-wrap">
-                    <p class="answer-text">"Hotline Bling" by Drake</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="3">
-                <div class="answer-wrap">
-                    <p class="answer-text">"Ring of Fire" by Johnny Cash</p>
-                </div>
-            </li>
-        </ul>
-        <ul class="quiz-step step7">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #7: Who is your favorite artist from these choices?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">Aerosmith</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">Beyoncé</p>
-                </div>
-            </li>
-             <li class="quiz-answer low-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">Nirvana</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="4">
-                <div class="answer-wrap">
-                    <p class="answer-text">Green Day</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="4">
-                <div class="answer-wrap">
-                    <p class="answer-text">Kanye West</p>
-                </div>
-            </li>
-        </ul>
-        <ul class="quiz-step step8">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #8: What is your favorite instrument?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">Guitar</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">Bass</p>
-                </div>
-            </li>
-             <li class="quiz-answer low-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">Drums</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="4">
-                <div class="answer-wrap">
-                    <p class="answer-text">Piano</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">Synthesizer</p>
-                </div>
-            </li>
-        </ul>
-        <ul class="quiz-step step9">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #9: What is your favorite color?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">Blue</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">Red</p>
-                </div>
-            </li>
-             <li class="quiz-answer low-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">Green</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="3">
-                <div class="answer-wrap">
-                    <p class="answer-text">Yellow</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="4">
-                <div class="answer-wrap">
-                    <p class="answer-text">Pink</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="4">
-                <div class="answer-wrap">
-                    <p class="answer-text">Other</p>
-                </div>
-            </li>
-        </ul>
-        <ul class="quiz-step step10">
-            <li class="question">
-                <div class="question-wrap">
-                    <p>Question #10: What artifact would you most like to see?</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">Kurt Cobain's Guitar</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">Michael Jackson's Glove</p>
-                </div>
-            </li>
-             <li class="quiz-answer low-value" data-quizIndex="2">
-                <div class="answer-wrap">
-                    <p class="answer-text">Taylor Swift's Lyric Sheets</p>
-                </div>
-            </li>
-            <li class="quiz-answer high-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">John Lennon's Jacket</p>
-                </div>
-            </li>
-            <li class="quiz-answer low-value" data-quizIndex="1">
-                <div class="answer-wrap">
-                    <p class="answer-text">Elvis Presley's Custom Motorcycle</p>
-                </div>
-            </li>
+            <div id="questions">
+
+            </div>
+            <div id="answers">
+
+            </div>
         </ul>
         <ul id="results">
-            <li class="results-inner">
-                <p>Your result is:</p>
-                <h1></h1>
-                <p class="desc"></p>
-            </li>
+            
         </ul>
     </div>
     
     <script language="javascript" type="text/javascript">
+        $(function(){
+            $('body').hide().fadeIn('slow');
+        });
         // Quiz result options in a separate object for flexibility
         var resultOptions = [
             {   title: 'Rocker Route',
@@ -367,111 +76,89 @@
         function skip(){
             window.location.href = "beacons.html";
         }
-
-        // global variables
-        var quizSteps = $('#quizzie .quiz-step'),
-            totalScore = 0;
-
-        // for each step in the quiz, add the selected answer value to the total score
-        // if an answer has already been selected, subtract the previous value and update total score with the new selected answer value
-        // toggle a visual active state to show which option has been selected
-        quizSteps.each(function () {
-            var currentStep = $(this),
-                ansOpts = currentStep.children('.quiz-answer');
-            // for each option per step, add a click listener
-            // apply active class and calculate the total score
-            ansOpts.each(function () {
-                var eachOpt = $(this);
-                eachOpt[0].addEventListener('click', check, false);
-                function check() {
-                    var $this = $(this),
-                        value = $this.attr('data-quizIndex'),
-                        answerScore = parseInt(value);
-                    // check to see if an answer was previously selected
-                    if (currentStep.children('.active').length > 0) {
-                        var wasActive = currentStep.children('.active'),
-                            oldScoreValue = wasActive.attr('data-quizIndex'),
-                            oldScore = parseInt(oldScoreValue);
-                        // handle visual active state
-                        currentStep.children('.active').removeClass('active');
-                        $this.addClass('active');
-                        // handle the score calculation
-                        totalScore -= oldScoreValue;
-                        totalScore += answerScore;
-                        calcResults(totalScore);
-                    } else {
-                        // handle visual active state
-                        $this.addClass('active');
-                        // handle score calculation
-                        totalScore += answerScore;
-                        calcResults(totalScore);
-                        // handle current step
-                        updateStep(currentStep);
-                    }
-                }
-            });
-        });
-
-        // show current step/hide other steps
-        function updateStep(currentStep) {
-            if(currentStep.hasClass('current')){
-               currentStep.removeClass('current');
-               currentStep.next().addClass('current');
+        
+        var currentStep = 0;
+        var totalScore = 0;
+        setupQuestion(currentStep);
+        
+        //populate question
+        function setupQuestion(currentStep){
+            var currentQuestion = eval("q" + currentStep + "Answers");
+            document.getElementById("questions").innerHTML = 
+                "<li class=\"question\">" + 
+                    "<div class=\"question-wrap\">" + 
+                        "<p>" + questions[currentStep] + "</p>" + 
+                    "</div>" +
+                "</li>"
+                    
+            for(var i=0; i < currentQuestion.length; i++){
+                var element = document.getElementById("answers");
+                var line = document.createElement("li");
+                $(line).addClass("quiz-answer");
+                element.appendChild(line);
+                
+                var container = document.createElement("div");
+                $(container).addClass("answer-wrap");
+                line.appendChild(container);
+                
+                var para = document.createElement("p");
+                $(para).addClass("answer-text");
+                container.appendChild(para);
+                
+                var answer = currentQuestion[i].answer;
+                var answerText = document.createTextNode(answer);
+                para.appendChild(answerText);
+                
+                var points = currentQuestion[i].points;
+                            
+                container.addEventListener("click", selectAnswer);
+                container.addEventListener("click", function(){console.log((parseInt(points)))});
             }
         }
 
-        // display scoring results
-        function calcResults(totalScore) {
-            // only update the results div if all questions have been answered
-            if (quizSteps.find('.active').length == quizSteps.length){
-                var resultsTitle = $('#results h1'),
-                    resultsDesc = $('#results .desc');
-
-                // calc lowest possible score
-                var lowestScoreArray = $('#quizzie .low-value').map(function() {
-                    return $(this).attr('data-quizIndex');
-                });
-                var minScore = 0;
-                for (var i = 0; i < lowestScoreArray.length; i++) {
-                    minScore += lowestScoreArray[i] << 0;
-                }
-                // calculate highest possible score
-                var highestScoreArray = $('#quizzie .high-value').map(function() {
-                    return $(this).attr('data-quizIndex');
-                });
-                var maxScore = 0;
-                for (var i = 0; i < highestScoreArray.length; i++) {
-                    maxScore += highestScoreArray[i] << 0;
-                }
-                // calc range, number of possible results, and intervals between results
-                var overallScore = maxScore + minScore,
-                    rockScore = overallScore/5,
-                    popScore = overallScore/4,
-                    countryScore = overallScore/3;
-                
-                // incrementally increase the possible score, starting at the minScore, until totalScore falls into range. then match that increment index (number of times it took to get totalScore into range) and return the corresponding index results from resultOptions object
-                if (totalScore <= rockScore) {
-                    // populate results
-                    resultsTitle.replaceWith("<h1>" + resultOptions[0].title + "</h1>");
-                    resultsDesc.replaceWith("<p class='desc'>" + resultOptions[0].desc + "</p>");
-                    return;
-                } else if (totalScore <= popScore && totalScore > rockScore) {
-                    // populate results
-                    resultsTitle.replaceWith("<h1>" + resultOptions[1].title + "</h1>");
-                    resultsDesc.replaceWith("<p class='desc'>" + resultOptions[1].desc + "</p>");
-                    return;
-                } else if (totalScore <= countryScore && totalScore > popScore) {
-                    // populate results
-                    resultsTitle.replaceWith("<h1>" + resultOptions[2].title + "</h1>");
-                    resultsDesc.replaceWith("<p class='desc'>" + resultOptions[2].desc + "</p>");
-                    return;
-                } else if (totalScore > countryScore) {
-                    // populate results
-                    resultsTitle.replaceWith("<h1>" + resultOptions[3].title + "</h1>");
-                    resultsDesc.replaceWith("<p class='desc'>" + resultOptions[3].desc + "</p>");
-                    return;
-                }
+        //update question when answer is clicked
+        function selectAnswer(){
+            currentStep++;
+            if(currentStep < 10){
+                var element = document.getElementById("answers");
+                $(element).empty();
+                setupQuestion(currentStep);
+            } else if(currentStep == 10){
+                calcResults();
             }
+        }
+        
+        // display scoring results
+        function calcResults() {
+            var element = document.getElementById("answers");
+            $(element).empty();
+            
+            var question = document.getElementById("questions");
+            $(question).empty();
+            
+            var line = document.createElement("li");
+            $(line).addClass("results-inner");
+            element.appendChild(line);
+            
+            var para = document.createElement("p");
+            $(para).addClass("answer-text");
+            line.appendChild(para);
+            
+            var text = document.createTextNode("Your result is:");
+            para.appendChild(text);
+            
+            var heading = document.createElement("h1");
+            line.appendChild(heading);
+            
+            var headingText = resultOptions[0].title;
+            heading.innerHTML = headingText;
+            
+            var desc = document.createElement("p");
+            $(desc).addClass("desc");
+            line.appendChild(desc);
+            
+            var descText = resultOptions[0].desc;
+            desc.innerHTML = descText;
         }
     </script>
 </body>

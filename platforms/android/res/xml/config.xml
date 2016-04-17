@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="nmTeamProject.RockThisWay" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
     <feature name="LocationManager">
         <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
@@ -25,17 +25,25 @@
         <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
     </feature>
     <allow-intent href="market:*" />
+    <splash density="land-hdpi" src="res/screen/android/drawable-land-hdpi/screen.png" />
+    <splash density="land-ldpi" src="res/screen/android/drawable-land-ldpi/screen.png" />
+    <splash density="land-mdpi" src="res/screen/android/drawable-land-mdpi/screen.png" />
+    <splash density="land-xhdpi" src="res/screen/android/drawable-land-xhdpi/screen.png" />
+    <splash density="port-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />
+    <splash density="port-ldpi" src="res/screen/android/drawable-ldpi/screen.png" />
+    <splash density="port-mdpi" src="res/screen/android/drawable-mdpi/screen.png" />
+    <splash density="port-xhdpi" src="res/screen/android/drawable-xhdpi/screen.png" />
     <name>Rock This Way</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
-    </description>
+            A sample Apache Cordova application that responds to the deviceready event.
+        </description>
+    <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#A7A7A7" />
+    <preference name="StatusBarBackgroundColor" value="#1D1A22" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <author email="dev@cordova.apache.org" href="http://cordova.io">
-        RIT New Media Team Project
-    </author>
-    <icon density="mdpi" height="57" platform="ios" src="res/icon.png" width="57" />
+            RIT New Media Team Project
+        </author>
     <icon density="mdpi" height="57" platform="android" src="res/icon.png" width="57" />
     <content src="index.html" />
     <access origin="*" />

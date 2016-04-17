@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Rock This Way</title>
+
+    <style>
+        @import 'ui/css/bootstrap.min.css';
+        @import 'ui/css/evothings-app.css';
+        @import 'ui/css/animate.css';
+        @import 'ui/css/style.css';
+    </style>
+
+    <script src="cordova.js"></script>
+    <script src="libs/jquery/jquery.js"></script>
+    <script src="libs/evothings/evothings.js"></script>
+    <script src="app.js"></script>
+    <script src="libs/bootstrap/bootstrap.min.js"></script>
+
+    <script>
+    
+        window.onload = load;
+        
+  
+        function loadMore(){
+           
+            $("#exhibitInfo").css("margin-top","150px");
+        }
+    
+    </script>
+    
+</head>
+
+<body>
+
+    <header>
+        <button class="back" onclick="history.back()">
+            <img src="ui/images/arrow-left.svg" />
+        </button>
+
+        <img src="images/logo2.png" height="50px" />
+
+    </header>
+
+   
+
+
+   <div id="exhibitPhoto"><img src="images/exhibit.png" width="90%"></div>
+    <div id="exhibitInfo">
+    <div id="exhibitTitle">Artist's Playground</div>
+        <div id="exhibitDescription">Jimi Hendrix Started playing guitar at the age of twelve. Learn more about how he developed at this exhibit</div>
+        <div onclick="loadMore()">Read More</div>
+    </div>
+    <div class="playButton">Play Game</div>
+
+</body>
+
+</html>
