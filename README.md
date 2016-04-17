@@ -9,5 +9,5 @@ We're using gulp to take care of our sass compilation. Running this will watch f
     gulp
     
 ## Build
-    cordova run ios
+    gulp cordova
    
