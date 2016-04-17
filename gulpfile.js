@@ -23,6 +23,7 @@ var sassOptions = {
 var jsEntry = './www/js/main.js';
 var jsOutput = './www/js/';
 var jsOutputFile = 'bundle.js';
+var rootFiles = "./www/**/*";
 
 /**
  * Compile our sass
@@ -101,6 +102,19 @@ gulp.task('build', ['sass'], function(callback) {
             argv: ['--release','--gradleArg=--no-daemon']
         }
     }, callback);
+});
+
+gulp.task('cordova-browser', ['sass', 'javascript'], function(callback) {
+    cordova.build({
+        'platforms': ['browser'],
+        'options': {
+            argv: ['--release','--gradleArg=--no-daemon']
+        }
+    }, callback);
+});
+
+gulp.task('cordova-watch', function() {
+   gulp.watch(rootFiles, ['cordova-browser']); 
 });
 
 gulp.task('default', ['sass', 'watch']);

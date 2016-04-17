@@ -4,9 +4,9 @@
 // counter to track progress).
 
 /**
-* @namespace
+* @namespace 
 */
-evothings = window.evothings || {};
+var evothings = window.evothings || {};
 (function()
 {
 	/* ------------------ Script loading ------------------ */
