@@ -12,6 +12,7 @@ var assign = require('lodash.assign');
 var watchify = require('watchify');
 var babelify = require('babelify');
 var gutil = require('gulp-util');
+var gulpIgnore = require('gulp-ignore');
 
 // Settings
 var sassInput = './www/ui/scss/*.scss';
@@ -21,9 +22,9 @@ var sassOptions = {
     outputStyle: 'compressed'
 };
 var jsEntry = './www/js/main.js';
-var jsOutput = './www/js/';
+var jsOutput = './www/';
 var jsOutputFile = 'bundle.js';
-var rootFiles = "./www/**/*";
+var rootFiles = ['./www/**/*', '!./www/*.js'];
 
 /**
  * Compile our sass
@@ -39,16 +40,6 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(sassOutput)); 
 });
 
-/**
- * Watch our sass and javascript
- */
-gulp.task('watch', ['javascript'], function() {
-   return gulp
-        .watch(sassInput, ['sass'])
-        .on('change', function(e) {
-            console.log('File ' + e.path + ' was ' + e.type + ', running tasks...');
-        });
-});
 
 /**
  * Watch our browserify modules
@@ -63,12 +54,30 @@ var customOpts = {
 var opts = assign({}, watchify.args, customOpts);
 var b = watchify(browserify(opts));
 
-gulp.task('javascript', bundle);
+gulp.task('javascript-watch', bundle);
 b.on('update', bundle);
 b.on('log', gutil.log);
 
 function bundle() {
     return b.transform(babelify, {presets: ['es2015']})
+        .bundle()
+        .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+        .pipe(source(jsOutputFile))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+            //.pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(jsOutput));
+}
+
+/**
+ * Bundle our js without watching
+ */
+gulp.task('javascript', bundleNormal);
+var b2 = browserify(customOpts);
+
+function bundleNormal() {
+    return b2.transform(babelify, {presets: ['es2015']})
         .bundle()
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
         .pipe(source(jsOutputFile))
@@ -95,7 +104,7 @@ gulp.task('cordova-build', function(callback) {
  * Run cordova for iOS
  * Compiles sass first
  */
-gulp.task('build', ['sass'], function(callback) {
+gulp.task('build', ['sass', 'javascript'], function(callback) {
     cordova.run({
         'platforms': ['ios'],
         'options': {
@@ -104,7 +113,10 @@ gulp.task('build', ['sass'], function(callback) {
     }, callback);
 });
 
-gulp.task('cordova-browser', ['sass', 'javascript'], function(callback) {
+/**
+ * Build for browser
+ */
+gulp.task('cordova-browser', function(callback) {
     cordova.build({
         'platforms': ['browser'],
         'options': {
@@ -113,8 +125,24 @@ gulp.task('cordova-browser', ['sass', 'javascript'], function(callback) {
     }, callback);
 });
 
+
+/**
+ * watch for browser changes
+ * CURRENTLY NOT WORKING (Infinitely loops..)
+ */
 gulp.task('cordova-watch', function() {
-   gulp.watch(rootFiles, ['cordova-browser']); 
+   gulp.watch('./www/bundle.js', ['cordova-browser'])
 });
 
-gulp.task('default', ['sass', 'watch']);
+/**
+ * Watch our sass and javascript
+ */
+gulp.task('watch', ['javascript-watch', 'cordova-watch'], function() {
+   return gulp
+        .watch(sassInput, ['sass'])
+        .on('change', function(e) {
+            console.log('File ' + e.path + ' was ' + e.type + ', running tasks...');
+        })
+});
+
+gulp.task('default', ['sass', 'javascript', 'watch']);

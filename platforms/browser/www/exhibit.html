@@ -10,7 +10,12 @@
     <title>Rock This Way</title>
 
     <link href="ui/css/style.css" rel="stylesheet">
+
+    
+
+
 </head>
+
 <body>
 
     <header>
@@ -24,24 +29,44 @@
 
     <div id="exhibitPhoto"><img src="images/exhibit.png" width="90%"></div>
     <div id="exhibitInfo">
-    <div id="exhibitTitle">Artist's Playground</div>
+        <div id="exhibitTitle">Artist's Playground</div>
         <div id="exhibitDescription">Jimi Hendrix Started playing guitar at the age of twelve. Learn more about how he developed at this exhibit</div>
         <div onclick="loadMore()">Read More</div>
     </div>
     <div class="playButton">Play Game</div>
 
-    
+
     <script src="cordova.js"></script>
-    <script src="js/bundle.js"></script>
-    <script src="app.js"></script>
+<!--    <script src="bundle.js"></script>-->
+    <script src="js/app.js"></script>
 
     <script>
-        window.onload = load;
-  
-        function loadMore(){
-            $("#exhibitInfo").css("margin-top","150px");
+         //script for changing content based on link
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
-    
+        
+        var exhbitNumber = getParameterByName('exhibit');
+        
+        
+        
+        
+        function loadMore() {
+            $("#exhibitInfo").css("margin-top", "150px");
+        }
     </script>
+    
+    <script>
+       
+    </script>
+    
 </body>
+
 </html>
