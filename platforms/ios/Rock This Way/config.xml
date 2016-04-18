@@ -80,7 +80,6 @@
     <splash height="1242" src="res/screen/ios/Default-Landscape-736h.png" width="2208" />
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
-    <preference name="DisallowOverscroll" value="true" />
     <preference name="EnableViewportScale" value="false" />
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
@@ -93,6 +92,7 @@
     <preference name="PaginationMode" value="unpaginated" />
     <preference name="CameraUsesGeolocation" value="false" />
     <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarBackgroundColor" value="#1D1A22" />
     <preference name="StatusBarStyle" value="lightcontent" />
 </widget>

@@ -17,7 +17,7 @@ var app = (function () {
     // Background notification id counter.
     var mNotificationId = 0;
 
-    var previousBeacon;
+    var previousBeacon = parseInt(localStorage.beacon);;
 
     // Mapping of region event state names.
     // These are used in the event display string.
@@ -206,32 +206,43 @@ var app = (function () {
         // If the nearest beacon changes, the code on beacons.html will change to the following based on beacon.major
 
         if (mNearestBeacon.major != previousBeacon) {
-            $('#homeScreen').empty();
+            //            $('#homeScreen').empty();
             if (mNearestBeacon.major == 19175) {
-                $('#modalTitle').text("PLay Who Wants to be a Rockstar?");
-                $("#modalPlay").attr("onclick","playGame(2)");
-                $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
-                var hScreen = $('<img src="images/map1.png" width="100%">');
+                if (window.location.href != "exhibit.html?exhibit=1") {
+                    window.location.href = "exhibit.html?exhibit=1";
+                }
+                //                $('#modalTitle').text("PLay Who Wants to be a Rockstar?");
+                //                $("#modalPlay").attr("onclick","playGame(2)");
+                //                $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
+                //                var hScreen = $('<img src="images/map1.png" width="100%">');
             } else if (mNearestBeacon.major == 18015) {
-                $('#modalTitle').text("Play Against the Crowd");
-                $("#modalPlay").attr("onclick","playGame(3)");
-                $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
-                var hScreen = $('<img src="images/map2.png" width="100%">');
+                if (window.location.href != "exhibit.html?exhibit=2") {
+                    window.location.href = "exhibit.html?exhibit=2";
+                }
+                //                $('#modalTitle').text("Play Against the Crowd");
+                //                $("#modalPlay").attr("onclick","playGame(3)");
+                //                $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
+                //                var hScreen = $('<img src="images/map2.png" width="100%">');
             } else if (mNearestBeacon.major == 50017) {
-                $("#modalPlay").attr("onclick","playGame(1)");
-                $('#modalTitle').text("Play Lyracle");
-                $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
-                var hScreen = $('<img src="images/map3.png" width="100%">');
+                if (window.location.href != "exhibit.html?exhibit=3") {
+                    window.location.href = "exhibit.html?exhibit=3";
+                }
+                //                $("#modalPlay").attr("onclick","playGame(1)");
+                //                $('#modalTitle').text("Play Lyracle");
+                //                $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
+                //                var hScreen = $('<img src="images/map3.png" width="100%">');
             } else {
-                var tester = $('');
+                //                var tester = $('');
             }
-            $('#homeScreen').append(hScreen);
-            $("#myModal").modal();
+            //            $('#homeScreen').append(hScreen);
+            //            $("#myModal").modal();
         }
+
+        localStorage.beacon = mNearestBeacon.major
         previousBeacon = mNearestBeacon.major;
 
     }
-    
+
     function displayRecentRegionEvent() {
         if (mAppInBackground) {
             // Set notification title.
@@ -278,24 +289,24 @@ var app = (function () {
         var d = new Date();
         return format(d.getHours(), d.getMinutes(), d.getSeconds());
     }
-    
-    
+
+
     return app;
 
 })();
 
-function playGame(game){
-    if(game==1){
+function playGame(game) {
+    if (game == 1) {
         window.location.href = "lyricgame.html";
     }
-    if(game==2){
+    if (game == 2) {
         window.location.href = "triviagame.html";
     }
-    if (game == 3){
+    if (game == 3) {
         window.location.href = "againstthecrowd.html";
     }
 }
- 
+
 
 
 app.initialize();

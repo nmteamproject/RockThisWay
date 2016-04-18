@@ -8,30 +8,30 @@
     },
     "installed_plugins": {
         "com.unarin.cordova.beacon": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         },
         "cordova-plugin-camera": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         },
         "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         },
         "cordova-plugin-vibration": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         },
         "de.appplant.cordova.plugin.local-notification": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-app-event": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         }
     }
 }

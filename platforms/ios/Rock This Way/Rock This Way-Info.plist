@@ -28,6 +28,12 @@
     <string>0.0.1</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
+    <key>NSMainNibFile</key>
+    <string/>
+    <key>NSMainNibFile~ipad</key>
+    <string/>
+    <key>UIRequiresFullScreen</key>
+    <true/>
     <key>NSAppTransportSecurity</key>
     <dict>
       <key>NSAllowsArbitraryLoads</key>
@@ -37,15 +43,9 @@
     <string>This app would like to scan for iBeacons even when in the background.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string/>
-    <key>NSMainNibFile</key>
-    <string/>
-    <key>NSMainNibFile~ipad</key>
-    <string/>
     <key>UIBackgroundModes</key>
     <array>
       <string>location</string>
     </array>
-    <key>UIRequiresFullScreen</key>
-    <true/>
   </dict>
 </plist>
