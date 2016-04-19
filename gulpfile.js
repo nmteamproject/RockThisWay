@@ -65,7 +65,7 @@ function bundle() {
         .pipe(source(jsOutputFile))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
-            //.pipe(uglify())
+            .pipe(uglify())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(jsOutput));
 }
@@ -128,7 +128,6 @@ gulp.task('cordova-browser', function(callback) {
 
 /**
  * watch for browser changes
- * CURRENTLY NOT WORKING (Infinitely loops..)
  */
 gulp.task('cordova-watch', function() {
    gulp.watch('./www/bundle.js', ['cordova-browser'])
