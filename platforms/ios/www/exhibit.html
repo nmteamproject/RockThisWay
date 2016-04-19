@@ -11,7 +11,7 @@
 
     <link href="ui/css/style.css" rel="stylesheet">
 
-    
+
 
 
 </head>
@@ -33,15 +33,19 @@
         <div id="exhibitDescription">Jimi Hendrix Started playing guitar at the age of twelve. Learn more about how he developed at this exhibit</div>
         <div onclick="loadMore()">Read More</div>
     </div>
-    <div class="playButton">Play Game</div>
+    <div class="playButton" id=playLinkButton>Play Game</div>
 
 
     <script src="cordova.js"></script>
+<<<<<<< Updated upstream
 <!--    <script src="bundle.js"></script>-->
+=======
+    <script src="js/bundle.js"></script>
+>>>>>>> Stashed changes
     <script src="js/app.js"></script>
 
     <script>
-         //script for changing content based on link
+        //script for changing content based on link
 
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -52,21 +56,32 @@
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
-        
+
         var exhbitNumber = getParameterByName('exhibit');
         
-        
-        
-        
+
+        if (exhbitNumber == 1) {
+            document.getElementById('exhibitTitle').innerHTML = "The Beatles"
+            document.getElementById('playLinkButton').onclick = function(){ window.location.href = "lyricgame.html";};
+
+        } else if (exhbitNumber == 2) {
+            document.getElementById('exhibitTitle').innerHTML = "Aerosmith"
+           document.getElementById('playLinkButton').onclick = function(){ window.location.href = "triviagame.html";};
+        } else if (exhbitNumber == 3) {
+            document.getElementById('exhibitTitle').innerHTML = "Taylor Swift"
+            document.getElementById('playLinkButton').onclick = function(){ window.location.href = "againstthecrowd.html";};
+        }
+
+
         function loadMore() {
             $("#exhibitInfo").css("margin-top", "150px");
         }
+
     </script>
-    
+
     <script>
-       
     </script>
-    
+
 </body>
 
 </html>
