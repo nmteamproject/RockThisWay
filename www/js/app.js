@@ -17,7 +17,7 @@ var app = (function () {
     // Background notification id counter.
     var mNotificationId = 0;
 
-    var previousBeacon = parseInt(localStorage.beacon);;
+    var previousBeacon = parseInt(localStorage.beacon);
 
     // Mapping of region event state names.
     // These are used in the event display string.
@@ -265,12 +265,7 @@ var app = (function () {
     function displayRegionEvents() {
         // Displayed before it connects to beacons or while there is no beacon in range.
         //uncomment bottom line if we need to change the home screen.
-        if (mRegionEvents.length <= 0) {
-            var element = $(
-                '<li>' + '<strong>' + 'Waiting for region events, please move into or out of a beacon region.' + '</strong>' + '</li>'
-            );
-            //$('#homeScreen').append(element);
-        }
+        
     }
 
     function getEventDisplayString(event) {
