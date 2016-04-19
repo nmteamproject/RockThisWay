@@ -43,6 +43,8 @@
 
         //Sets up the timer.
         var timeLeft = 30;
+        
+        var tScore = 0;
 
 
         function setup() {
@@ -125,6 +127,7 @@
             if(questionsAsked == 11) {
                 alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
                 //document.getElementById("ButtonContinue").disabled = true;
+                
             } 
 
         }
@@ -139,6 +142,12 @@
                 timeLeft = 1;
                 alert("Out of time!");
             }
+        }
+        
+        tScore += totalCorrect * 10;
+        if (localStorage.getItem("score") != undefined)
+        {
+            var points = parseInt(localStorage.score);
         }
     </script>
 
