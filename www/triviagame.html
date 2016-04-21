@@ -43,6 +43,12 @@
 
         //Sets up the timer.
         var timeLeft = 30;
+        
+        //Flag to disable timer at game completion.
+        var stillCounting = 1;
+        
+        //Trivia Score
+        var tScore = 0;
 
 
         function setup() {
@@ -124,7 +130,9 @@
             // final question asked - disable button and show final results
             if(questionsAsked == 11) {
                 alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
+                stillCounting = 0;
                 //document.getElementById("ButtonContinue").disabled = true;
+                
             } 
 
         }
@@ -132,13 +140,29 @@
 
         //The countdown timer, getting questions correct adds ten seconds.
         function timerCountdown() {
-            timeLeft--;
-            document.getElementById("TimerElement").innerHTML = timeLeft;
+            
+            
+            if(stillCounting == 1)
+            {
+                timeLeft--;
+                document.getElementById("TimerElement").innerHTML = timeLeft;
+            }
+            if(stillCounting == 0)
+            {
+                var staticTime = timeLeft;
+                document.getElementById("TimerElement").innerHTML = staticTime;
+            }
 
             if (timeLeft <= 0) {
                 timeLeft = 1;
                 //alert("Out of time!");
             }
+        }
+        
+        tScore += totalCorrect * 10;
+        if (localStorage.getItem("score") != undefined)
+        {
+            var points = parseInt(localStorage.score);
         }
     </script>
 
@@ -174,7 +198,7 @@
         </div>
         <div class="submissionForm">
            
-
+            
             <div id="progress"></div>
         </div>
     </center>

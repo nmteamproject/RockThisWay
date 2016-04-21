@@ -13245,27 +13245,42 @@ var app = function () {
         // If the nearest beacon changes, the code on beacons.html will change to the following based on beacon.major
 
         if (mNearestBeacon.major != previousBeacon && window.location.href == "yourday.html") {
-//            $('#homeScreen').empty();
+            console.log("this was called")
+                        $('#homeScreen').empty();
             if (mNearestBeacon.major == 19175) {
-               if (window.location.href != "exhibit.html?exhibit=1") {
-                    window.location.href = "exhibit.html?exhibit=1";
-                }
+//                if (window.location.href != "exhibit.html?exhibit=1") {
+//                    window.location.href = "exhibit.html?exhibit=1";
+//                }
+                                $('#modalTitle').text("PLay Who Wants to be a Rockstar?");
+                                $("#modalPlay").attr("onclick","playGame(2)");
+                                $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
+                                var hScreen = $('<img src="images/map1.png" width="100%">');
             } else if (mNearestBeacon.major == 18015) {
-                if (window.location.href != "exhibit.html?exhibit=2") {
-                    window.location.href = "exhibit.html?exhibit=2";
-                }
+//                if (window.location.href != "exhibit.html?exhibit=2") {
+//                    window.location.href = "exhibit.html?exhibit=2";
+//                }
+                                $('#modalTitle').text("Play Against the Crowd");
+                                $("#modalPlay").attr("onclick","playGame(3)");
+                                $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
+                                var hScreen = $('<img src="images/map2.png" width="100%">');
             } else if (mNearestBeacon.major == 50017) {
-                if (window.location.href != "exhibit.html?exhibit=3") {
-                    window.location.href = "exhibit.html?exhibit=3";
-                }
+//                if (window.location.href != "exhibit.html?exhibit=3") {
+//                    window.location.href = "exhibit.html?exhibit=3";
+//                }
+                                $("#modalPlay").attr("onclick","playGame(1)");
+                                $('#modalTitle').text("Play Lyracle");
+                                $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
+                                var hScreen = $('<img src="images/map3.png" width="100%">');
             } else {
-                var tester = $('');
+                                var hScreen = $('');
             }
-//            $('#homeScreen').append(hScreen);
-//            $("#myModal").modal();
+                        $('#homeScreen').append(hScreen);
+                        $("#myModal").modal();
         }
+
         localStorage.beacon = mNearestBeacon.major
         previousBeacon = mNearestBeacon.major;
+
     }
 
     function displayRecentRegionEvent() {
