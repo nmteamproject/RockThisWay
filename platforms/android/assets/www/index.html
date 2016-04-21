@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <title>Rock This Way</title>
-    <style>
-        @import 'ui/css/bootstrap.min.css';
-        @import 'ui/css/evothings-app.css';
-        @import 'ui/css/style.css';
-    </style>
+    <link href="ui/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -20,7 +16,7 @@
 
         <img src="images/logo2.png" height="50px"/>
     </header>
-
+    
     <br>
     <p class="lead" id="login">Plan Your Day</p>
     
@@ -35,7 +31,8 @@
     
     <!-- non blocking loading -->
     <script src="cordova.js"></script>
-    
+    <!-- all of our bundled js -->
+    <script src="bundle.js"></script>
     <script type="text/javascript">
         $(function(){
             $('body').hide().fadeIn('slow');
@@ -43,13 +40,7 @@
         function takeSurvey() {
             window.location.href = "survey.html";
         }
-
-        function skip() {
-            window.location.href = "beacons.html";
-        }
+        
     </script>
-    
-    <!-- all of our bundled js -->
-    <script src="bundle.js"></script>
 </body>
 </html>

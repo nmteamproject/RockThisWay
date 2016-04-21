@@ -25,14 +25,14 @@
         <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
     </feature>
     <allow-intent href="market:*" />
-    <splash density="land-hdpi" src="res/screen/android/drawable-land-hdpi/screen.png" />
-    <splash density="land-ldpi" src="res/screen/android/drawable-land-ldpi/screen.png" />
-    <splash density="land-mdpi" src="res/screen/android/drawable-land-mdpi/screen.png" />
-    <splash density="land-xhdpi" src="res/screen/android/drawable-land-xhdpi/screen.png" />
-    <splash density="port-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />
-    <splash density="port-ldpi" src="res/screen/android/drawable-ldpi/screen.png" />
-    <splash density="port-mdpi" src="res/screen/android/drawable-mdpi/screen.png" />
-    <splash density="port-xhdpi" src="res/screen/android/drawable-xhdpi/screen.png" />
+    <splash density="land-hdpi" src="res/screens/android/drawable-land-hdpi/screen.png" />
+    <splash density="land-ldpi" src="res/screens/android/drawable-land-ldpi/screen.png" />
+    <splash density="land-mdpi" src="res/screens/android/drawable-land-mdpi/screen.png" />
+    <splash density="land-xhdpi" src="res/screens/android/drawable-land-xhdpi/screen.png" />
+    <splash density="port-hdpi" src="res/screens/android/drawable-hdpi/screen.png" />
+    <splash density="port-ldpi" src="res/screen/sandroid/drawable-ldpi/screen.png" />
+    <splash density="port-mdpi" src="res/screens/android/drawable-mdpi/screen.png" />
+    <splash density="port-xhdpi" src="res/screens/android/drawable-xhdpi/screen.png" />
     <name>Rock This Way</name>
     <description>
             A sample Apache Cordova application that responds to the deviceready event.

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-
+    
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -26,19 +26,49 @@
         Survey
 
     </header>
+    
+    <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Survey</h4>
+            </div>
+            <div class="modal-body">
+              <p>Take this quick survey to determine your personalized route through the Rock Hall and enhance your experience! Let's rock!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="skip()">Skip</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Continue</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    
+    <div id="questionNumber">
+        <p><span class="questionNum">1</span>/10</p>
+    </div>
 
     <div id="quizzie">
-      <h1>Rock Hall Route Survey</h1>
         <ul class="quiz-step step1 current">
             <div id="questions">
 
             </div>
             <div id="answers">
-
+                
             </div>
         </ul>
-        <ul id="results">
-            
+        <ul class="quiz-step step1 current">
+            <div id="results">
+                
+            </div>
         </ul>
     </div>
     
@@ -46,32 +76,38 @@
         $(function(){
             $('body').hide().fadeIn('slow');
         });
+        
+        $(window).load(function(){
+            $('#myModal').modal('show');
+        });
+
         // Quiz result options in a separate object for flexibility
         var resultOptions = [
             {   title: 'Rocker Route',
                 desc: '<p>You are a hardcore rocker at heart and love classic rock and roll!</p><br>' +
                 '<img src=\"images/rock.jpg\"><br>' +
-                '<button id=\"skip\" style=\"margin-top:15px\" onclick=\"skip()\">Finish</button>'},
+                '<button class=\"selected\" style=\"margin-top:15px\"'},
             {   title: 'Pop Route',
                 desc: '<p>You love all popular music and like to stay contemporary!</p><br>' +
                 '<img src=\"images/pop.jpg\"><br>' +
-                '<button id=\"skip\" style=\"margin-top:15px\" onclick=\"skip()\">Finish</button>'},
+                '<button class=\"selected\" style=\"margin-top:15px\"'},
             {   title: 'Country Route',
                 desc: '<p>You like to sit back and listen to the soothing twang of country music!</p><br>' +
                 '<img src=\"images/country.jpg\"><br>' +
-                '<button id=\"skip\" style=\"margin-top:15px\" onclick=\"skip()\">Finish</button>'},
+                '<button class=\"selected\" style=\"margin-top:15px\"'},
             {   title: 'Alternative Route',
                 desc: '<p>You like to stray away from the norm and listen to something a little out of the box!</p><br>' +
                 '<img src=\"images/alternative.jpg\"><br>' +
-                '<button id=\"skip\" style=\"margin-top:15px\" onclick=\"skip()\">Finish</button>'}
+                '<button class=\"selected\" style=\"margin-top:15px\"'}
         ];
         
-        function skip(){
-            window.location.href = "yourday.html";
-        }
-        
+        var isAnswerSelected = false;
         var currentStep = 0;
         var totalScore = 0;
+        var questionNum = 1;
+        var result;
+        var questionText;
+        var questionAnswers = [];
         setupQuestion(currentStep);
         
         //populate question
@@ -85,6 +121,7 @@
                 "</li>"
                     
             for(var i=0; i < currentQuestion.length; i++){
+                //question buttons
                 var element = document.getElementById("answers");
                 var line = document.createElement("li");
                 $(line).addClass("quiz-answer");
@@ -102,22 +139,61 @@
                 var answerText = document.createTextNode(answer);
                 para.appendChild(answerText);
                 
-                var points = currentQuestion[i].points;
-                            
+                container.addEventListener("click", function(){
+                    $(".quiz-answer div").removeClass("answerSelected");
+                    $(".quiz-answer div").addClass("answer-wrap");
+                    $(this).addClass("answerSelected");
+                    $(this).removeClass("answer-wrap");
+                    questionText = $(this).context.textContent;
+                    if(currentStep == 3){
+                        result = $(this).context.textContent;
+                    }
+                });
                 container.addEventListener("click", selectAnswer);
-                container.addEventListener("click", function(){console.log((parseInt(points)))});
             }
+            //continue button
+            var cElement = document.getElementById("answers");
+            var cLine = document.createElement("li");
+            cElement.appendChild(cLine);
+            
+            var cContainer = document.createElement("div");
+            $(cContainer).addClass("unselected");
+            cLine.appendChild(cContainer);
+            
+            var cPara = document.createElement("p");
+            $(cPara).addClass("answer-text");
+            cContainer.appendChild(cPara);
+            
+            var continueText = document.createTextNode("CONTINUE");
+            cPara.appendChild(continueText);
+            
+            cContainer.addEventListener("click", nextQuestion);
+        }
+        
+        //highlights selection and enables continue buttons
+        function selectAnswer(){
+            isAnswerSelected = true;
+            $(".unselected").addClass("selected");
+            $(".unselected").removeClass("unselected");
+            $(".selected").css("opacity", "1.0");
         }
 
-        //update question when answer is clicked
-        function selectAnswer(){
-            currentStep++;
-            if(currentStep < 10){
-                var element = document.getElementById("answers");
-                $(element).empty();
-                setupQuestion(currentStep);
-            } else if(currentStep == 10){
-                calcResults();
+        //update question when continue button is clicked
+        function nextQuestion(){
+            if(isAnswerSelected){
+                isAnswerSelected = false;
+                questionAnswers.push(questionText);
+                questionNum++;
+                currentStep++;
+                if(currentStep < 10){
+                    $("#questionNumber").html("<p><span class=\"questionNum\">" + questionNum + "</span>/10</p>");
+                    var element = document.getElementById("answers");
+                    $(element).empty();
+                    setupQuestion(currentStep);
+                } else if(currentStep == 10){
+                    calcResults();
+                    $("#questionNumber").empty();
+                }
             }
         }
         
@@ -143,15 +219,119 @@
             var heading = document.createElement("h1");
             line.appendChild(heading);
             
-            var headingText = resultOptions[0].title;
-            heading.innerHTML = headingText;
+            if(result == "Rock"){
+                var headingText = resultOptions[0].title;
+                heading.innerHTML = headingText;
+
+                var desc = document.createElement("p");
+                $(desc).addClass("desc");
+                line.appendChild(desc);
+
+                var descText = resultOptions[0].desc;
+                desc.innerHTML = descText;
+            } else if(result == "Pop"){
+                var headingText = resultOptions[1].title;
+                heading.innerHTML = headingText;
+
+                var desc = document.createElement("p");
+                $(desc).addClass("desc");
+                line.appendChild(desc);
+
+                var descText = resultOptions[1].desc;
+                desc.innerHTML = descText;
+            } else if(result == "Country"){
+                var headingText = resultOptions[2].title;
+                heading.innerHTML = headingText;
+
+                var desc = document.createElement("p");
+                $(desc).addClass("desc");
+                line.appendChild(desc);
+
+                var descText = resultOptions[2].desc;
+                desc.innerHTML = descText;
+            } else if(result == "Alternative"){
+                var headingText = resultOptions[3].title;
+                heading.innerHTML = headingText;
+
+                var desc = document.createElement("p");
+                $(desc).addClass("desc");
+                line.appendChild(desc);
+
+                var descText = resultOptions[3].desc;
+                desc.innerHTML = descText;
+            }
+            //continue button
+            var cElement = document.getElementById("answers");
+            var cLine = document.createElement("li");
+            cElement.appendChild(cLine);
             
-            var desc = document.createElement("p");
-            $(desc).addClass("desc");
-            line.appendChild(desc);
+            var cContainer = document.createElement("div");
+            $(cContainer).addClass("selected");
+            cLine.appendChild(cContainer);
             
-            var descText = resultOptions[0].desc;
-            desc.innerHTML = descText;
+            var cPara = document.createElement("p");
+            $(cPara).addClass("answer-text");
+            cContainer.appendChild(cPara);
+            
+            var continueText = document.createTextNode("CONTINUE");
+            cPara.appendChild(continueText);
+            
+            cContainer.addEventListener("click", goToResults);
+        }
+        
+        function goToResults(){
+            $('body').css("overflow", "visible");
+            var element = document.getElementById("answers");
+            $(element).empty();
+            
+            for(var i=0; i < questionAnswers.length; i++){
+                var container = document.createElement("div");
+                $(container).addClass("card card-3");
+                element.appendChild(container);
+                
+                var para = document.createElement("p");
+                container.appendChild(para);
+                
+                var yourQuestion = questions[i];
+                var answerText = document.createTextNode(yourQuestion);
+                para.appendChild(answerText);
+                
+                var para2 = document.createElement("p");
+                container.appendChild(para2);
+                
+                var youAnswered = document.createTextNode("YOU ANSWERED");
+                para2.appendChild(youAnswered);
+                
+                var para3 = document.createElement("p");
+                container.appendChild(para3);
+                
+                var answer = questionAnswers[i];
+                var yourAnswer = document.createTextNode(answer);
+                para3.appendChild(yourAnswer);
+                
+                container.style.clear = "left";
+            }
+            //continue button
+            var cElement = document.getElementById("results");
+            var cLine = document.createElement("li");
+            cElement.appendChild(cLine);
+            
+            var cContainer = document.createElement("div");
+            $(cContainer).addClass("selected");
+            cLine.appendChild(cContainer);
+            
+            var cPara = document.createElement("p");
+            $(cPara).addClass("answer-text");
+            cContainer.appendChild(cPara);
+            
+            var continueText = document.createTextNode("CONTINUE");
+            cPara.appendChild(continueText);
+            
+            cContainer.addEventListener("click", skip);
+        }
+        
+        function skip(){
+            window.location.href = "yourday.html";
         }
     </script>
 </body>

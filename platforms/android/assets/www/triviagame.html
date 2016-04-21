@@ -81,7 +81,10 @@
         function setQuestion() {
             selectionValid = false; // Flag to make sure question has not been asked yet
             while (selectionValid == false) {
-                currentQuestion = tArrayLength - (questionsAsked+1); // randomly select starting question
+                
+                currentQuestion = tArrayLength - (questionsAsked+1);// randomly select starting question
+                
+                //currentQuestion = Math.floor((Math.random() * 14) + 1); //Trying to fix bug were the questions are no randomly asked, they are asked in order of placement in array.
                 console.log(currentQuestion);
                 if (TriviaData[currentQuestion][2] == "no") {
                     selectionValid = true;
@@ -95,7 +98,7 @@
 
         function trackProgress() {
             document.getElementById('progress').innerHTML = "";
-            for (var i = 0; i < progress.length; i++) {
+            for (var i = 0; i < 10; i++) {
                 document.getElementById('progress').innerHTML += progress[i];
             }
         }
@@ -106,7 +109,7 @@
             if (TriviaData[currentQuestion][1] == myAnswer) {
                 // answer correct
                 totalCorrect = totalCorrect + 1;
-                timeLeft + 10;
+                timeLeft += 10;
                 progress[(questionsAsked - 1)] = "&#9745;";
                 trackProgress();
             } else {
@@ -114,15 +117,15 @@
                 trackProgress();
             }
             removeQuestion();
-            if (questionsAsked < 15) {
+            if (questionsAsked < 11) {
                 
                 setQuestion();
             }
             // final question asked - disable button and show final results
-            else {
+            if(questionsAsked == 11) {
                 alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
-//                document.getElementById("ButtonContinue").disabled = true;
-            }
+                //document.getElementById("ButtonContinue").disabled = true;
+            } 
 
         }
 
@@ -134,7 +137,7 @@
 
             if (timeLeft <= 0) {
                 timeLeft = 1;
-                alert("Out of time!");
+                //alert("Out of time!");
             }
         }
     </script>
@@ -144,7 +147,7 @@
 
 
 
-<body style="background:#c6e2ff">
+<body>
 
     <header>
         <button class="back" onclick="history.back()">
@@ -158,9 +161,9 @@
     <center>
 
         <br>Time Remaining
-        <div id="TimerElement">?</div>
+        <div id="TimerElement">30</div>
 
-        <div id="TriviaQuestions">
+        <div id="TriviaQuestions" style="color:black">
                 
         </div>
 
