@@ -11,10 +11,11 @@
     <link href="ui/css/style.css" rel="stylesheet">
     <script src="lyrics.js"></script>
     <script src="cordova.js"></script>
-    <script src="js/bundle.js"></script>
+    <script src="bundle.js"></script>
+    <script src="libs/sortable/Sortable.js"></script>
 </head>
 
-<body style="background:#c6e2ff">
+<body>
 
     <header>
         <button class="back" onclick="history.back()">
@@ -100,7 +101,7 @@
         var songTime = (soundFile.currentTime / soundFile.duration) * 359;
 
 
-        document.getElementById("arc1").setAttribute("d", describeArc(40, 43, 28, 0, songTime));
+        document.getElementById("arc1").setAttribute("d", describeArc(30, 35, 27, 0, songTime));
     };
 
     function start() {
@@ -166,27 +167,27 @@
 
 
     function loadWordBank() {
-        document.getElementById("lyrics").style.border = "medium solid #000000";
+        document.getElementById("lyrics").style.border = "medium solid #ffffff";
         Sortable.create(lyrics, {
             group: 'foo',
             onStart: function (evt) {
-                document.getElementById("lyrics").style.border = "medium dashed #000000";
+                document.getElementById("lyrics").style.border = "medium dashed #ffffff";
             },
 
             // dragging ended
             onEnd: function (evt) {
-                document.getElementById("lyrics").style.border = "medium solid #000000";
+                document.getElementById("lyrics").style.border = "medium solid #ffffff";
             },
         });
         Sortable.create(wordBank, {
             group: 'foo',
             onStart: function (evt) {
-                document.getElementById("lyrics").style.border = "medium dashed #000000";
+                document.getElementById("lyrics").style.border = "medium dashed #ffffff";
             },
 
             // dragging ended
             onEnd: function (evt) {
-                document.getElementById("lyrics").style.border = "medium solid #000000";
+                document.getElementById("lyrics").style.border = "medium solid #ffffff";
             },
         });
         document.getElementById("lyrics").innerHTML = ""

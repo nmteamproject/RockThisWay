@@ -73,6 +73,11 @@
     
 }
 
+#progress{
+    width: 100vw;
+    text-align: center;
+}
+
 .triviaAnswer{
     width:90vw;
     padding: 10px;
@@ -95,7 +100,7 @@
 
 
 #lyrics {
-    border-style: thick solid #000000;
+    border-style: thick solid #ffffff;
     border-radius: 10px;
     min-height: 100px;
     margin: 15px;
@@ -106,8 +111,8 @@
 #playMusicButton {
     border: none;
     border-radius: 40px;
-    padding: 10px 15px 10px 17px;
-    margin-top: 20px;
+    padding: 13px 13px 8px 15px;
+    margin-top: 50px;
     margin-bottom: 20px;
     font-size: 30px;
     z-index: 3;
@@ -190,6 +195,7 @@
 #answer {
     width: 85vw;
     font-size: 30px;
+    color:black;
 }
 
 .strike {
@@ -305,6 +311,9 @@ header img.logotype {
 								Common Styles
 	---------------------------------------------------------- */
 
+#myModal{
+    color: #000000;
+}
 
 /* Common styles for Evothings examples and client. */
 
