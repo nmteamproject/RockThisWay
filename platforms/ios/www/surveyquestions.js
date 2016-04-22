@@ -1,14 +1,14 @@
 var questions = [
     "What is your age group?",
-    "Have you been to the Rock Hall before?",
-    "How long will you spend at the Rock Hall?",
-    "What is your favorite genre of music?",
-    "What decade do you belong in?",
-    "What is your favorite song from these choices?",
-    "Who is your favorite artist from these choices?",
-    "What is your favorite instrument?",
-    "What is your favorite color?",
-    "What artifact would you most like to see?"
+    "Been here before?",
+    "How long will you be here?",
+    "Pick a genre",
+    "Pick a decade",
+    "Pick a song",
+    "Pick an artist",
+    "Pick an instrument",
+    "Pick a color",
+    "Pick an artifact"
 ];
 
 
@@ -39,6 +39,14 @@ var q1Answers = [
     {
         "points": "0",
         "answer": "No"
+    },
+    {
+        "points": "0",
+        "answer": "Maybe"
+    },
+    {
+        "points": "0",
+        "answer": "Not sure"
     }
 ];
 
@@ -71,24 +79,16 @@ var q3Answers = [
         "answer": "Pop"
     },
     {
-        "points": "2",
-        "answer": "Hip-hop"
-    },
-    {
         "points": "3",
-        "answer": "Country"
+        "answer": "Alternative"
     },
     {
         "points": "4",
-        "answer": "Other"
+        "answer": "Country"
     }
 ];
 
 var q4Answers = [
-    {
-        "points": "3",
-        "answer": "50s"
-    },
     {
         "points": "3",
         "answer": "60s"
@@ -104,10 +104,6 @@ var q4Answers = [
     {
         "points": "2",
         "answer": "90s"
-    },
-    {
-        "points": "4",
-        "answer": "00s"
     }
 ];
 
@@ -146,10 +142,6 @@ var q6Answers = [
     {
         "points": "1",
         "answer": "Green Day"
-    },
-    {
-        "points": "2",
-        "answer": "Kanye West"
     }
 ];
 
@@ -169,11 +161,7 @@ var q7Answers = [
     {
         "points": "4",
         "answer": "Piano"
-    },
-    {
-        "points": "2",
-        "answer": "Synthesizer"
-    },
+    }
 ];
 
 var q8Answers = [
@@ -193,14 +181,6 @@ var q8Answers = [
         "points": "0",
         "answer": "Yellow"
     },
-    {
-        "points": "0",
-        "answer": "Pink"
-    },
-    {
-        "points": "0",
-        "answer": "Other"
-    }
 ];
 
 var q9Answers = [
@@ -215,10 +195,6 @@ var q9Answers = [
     {
         "points": "3",
         "answer": "Taylor Swift's Lyric Sheets"
-    },
-    {
-        "points": "1",
-        "answer": "John Lennon's Jacket"
     },
     {
         "points": "1",
