@@ -16,6 +16,8 @@
     <script src="crowdanswers.js"></script>
 
     <script type="text/javascript">
+        
+        //Score Keeping
         if (localStorage.getItem("score") != undefined){
             var points = parseInt(localStorage.score);
         }
@@ -27,6 +29,8 @@
 
         var strikes = 0;
 
+        
+        //checks answer submition and assess appropriate points or strikes
         function submit() {
             if ($('#answer').val() == '') {
                 $('.hidden').css('opacity', '1.0');
@@ -63,7 +67,7 @@
             document.getElementById('answer').value = "";
         }
 
-
+        // Creates place holder boxes for number of questions
         function fillQuestions() {
             var questionList = "";
             for (var i = 0; i < questions.length; i++) {
@@ -76,6 +80,7 @@
             loadQuestion();
         }
 
+        //Loads the next question
         function loadQuestion() {
             var prevQNum = "crowdQ" + (questionNumber - 1);
             if ((questionNumber - 1) >= 0) {
