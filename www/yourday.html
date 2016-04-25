@@ -252,7 +252,15 @@
                         $('#modalTitle').text("Play Lyracle");
                         $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
                         var hScreen = $('<img src="images/map3.png" width="100%">');
-                    } else {
+                    } 
+                    else if (mNearestBeacon.major == 112) {
+                        $("#modalPlay").hide();
+                        $("#modalExhibit").attr("onclick", "leaveExhibits()");
+                        $("#modalExhibit").text("Leave");
+                        $('#modalTitle').text("Leave Exhibit?");
+                        $("#modalDescription").text("If you are leaving the exhibit please press the following button and give this phone to an exhibitor.");
+                        var hScreen = $('<img src="images/map3.png" width="100%">');
+                    }else {
                         var hScreen = $('');
                     }
                     $('#homeScreen').append(hScreen);
@@ -311,6 +319,9 @@
 
         })();
         
+        function leaveExhibits(){
+            window.location.href = "submitscore.html";
+        }
         
         function goToExhibit(exhibit){
             var link = "exhibit.html?exhibit="+exhibit;
