@@ -15,17 +15,13 @@
     <script src="libs/sortable/Sortable.js"></script>
 </head>
 
-<body>
+<body id="lyricGame">
 
-    <header>
-        <button class="back" onclick="history.back()">
-            <img src="ui/images/arrow-left.svg" />
-        </button>
-
-       <div> Aerosmith</div>
-
-    </header>
-
+<div id="lyricHeader">
+    <img src="images/arrow.png" class="backButton" onclick="history.back()">
+    
+    Aerosmith's Lyrics
+</div>
 
     <div>
         <div id="songDetails">
@@ -36,26 +32,31 @@
             <path id="arc1" fill="none" stroke="#e82828" stroke-width="3" />
         </svg>
         <center>
-            <button id="playMusicButton"  onclick="playMusic(this.value)" value=""><img src="images/play.png" height="40px"></button>
+
+            <button class="lyricButton" onclick="showLyrics()"><img src="images/lyricGameUI/lyricLyricButton.png" height="40px"></button>
+
+            <button id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="images/lyricGameUI/lyricPlayButton.png" height="70px"></button>
+
+            <button class="lyricButton" onclick="loadWordBank()"><img src="images/lyricGameUI/lyricRestartButton.png" height="40px"></button>
         </center>
-        <div class="directions">Complete the lyrics</div>
-        <!--        <div id="verse"></div>-->
+        <div  id="verse" class="directions">Complete the lyrics</div>
+                <div></div>
     </div>
     <center>
         <div id="game">
-            <button id="lyricRefresh" onclick="loadWordBank()">&#x21bb;</button>
+
 
             <div id="lyrics">
 
             </div>
-            <div id="wordBank" style="text-align: center; margin: 0 0.9em 0 0.9em">
+            <div id="wordBank">
             </div>
         </div>
 
     </center>
-    
-        <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
-    
+
+    <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
+
 </body>
 
 
@@ -77,7 +78,7 @@
         var songTime = (soundFile.currentTime / soundFile.duration) * 359;
 
 
-        document.getElementById("arc1").setAttribute("d", describeArc(30, 35, 27, 0, songTime));
+        document.getElementById("arc1").setAttribute("d", describeArc(57, 50, 37, 0, songTime));
     };
 
     function start() {
@@ -144,12 +145,12 @@
             document.getElementById("lyrics").innerHTML = answer;
             document.getElementById("wordBank").innerHTML = "You got the Correct answer!"
             document.getElementById("sumbitLyricsButton").innerHTML = "Next";
-            document.getElementById("sumbitLyricsButton").setAttribute('onclick','nextLyrics()');
-            
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
+
         } else {
-            if(document.getElementById("lyrics").innerHTML!= ""){
-                     document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\">Incorrect, Try again</text></svg>')";
-                }
+            if (document.getElementById("lyrics").innerHTML != "") {
+                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\">Incorrect, Try again</text></svg>')";
+            }
             loadWordBank();
         }
     }
@@ -160,14 +161,14 @@
         if (playingMusic == true) {
             stop();
             soundFile.pause();
-            document.getElementById('playMusicButton').innerHTML = "<img src='images/play.png' height='40px'>"
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>"
             playingMusic = false;
         } else {
 
             start();
             soundFile.play();
             playingMusic = true;
-            document.getElementById('playMusicButton').innerHTML = "<img src='images/pause.png' height='40px'>"
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPauseButton.png' height='70px'>"
         }
     }
 
@@ -185,8 +186,8 @@
             // dragging ended
             onEnd: function (evt) {
                 document.getElementById("lyrics").style.border = "2px solid #545454";
-                
-                
+
+
             },
         });
         Sortable.create(wordBank, {
@@ -198,11 +199,11 @@
             // dragging ended
             onEnd: function (evt) {
                 document.getElementById("lyrics").style.border = "2px solid #545454";
-                
-                if(document.getElementById("lyrics").innerHTML!= ""){
-                     document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
+
+                if (document.getElementById("lyrics").innerHTML != "") {
+                    document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
                 }
-                
+
             },
         });
         document.getElementById("lyrics").innerHTML = ""
@@ -211,7 +212,7 @@
 
         document.getElementById("playMusicButton").value = musicCollection[lyricNumber];
         document.getElementById("song").innerHTML = songs[lyricNumber].song;
-        document.getElementById("artist").innerHTML = (songs[lyricNumber].artist)+"'";
+        document.getElementById("artist").innerHTML = (songs[lyricNumber].artist) + "'";
 
         var bank = eval("lyricCollection" + lyricNumber);
         var fullBank = "";
@@ -222,15 +223,18 @@
 
         document.getElementById("wordBank").innerHTML = fullBank;
     }
-    
-    function nextLyrics(){
-        
+
+    function nextLyrics() {
+
         lyricNumber++;
         loadWordBank();
         document.getElementById("sumbitLyricsButton").innerHTML = "Submit";
-        document.getElementById("sumbitLyricsButton").setAttribute('onclick','checkLyrics()');
+        document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'checkLyrics()');
     }
     
+    function showLyrics(){
+        document.getElementById('verse').innerHTML = songs[lyricNumber].verse;
+    }
 </script>
 
 

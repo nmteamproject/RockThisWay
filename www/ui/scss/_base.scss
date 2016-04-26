@@ -95,9 +95,9 @@
 
 #playTracker{
     position: fixed;
-    z-index: 0;
-    width:80px;
-    height: 80px;
+    z-index: 1;
+    width:100px;
+    height: 100px;
     margin-top: 10px;
     margin-left: 143px;
 }
@@ -112,6 +112,7 @@
 }
 
 #playMusicButton {
+    background: none;
     border: none;
     position: relative;
     border-radius: 40px;
@@ -126,8 +127,8 @@
     font-family: sans-serif;
     border: thin solid #107a7a;
     font-size: 12px;
-    background: #1D1A22;
-    color: #545454;
+    background: #171717;
+    color: #d9d9d9;
     font-style: normal;
     text-decoration: none;
     padding: 9px;
@@ -138,6 +139,7 @@
 
 #songDetails {
     width: 100%;
+    margin-top: 70px;
 }
 
 #artist {
@@ -173,20 +175,39 @@ text-align: center;
     margin: 0;
 }
 
-#lyricRefresh {
-    position: absolute;
-    left: 42%;
-    margin-top: 135px;
+.lyricButton {
+   
     background: none;
     border: none;
 }
 
 .directions {
     text-align: center;
-    font-size: 15px;
+    font-size: 12px;
     color: #959595;
+    font-style: italic;
 }
 
+#lyricGame{
+    background-image: url(../../images/lyricGameUI/lyricBackground1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+
+#lyricHeader{
+    margin-top: -70px;
+    text-align: center;
+}
+
+.backButton{
+    margin-left: 15px;
+    margin-top: 7px;
+    float: left;
+    transform: scaleX(-1);
+    background: none;
+    height: 25px;
+}
 
 /*  ----------------------------------------------------------
 								Against The Crowd
