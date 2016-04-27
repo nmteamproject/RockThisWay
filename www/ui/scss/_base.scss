@@ -76,7 +76,8 @@
 }
 
 #progress{
-    margin-top: 200px;
+    position:fixed;
+    bottom: 0;
     width: 100vw;
     text-align: center;
 }
@@ -102,13 +103,16 @@
     margin-left: 143px;
 }
 
+#wordBank{
+    margin-bottom: 50px;
+}
 
 #lyrics {
     border-radius: 2px;
     min-height: 175px;
     margin: 15px;
     z-index: 10;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="35%" y="55%" font-size="20" fill="#c1c1c1">Drag and Drop</text></svg>');
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="27%" y="55%" font-size="30" fill="#636363">Drag &amp; Drop</text></svg>');
 }
 
 #playMusicButton {
@@ -125,9 +129,9 @@
 
 .lyric {
     font-family: sans-serif;
-    border: thin solid #107a7a;
+    border: thin solid #04dada;
     font-size: 12px;
-    background: #171717;
+    background: linear-gradient(to bottom, #131618 0%,#060808 100%);
     color: #d9d9d9;
     font-style: normal;
     text-decoration: none;
@@ -165,11 +169,11 @@ text-align: center;
 
 .submitButton {
     font-size: 20px;
-    background: linear-gradient(to right, #03d4d2 0%,#107a7a 100%);
+    background: linear-gradient(to right, #05dbdb 0%,#178d8e 100%);
     padding: 20px 0px 20px 20px;
     border-radius: 0px;
     width: 100vw;
-    position: absolute;
+    position: fixed;
     bottom:0;
     left: 0;
     margin: 0;
@@ -212,6 +216,14 @@ text-align: center;
 /*  ----------------------------------------------------------
 								Against The Crowd
 	---------------------------------------------------------- */
+
+#atcGame{
+    background-image: url(../../images/feudGameUI/ATCbackground1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+
 .answerText{
     height: 45px;
     line-height: 45px;
@@ -239,7 +251,7 @@ text-align: center;
 #answer {
     padding-left: 5px;
     margin-bottom: 30px;
-    border: 1px solid white;
+    border: 3px solid #acacac;
     background: none;
     width: 80vw;
     font-size: 30px;
@@ -255,7 +267,15 @@ text-align: center;
     padding: 5px;
 }
 
+
+.correctAnswer{
+    width: 80vw;
+    border: 1px solid #1b8e8e;
+    background: linear-gradient(to right, #134644 0%,#145351 100%);
+}
+
 .crowdQuestion {
+    opacity: 0.6;
     width: 80vw;
     background: linear-gradient(to bottom, #151715 0%,#111412 100%);
     border-radius: 2px;
@@ -264,7 +284,7 @@ text-align: center;
 
 
 #submit{
-     background: linear-gradient(to right, #7df62c 0%,#288d3a 100%);
+     background: linear-gradient(to right, #82dd43 0%,#318e48 100%);
 }
 
 

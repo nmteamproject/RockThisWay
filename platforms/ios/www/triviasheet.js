@@ -1,38 +1,38 @@
 var TriviaData = new Array(15);
 createTwoDimensionalArray(3);
 
-TriviaData[0][0] = "Taylor Swift\'s song \"Shake It Off\" is from her album \"Red\".";
-TriviaData[1][0] = "I 100% know how all this code works.";
-TriviaData[2][0] = "The Rock and Roll hall of fame is in Cleveland Ohio.";
-TriviaData[3][0] = "Imagine RIT is on August 23rd.";
+TriviaData[0][0] = "The Beatles were not part of the 'British Invasion'.";
+TriviaData[1][0] = "The film 'Ferris Beullers day Off' featured the Bealtes' 'Hey Jude'.";
+TriviaData[2][0] = "Ringo Starr was the most popular Beatles' song writer.";
+TriviaData[3][0] = "The Beatles were known for their short hair.";
 TriviaData[4][0] = "Paul McCartney is a member of The Eagles.";
-TriviaData[5][0] = "This was coded by Brendan Kenny and a gay girl with blue hair.";
-TriviaData[6][0] = "This app was built using Cordova.";
-TriviaData[7][0] = "The Top Grossing Album of all time was made by Justin Beiber.";
-TriviaData[8][0] = "The lead singer of fun. is Nate Ruess.";
-TriviaData[9][0] = "The Who is a British Band";
-TriviaData[10][0] = "Rochester is a bipoler city.";
-TriviaData[11][0] = "Sharkrats are best rats.";
-TriviaData[12][0] = "Female charr have fluffy-er tails.";
-TriviaData[13][0] = "Japan has created a highly loved digital pop idol.";
-TriviaData[14][0] = "Akira Yamaoka composed the music for all Silent Hill games.";
+TriviaData[5][0] = "The Bealtes' first album was called 'My Bonnie'.";
+TriviaData[6][0] = "The Beatles broke up in 1970.";
+TriviaData[7][0] = "The Beatles' Bassist was named George Harrison.";
+TriviaData[8][0] = "'Love Me Do' was the Beatles' first hit.";
+TriviaData[9][0] = "George Martin is called the 5th Beatle";
+TriviaData[10][0] = "Every Beatle sang at least one of their songs.";
+TriviaData[11][0] = "The Beatles' Drummer was named Ringo Starr.";
+TriviaData[12][0] = "Band originally was named the Blackjacks.";
+TriviaData[13][0] = "John Lennon was the original Beatle.";
+TriviaData[14][0] = "The Beatles formed their band in Liverpool.";
 
 // Answers
 TriviaData[0][1] = "false";
 TriviaData[1][1] = "false";
-TriviaData[2][1] = "true";
+TriviaData[2][1] = "false";
 TriviaData[3][1] = "false";
 TriviaData[4][1] = "false";
 TriviaData[5][1] = "true";
 TriviaData[6][1] = "true";
-TriviaData[7][1] = "false";
+TriviaData[7][1] = "true";
 TriviaData[8][1] = "true";
 TriviaData[9][1] = "true";
 TriviaData[10][1] = "true";
 TriviaData[11][1] = "true";
 TriviaData[12][1] = "true";
 TriviaData[13][1] = "true";
-TriviaData[14][1] = "false";
+TriviaData[14][1] = "true";
 
 // Has question been asked
 // -- necessary because we are asking in random order

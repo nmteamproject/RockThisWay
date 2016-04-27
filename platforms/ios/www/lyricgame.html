@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="background:#c6e2ff">
+<html>
 
 <head>
 
@@ -15,79 +15,56 @@
     <script src="libs/sortable/Sortable.js"></script>
 </head>
 
-<body>
+<body id="lyricGame">
 
-    <header>
-        <button class="back" onclick="history.back()">
-            <img src="ui/images/arrow-left.svg" />
-        </button>
+<div id="lyricHeader">
+    <img src="images/arrow.png" class="backButton" onclick="history.back()">
+    
+    Aerosmith's Lyrics
+</div>
 
-        <img src="images/logo2.png" height="50px" />
-
-    </header>
-
-
-    <div style="margin: 0 0.9em 0 0.9em">
+    <div>
         <div id="songDetails">
-            <div id="song"></div>
             <div id="artist"></div>
+            <div id="song"></div>
         </div>
-        <svg id="playTracker" onclick="playMusic(this.value)" value="">
+        <svg id="playTracker">
             <path id="arc1" fill="none" stroke="#e82828" stroke-width="3" />
         </svg>
         <center>
-            <button id="playMusicButton">&#9654;</button>
 
+            <button class="lyricButton" onclick="showLyrics()"><img src="images/lyricGameUI/lyricLyricButton.png" height="40px"></button>
+
+            <button id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="images/lyricGameUI/lyricPlayButton.png" height="70px"></button>
+
+            <button class="lyricButton" onclick="loadWordBank()"><img src="images/lyricGameUI/lyricRestartButton.png" height="40px"></button>
         </center>
-        <div class="directions">Complete these Lyrics!</div>
-        <div id="verse"></div>
+        <div  id="verse" class="directions">Complete the lyrics</div>
+                <div></div>
     </div>
     <center>
         <div id="game">
-            <button id="lyricRefresh" onclick="loadWordBank()">&#x21bb;</button>
+
 
             <div id="lyrics">
 
             </div>
-            <div id="wordBank" style="text-align: center; margin: 0 0.9em 0 0.9em">
+            <div id="wordBank">
             </div>
         </div>
 
     </center>
-    <div id="sumbitLyricsButton">
-        <button onclick="checkLyrics()" class="submitButton">Submit</button>
-    </div>
+
+    <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
+
 </body>
 
 
-<!--
-
-
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-         Modal content
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
--->
 
 <script type="text/javascript">
     window.onload = loadWordBank;
 
-    var lyricNumber = 1;
+    var lyricNumber = 0;
     var swapCount = 0;
     var swapLyric;
     var playingMusic = false;
@@ -95,13 +72,13 @@
     var timer = null;
 
 
-
+    // Timer for song length UI
     function tick() {
 
         var songTime = (soundFile.currentTime / soundFile.duration) * 359;
 
 
-        document.getElementById("arc1").setAttribute("d", describeArc(30, 35, 27, 0, songTime));
+        document.getElementById("arc1").setAttribute("d", describeArc(57, 50, 37, 0, songTime));
     };
 
     function start() {
@@ -114,105 +91,7 @@
     };
 
 
-    function addLyric(clickedVal) {
-        var lyric = "<button class='lyric' onclick='swap(this)' value='" + clickedVal + "'>" + clickedVal + "</button>";
-
-
-        var currentLyrics = document.getElementById("lyrics").innerHTML;
-        document.getElementById("lyrics").innerHTML = currentLyrics + "" + lyric;
-    }
-
-    function checkLyrics() {
-        var fullString = document.getElementById("lyrics").querySelectorAll(".lyric");
-        var answerLyrics;
-        for (i = 0; i < fullString.length; i++) {
-            if (fullString[i].style.display != "none") {
-                answerLyrics = answerLyrics + " " + fullString[i].value;
-            }
-        }
-
-        var answer = answerLyrics.substr(10, answerLyrics.length);
-        console.log(answer);
-
-        if (answer == correctLyrics[lyricNumber]) {
-            document.getElementById("wordBank").innerHTML = "You Got it Right!";
-        } else {
-            document.getElementById("lyrics").innerHTML = "That was incorrect! Try again =)"
-            loadWordBank();
-        }
-
-
-
-    }
-
-
-
-
-    function playMusic(song) {
-
-        if (playingMusic == true) {
-            stop();
-            soundFile.pause();
-            document.getElementById('playMusicButton').innerHTML="&#9654;"
-            playingMusic = false;
-        } else {
-
-            start();
-            soundFile.play();
-            playingMusic = true;
-            document.getElementById('playMusicButton').innerHTML="&#10074;&#10074;"
-        }
-    }
-
-
-
-    function loadWordBank() {
-        document.getElementById("lyrics").style.border = "medium solid #ffffff";
-        Sortable.create(lyrics, {
-            group: 'foo',
-            onStart: function (evt) {
-                document.getElementById("lyrics").style.border = "medium dashed #ffffff";
-            },
-
-            // dragging ended
-            onEnd: function (evt) {
-                document.getElementById("lyrics").style.border = "medium solid #ffffff";
-            },
-        });
-        Sortable.create(wordBank, {
-            group: 'foo',
-            onStart: function (evt) {
-                document.getElementById("lyrics").style.border = "medium dashed #ffffff";
-            },
-
-            // dragging ended
-            onEnd: function (evt) {
-                document.getElementById("lyrics").style.border = "medium solid #ffffff";
-            },
-        });
-        document.getElementById("lyrics").innerHTML = ""
-
-        soundFile = new Audio('songs/' + musicCollection[lyricNumber] + '.mp3');
-
-        document.getElementById("playMusicButton").value = musicCollection[lyricNumber];
-        document.getElementById("song").innerHTML = songs[lyricNumber].song;
-        document.getElementById("artist").innerHTML = songs[lyricNumber].artist;
-        document.getElementById("verse").innerHTML = songs[lyricNumber].verse;
-
-        var bank = eval("lyricCollection" + lyricNumber);
-        var fullBank = "";
-
-        for (i = 0; i < bank.length; i++) {
-            fullBank += "<button class='lyric' onclick='this.style.display=&quot;none&quot;; [addLyric(this.value)];' value='" + bank[i] + "'>" + bank[i] + "</button> "
-        }
-
-        document.getElementById("wordBank").innerHTML = fullBank;
-
-
-
-    }
-
-
+    // Code to draw circle 
     function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
         var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
 
@@ -235,6 +114,126 @@
     ].join(" ");
 
         return d;
+    }
+
+
+
+    // Adds lyric to answer key
+    function addLyric(clickedVal) {
+        var lyric = "<button class='lyric' onclick='swap(this)' value='" + clickedVal + "'>" + clickedVal + "</button>";
+
+
+        var currentLyrics = document.getElementById("lyrics").innerHTML;
+        document.getElementById("lyrics").innerHTML = currentLyrics + "" + lyric;
+    }
+
+
+    // Called when user submits lyrics
+    function checkLyrics() {
+        var fullString = document.getElementById("lyrics").querySelectorAll(".lyric");
+        var answerLyrics;
+        for (i = 0; i < fullString.length; i++) {
+            if (fullString[i].style.display != "none") {
+                answerLyrics = answerLyrics + " " + fullString[i].value;
+            }
+        }
+
+        var answer = answerLyrics.substr(10, answerLyrics.length);
+        //console.log(answer);
+
+        if (answer == correctLyrics[lyricNumber]) {
+            document.getElementById("lyrics").innerHTML = answer;
+            document.getElementById("wordBank").innerHTML = "You got the Correct answer!"
+            document.getElementById("sumbitLyricsButton").innerHTML = "Next";
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
+
+        } else {
+            if (document.getElementById("lyrics").innerHTML != "") {
+                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#636363\">Incorrect, Try again</text></svg>')";
+            }
+            loadWordBank();
+        }
+    }
+
+    // Plays music segment
+    function playMusic(song) {
+        console.log("called");
+        if (playingMusic == true) {
+            stop();
+            soundFile.pause();
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>"
+            playingMusic = false;
+        } else {
+
+            start();
+            soundFile.play();
+            playingMusic = true;
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPauseButton.png' height='70px'>"
+        }
+    }
+
+
+    // Loads the page and word bank | Also called to reset Word Bank
+    function loadWordBank() {
+        //Makes Dragging UI
+        document.getElementById("lyrics").style.border = "3px solid #636363";
+        Sortable.create(lyrics, {
+            group: 'foo',
+            onStart: function (evt) {
+                document.getElementById("lyrics").style.border = "3px dashed #636363";
+            },
+
+            // dragging ended
+            onEnd: function (evt) {
+                document.getElementById("lyrics").style.border = "3px solid #636363";
+
+
+            },
+        });
+        Sortable.create(wordBank, {
+            group: 'foo',
+            onStart: function (evt) {
+                document.getElementById("lyrics").style.border = "3px dashed #636363";
+            },
+
+            // dragging ended
+            onEnd: function (evt) {
+                document.getElementById("lyrics").style.border = "3px solid #636363";
+
+                if (document.getElementById("lyrics").innerHTML != "") {
+                    document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
+                }
+
+            },
+        });
+        document.getElementById("lyrics").innerHTML = ""
+
+        soundFile = new Audio('songs/' + musicCollection[lyricNumber] + '.mp3');
+
+        document.getElementById("playMusicButton").value = musicCollection[lyricNumber];
+        document.getElementById("song").innerHTML = songs[lyricNumber].song;
+        document.getElementById("artist").innerHTML = (songs[lyricNumber].artist) + "'";
+
+        var bank = eval("lyricCollection" + lyricNumber);
+        var fullBank = "";
+
+        for (i = 0; i < bank.length; i++) {
+            fullBank += "<button class='lyric' onclick='this.style.display=&quot;none&quot;; [addLyric(this.value)];' value='" + bank[i] + "'>" + bank[i] + "</button> "
+        }
+
+        document.getElementById("wordBank").innerHTML = fullBank;
+    }
+
+    function nextLyrics() {
+
+        lyricNumber++;
+        loadWordBank();
+        document.getElementById("sumbitLyricsButton").innerHTML = "Submit";
+        document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'checkLyrics()');
+    }
+    
+    function showLyrics(){
+        document.getElementById('verse').innerHTML = songs[lyricNumber].verse;
     }
 </script>
 

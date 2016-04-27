@@ -8,7 +8,7 @@
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Rock This Way</title>
-    
+
     <link href="ui/css/style.css" rel="stylesheet">
 
     <script src="cordova.js"></script>
@@ -16,80 +16,138 @@
     <script src="crowdanswers.js"></script>
 
     <script type="text/javascript">
-        if (localStorage.getItem("score") != undefined){
-            var points = parseInt(localStorage.score);
-        }
-        else{
-            var points = 0;
-        }
+        //        //Score Keeping
+        //        if (localStorage.getItem("score") != undefined) {
+        //            var points = parseInt(localStorage.score);
+        //        } else {
+        //            var points = 0;
+        //        }
+        //        var questionNumber = 0;
+        //        window.onload = fillQuestions;
+        //
+        //        var strikes = 0;
+        //
+        //
+        //        //checks answer submition and assesses appropriate points or strikes
+        //        function submit() {
+        //            if ($('#answer').val() == '') {
+        //                $('.hidden').css('opacity', '1.0');
+        //            } else {
+        //                var matched = false;
+        //                var answer = $('#answer').val().toLowerCase();
+        //                var answerkey = eval('q' + questionNumber + 'Answers');
+        //                for (var i = 0; i < answerkey.length; i++) {
+        //                    var obj = answerkey[i];
+        //                    for (var j = 0; j < obj.keywords.length; j++) {
+        //                        if (obj.keywords[j] == answer) {
+        //                            document.getElementById('pointsAwarded').innerHTML = "You got " + obj.points + " points!";
+        //                            matched = true;
+        //                            points += parseInt(obj.points);
+        //                            document.getElementById('crowdPoints').innerHTML = points;
+        //                            questionNumber++;
+        //                            loadQuestion();
+        //                        }
+        //                    }
+        //                }
+        //                if (matched == false) {
+        //                    strikes++;
+        //                    document.getElementById('strikes').innerHTML += "<div class='animated bounceIn strike'>X</div>";
+        //                    if (strikes == 3) {
+        //                        document.getElementById('pointsAwarded').innerHTML = "You got 0 points!";
+        //                        document.getElementById('strikes').innerHTML = "";
+        //                        strikes = 0;
+        //                        questionNumber++;
+        //                        loadQuestion();
+        //                    }
+        //                }
+        //
+        //            }
+        //            document.getElementById('answer').value = "";
+        //        }
+        //
+        //        // Creates place holder boxes for number of questions
+        //        function fillQuestions() {
+        //            var questionList = "";
+        //            for (var i = 0; i < questions.length; i++) {
+        //                questionList += "<div class='crowdQuestion' id='crowdQ" + i + "'>" + (i + 1) + "</div>";
+        //            }
+        //            document.getElementById('questionAnswers').innerHTML = questionList;
+        //
+        //            document.getElementById('crowdPoints').innerHTML = points;
+        //
+        //            loadQuestion();
+        //        }
+        //
+        //        //Loads the next question
+        //        function loadQuestion() {
+        //            var prevQNum = "crowdQ" + (questionNumber - 1);
+        //            if ((questionNumber - 1) >= 0) {
+        //                document.getElementById(prevQNum).style.color = "#888888"
+        //            }
+        //            var qNum = "crowdQ" + questionNumber;
+        //            document.getElementById(qNum).className += " animated";
+        //            document.getElementById(qNum).className += " bounceIn";
+        //            document.getElementById(qNum).innerHTML = questions[questionNumber];
+        //        }
+        //
+        //        window.onbeforeunload = function (e) {
+        //            localStorage.score = points;
+        //        };
+
+        window.onload = startQuestion;
         var questionNumber = 0;
-        window.onload = fillQuestions;
-
+        var questionID = eval("q" + questionNumber + "Answers");
         var strikes = 0;
+        
+        //document.getElementById('answer').addEventListener("click", clearAnswer);
+        
+        function startQuestion() {
+            document.getElementById('question').innerHTML = questions[questionNumber];
 
-        function submit() {
-            if ($('#answer').val() == '') {
-                $('.hidden').css('opacity', '1.0');
-            } else {
-                var matched = false;
-                var answer = $('#answer').val().toLowerCase();
-                var answerkey = eval('q' + questionNumber + 'Answers');
-                for (var i = 0; i < answerkey.length; i++) {
-                    var obj = answerkey[i];
-                    for (var j = 0; j < obj.keywords.length; j++) {
-                        if (obj.keywords[j] == answer) {
-                            document.getElementById('pointsAwarded').innerHTML = "You got " + obj.points + " points!";
-                            matched = true;
-                            points += parseInt(obj.points);
-                            document.getElementById('crowdPoints').innerHTML = points;
-                            questionNumber++;
-                            loadQuestion();
-                        }
-                    }
-                }
-                if (matched == false) {
-                    strikes++;
-                    document.getElementById('strikes').innerHTML += "<div class='animated bounceIn strike'>X</div>";
-                    if (strikes == 3) {
-                        document.getElementById('pointsAwarded').innerHTML = "You got 0 points!";
-                        document.getElementById('strikes').innerHTML = "";
-                        strikes = 0;
-                        questionNumber++;
-                        loadQuestion();
-                    }
-                }
-
-            }
-            document.getElementById('answer').value = "";
-        }
-
-
-        function fillQuestions() {
             var questionList = "";
-            for (var i = 0; i < questions.length; i++) {
+
+            for (var i = 0; i < questionID.length; i++) {
                 questionList += "<div class='crowdQuestion' id='crowdQ" + i + "'>" + (i + 1) + "</div>";
             }
-            document.getElementById('question').innerHTML = questionList;
-
-            document.getElementById('crowdPoints').innerHTML = points;
-
-            loadQuestion();
+            document.getElementById('questionAnswers').innerHTML = questionList;
         }
 
-        function loadQuestion() {
-            var prevQNum = "crowdQ" + (questionNumber - 1);
-            if ((questionNumber - 1) >= 0) {
-                document.getElementById(prevQNum).style.color = "#888888"
+        function submit() {
+            var correct = false;
+            var answer = $('#answer').val().toLowerCase();
+            for (var i = 0; i < questionID.length; i++) {
+                if (answer.toLowerCase() == questionID[i].answer.toLowerCase()) {
+                    var correctResponse = eval("crowdQ" + i);
+                    
+                    document.getElementById(correctResponse).style.border = "1px solid #1b8e8e";
+                    document.getElementById(correctResponse).style.background = "linear-gradient(to right, #134644 0%,#145351 100%)";
+                    document.getElementById(correctResponse).innerHTML = "<div class='answerText'>"+questionID[i].answer+"</div> &nbsp <div class='answerPoints'>"+questionID[i].points+"</div>" ;
+                    document.getElementById(correctResponse).classList += " animated flipInY";
+                    correct = true;
+                }
             }
-            var qNum = "crowdQ" + questionNumber;
-            document.getElementById(qNum).className += " animated";
-            document.getElementById(qNum).className += " bounceIn";
-            document.getElementById(qNum).innerHTML = questions[questionNumber];
+            
+            if (correct == false){
+                strikes++;
+//                var strikeCount = "<div class='animated shake'>";
+//                for(var i = 0; i < strikes; i++){
+//                    strikeCount += "<div class='strike'>X</div>";
+//                }
+//                strikeCount +="</div>"
+                console.log("wrong");
+                document.getElementById('answer').style.border = "3px solid #ff0000";
+                
+               // document.getElementById('strikes').innerHTML = strikeCount;
+            }
+            
+            //document.getElementById('answer').value = "";
         }
-
-        window.onbeforeunload = function (e) {
-            localStorage.score = points;
-        };
+        
+        
+        function clearAnswer(){
+            document.getElementById('answer').value = "";
+            document.getElementById('answer').style.border = "3px solid #acacac";
+        }
     </script>
 
 </head>
@@ -109,20 +167,22 @@
         <div class="points" id="crowdPoints">0</div>
 
     </header>
+    <center>
+    <div id="question"></div>
+    <input id="answer" type="texts" placeholder="Response" onclick="clearAnswer()">
 
 
-    <div style="text-align: center; margin: 0 0.9em 0 0.9em">
-        <div id="question"></div>
+    <div>
+        <div id="questionAnswers"></div>
         <br>
         <div id="pointsAwarded"></div>
         <br>
         <center id="strikes"></center>
-        <div class="submissionForm">
-            <input id="answer" type="texts" name="answer" placeholder="Answer">
-            <br>
-            <button id="submit" class="submitButton" style="margin-top:15px; margin-bottom:15px" onclick="submit()">Submit</button>
-        </div>
-    </div>
 
+        <br>
+        <button id="submit" class="submitButton" onclick="submit()">Submit</button>
+    </div>
+</center>
 </body>
+
 </html>

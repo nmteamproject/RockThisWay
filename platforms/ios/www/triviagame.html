@@ -9,9 +9,7 @@
 
     <title>Rock This Way</title>
 
-    <style>
-        /*        @import 'ui/css/evothings-app.css';*/
-        
+    <style>        
         @import 'ui/css/style.css';
         @import 'ui/css/animate.css';
     </style>
@@ -50,7 +48,7 @@
         //Trivia Score
         var tScore = 0;
 
-
+        // Sets up all question cards
         function setup() {
             setQuestion();
 
@@ -75,7 +73,7 @@
             trackProgress();
         }
 
-
+        // moves cards off screen when you answer
         function removeQuestion() {
             var div = document.getElementsByClassName('TriviaQuestion');
             div[div.length - questionsAsked].className += " animated bounceOutRight";

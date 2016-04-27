@@ -118,9 +118,9 @@
             for (var i = 0; i < questionID.length; i++) {
                 if (answer.toLowerCase() == questionID[i].answer.toLowerCase()) {
                     var correctResponse = "crowdQ" + i;
-                    document.getElementById(correctResponse).classList += " animated flipInY";
-                    document.getElementById(correctResponse).style.background = "linear-gradient(to right, #03d4d2 0%,#107a7a 100%)";
+                    
                     document.getElementById(correctResponse).innerHTML = "<div class='answerText'>"+questionID[i].answer+"</div> &nbsp <div class='answerPoints'>"+questionID[i].points+"</div>" ;
+                    document.getElementById(correctResponse).classList = "correctAnswer animated flipInY";
                     correct = true;
                 }
             }
@@ -133,7 +133,7 @@
 //                }
 //                strikeCount +="</div>"
                 console.log("wrong");
-                document.getElementById('answer').style.border = "1px solid #ff0000";
+                document.getElementById('answer').style.border = "3px solid #ff0000";
                 
                // document.getElementById('strikes').innerHTML = strikeCount;
             }
@@ -144,7 +144,7 @@
         
         function clearAnswer(){
             document.getElementById('answer').value = "";
-            document.getElementById('answer').style.border = "1px solid #ffffff";
+            document.getElementById('answer').style.border = "3px solid #acacac";
         }
     </script>
 
@@ -153,18 +153,9 @@
 
 
 
-<body>
+<body id="atcGame">
 
-    <header>
-        <button class="back" onclick="history.back()">
-            <img src="ui/images/arrow-left.svg" />
-        </button>
-
-        <img src="images/logo2.png" height="50px" />
-
-        <div class="points" id="crowdPoints">0</div>
-
-    </header>
+    
     <center>
     <div id="question"></div>
     <input id="answer" type="texts" placeholder="Response" onclick="clearAnswer()">
