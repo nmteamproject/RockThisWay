@@ -51,7 +51,6 @@
         // Sets up all question cards
         function setup() {
             setQuestion();
-
             for (var i = 0; i < TriviaData.length; i++) {
                 progress[i] = "&#9744;";
 
@@ -96,11 +95,19 @@
             }
             //document.getElementById("TriviaQuestion").innerHTML = TriviaData[currentQuestion][0];
             TriviaData[currentQuestion][2] = "yes";
-
+            setAnswers(currentQuestion);
+        }
+        
+        function setAnswers(questionNumber)
+        {
+            document.getElementById('a1').innerHTML = TriviaData[questionNumber][3];
+            document.getElementById('a2').innerHTML = TriviaData[questionNumber][4];
+            document.getElementById('a3').innerHTML = TriviaData[questionNumber][5];
+            document.getElementById('a4').innerHTML = TriviaData[questionNumber][6];
         }
 
-
-        function trackProgress() {
+        function trackProgress()
+        {
             document.getElementById('progress').innerHTML = "";
             for (var i = 0; i < 10; i++) {
                 document.getElementById('progress').innerHTML += progress[i];
@@ -190,10 +197,10 @@
 
 
         <div id="triviaInput">
-            <button class="triviaAnswer" onclick="processAnswer('1')">1</button>
-            <button class="triviaAnswer" onclick="processAnswer('2')">2</button>
-            <button class="triviaAnswer" onclick="processAnswer('3')">3</button>
-            <button class="triviaAnswer" onclick="processAnswer('4')">4</button>
+            <button class="triviaAnswer" id="a1" onclick="processAnswer('1')">C</button>
+            <button class="triviaAnswer" id="a2" onclick="processAnswer('2')">R</button>
+            <button class="triviaAnswer" id="a3" onclick="processAnswer('3')">A</button>
+            <button class="triviaAnswer" id="a4" onclick="processAnswer('4')">P</button>
         </div>
 
 
