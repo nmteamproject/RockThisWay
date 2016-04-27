@@ -29,7 +29,7 @@
         // i.e. number questions asked, current correct total and current question
         var questionsAsked = 0;
         var totalCorrect = 0;
-        var currentQuestion = 0;
+        var currentQuestion;
         var selectionValid = false;
 
         var progress = [];
@@ -86,7 +86,7 @@
             selectionValid = false; // Flag to make sure question has not been asked yet
             while (selectionValid == false) {
                 
-                currentQuestion = tArrayLength - (questionsAsked+1);// randomly select starting question
+                currentQuestion = 0 + (questionsAsked);// randomly select starting question
                 
                 //currentQuestion = Math.floor((Math.random() * 14) + 1); //Trying to fix bug were the questions are no randomly asked, they are asked in order of placement in array.
                 console.log(currentQuestion);
@@ -96,7 +96,7 @@
             }
             //document.getElementById("TriviaQuestion").innerHTML = TriviaData[currentQuestion][0];
             TriviaData[currentQuestion][2] = "yes";
-            questionsAsked = questionsAsked + 1;
+            
         }
 
 
@@ -110,6 +110,7 @@
 
         //Processes whether the answer was correct or not
         function processAnswer(myAnswer) {
+            questionsAsked++;
             if (TriviaData[currentQuestion][1] == myAnswer) {
                 // answer correct
                 totalCorrect = totalCorrect + 1;
@@ -121,12 +122,12 @@
                 trackProgress();
             }
             removeQuestion();
-            if (questionsAsked < 11) {
+            if (questionsAsked < 10) {
                 
                 setQuestion();
             }
             // final question asked - disable button and show final results
-            if(questionsAsked == 11) {
+            if(questionsAsked == 10) {
                 alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
                 stillCounting = 0;
                 //document.getElementById("ButtonContinue").disabled = true;
@@ -191,8 +192,10 @@
 
 
         <div id="triviaInput">
-            <button class="triviaAnswer" onclick="processAnswer('true')">True</button>
-            <button class="triviaAnswer" onclick="processAnswer('false')">False</button>
+            <button class="triviaAnswer" onclick="processAnswer('1')">1</button>
+            <button class="triviaAnswer" onclick="processAnswer('2')">2</button>
+            <button class="triviaAnswer" onclick="processAnswer('3')">3</button>
+            <button class="triviaAnswer" onclick="processAnswer('4')">4</button>
         </div>
         <div class="submissionForm">
            
