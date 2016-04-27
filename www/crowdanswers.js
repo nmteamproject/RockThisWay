@@ -9,16 +9,29 @@ var questions = [
 
 var q0Answers = [
     {
+        "answer":"Love Story",
         "points": "60",
-        "keywords": ["", "", ""]
+        "keywords": ["love story", "love", "story"]
     },
     {
+        "answer":"Blank Space",
         "points": "25",
-        "keywords": [""]
+        "keywords": ["blank space"]
     },
     {
+        "answer":"You Belong With Me",
         "points": "15",
-        "keywords": ["", ""]
+        "keywords": ["you belong with me", "belong with me"]
+    },
+    {
+        "answer":"Shake It Off",
+        "points": "15",
+        "keywords": ["shake it off"]
+    },
+    {
+        "answer":"22",
+        "points": "15",
+        "keywords": ["22"]
     }
 ];
 
