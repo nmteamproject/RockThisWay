@@ -15,7 +15,20 @@
     <script src="libs/sortable/Sortable.js"></script>
 </head>
 
+<<<<<<< Updated upstream
 <body id="lyricGame">
+=======
+<body>
+
+    <header>
+        <button class="back" onclick="history.back()">
+            <img src="ui/images/arrow-left.svg" />
+        </button>
+
+       <div> Aerosmith</div>
+
+    </header>
+>>>>>>> Stashed changes
 
 <div id="lyricHeader">
     <img src="images/arrow.png" class="backButton" onclick="history.back()">
@@ -32,6 +45,7 @@
             <path id="arc1" fill="none" stroke="#e82828" stroke-width="3" />
         </svg>
         <center>
+<<<<<<< Updated upstream
 
             <button class="lyricButton" onclick="showLyrics()"><img src="images/lyricGameUI/lyricLyricButton.png" height="40px"></button>
 
@@ -41,6 +55,12 @@
         </center>
         <div  id="verse" class="directions">Complete the lyrics</div>
                 <div></div>
+=======
+            <button id="playMusicButton"  onclick="playMusic(this.value)" value=""><img src="images/play.png" height="40px"></button>
+        </center>
+        <div class="directions">Complete the lyrics</div>
+        <!--        <div id="verse"></div>-->
+>>>>>>> Stashed changes
     </div>
     <center>
         <div id="game">
@@ -54,12 +74,22 @@
         </div>
 
     </center>
+<<<<<<< Updated upstream
+=======
+    
+        <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
+    
+</body>
+>>>>>>> Stashed changes
 
     <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
 
+<<<<<<< Updated upstream
 </body>
 
 
+=======
+>>>>>>> Stashed changes
 
 <script type="text/javascript">
     window.onload = loadWordBank;
@@ -145,12 +175,21 @@
             document.getElementById("lyrics").innerHTML = answer;
             document.getElementById("wordBank").innerHTML = "You got the Correct answer!"
             document.getElementById("sumbitLyricsButton").innerHTML = "Next";
+<<<<<<< Updated upstream
             document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
 
         } else {
             if (document.getElementById("lyrics").innerHTML != "") {
                 document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#636363\">Incorrect, Try again</text></svg>')";
             }
+=======
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick','nextLyrics()');
+            
+        } else {
+            if(document.getElementById("lyrics").innerHTML!= ""){
+                     document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\">Incorrect, Try again</text></svg>')";
+                }
+>>>>>>> Stashed changes
             loadWordBank();
         }
     }
@@ -161,14 +200,22 @@
         if (playingMusic == true) {
             stop();
             soundFile.pause();
+<<<<<<< Updated upstream
             document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>"
+=======
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/play.png' height='40px'>"
+>>>>>>> Stashed changes
             playingMusic = false;
         } else {
 
             start();
             soundFile.play();
             playingMusic = true;
+<<<<<<< Updated upstream
             document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPauseButton.png' height='70px'>"
+=======
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/pause.png' height='40px'>"
+>>>>>>> Stashed changes
         }
     }
 
@@ -176,34 +223,61 @@
     // Loads the page and word bank | Also called to reset Word Bank
     function loadWordBank() {
         //Makes Dragging UI
+<<<<<<< Updated upstream
         document.getElementById("lyrics").style.border = "3px solid #636363";
         Sortable.create(lyrics, {
             group: 'foo',
             onStart: function (evt) {
                 document.getElementById("lyrics").style.border = "3px dashed #636363";
+=======
+        document.getElementById("lyrics").style.border = "2px solid #545454";
+        Sortable.create(lyrics, {
+            group: 'foo',
+            onStart: function (evt) {
+                document.getElementById("lyrics").style.border = "2px dashed #545454";
+>>>>>>> Stashed changes
             },
 
             // dragging ended
             onEnd: function (evt) {
+<<<<<<< Updated upstream
                 document.getElementById("lyrics").style.border = "3px solid #636363";
 
 
+=======
+                document.getElementById("lyrics").style.border = "2px solid #545454";
+                
+                
+>>>>>>> Stashed changes
             },
         });
         Sortable.create(wordBank, {
             group: 'foo',
             onStart: function (evt) {
+<<<<<<< Updated upstream
                 document.getElementById("lyrics").style.border = "3px dashed #636363";
+=======
+                document.getElementById("lyrics").style.border = "2px dashed #545454";
+>>>>>>> Stashed changes
             },
 
             // dragging ended
             onEnd: function (evt) {
+<<<<<<< Updated upstream
                 document.getElementById("lyrics").style.border = "3px solid #636363";
 
                 if (document.getElementById("lyrics").innerHTML != "") {
                     document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
                 }
 
+=======
+                document.getElementById("lyrics").style.border = "2px solid #545454";
+                
+                if(document.getElementById("lyrics").innerHTML!= ""){
+                     document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
+                }
+                
+>>>>>>> Stashed changes
             },
         });
         document.getElementById("lyrics").innerHTML = ""
@@ -212,7 +286,11 @@
 
         document.getElementById("playMusicButton").value = musicCollection[lyricNumber];
         document.getElementById("song").innerHTML = songs[lyricNumber].song;
+<<<<<<< Updated upstream
         document.getElementById("artist").innerHTML = (songs[lyricNumber].artist) + "'";
+=======
+        document.getElementById("artist").innerHTML = (songs[lyricNumber].artist)+"'";
+>>>>>>> Stashed changes
 
         var bank = eval("lyricCollection" + lyricNumber);
         var fullBank = "";
@@ -222,6 +300,7 @@
         }
 
         document.getElementById("wordBank").innerHTML = fullBank;
+<<<<<<< Updated upstream
     }
 
     function nextLyrics() {
@@ -234,7 +313,18 @@
     
     function showLyrics(){
         document.getElementById('verse').innerHTML = songs[lyricNumber].verse;
+=======
     }
+    
+    function nextLyrics(){
+        
+        lyricNumber++;
+        loadWordBank();
+        document.getElementById("sumbitLyricsButton").innerHTML = "Submit";
+        document.getElementById("sumbitLyricsButton").setAttribute('onclick','checkLyrics()');
+>>>>>>> Stashed changes
+    }
+    
 </script>
 
 

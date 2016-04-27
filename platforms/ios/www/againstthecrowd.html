@@ -16,6 +16,7 @@
     <script src="crowdanswers.js"></script>
 
     <script type="text/javascript">
+<<<<<<< Updated upstream
         //        //Score Keeping
         //        if (localStorage.getItem("score") != undefined) {
         //            var points = parseInt(localStorage.score);
@@ -95,6 +96,16 @@
         //        };
 
         window.onload = startQuestion;
+=======
+        
+        //Score Keeping
+        if (localStorage.getItem("score") != undefined){
+            var points = parseInt(localStorage.score);
+        }
+        else{
+            var points = 0;
+        }
+>>>>>>> Stashed changes
         var questionNumber = 0;
         var questionID = eval("q" + questionNumber + "Answers");
         var strikes = 0;
@@ -104,6 +115,49 @@
         function startQuestion() {
             document.getElementById('question').innerHTML = questions[questionNumber];
 
+<<<<<<< Updated upstream
+=======
+        
+        //checks answer submition and assess appropriate points or strikes
+        function submit() {
+            if ($('#answer').val() == '') {
+                $('.hidden').css('opacity', '1.0');
+            } else {
+                var matched = false;
+                var answer = $('#answer').val().toLowerCase();
+                var answerkey = eval('q' + questionNumber + 'Answers');
+                for (var i = 0; i < answerkey.length; i++) {
+                    var obj = answerkey[i];
+                    for (var j = 0; j < obj.keywords.length; j++) {
+                        if (obj.keywords[j] == answer) {
+                            document.getElementById('pointsAwarded').innerHTML = "You got " + obj.points + " points!";
+                            matched = true;
+                            points += parseInt(obj.points);
+                            document.getElementById('crowdPoints').innerHTML = points;
+                            questionNumber++;
+                            loadQuestion();
+                        }
+                    }
+                }
+                if (matched == false) {
+                    strikes++;
+                    document.getElementById('strikes').innerHTML += "<div class='animated bounceIn strike'>X</div>";
+                    if (strikes == 3) {
+                        document.getElementById('pointsAwarded').innerHTML = "You got 0 points!";
+                        document.getElementById('strikes').innerHTML = "";
+                        strikes = 0;
+                        questionNumber++;
+                        loadQuestion();
+                    }
+                }
+
+            }
+            document.getElementById('answer').value = "";
+        }
+
+        // Creates place holder boxes for number of questions
+        function fillQuestions() {
+>>>>>>> Stashed changes
             var questionList = "";
 
             for (var i = 0; i < questionID.length; i++) {
@@ -112,6 +166,7 @@
             document.getElementById('questionAnswers').innerHTML = questionList;
         }
 
+<<<<<<< Updated upstream
         function submit() {
             var correct = false;
             var answer = $('#answer').val().toLowerCase();
@@ -138,6 +193,13 @@
                 document.getElementById('answer').style.border = "3px solid #ff0000";
                 
                // document.getElementById('strikes').innerHTML = strikeCount;
+=======
+        //Loads the next question
+        function loadQuestion() {
+            var prevQNum = "crowdQ" + (questionNumber - 1);
+            if ((questionNumber - 1) >= 0) {
+                document.getElementById(prevQNum).style.color = "#888888"
+>>>>>>> Stashed changes
             }
             
             //document.getElementById('answer').value = "";
@@ -173,11 +235,24 @@
 
 
     <div>
+<<<<<<< Updated upstream
         <div id="questionAnswers"></div>
+=======
+        <div id="question"></div>
+>>>>>>> Stashed changes
         <br>
         <div id="pointsAwarded"></div>
         <br>
         <center id="strikes"></center>
+<<<<<<< Updated upstream
+=======
+        <div class="submissionForm">
+            <input id="answer" type="texts" name="answer" placeholder="Answer">
+        </div>
+        <br>
+            <button id="submit" class="submitButton" onclick="submit()">Submit</button>
+    </div>
+>>>>>>> Stashed changes
 
         <br>
         <button id="submit" class="submitButton" onclick="submit()">Submit</button>

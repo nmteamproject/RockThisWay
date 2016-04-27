@@ -95,9 +95,15 @@
 
 #playTracker{
     position: fixed;
+<<<<<<< Updated upstream
     z-index: 1;
     width:100px;
     height: 100px;
+=======
+    z-index: 0;
+    width:80px;
+    height: 80px;
+>>>>>>> Stashed changes
     margin-top: 10px;
     margin-left: 143px;
 }
@@ -111,7 +117,11 @@
     min-height: 175px;
     margin: 15px;
     z-index: 10;
+<<<<<<< Updated upstream
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="27%" y="55%" font-size="30" fill="#636363">Drag &amp; Drop</text></svg>');
+=======
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="35%" y="55%" font-size="20" fill="#c1c1c1">Drag and Drop</text></svg>');
+>>>>>>> Stashed changes
 }
 
 #playMusicButton {
@@ -128,10 +138,17 @@
 
 .lyric {
     font-family: sans-serif;
+<<<<<<< Updated upstream
     border: thin solid #04dada;
     font-size: 12px;
     background: linear-gradient(to bottom, #131618 0%,#060808 100%);
     color: #d9d9d9;
+=======
+    border: thin solid #107a7a;
+    font-size: 12px;
+    background: #1D1A22;
+    color: #545454;
+>>>>>>> Stashed changes
     font-style: normal;
     text-decoration: none;
     padding: 9px;
@@ -168,18 +185,33 @@ text-align: center;
 
 .submitButton {
     font-size: 20px;
+<<<<<<< Updated upstream
     background: linear-gradient(to right, #05dbdb 0%,#178d8e 100%);
     padding: 20px 0px 20px 20px;
     border-radius: 0px;
     width: 100vw;
     position: fixed;
+=======
+    background: linear-gradient(to right, #03d4d2 0%,#107a7a 100%);;
+    padding: 20px 0px 20px 20px;
+    border-radius: 0px;
+    width: 100vw;
+    position: absolute;
+>>>>>>> Stashed changes
     bottom:0;
     left: 0;
     margin: 0;
 }
 
+<<<<<<< Updated upstream
 .lyricButton {
    
+=======
+#lyricRefresh {
+    position: absolute;
+    left: 42%;
+    margin-top: 135px;
+>>>>>>> Stashed changes
     background: none;
     border: none;
 }
