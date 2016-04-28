@@ -149,7 +149,7 @@
 
         } else {
             if (document.getElementById("lyrics").innerHTML != "") {
-                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\">Incorrect, Try again</text></svg>')";
+                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#636363\">Incorrect, Try again</text></svg>')";
             }
             loadWordBank();
         }
@@ -176,16 +176,16 @@
     // Loads the page and word bank | Also called to reset Word Bank
     function loadWordBank() {
         //Makes Dragging UI
-        document.getElementById("lyrics").style.border = "2px solid #545454";
+        document.getElementById("lyrics").style.border = "3px solid #636363";
         Sortable.create(lyrics, {
             group: 'foo',
             onStart: function (evt) {
-                document.getElementById("lyrics").style.border = "2px dashed #545454";
+                document.getElementById("lyrics").style.border = "3px dashed #636363";
             },
 
             // dragging ended
             onEnd: function (evt) {
-                document.getElementById("lyrics").style.border = "2px solid #545454";
+                document.getElementById("lyrics").style.border = "3px solid #636363";
 
 
             },
@@ -193,12 +193,12 @@
         Sortable.create(wordBank, {
             group: 'foo',
             onStart: function (evt) {
-                document.getElementById("lyrics").style.border = "2px dashed #545454";
+                document.getElementById("lyrics").style.border = "3px dashed #636363";
             },
 
             // dragging ended
             onEnd: function (evt) {
-                document.getElementById("lyrics").style.border = "2px solid #545454";
+                document.getElementById("lyrics").style.border = "3px solid #636363";
 
                 if (document.getElementById("lyrics").innerHTML != "") {
                     document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";

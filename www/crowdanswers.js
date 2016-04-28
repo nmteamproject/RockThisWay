@@ -37,14 +37,17 @@ var q0Answers = [
 
 var q1Answers = [
     {
+        "answer":"4",
         "points": "60",
         "keywords": ["", "", ""]
     },
     {
+        "answer":"3",
         "points": "25",
         "keywords": [""]
     },
     {
+        "answer":"2",
         "points": "15",
         "keywords": ["", ""]
     }

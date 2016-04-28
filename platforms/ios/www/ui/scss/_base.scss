@@ -71,10 +71,12 @@
 
 #triviaInput{
     margin-top: 300px;
+    margin-bottom: 200px;
     
 }
 
 #progress{
+    margin-top: 200px;
     width: 100vw;
     text-align: center;
 }
@@ -93,58 +95,81 @@
 
 #playTracker{
     position: fixed;
+<<<<<<< Updated upstream
+    z-index: 1;
+    width:100px;
+    height: 100px;
+=======
     z-index: 0;
     width:80px;
     height: 80px;
-    margin-top: 40px;
+>>>>>>> Stashed changes
+    margin-top: 10px;
+    margin-left: 143px;
 }
 
+#wordBank{
+    margin-bottom: 50px;
+}
 
 #lyrics {
-    border-style: thick solid #ffffff;
-    border-radius: 10px;
-    min-height: 100px;
+    border-radius: 2px;
+    min-height: 175px;
     margin: 15px;
     z-index: 10;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="25%" y="55%" font-size="30" fill="#c1c1c1">Drag and Drop</text></svg>');
+<<<<<<< Updated upstream
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="27%" y="55%" font-size="30" fill="#636363">Drag &amp; Drop</text></svg>');
+=======
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text x="35%" y="55%" font-size="20" fill="#c1c1c1">Drag and Drop</text></svg>');
+>>>>>>> Stashed changes
 }
 
 #playMusicButton {
+    background: none;
     border: none;
+    position: relative;
     border-radius: 40px;
-    padding: 13px 13px 8px 15px;
-    margin-top: 50px;
+    padding: 5px 5px 5px 5px;
+    margin-top: 20px;
     margin-bottom: 20px;
     font-size: 30px;
     z-index: 3;
 }
 
 .lyric {
-    border: thin solid;
-    font-size: 20px;
-    background: white;
-    color: black;
-    border-radius: 0;
+    font-family: sans-serif;
+<<<<<<< Updated upstream
+    border: thin solid #04dada;
+    font-size: 12px;
+    background: linear-gradient(to bottom, #131618 0%,#060808 100%);
+    color: #d9d9d9;
+=======
+    border: thin solid #107a7a;
+    font-size: 12px;
+    background: #1D1A22;
+    color: #545454;
+>>>>>>> Stashed changes
     font-style: normal;
     text-decoration: none;
     padding: 9px;
     margin: 3px;
-    border-radius: 5px;
+    border-radius: 0px;
     z-index: 10;
 }
 
 #songDetails {
     width: 100%;
+    margin-top: 70px;
 }
 
 #artist {
-    display: inline;
-    float: right
+text-align: center;
 }
 
 #song {
-    display: inline;
-    float: left;
+    text-align: center;
+    font-size: 20px;
+
 }
 
 #verse {
@@ -160,43 +185,100 @@
 
 .submitButton {
     font-size: 20px;
-    background: none;
-    padding: 10px;
-    border-radius: 10px;
-    width: 80%;
-    border: 1px solid;
+<<<<<<< Updated upstream
+    background: linear-gradient(to right, #05dbdb 0%,#178d8e 100%);
+    padding: 20px 0px 20px 20px;
+    border-radius: 0px;
+    width: 100vw;
+    position: fixed;
+=======
+    background: linear-gradient(to right, #03d4d2 0%,#107a7a 100%);;
+    padding: 20px 0px 20px 20px;
+    border-radius: 0px;
+    width: 100vw;
+    position: absolute;
+>>>>>>> Stashed changes
+    bottom:0;
+    left: 0;
+    margin: 0;
 }
 
+<<<<<<< Updated upstream
+.lyricButton {
+   
+=======
 #lyricRefresh {
     position: absolute;
-    left: 20px;
-    margin-top: 40px;
+    left: 42%;
+    margin-top: 135px;
+>>>>>>> Stashed changes
     background: none;
     border: none;
 }
 
 .directions {
     text-align: center;
-    font-size: 15px;
+    font-size: 12px;
     color: #959595;
+    font-style: italic;
 }
 
+#lyricGame{
+    background-image: url(../../images/lyricGameUI/lyricBackground1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+
+#lyricHeader{
+    margin-top: -70px;
+    text-align: center;
+}
+
+.backButton{
+    margin-left: 15px;
+    margin-top: 7px;
+    float: left;
+    transform: scaleX(-1);
+    background: none;
+    height: 25px;
+}
 
 /*  ----------------------------------------------------------
 								Against The Crowd
 	---------------------------------------------------------- */
+.answerText{
+    height: 45px;
+    line-height: 45px;
+    font-size: 20px;
+    padding-left: 20px;
+    float: left;
+}
+.answerPoints{
+    height: 45px;
+    line-height: 45px;
+    font-size: 20px;
+    padding-right: 20px;
+    float: right;
+}
 
 .submissionForm {
     padding: 10px;
     position: absolute;
     bottom: 0px;
+    margin-bottom: 15%;
+    width: 100%;
     text-align: center;
 }
 
 #answer {
-    width: 85vw;
+    padding-left: 5px;
+    margin-bottom: 30px;
+    border: 3px solid #acacac;
+    background: none;
+    width: 80vw;
     font-size: 30px;
-    color:black;
+    color:#b9b9b9;
 }
 
 .strike {
@@ -210,9 +292,14 @@
 
 .crowdQuestion {
     width: 80vw;
-    border: 2px solid #ffffff;
-    border-radius: 10px;
-    margin: 2px 10px 2px 10px;
+    background: linear-gradient(to bottom, #151715 0%,#111412 100%);
+    border-radius: 2px;
+    margin: 4px 10px 4px 10px;
+}
+
+
+#submit{
+     background: linear-gradient(to right, #82dd43 0%,#318e48 100%);
 }
 
 
@@ -315,6 +402,7 @@ header img.logotype {
 #myModal{
     color: #000000;
 }
+
 
 /* Common styles for Evothings examples and client. */
 

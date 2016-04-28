@@ -65,9 +65,17 @@
                 
             </div>
         </ul>
-        <ul id="results">
-            
+        <ul class="quiz-step step1 current">
+            <div id="results">
+                
+            </div>
+            <div id="continue">
+                
+            </div>
         </ul>
+        <div id="break">
+        <br>
+        </div>
     </div>
     
     <script language="javascript" type="text/javascript">
@@ -84,58 +92,20 @@
             {   title: 'Rocker Route',
                 desc: '<p>You are a hardcore rocker at heart and love classic rock and roll!</p><br>' +
                 '<img src=\"images/rock.jpg\"><br>' +
-                '<button class=\"selected\" style=\"margin-top:15px\" onclick=\"goToResults()\">Continue</button>'},
+                '<button class=\"selected\"'},
             {   title: 'Pop Route',
                 desc: '<p>You love all popular music and like to stay contemporary!</p><br>' +
                 '<img src=\"images/pop.jpg\"><br>' +
-                '<button class=\"selected\" style=\"margin-top:15px\" onclick=\"goToResults()\">Continue</button>'},
+                '<button class=\"selected\"'},
             {   title: 'Country Route',
                 desc: '<p>You like to sit back and listen to the soothing twang of country music!</p><br>' +
                 '<img src=\"images/country.jpg\"><br>' +
-                '<button class=\"selected\" style=\"margin-top:15px\" onclick=\"goToResults()\">Continue</button>'},
+                '<button class=\"selected\"'},
             {   title: 'Alternative Route',
                 desc: '<p>You like to stray away from the norm and listen to something a little out of the box!</p><br>' +
                 '<img src=\"images/alternative.jpg\"><br>' +
-                '<button class=\"selected\" style=\"margin-top:15px\" onclick=\"goToResults()\">Continue</button>'}
+                '<button class=\"selected\"'}
         ];
-        
-        function goToResults(){
-            $('body').css("overflow", "visible");
-            var element = document.getElementById("answers");
-            $(element).empty();
-            
-            for(var i=0; i < questionAnswers.length; i++){
-                var container = document.createElement("div");
-                $(container).addClass("card card-3");
-                element.appendChild(container);
-                
-                var para = document.createElement("p");
-                container.appendChild(para);
-                
-                var yourQuestion = questions[i];
-                var answerText = document.createTextNode(yourQuestion);
-                para.appendChild(answerText);
-                
-                var para2 = document.createElement("p");
-                container.appendChild(para2);
-                
-                var youAnswered = document.createTextNode("YOU ANSWERED");
-                para2.appendChild(youAnswered);
-                
-                var para3 = document.createElement("p");
-                container.appendChild(para3);
-                
-                var answer = questionAnswers[i];
-                var yourAnswer = document.createTextNode(answer);
-                para3.appendChild(yourAnswer);
-                
-                container.style.clear = "left";
-            }
-        }
-        
-        function skip(){
-            window.location.href = "yourday.html";
-        }
         
         var isAnswerSelected = false;
         var currentStep = 0;
@@ -296,6 +266,85 @@
                 var descText = resultOptions[3].desc;
                 desc.innerHTML = descText;
             }
+            //continue button
+            var cElement = document.getElementById("answers");
+            var cLine = document.createElement("li");
+            cElement.appendChild(cLine);
+            
+            var cContainer = document.createElement("div");
+            $(cContainer).addClass("selected");
+            cLine.appendChild(cContainer);
+            
+            var cPara = document.createElement("p");
+            $(cPara).addClass("answer-text");
+            cContainer.appendChild(cPara);
+            
+            var continueText = document.createTextNode("CONTINUE");
+            cPara.appendChild(continueText);
+            
+            cContainer.addEventListener("click", goToResults);
+        }
+        
+        function goToResults(){
+            $('body').css("overflow", "visible");
+            var element = document.getElementById("results");
+            var answers = document.getElementById("answers");
+            $(answers).empty();
+            
+            var heading = document.createElement("h1");
+            var headingText = document.createTextNode("Edit Your Answers");
+            heading.appendChild(headingText);
+            answers.appendChild(heading);
+            
+            for(var i=0; i < questionAnswers.length; i++){
+                var container = document.createElement("div");
+                $(container).addClass("card card-3");
+                element.appendChild(container);
+                
+                var para = document.createElement("p");
+                $(para).addClass("title");
+                container.appendChild(para);
+                
+                var yourQuestion = questions[i];
+                var answerText = document.createTextNode(yourQuestion);
+                para.appendChild(answerText);
+                
+                var para2 = document.createElement("p");
+                container.appendChild(para2);
+                
+                var youAnswered = document.createTextNode("YOU ANSWERED");
+                para2.appendChild(youAnswered);
+                
+                var para3 = document.createElement("p");
+                container.appendChild(para3);
+                
+                var answer = questionAnswers[i];
+                var yourAnswer = document.createTextNode(answer);
+                para3.appendChild(yourAnswer);
+                
+                container.style.clear = "left";
+            }
+            //continue button
+            var cElement = document.getElementById("continue");
+            var cLine = document.createElement("li");
+            cElement.appendChild(cLine);
+            
+            var cContainer = document.createElement("div");
+            $(cContainer).addClass("selected");
+            cLine.appendChild(cContainer);
+            
+            var cPara = document.createElement("p");
+            $(cPara).addClass("answer-text");
+            cContainer.appendChild(cPara);
+            
+            var continueText = document.createTextNode("CONTINUE");
+            cPara.appendChild(continueText);
+            
+            cContainer.addEventListener("click", skip);
+        }
+        
+        function skip(){
+            window.location.href = "yourday.html";
         }
     </script>
 </body>

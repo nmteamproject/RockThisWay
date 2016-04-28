@@ -1,5 +1,5 @@
-var TriviaData = new Array(15);
-createTwoDimensionalArray(3);
+var TriviaData = new Array(10);
+createTwoDimensionalArray(2);
 
 TriviaData[0][0] = "The Beatles were not part of the 'British Invasion'.";
 TriviaData[1][0] = "The film 'Ferris Beullers day Off' featured the Bealtes' 'Hey Jude'.";
