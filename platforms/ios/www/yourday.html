@@ -238,25 +238,18 @@
                 }
                 // If the nearest beacon changes, the code on beacons.html will change to the following based on beacon.major
                 if (mNearestBeacon.major != previousBeacon) {
-                    $('#homeScreen').empty();
                     if (mNearestBeacon.major == 19175) {
                         $('#modalTitle').text("Play Who Wants to be a Rockstar?");
-                        $("#modalExhibit").attr("onclick", "goToExhibit(2)");
                         $("#modalPlay").attr("onclick", "playGame(2)");
                         $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
-                        var hScreen = $('<img src="images/map1.png" width="100%">');
                     } else if (mNearestBeacon.major == 18015) {
                         $('#modalTitle').text("Play Against the Crowd");
-                        $("#modalExhibit").attr("onclick", "goToExhibit(2)");
                         $("#modalPlay").attr("onclick", "playGame(3)");
                         $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
-                        var hScreen = $('<img src="images/map2.png" width="100%">');
                     } else if (mNearestBeacon.major == 50017) {
                         $("#modalPlay").attr("onclick", "playGame(1)");
-                        $("#modalExhibit").attr("onclick", "goToExhibit(2)");
                         $('#modalTitle').text("Play Lyracle");
                         $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
-                        var hScreen = $('<img src="images/map3.png" width="100%">');
                     } 
                     else if (mNearestBeacon.major == 112) {
                         $("#modalPlay").hide();
@@ -264,11 +257,8 @@
                         $("#modalExhibit").text("Leave");
                         $('#modalTitle').text("Leave Exhibit?");
                         $("#modalDescription").text("If you are leaving the exhibit please press the following button and give this phone to an exhibitor.");
-                        var hScreen = $('<img src="images/map3.png" width="100%">');
                     }else {
-                        var hScreen = $('');
                     }
-                    $('#homeScreen').append(hScreen);
                     $("#myModal").modal();
                 }
 
@@ -451,7 +441,7 @@
                     <p id="modalDescription">Play a game where you get a clip of a song, then you have to put the rest of the lyrics in order!</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalExhibit" onclick="goToExhibit(1)">Exhibit</button>
+
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="modalPlay" onclick="playGame(1)">Game</button>
                 </div>
             </div>
