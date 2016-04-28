@@ -31,7 +31,7 @@
     <div id="exhibitInfo">
         <div id="exhibitTitle">Artist's Playground</div>
         <div id="exhibitDescription">Jimi Hendrix Started playing guitar at the age of twelve. Learn more about how he developed at this exhibit</div>
-        <div onclick="loadMore()">Read More</div>
+<!--        <div onclick="loadMore()">Read More</div>-->
     </div>
     <div class="playButton" id=playLinkButton>Play Game</div>
 
@@ -61,19 +61,22 @@
         if (exhbitNumber == 1) {
             document.getElementById('exhibitTitle').innerHTML = "The Beatles"
             document.getElementById('playLinkButton').onclick = function(){ window.location.href = "lyricgame.html";};
+            document.getElementById('exhibitDescription').innerHTML = "The Beatles were the most influential popular music group of the rock era. They affected the post-war baby boom generation of Britain, the United States and many other countries during the 1960s. Certainly they are the most popular group in rock history, with global sales exceeding 1.1 billion records.";
 
         } else if (exhbitNumber == 2) {
             document.getElementById('exhibitTitle').innerHTML = "Aerosmith"
            document.getElementById('playLinkButton').onclick = function(){ window.location.href = "triviagame.html";};
+            document.getElementById('exhibitDescription').innerHTML = "Aerosmith is a long-running hard rock band, originally forming in Boston, Massachusetts in the early 1970s, and enjoying a later resurgence in popularity in the late 1980s and mid-1990s";
         } else if (exhbitNumber == 3) {
             document.getElementById('exhibitTitle').innerHTML = "Taylor Swift"
             document.getElementById('playLinkButton').onclick = function(){ window.location.href = "againstthecrowd.html";};
+            document.getElementById('exhibitDescription').innerHTML = "Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.";
         }
 
-
-        function loadMore() {
-            $("#exhibitInfo").css("margin-top", "150px");
-        }
+        //begining of design for getting more info
+//        function loadMore() {
+//            $("#exhibitInfo").css("margin-top", "150px");
+//        }
 
     </script>
 

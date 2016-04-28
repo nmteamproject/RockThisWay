@@ -133,7 +133,6 @@ p {
 
 .card {
     width: 92%;
-    text-align: left;
     font-size: 1.5em;
     padding: 5% 5% 5% 5%;
     margin-left: 4%;
@@ -146,5 +145,34 @@ p {
 }
 
 .card-3 {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    text-align: left;
+    border-radius: 10px 10px 10px 10px;
+    font-weight: bold;
+}
+
+.exhibit {
+    background: #ccc;
+    color: black;
+    font-style: normal;
+    font-weight: bolder;
+}
+
+.title {
+    font-style: italic;
+    font-weight: lighter;
+}
+
+#answers h1 {
+    padding-bottom: 4%;
+}
+
+#break {
+    margin-top: 13%;
+}
+
+#continue {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #1D1A22;
 }

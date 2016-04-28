@@ -10,10 +10,8 @@
     <title>Rock This Way</title>
 
     <style>
-        /*        @import 'ui/css/evothings-app.css';*/
-        
         @import 'ui/css/style.css';
-        @import 'ui/css/animate.css';
+        /*        @import 'ui/css/animate.css';*/
     </style>
 
     <script src="cordova.js"></script>
@@ -31,7 +29,7 @@
         // i.e. number questions asked, current correct total and current question
         var questionsAsked = 0;
         var totalCorrect = 0;
-        var currentQuestion = 0;
+        var currentQuestion;
         var selectionValid = false;
 
         var progress = [];
@@ -44,10 +42,15 @@
         //Sets up the timer.
         var timeLeft = 30;
 
+        //Flag to disable timer at game completion.
+        var stillCounting = 1;
 
+        //Trivia Score
+        var tScore = 0;
+
+        // Sets up all question cards
         function setup() {
             setQuestion();
-
             for (var i = 0; i < TriviaData.length; i++) {
                 progress[i] = "&#9744;";
 
@@ -69,7 +72,7 @@
             trackProgress();
         }
 
-
+        // moves cards off screen when you answer
         function removeQuestion() {
             var div = document.getElementsByClassName('TriviaQuestion');
             div[div.length - questionsAsked].className += " animated bounceOutRight";
@@ -81,9 +84,9 @@
         function setQuestion() {
             selectionValid = false; // Flag to make sure question has not been asked yet
             while (selectionValid == false) {
-                
-                currentQuestion = tArrayLength - (questionsAsked+1);// randomly select starting question
-                
+
+                currentQuestion = 0 + (questionsAsked); // randomly select starting question
+
                 //currentQuestion = Math.floor((Math.random() * 14) + 1); //Trying to fix bug were the questions are no randomly asked, they are asked in order of placement in array.
                 console.log(currentQuestion);
                 if (TriviaData[currentQuestion][2] == "no") {
@@ -92,11 +95,19 @@
             }
             //document.getElementById("TriviaQuestion").innerHTML = TriviaData[currentQuestion][0];
             TriviaData[currentQuestion][2] = "yes";
-            questionsAsked = questionsAsked + 1;
+            setAnswers(currentQuestion);
+        }
+        
+        function setAnswers(questionNumber)
+        {
+            document.getElementById('a1').innerHTML = TriviaData[questionNumber][3];
+            document.getElementById('a2').innerHTML = TriviaData[questionNumber][4];
+            document.getElementById('a3').innerHTML = TriviaData[questionNumber][5];
+            document.getElementById('a4').innerHTML = TriviaData[questionNumber][6];
         }
 
-
-        function trackProgress() {
+        function trackProgress()
+        {
             document.getElementById('progress').innerHTML = "";
             for (var i = 0; i < 10; i++) {
                 document.getElementById('progress').innerHTML += progress[i];
@@ -106,6 +117,8 @@
 
         //Processes whether the answer was correct or not
         function processAnswer(myAnswer) {
+            console.log("called");
+            questionsAsked++;
             if (TriviaData[currentQuestion][1] == myAnswer) {
                 // answer correct
                 totalCorrect = totalCorrect + 1;
@@ -117,28 +130,43 @@
                 trackProgress();
             }
             removeQuestion();
-            if (questionsAsked < 11) {
-                
+            if (questionsAsked < 10) {
+
                 setQuestion();
             }
             // final question asked - disable button and show final results
-            if(questionsAsked == 11) {
+            if (questionsAsked == 10) {
                 alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
+                stillCounting = 0;
                 //document.getElementById("ButtonContinue").disabled = true;
-            } 
+
+            }
 
         }
 
 
         //The countdown timer, getting questions correct adds ten seconds.
         function timerCountdown() {
-            timeLeft--;
-            document.getElementById("TimerElement").innerHTML = timeLeft;
+
+
+            if (stillCounting == 1) {
+                timeLeft--;
+                document.getElementById("TimerElement").innerHTML = timeLeft;
+            }
+            if (stillCounting == 0) {
+                var staticTime = timeLeft;
+                document.getElementById("TimerElement").innerHTML = staticTime;
+            }
 
             if (timeLeft <= 0) {
                 timeLeft = 1;
                 //alert("Out of time!");
             }
+        }
+
+        tScore += totalCorrect * 10;
+        if (localStorage.getItem("score") != undefined) {
+            var points = parseInt(localStorage.score);
         }
     </script>
 
@@ -164,19 +192,21 @@
         <div id="TimerElement">30</div>
 
         <div id="TriviaQuestions" style="color:black">
-                
+
         </div>
 
 
         <div id="triviaInput">
-            <button class="triviaAnswer" onclick="processAnswer('true')">True</button>
-            <button class="triviaAnswer" onclick="processAnswer('false')">False</button>
+            <button class="triviaAnswer" id="a1" onclick="processAnswer('1')">C</button>
+            <button class="triviaAnswer" id="a2" onclick="processAnswer('2')">R</button>
+            <button class="triviaAnswer" id="a3" onclick="processAnswer('3')">A</button>
+            <button class="triviaAnswer" id="a4" onclick="processAnswer('4')">P</button>
         </div>
-        <div class="submissionForm">
-           
 
-            <div id="progress"></div>
-        </div>
+
+
+        <div id="progress"></div>
+
     </center>
 </body>
 
