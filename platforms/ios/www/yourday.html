@@ -21,6 +21,11 @@
             console.log("beacon Called");
             //$("#myModal").modal()
         }
+        
+        $(function(){
+            $('body').hide().fadeIn('slow');
+            displayPlan();
+        });
 
     </script>
 
@@ -313,8 +318,7 @@
                 var d = new Date();
                 return format(d.getHours(), d.getMinutes(), d.getSeconds());
             }
-
-
+            
             return app;
 
         })();
@@ -341,7 +345,63 @@
             }
         }
 
-
+        function displayPlan(){
+            $('body').css("overflow", "visible");
+            var element = document.getElementById("homeScreen");
+            
+            var heading = document.createElement("h1");
+            var headingText = document.createTextNode("Today's Plan");
+            heading.appendChild(headingText);
+            element.appendChild(heading);
+            
+            for(var i=0; i < 3; i++){
+                var container = document.createElement("div");
+                $(container).addClass("card card-3 exhibit");
+                $(container).css("margin-top", "5%");
+                element.appendChild(container);
+                
+                var container2 = document.createElement("div");
+                $(container2).addClass("half-card");
+                $(container2).css("margin-top", "5%");
+                container.appendChild(container2);
+                                
+                var para3 = document.createElement("p");
+                $(para3).css("text-align", "left");
+                container2.appendChild(para3);
+               
+                var image = $('<img src="images/welcome.png">');
+                image.addClass("exhibitImage");
+                image.appendTo(container);
+                
+                //var yourQuestion = questions[i];
+                var exhibitTitle2 = document.createTextNode("Exhibit Title");
+                para3.appendChild(exhibitTitle2);
+                                
+                var para = document.createElement("p");
+                $(para).addClass("exhibit");
+                $(para).css("text-align", "left");
+                container.appendChild(para);
+                
+                //var yourQuestion = questions[i];
+                var exhibitTitle = document.createTextNode("Exhibit Title");
+                para.appendChild(exhibitTitle);
+                
+                var para2 = document.createElement("p");
+                $(para2).addClass("exhbit title");
+                $(para2).css("font-style", "normal");
+                $(para2).css("text-align", "left");
+                container.appendChild(para2);
+                
+                var exhibitText = document.createTextNode("Exhibit Info");
+                para2.appendChild(exhibitText);
+                
+                container.style.clear = "left";
+            }
+        }
+        
+        function flipPage() {
+            document.querySelector("#flip-toggle").classList.toggle("flip");
+        }
 
         app.initialize();
     </script>
@@ -351,25 +411,33 @@
 <body>
 
     <header>
+
         <button class="back" onclick="history.back()">
             <img src="ui/images/arrow-left.svg" />
         </button>
 
+        <button class="swap" onclick="flipPage()">
+            <img src="ui/images/swap.png" />
+        </button>
+
         <img src="images/logo2.png" height="50px" />
-
+    
     </header>
-
-    <ul id="homeScreen" class="dynamic">
-        <div style="margin: 0 0.9em 0 0.9em">
-            <p class="lead" style="text-align: center">Start navigating the Rock Hall!</p>
+    
+    <div class="flip-container" id="flip-toggle">
+        <div class="flipper">
+            <div class="frontPage">
+                <ul id="homeScreen" class="dynamic">
+                </ul>
+            </div>
+            <div class="backPage">
+                <div id="map">
+                    <img src="images/map1.png" width="100%"/>
+                </div>
+            </div>
         </div>
-    </ul>
-
-    <ul id="test" class="dynamic"></ul>
-
-
-
-
+    </div>
+    
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 

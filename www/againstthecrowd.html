@@ -126,7 +126,11 @@
                     var correctResponse = "crowdQ" + i;
 
                     document.getElementById(correctResponse).innerHTML = "<div class='answerText'>" + questionID[i].answer + "</div> &nbsp <div class='answerPoints'>" + questionID[i].points + "</div>";
-                    document.getElementById(correctResponse).classList = "correctAnswer animated flipInY";
+                   
+                    document.getElementById(correctResponse).classList.add('animated');
+                    document.getElementById(correctResponse).classList.add('flipInY');
+                    document.getElementById(correctResponse).classList.remove('crowdQuestion');
+                    document.getElementById(correctResponse).classList.add('correctAnswer');
                     numberCorrect++;
                     correct = true;
                 }
@@ -192,7 +196,11 @@
 
 <body id="atcGame">
 
-
+    <div id="gameHeader">
+    <img src="images/arrow.png" class="backButton" onclick="history.back()">
+    
+    
+</div>
     <center>
         <div id="question"></div>
         <input id="answer" type="texts" placeholder="Response" onclick="clearAnswer()">

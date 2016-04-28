@@ -89,6 +89,14 @@
     margin: 4px;
 }
 
+#triviaGame{
+    background-image: url(../../images/triviaGameUI/triviaBackground1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+
+
 /*  ----------------------------------------------------------
 								Lyracle
 	---------------------------------------------------------- */
@@ -199,7 +207,7 @@ text-align: center;
     
 }
 
-#lyricHeader{
+#gameHeader{
     margin-top: -70px;
     text-align: center;
 }
