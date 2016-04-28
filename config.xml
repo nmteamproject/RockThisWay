@@ -40,7 +40,14 @@
             <icon src="res/icons/ios/Icon-Small-50@2x.png" width="100" height="100" />
         </platform>
         <!--    <icon src="res/icon.png" platform="ios" width="57" height="57" density="mdpi" />-->
-        <icon src="res/icon.png" platform="android" width="57" height="57" density="mdpi" />
+        <platform name="android">
+            <icon src="res/icons/android/mipmap-hdpi/ic_launcher.png" platform="android" width="72" height="72" density="hdpi" />
+            <icon src="res/icons/android/mipmap-ldpi/ic_launcher.png" platform="android" width="36" height="36" density="ldpi" />
+            <icon src="res/icons/android/mipmap-mdpi/ic_launcher.png" platform="android" width="48" height="48" density="mdpi" />
+            <icon src="res/icons/android/mipmap-xhdpi/ic_launcher.png" platform="android" width="96" height="96" density="xhdpi" />
+            <icon src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" platform="android" width="144" height="144" density="xxhdpi" />
+            <icon src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" platform="android" width="192" height="192" density="xxxhdpi" />
+        </platform>
         <content src="index.html" />
         <plugin name="cordova-plugin-whitelist" spec="1" />
         <access origin="*" />
@@ -59,7 +66,7 @@
             <splash src="res/screens/android/drawable-land-xhdpi/screen.png" density="land-xhdpi"/>
 
             <splash src="res/screens/android/drawable-hdpi/screen.png" density="port-hdpi"/>
-            <splash src="res/screen/sandroid/drawable-ldpi/screen.png" density="port-ldpi"/>
+            <splash src="res/screens/android/drawable-ldpi/screen.png" density="port-ldpi"/>
             <splash src="res/screens/android/drawable-mdpi/screen.png" density="port-mdpi"/>
             <splash src="res/screens/android/drawable-xhdpi/screen.png" density="port-xhdpi"/>
         </platform>

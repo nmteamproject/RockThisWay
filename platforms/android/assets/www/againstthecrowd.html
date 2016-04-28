@@ -98,12 +98,17 @@
         var questionNumber = 0;
         var questionID = eval("q" + questionNumber + "Answers");
         var strikes = 0;
+        var numberCorrect = 0;
         
+        var points=0;
         //document.getElementById('answer').addEventListener("click", clearAnswer);
-        
-        function startQuestion() {
-            document.getElementById('question').innerHTML = questions[questionNumber];
 
+        function startQuestion() {
+            document.getElementById('strikes').innerHTML = "";
+            document.getElementById('submit').innerHTML = "Submit";
+            document.getElementById("submit").setAttribute('onclick', 'submit()');
+            document.getElementById('question').innerHTML = questions[questionNumber];
+            questionID = eval("q" + questionNumber + "Answers");
             var questionList = "";
 
             for (var i = 0; i < questionID.length; i++) {
@@ -113,36 +118,68 @@
         }
 
         function submit() {
+            
             var correct = false;
             var answer = $('#answer').val().toLowerCase();
             for (var i = 0; i < questionID.length; i++) {
                 if (answer.toLowerCase() == questionID[i].answer.toLowerCase()) {
                     var correctResponse = "crowdQ" + i;
-                    
-                    document.getElementById(correctResponse).innerHTML = "<div class='answerText'>"+questionID[i].answer+"</div> &nbsp <div class='answerPoints'>"+questionID[i].points+"</div>" ;
+
+                    document.getElementById(correctResponse).innerHTML = "<div class='answerText'>" + questionID[i].answer + "</div> &nbsp <div class='answerPoints'>" + questionID[i].points + "</div>";
                     document.getElementById(correctResponse).classList = "correctAnswer animated flipInY";
+                    numberCorrect++;
                     correct = true;
                 }
             }
-            
-            if (correct == false){
+
+            if (correct == false) {
                 strikes++;
-//                var strikeCount = "<div class='animated shake'>";
-//                for(var i = 0; i < strikes; i++){
-//                    strikeCount += "<div class='strike'>X</div>";
-//                }
-//                strikeCount +="</div>"
-                console.log("wrong");
+                //                var strikeCount = "<div class='animated shake'>";
+                //                for(var i = 0; i < strikes; i++){
+                //                    strikeCount += "<div class='strike'>X</div>";
+                //                }
+                //                strikeCount +="</div>"
                 document.getElementById('answer').style.border = "3px solid #ff0000";
+
+                // document.getElementById('strikes').innerHTML = strikeCount;
+            }
+
+            if (strikes == 3) {
+                for (var i = 0; i < questionID.length; i++) {
+                    var correctResponse = "crowdQ" + i;
+
+                    document.getElementById(correctResponse).innerHTML = "<div class='answerText'>" + questionID[i].answer + "</div> &nbsp <div class='answerPoints'>" + questionID[i].points + "</div>";
+                    document.getElementById(correctResponse).classList = "correctAnswer animated flipInY";
+                    
+
+                }
                 
-               // document.getElementById('strikes').innerHTML = strikeCount;
+               document.getElementById('strikes').innerHTML = "You got 3 strikes! <br> Points awarded: ";
+                prepareMoveOn();
+                
             }
             
+             if (numberCorrect == questionID.length){
+                    document.getElementById('strikes').innerHTML = "You got them all! <br> Points awarded: "+ points;
+                     prepareMoveOn();
+                }
+
             //document.getElementById('answer').value = "";
         }
-        
-        
-        function clearAnswer(){
+
+        function prepareMoveOn(){
+            strikes = 0;
+            questionNumber++;
+            console.log(questionNumber);
+            document.getElementById('submit').innerHTML = "Next";
+            clearAnswer();
+            //document.getElementById('strikes').innerHTML = "";
+            document.getElementById("submit").setAttribute('onclick', 'startQuestion()');
+            
+            
+        }
+
+        function clearAnswer() {
             document.getElementById('answer').value = "";
             document.getElementById('answer').style.border = "3px solid #acacac";
         }
@@ -155,23 +192,23 @@
 
 <body id="atcGame">
 
-    
+
     <center>
-    <div id="question"></div>
-    <input id="answer" type="texts" placeholder="Response" onclick="clearAnswer()">
+        <div id="question"></div>
+        <input id="answer" type="texts" placeholder="Response" onclick="clearAnswer()">
 
 
-    <div>
-        <div id="questionAnswers"></div>
-        <br>
-        <div id="pointsAwarded"></div>
-        <br>
-        <center id="strikes"></center>
+        <div>
+            <div id="questionAnswers"></div>
+            <br>
+            <div id="pointsAwarded"></div>
+            <br>
+            <center id="strikes"></center>
 
-        <br>
-        <button id="submit" class="submitButton" onclick="submit()">Submit</button>
-    </div>
-</center>
+            <br>
+            <button id="submit" class="submitButton" onclick="submit()">Submit</button>
+        </div>
+    </center>
 </body>
 
 </html>

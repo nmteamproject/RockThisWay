@@ -176,3 +176,27 @@ p {
     width: 100%;
     background: #1D1A22;
 }
+
+.modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+  background-image: url("/www/images/loading.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.modal-body {
+    color: white;
+}
+
+#beginBtn {
+    margin-top: 130%;
+}

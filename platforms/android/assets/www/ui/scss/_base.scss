@@ -270,11 +270,13 @@ text-align: center;
 
 .correctAnswer{
     width: 80vw;
+    margin-bottom: 2px;
     border: 1px solid #1b8e8e;
     background: linear-gradient(to right, #134644 0%,#145351 100%);
 }
 
 .crowdQuestion {
+    margin-bottom: 2px;
     opacity: 0.6;
     width: 80vw;
     background: linear-gradient(to bottom, #151715 0%,#111412 100%);
