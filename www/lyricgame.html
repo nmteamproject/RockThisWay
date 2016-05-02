@@ -17,7 +17,7 @@
 
 <body id="lyricGame">
 
-<div id="gameHeader">
+<div class="gameHeader">
     <img src="images/arrow.png" class="backButton" onclick="history.back()">
     
     Aerosmith's Lyrics
@@ -79,16 +79,16 @@
 
 
         document.getElementById("arc1").setAttribute("d", describeArc(57, 50, 37, 0, songTime));
-    };
+    }
 
     function start() {
         tick();
         timer = setTimeout(start, 1000);
-    };
+    }
 
     function stop() {
         clearTimeout(timer);
-    };
+    }
 
 
     // Code to draw circle 
@@ -143,7 +143,7 @@
 
         if (answer == correctLyrics[lyricNumber]) {
             document.getElementById("lyrics").innerHTML = answer;
-            document.getElementById("wordBank").innerHTML = "You got the Correct answer!"
+            document.getElementById("wordBank").innerHTML = "You got the Correct answer!";
             document.getElementById("sumbitLyricsButton").innerHTML = "Next";
             document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
 
@@ -161,14 +161,14 @@
         if (playingMusic == true) {
             stop();
             soundFile.pause();
-            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>"
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>";
             playingMusic = false;
         } else {
 
             start();
             soundFile.play();
             playingMusic = true;
-            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPauseButton.png' height='70px'>"
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPauseButton.png' height='70px'>";
         }
     }
 
@@ -188,7 +188,7 @@
                 document.getElementById("lyrics").style.border = "3px solid #636363";
 
 
-            },
+            }
         });
         Sortable.create(wordBank, {
             group: 'foo',
@@ -204,9 +204,9 @@
                     document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
                 }
 
-            },
+            }
         });
-        document.getElementById("lyrics").innerHTML = ""
+        document.getElementById("lyrics").innerHTML = "";
 
         soundFile = new Audio('songs/' + musicCollection[lyricNumber] + '.mp3');
 

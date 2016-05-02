@@ -18,7 +18,6 @@
     <script>
         //script for testing Modals
         function triggerModal() {
-            console.log("beacon Called");
             //$("#myModal").modal()
         }
         
@@ -325,13 +324,13 @@
 
         function playGame(game) {
             if (game == 1) {
-                window.location.href = "lyricgame.html";
+                window.location.href = "rules.html?game=1";
             }
             if (game == 2) {
-                window.location.href = "triviagame.html";
+                window.location.href = "rules.html?game=2";
             }
             if (game == 3) {
-                window.location.href = "againstthecrowd.html";
+                window.location.href = "rules.html?game=3";
             }
         }
 
