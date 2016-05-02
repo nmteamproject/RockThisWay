@@ -18,7 +18,7 @@
     </header>
     
     <br>
-    <p class="lead" id="login">Plan Your Day</p>
+    <p class="lead" id="login" onclick="takeSurvey()">Plan Your Day</p>
     
     <button class="arrow" onclick="takeSurvey()">
         <img src="images/arrow.png" width="35px" height="40px"/>
@@ -39,7 +39,7 @@
             $('body').hide().fadeIn('slow');
         });
         function takeSurvey() {
-            window.location.href = "survey.html";
+            window.location.href = "pre_survey.html";
         }
         
     </script>

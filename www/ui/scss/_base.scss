@@ -592,5 +592,40 @@ body::after {
 }
 
 #map {
-    height: 100%;
+    margin-top: -10%;
+}
+
+.marker1 {
+    position: absolute;
+    right: -115%;
+    top: 0;
+    margin-top: 72%;
+    width: auto;
+    height: auto;
+}
+
+.marker2 {
+    position: absolute;
+    right: -170%;
+    top: 0;
+    margin-top: 50%;
+    width: auto;
+    height: auto;
+}
+
+.marker3 {
+    position: absolute;
+    right: -150%;
+    top: 0;
+    margin-top: 20%;
+    width: auto;
+    height: auto;
+}
+
+.marker1 img,
+.marker2 img,
+.marker3 img, {
+    max-width: 20%;
+    height: auto;
+    width: auto;
 }

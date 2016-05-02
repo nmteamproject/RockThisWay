@@ -177,26 +177,21 @@ p {
     background: #1D1A22;
 }
 
-.modal-dialog {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.modal-content {
-  height: auto;
-  min-height: 100%;
-  border-radius: 0;
-  background-image: url("/www/images/loading.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.modal-body {
-    color: white;
+.container {
+    background-image: url("/www/images/pre_survey.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: -20%;
+    margin-bottom: -20%;
+    min-height: 100%;
 }
 
 #beginBtn {
-    margin-top: 130%;
+    margin-top: 125%;
+}
+
+#passBtn {
+    font-style: italic;
+    font-weight: lighter;
+    padding-top: 3%;
 }

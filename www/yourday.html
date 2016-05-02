@@ -14,7 +14,7 @@
     <script src="cordova.js"></script>
     <script src="js/app.js"></script>
     <script src="bundle.js"></script>
-
+    
     <script>
         //script for testing Modals
         function triggerModal() {
@@ -335,6 +335,7 @@
             }
         }
 
+        //adds the CSS to display exhibit cards
         function displayPlan(){
             $('body').css("overflow", "visible");
             var element = document.getElementById("homeScreen");
@@ -363,7 +364,6 @@
                 image.addClass("exhibitImage");
                 image.appendTo(container);
                 
-                //var yourQuestion = questions[i];
                 var exhibitTitle2 = document.createTextNode("Exhibit Title");
                 para3.appendChild(exhibitTitle2);
                                 
@@ -372,7 +372,6 @@
                 $(para).css("text-align", "left");
                 container.appendChild(para);
                 
-                //var yourQuestion = questions[i];
                 var exhibitTitle = document.createTextNode("Exhibit Title");
                 para.appendChild(exhibitTitle);
                 
@@ -389,10 +388,36 @@
             }
         }
         
+        var flipped = false;
+        //toggles between the plan screen and map screen
         function flipPage() {
+            //creating location markers and putting them in their own divs
+            var markers = document.getElementById("markers");
+            for(var i=0; i<3; i++) {
+                var image = $('<img src="ui/images/pick-location-marker.png">');
+                var marker = document.createElement("div");
+                
+                $(marker).addClass("marker" + (i+1));
+                markers.appendChild(marker);
+                image.appendTo(marker);
+                
+                marker.addEventListener("click", function(){console.log("hi")});
+            }
             document.querySelector("#flip-toggle").classList.toggle("flip");
+            
+            if(!flipped) {
+                flipped = true;
+            } else {
+                flipped = false;
+            }
+            if(!flipped) {
+                $(markers).empty();
+                $(map).css("overflow", "hidden");
+            } else {
+                $(map).css("overflow", "visible");
+            }
         }
-
+        
         app.initialize();
     </script>
 
@@ -407,7 +432,7 @@
         </button>
 
         <button class="swap" onclick="flipPage()">
-            <img src="ui/images/swap.png" />
+            <img src="ui/images/BaseMap.png" />
         </button>
 
         <img src="images/logo2.png" height="50px" />
@@ -422,7 +447,8 @@
             </div>
             <div class="backPage">
                 <div id="map">
-                    <img src="images/map1.png" width="100%"/>
+                    <img src="images/rock-hall-map.png" width="351%"/>
+                    <div id="markers"></div>
                 </div>
             </div>
         </div>

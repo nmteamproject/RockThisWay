@@ -14,7 +14,7 @@
     <script src="cordova.js"></script>
     <script src="js/app.js"></script>
     <script src="bundle.js"></script>
-
+    
     <script>
         //script for testing Modals
         function triggerModal() {
@@ -238,25 +238,18 @@
                 }
                 // If the nearest beacon changes, the code on beacons.html will change to the following based on beacon.major
                 if (mNearestBeacon.major != previousBeacon) {
-                    $('#homeScreen').empty();
                     if (mNearestBeacon.major == 19175) {
                         $('#modalTitle').text("Play Who Wants to be a Rockstar?");
-                        $("#modalExhibit").attr("onclick", "goToExhibit(2)");
                         $("#modalPlay").attr("onclick", "playGame(2)");
                         $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
-                        var hScreen = $('<img src="images/map1.png" width="100%">');
                     } else if (mNearestBeacon.major == 18015) {
                         $('#modalTitle').text("Play Against the Crowd");
-                        $("#modalExhibit").attr("onclick", "goToExhibit(2)");
                         $("#modalPlay").attr("onclick", "playGame(3)");
                         $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
-                        var hScreen = $('<img src="images/map2.png" width="100%">');
                     } else if (mNearestBeacon.major == 50017) {
                         $("#modalPlay").attr("onclick", "playGame(1)");
-                        $("#modalExhibit").attr("onclick", "goToExhibit(2)");
                         $('#modalTitle').text("Play Lyracle");
                         $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
-                        var hScreen = $('<img src="images/map3.png" width="100%">');
                     } 
                     else if (mNearestBeacon.major == 112) {
                         $("#modalPlay").hide();
@@ -264,11 +257,8 @@
                         $("#modalExhibit").text("Leave");
                         $('#modalTitle').text("Leave Exhibit?");
                         $("#modalDescription").text("If you are leaving the exhibit please press the following button and give this phone to an exhibitor.");
-                        var hScreen = $('<img src="images/map3.png" width="100%">');
                     }else {
-                        var hScreen = $('');
                     }
-                    $('#homeScreen').append(hScreen);
                     $("#myModal").modal();
                 }
 
@@ -345,6 +335,7 @@
             }
         }
 
+        //adds the CSS to display exhibit cards
         function displayPlan(){
             $('body').css("overflow", "visible");
             var element = document.getElementById("homeScreen");
@@ -373,7 +364,6 @@
                 image.addClass("exhibitImage");
                 image.appendTo(container);
                 
-                //var yourQuestion = questions[i];
                 var exhibitTitle2 = document.createTextNode("Exhibit Title");
                 para3.appendChild(exhibitTitle2);
                                 
@@ -382,7 +372,6 @@
                 $(para).css("text-align", "left");
                 container.appendChild(para);
                 
-                //var yourQuestion = questions[i];
                 var exhibitTitle = document.createTextNode("Exhibit Title");
                 para.appendChild(exhibitTitle);
                 
@@ -399,10 +388,36 @@
             }
         }
         
+        var flipped = false;
+        //toggles between the plan screen and map screen
         function flipPage() {
+            //creating location markers and putting them in their own divs
+            var markers = document.getElementById("markers");
+            for(var i=0; i<3; i++) {
+                var image = $('<img src="ui/images/pick-location-marker.png">');
+                var marker = document.createElement("div");
+                
+                $(marker).addClass("marker" + (i+1));
+                markers.appendChild(marker);
+                image.appendTo(marker);
+                
+                marker.addEventListener("click", function(){console.log("hi")});
+            }
             document.querySelector("#flip-toggle").classList.toggle("flip");
+            
+            if(!flipped) {
+                flipped = true;
+            } else {
+                flipped = false;
+            }
+            if(!flipped) {
+                $(markers).empty();
+                $(map).css("overflow", "hidden");
+            } else {
+                $(map).css("overflow", "visible");
+            }
         }
-
+        
         app.initialize();
     </script>
 
@@ -413,11 +428,11 @@
     <header>
 
         <button class="back" onclick="history.back()">
-            <img src="ui/images/arrow-left.svg" />
+            <img src="images/user.png" />
         </button>
 
         <button class="swap" onclick="flipPage()">
-            <img src="ui/images/swap.png" />
+            <img src="ui/images/BaseMap.png" />
         </button>
 
         <img src="images/logo2.png" height="50px" />
@@ -432,7 +447,8 @@
             </div>
             <div class="backPage">
                 <div id="map">
-                    <img src="images/map1.png" width="100%"/>
+                    <img src="images/rock-hall-map.png" width="351%"/>
+                    <div id="markers"></div>
                 </div>
             </div>
         </div>
@@ -451,7 +467,7 @@
                     <p id="modalDescription">Play a game where you get a clip of a song, then you have to put the rest of the lyrics in order!</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalExhibit" onclick="goToExhibit(1)">Exhibit</button>
+
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="modalPlay" onclick="playGame(1)">Game</button>
                 </div>
             </div>
