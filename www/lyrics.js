@@ -14,7 +14,7 @@ var songs = [
         song: "Dude (Looks Like a Lady)",
         verse: "cruise into a bar on the shore, her picture graced the grime on the door..."
     }
-]
+];
 
 var correctLyrics = [
     "and Im wondering what youre dreaming wondering if its me youre seeing",
