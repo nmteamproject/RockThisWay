@@ -17,12 +17,21 @@
 </head>
 
 <body id="nameCreation">
-    
-    <div class="pagetitle">Create Your Own Gamertag</div>
-    <div class="divider"></div>
-    <div class="details">This name will follow you throughout your exhibits. At the end look for your name on the leaderboards!</div>
-    <input id="userName" type="text" placeholder="Your name here">
-    <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
+
+    <div id="creationPage">
+        <div class="pagetitle">Create Your Own Gamertag</div>
+        <div class="divider"></div>
+        <div class="details">This name will follow you throughout your exhibits. At the end look for your name on the leaderboards!</div>
+        <input id="userName" type="text" placeholder="Your name here">
+        <button onclick="submitUserName()" class="submitButton" id="sumbitLyricsButton">Submit</button>
+
+    </div>
+
+    <div id="userPage">
+        <div id="teamName"></div>
+        <div id="teamScore"></div>
+        <button onclick="history.back()" class="submitButton" id="sumbitLyricsButton">Return</button>
+    </div>
 
     <script src="cordova.js"></script>
 
@@ -31,19 +40,51 @@
     <script src="js/app.js"></script>
 
     <script>
-        //Will be script to show user's profile and score upon phone return.
-        if (localStorage.getItem("score") != undefined){
-            var points = parseInt(localStorage.score);
-        }else{
-            var points = 0;
+        window.onload = loadPage;
+
+        function loadPage() {
+
+            localStorage.removeItem("user");
+
+            document.getElementById('creationPage').style.display = "none";
+            document.getElementById('userPage').style.display = "none";
+            if (localStorage.getItem("user") != undefined) {
+                document.getElementById('userPage').style.display = "initial";
+                var user = localStorage.getItem("user");
+
+                if (localStorage.getItem("score") != undefined) {
+                    var points = parseInt(localStorage.score);
+                } else {
+                    var points = 0;
+                }
+
+                document.getElementById('teamName').innerHTML = "Team Name: " + user;
+                document.getElementById('teamScore').innerHTML = "Team Score: " + points;
+            } else {
+                document.getElementById('creationPage').style.display = "initial";
+            }
         }
-        if (localStorage.getItem("user") != undefined){
-            var user = parseInt(localStorage.user);
-        }else{
-            var user = "";
+
+    
+        function submitUserName() {
+            console.log("called");
+
+            //localStorage.user = document.getElementById('userName').value;
+            var user = document.getElementById('userName').value;
+
+            if (localStorage.getItem("score") != undefined) {
+                var points = parseInt(localStorage.score);
+            } else {
+                var points = 0;
+            }
+
+            document.getElementById('creationPage').style.display = "none";
+            document.getElementById('userPage').style.display = "initial";
+
+            document.getElementById('teamName').innerHTML = "Team Name: " + user;
+            document.getElementById('teamScore').innerHTML = "Team Score: " + points;
+            console.log("called 2");
         }
-        document.getElementById('teamName').innerHTML = "Team Name: "+user;
-        document.getElementById('teamScore').innerHTML = "Team Score: "+points;
     </script>
 
 

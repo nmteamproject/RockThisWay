@@ -322,6 +322,10 @@
             
         }
 
+        function goToUser(){
+            window.location.href = "user.html";
+        }
+        
         function playGame(game) {
             if (game == 1) {
                 window.location.href = "rules.html?game=1";
@@ -426,7 +430,7 @@
 
     <header>
 
-        <button class="back" onclick="history.back()">
+        <button class="back" onclick="goToUser()">
             <img src="images/user.png" />
         </button>
 
