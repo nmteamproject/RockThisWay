@@ -143,12 +143,17 @@
                 stillCounting = 0;
                 
                 document.getElementById("end").removeAttribute("hidden");
-                console.log("Shit ran");
+                document.getElementById("a1").setAttribute("hidden", "true");
+                document.getElementById("a2").setAttribute("hidden", "true");
+                document.getElementById("a3").setAttribute("hidden", "true");
+                document.getElementById("a4").setAttribute("hidden", "true");
+                //console.log("Shit ran");
                 //document.getElementById("ButtonContinue").disabled = true;
 
             }
 
             localStorage.triviaScore = totalCorrect * 10;
+            document.getElementById("ScoreBoard").innerHTML = "Score " + totalCorrect * 10;
         }
 
 
@@ -171,7 +176,6 @@
             }
         }
 
-        tScore += totalCorrect * 10;
         if (localStorage.getItem("score") != undefined) {
             var points = parseInt(localStorage.score);
         }
@@ -201,7 +205,7 @@
         <div id="TimerElement">30</div>
 
         <div id="TriviaQuestions" style="color:black">
-
+        <div id="ScoreBoard" style="color:white">Score 0</div>
         </div>
 
 
