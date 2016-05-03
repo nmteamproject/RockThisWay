@@ -16,18 +16,10 @@
     <script src="crowdanswers.js"></script>
 
     <script type="text/javascript">
-  
         window.onload = startQuestion;
 
-        //Score Keeping
-        if (localStorage.getItem("score") != undefined) {
-            var points = parseInt(localStorage.score);
-        } else {
-            var points = 0;
-        }
-
         localStorage.atcScore = 0;
-        
+
         var questionNumber = 0;
         var questionID = eval("q" + questionNumber + "Answers");
         var strikes = 0;
@@ -36,11 +28,11 @@
         //document.getElementById('answer').addEventListener("click", clearAnswer);
 
         function startQuestion() {
-            
-            if(questionNumber == 3){
+
+            if (questionNumber == 3) {
                 window.location.href = "user.html";
             }
-            
+
             document.getElementById('strikes').innerHTML = "";
             document.getElementById('submit').innerHTML = "Submit";
             document.getElementById("submit").setAttribute('onclick', 'submit()');
@@ -70,7 +62,8 @@
                     document.getElementById(correctResponse).classList.add('correctAnswer');
                     numberCorrect++;
                     correct = true;
-                    localStorage.atcScore += parseInt(questionID[i].points);
+                    var newPoints = parseInt(questionID[i].points)
+                    localStorage.atcScore += newPoints;
                 }
             }
 
@@ -89,13 +82,13 @@
 
                 }
 
-                document.getElementById('strikes').innerHTML = "You got 3 strikes! <br> Points awarded: ";
+                document.getElementById('strikes').innerHTML = "You got 3 strikes!";
                 prepareMoveOn();
 
             }
 
             if (numberCorrect == questionID.length) {
-                document.getElementById('strikes').innerHTML = "You got them all! <br> Points awarded: " + points;
+                document.getElementById('strikes').innerHTML = "You got them all!";
                 prepareMoveOn();
             }
 
@@ -103,10 +96,16 @@
 
         function prepareMoveOn() {
             strikes = 0;
-            questionNumber++;
-            document.getElementById('submit').innerHTML = "Next";
+            numberCorrect = 0;
             clearAnswer();
-            document.getElementById("submit").setAttribute('onclick', 'startQuestion()');
+            questionNumber++;
+            if (questionNumber != 3) {
+                document.getElementById('submit').innerHTML = "Next";
+                document.getElementById("submit").setAttribute('onclick', 'startQuestion()');
+            }else{
+                document.getElementById('submit').innerHTML = "Finish";
+                document.getElementById("submit").setAttribute('onclick', 'finish()');
+            }
 
 
         }
@@ -114,6 +113,14 @@
         function clearAnswer() {
             document.getElementById('answer').value = "";
             document.getElementById('answer').style.border = "3px solid #acacac";
+        }
+
+        function finish(){
+            window.location.href = "rules.html?game=6";
+        }
+        
+        function returnToPlan() {
+            window.location.href = "yourday.html";
         }
     </script>
 
@@ -125,7 +132,7 @@
 <body id="atcGame">
 
     <div class="gameHeader">
-        <img src="images/arrow.png" class="backButton" onclick="history.back()">
+        <img src="images/arrow.png" class="backButton" onclick="returnToPlan()">
 
 
     </div>

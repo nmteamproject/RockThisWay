@@ -1,3 +1,71 @@
+/*  ----------------------------------------------------------
+								Game Modal
+	---------------------------------------------------------- */
+#gameModal{
+    display:none;
+    position: fixed;
+    z-index: 100;
+    height:80vh;
+    width: 90%;
+    background: white;
+    margin-left: 20px;
+    color: black;
+}
+
+
+#exhibitPhoto{
+    text-align: center;
+    position: fixed;
+    z-index: 0;
+}
+#exhibitDescription{    
+    font-size: 15px;
+    padding-bottom: 20px;
+    font-weight: 100;
+}
+#exhibitTitle{
+    color:white;
+    font-size: 25px;
+    font-weight: 100;
+}
+
+#exhibitInfo{
+    background:linear-gradient(to right, #c8a11e 0%,#6a5e1a 100%);;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 35px;
+    font-size: 15px;
+    font-weight:bolder;
+    position: relative;
+    z-index: 2;
+    margin-top: 250px;
+}
+
+.modalText{
+    color:#a7a7a7;
+    font-size: 12px;
+}
+
+.playButton{
+    background: linear-gradient(to right, #ed5f3c 1%,#ea3333 100%);
+    text-align: center;
+    font-size: 15px;
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    border-radius: 2px;
+    border: solid 1px #c8a11e;
+    color: #ffffff;
+    position: absolute;
+    bottom: 0;
+}
+
+
+
+
+/*  ----------------------------------------------------------
+								Base
+	---------------------------------------------------------- */
 .gameNotification {
     background: #ff78f3;
     position: fixed;
@@ -520,53 +588,6 @@ body::after {
 }
 
 
-
-
-/*  ----------------------------------------------------------
-								Exhibit Page
-	---------------------------------------------------------- */
-
-#exhibitPhoto{
-    text-align: center;
-    position: fixed;
-    z-index: 0;
-}
-#exhibitDescription{    
-    font-size: 15px;
-    padding-bottom: 20px;
-    font-weight: 100;
-}
-#exhibitTitle{
-    color:white;
-    font-size: 25px;
-    font-weight: 100;
-}
-
-#exhibitInfo{
-    background:linear-gradient(to right, #c8a11e 0%,#6a5e1a 100%);;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding: 35px;
-    font-size: 15px;
-    font-weight:bolder;
-    position: relative;
-    z-index: 2;
-    margin-top: 250px;
-}
-
-
-
-.playButton{
-    text-align: center;
-    margin: 20px;
-    padding: 5px;
-    border-radius: 5px;
-    border: solid 1px #c8a11e;
-    color: #c8a11e;
-    position: relative;
-    z-index: 2;
-}
-
 /*  ----------------------------------------------------------
 				       Plan Your Day Page
 	---------------------------------------------------------- */
@@ -674,4 +695,22 @@ body::after {
     max-width: 20%;
     height: auto;
     width: auto;
+}
+
+
+header button.userButton{
+    background: none;
+    position: absolute;
+    left: 0.4em;
+    width: 10%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 50%;
+    color: #000;
+    text-align: left;
+    background: none;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
 }

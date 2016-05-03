@@ -69,30 +69,27 @@
 
             var user = localStorage.user
             
-            var points = parseInt(localStorage.score);
+            var points = 0;
             
             
             
             var atcScore = parseInt(localStorage.atcScore);
             if (Number.isInteger(atcScore)){
                 document.getElementById('atcPoints').innerHTML = atcScore;
+                points += atcScore;
             }
             var triviaScore = parseInt(localStorage.triviaScore);
             if (Number.isInteger(triviaScore)){
-                document.getElementById('triviaPoints').innerHTML = atcScore;
+                document.getElementById('triviaPoints').innerHTML = triviaScore;
+                points += triviaScore;
             }
             var lyricScore = parseInt(localStorage.lyricScore);
             if (Number.isInteger(lyricScore)){
-                document.getElementById('lyricPoints').innerHTML = atcScore;
+                document.getElementById('lyricPoints').innerHTML = lyricScore;
+                points += lyricScore;
             }
             
-            
-            
-            if (localStorage.getItem("score") != undefined) {
-                var points = parseInt(localStorage.score);
-            } else {
-                var points = 0;
-            }
+            localStorage.points = points;
 
             
             
