@@ -142,12 +142,13 @@
                 
                 stillCounting = 0;
                 
-                
+                document.getElementById("end").removeAttribute("hidden");
+                console.log("Shit ran");
                 //document.getElementById("ButtonContinue").disabled = true;
 
             }
 
-            localStorage.triviaScore = totalCorrect;
+            localStorage.triviaScore = totalCorrect * 10;
         }
 
 
@@ -209,6 +210,7 @@
             <button class="triviaAnswer" id="a2" onclick="processAnswer('2')">R</button>
             <button class="triviaAnswer" id="a3" onclick="processAnswer('3')">A</button>
             <button class="triviaAnswer" id="a4" onclick="processAnswer('4')">P</button>
+            <button class="triviaAnswer" id="end" onclick="returnToPlan()" hidden="true">Return to Plan</button>
         </div>
 
 
