@@ -18,7 +18,7 @@
 <body id="lyricGame">
 
 <div class="gameHeader">
-    <img src="images/arrow.png" class="backButton" onclick="history.back()">
+    <img src="images/arrow.png" class="backButton" onclick="returnToPlan()">
     
     Aerosmith's Lyrics
 </div>
@@ -71,7 +71,8 @@
     var soundFile;
     var timer = null;
 
-
+    localStorage.lyricScore = 0;
+    
     // Timer for song length UI
     function tick() {
 
@@ -235,6 +236,10 @@
     function showLyrics(){
         document.getElementById('verse').innerHTML = songs[lyricNumber].verse;
     }
+    
+    function returnToPlan() {
+            window.location.href = "yourday.html";
+        }
 </script>
 
 

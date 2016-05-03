@@ -180,7 +180,7 @@ var q8Answers = [
     {
         "points": "0",
         "answer": "Yellow"
-    },
+    }
 ];
 
 var q9Answers = [

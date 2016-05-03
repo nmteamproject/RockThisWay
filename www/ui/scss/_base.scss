@@ -436,6 +436,10 @@ header img.logotype {
     font-weight: 200;
 }
 
+.redDivider{
+    background: #ff0000!important;
+}
+
 .divider{
     width: 40px;
     height: 10px;
@@ -446,6 +450,13 @@ header img.logotype {
 .details{
     font-size: 12px;
 }
+
+.points{
+    font-size: 17px;
+    color: #dcdcdc;
+    margin-bottom: 15px;
+}
+
 
 /*  ----------------------------------------------------------
 								Common Styles

@@ -23,12 +23,13 @@
         <img src="images/logo2.png" height="50px" />
 
     </header>
-    
+
     <div>Thank you for participating in our senior design project! Have a fantastic day at Imagine RIT!</div>
-    <br><br>
+    <br>
+    <br>
     <div id="teamName">Team Name: </div>
     <div id="teamScore">Team Score: </div>
-    
+
 
     <script src="cordova.js"></script>
 
@@ -38,18 +39,24 @@
 
     <script>
         //Will be script to show user's profile and score upon phone return.
-        if (localStorage.getItem("score") != undefined){
-            var points = parseInt(localStorage.score);
-        }else{
-            var points = 0;
+        var points = 0;
+        var atcScore = parseInt(localStorage.atcScore);
+        if (Number.isInteger(atcScore)) {
+            points += atcScore;
         }
-        if (localStorage.getItem("user") != undefined){
-            var user = parseInt(localStorage.user);
-        }else{
-            var user = "";
+        var triviaScore = parseInt(localStorage.triviaScore);
+        if (Number.isInteger(triviaScore)) {
+            points += triviaScore;
         }
-        document.getElementById('teamName').innerHTML = "Team Name: "+user;
-        document.getElementById('teamScore').innerHTML = "Team Score: "+points;
+        var lyricScore = parseInt(localStorage.lyricScore);
+        if (Number.isInteger(lyricScore)) {
+            points += lyricScore;
+        }
+        var user = localStorage.user;
+        
+        
+        document.getElementById('teamName').innerHTML = "Team Name: " + user;
+        document.getElementById('teamScore').innerHTML = "Team Score: " + points;
     </script>
 
 

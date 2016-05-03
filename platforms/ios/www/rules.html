@@ -48,13 +48,13 @@
         var gameNumber = getParameterByName('game');
         
 
-        if (gameNumber == 2) {
+        if (gameNumber == 1) {
             document.getElementById('gameTitle').innerHTML = "The Beatles Trivia";
             document.getElementById('gameDuration').innerHTML = "One Minute";
             document.getElementById('beginGame').onclick = function(){ window.location.href = "triviagame.html";};
             document.getElementById('gameDescription').innerHTML = "Answer as many questions as possible within the time given.<br>The more questions you answer correctly, the more time and points you'll get! ";
             //document.getElementById('rulesPage').style.backgroundImage = "url(images/namecreation.png) no-repeat center center fixed";
-        } else if (gameNumber == 1) {
+        } else if (gameNumber == 2) {
             document.getElementById('gameTitle').innerHTML = "Aerosmith";
             document.getElementById('gameDuration').innerHTML = "Three Songs";
             document.getElementById('beginGame').onclick = function(){ window.location.href = "lyricgame.html";};

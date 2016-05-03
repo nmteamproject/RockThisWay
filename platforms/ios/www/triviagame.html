@@ -25,6 +25,8 @@
 
         var tArrayLength = TriviaData.length;
 
+        localStorage.triviaScore = 0;
+        
         // Variables to track state of the game
         // i.e. number questions asked, current correct total and current question
         var questionsAsked = 0;
@@ -136,8 +138,11 @@
             }
             // final question asked - disable button and show final results
             if (questionsAsked == 10) {
-                alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
+                //alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
+                localStorage.triviaScore = totalCorrect * timeLeft;
                 stillCounting = 0;
+                
+                
                 //document.getElementById("ButtonContinue").disabled = true;
 
             }
@@ -177,7 +182,7 @@
 
 <body id="triviaGame">
 
-    <div id="gameHeader">
+    <div class="gameHeader">
     <img src="images/arrow.png" class="backButton" onclick="history.back()">
     
     Beatles Trivia
