@@ -180,6 +180,9 @@
             var points = parseInt(localStorage.score);
         }
         
+        function finish(){
+            window.location.href = "rules.html?game=4";
+        }
         
         function returnToPlan() {
             window.location.href = "yourday.html";
@@ -214,7 +217,7 @@
             <button class="triviaAnswer" id="a2" onclick="processAnswer('2')">R</button>
             <button class="triviaAnswer" id="a3" onclick="processAnswer('3')">A</button>
             <button class="triviaAnswer" id="a4" onclick="processAnswer('4')">P</button>
-            <button class="triviaAnswer" id="end" onclick="returnToPlan()" hidden="true">Return to Plan</button>
+            <button class="triviaAnswer" id="end" onclick="finish()" hidden="true">Return to Plan</button>
         </div>
 
 

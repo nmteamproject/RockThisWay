@@ -65,7 +65,7 @@ var lyricCollection2 = [
     "bite",
     "baby",
     "maybe",
-    "you're",
+    "youre",
     "wrong",
     "but",
     "you",
@@ -73,7 +73,6 @@ var lyricCollection2 = [
     "its",
     "alright"
 ];
-
 
 var musicCollection = [
     "MissAThing",

@@ -16,7 +16,6 @@
     <script src="crowdanswers.js"></script>
 
     <script type="text/javascript">
-  
         window.onload = startQuestion;
 
         //Score Keeping
@@ -27,7 +26,7 @@
         }
 
         localStorage.atcScore = 0;
-        
+
         var questionNumber = 0;
         var questionID = eval("q" + questionNumber + "Answers");
         var strikes = 0;
@@ -36,11 +35,11 @@
         //document.getElementById('answer').addEventListener("click", clearAnswer);
 
         function startQuestion() {
-            
-            if(questionNumber == 3){
+
+            if (questionNumber == 3) {
                 window.location.href = "user.html";
             }
-            
+
             document.getElementById('strikes').innerHTML = "";
             document.getElementById('submit').innerHTML = "Submit";
             document.getElementById("submit").setAttribute('onclick', 'submit()');
@@ -103,10 +102,15 @@
 
         function prepareMoveOn() {
             strikes = 0;
-            questionNumber++;
-            document.getElementById('submit').innerHTML = "Next";
             clearAnswer();
-            document.getElementById("submit").setAttribute('onclick', 'startQuestion()');
+            questionNumber++;
+            if (questionNumber != 3) {
+                document.getElementById('submit').innerHTML = "Next";
+                document.getElementById("submit").setAttribute('onclick', 'startQuestion()');
+            }else{
+                document.getElementById('submit').innerHTML = "Finish";
+                document.getElementById("submit").setAttribute('onclick', 'finish()');
+            }
 
 
         }
@@ -115,6 +119,11 @@
             document.getElementById('answer').value = "";
             document.getElementById('answer').style.border = "3px solid #acacac";
         }
+
+        function finish(){
+            window.location.href = "rules.html?game=6";
+        }
+        
         function returnToPlan() {
             window.location.href = "yourday.html";
         }

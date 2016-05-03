@@ -17,11 +17,9 @@
 
 <body id="lyricGame">
 
-<div class="gameHeader">
-    <img src="images/arrow.png" class="backButton" onclick="returnToPlan()">
-    
-    Aerosmith's Lyrics
-</div>
+    <div class="gameHeader">
+        <img src="images/arrow.png" class="backButton" onclick="returnToPlan()"> Aerosmith's Lyrics
+    </div>
 
     <div>
         <div id="songDetails">
@@ -39,8 +37,8 @@
 
             <button class="lyricButton" onclick="loadWordBank()"><img src="images/lyricGameUI/lyricRestartButton.png" height="40px"></button>
         </center>
-        <div  id="verse" class="directions">Complete the lyrics</div>
-                <div></div>
+        <div id="verse" class="directions">Complete the lyrics</div>
+        <div></div>
     </div>
     <center>
         <div id="game">
@@ -72,7 +70,7 @@
     var timer = null;
 
     localStorage.lyricScore = 0;
-    
+
     // Timer for song length UI
     function tick() {
 
@@ -228,18 +226,28 @@
     function nextLyrics() {
 
         lyricNumber++;
-        loadWordBank();
-        document.getElementById("sumbitLyricsButton").innerHTML = "Submit";
-        document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'checkLyrics()');
+
+        if (lyricNumber != 3) {
+            loadWordBank();
+            document.getElementById("sumbitLyricsButton").innerHTML = "Submit";
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'checkLyrics()');
+        }else{
+            document.getElementById("sumbitLyricsButton").innerHTML = "Finish";
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'finish()');
+        }
+    }
+
+    function finish(){
+        window.location.href = "rules.html?game=5";
     }
     
-    function showLyrics(){
+    function showLyrics() {
         document.getElementById('verse').innerHTML = songs[lyricNumber].verse;
     }
-    
+
     function returnToPlan() {
-            window.location.href = "yourday.html";
-        }
+        window.location.href = "yourday.html";
+    }
 </script>
 
 
