@@ -24,6 +24,9 @@
         },
         "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "nmTeamProject.RockThisWay"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         }
     },
     "dependent_plugins": {

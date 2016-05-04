@@ -24,21 +24,28 @@
     <feature name="LocalNotification">
         <param name="android-package" value="de.appplant.cordova.plugin.localnotification.LocalNotification" />
     </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
     <icon density="hdpi" height="72" platform="android" src="res/icons/android/mipmap-hdpi/ic_launcher.png" width="72" />
     <icon density="ldpi" height="36" platform="android" src="res/icons/android/mipmap-ldpi/ic_launcher.png" width="36" />
     <icon density="mdpi" height="48" platform="android" src="res/icons/android/mipmap-mdpi/ic_launcher.png" width="48" />
     <icon density="xhdpi" height="96" platform="android" src="res/icons/android/mipmap-xhdpi/ic_launcher.png" width="96" />
     <icon density="xxhdpi" height="144" platform="android" src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" width="144" />
     <icon density="xxxhdpi" height="192" platform="android" src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" width="192" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashMaintainAspectRatio" value="true|false" />
+    <preference name="SplashShowOnlyFirstTime" value="true|false" />
     <allow-intent href="market:*" />
-    <splash density="land-hdpi" src="res/screens/android/drawable-land-hdpi/screen.png" />
-    <splash density="land-ldpi" src="res/screens/android/drawable-land-ldpi/screen.png" />
-    <splash density="land-mdpi" src="res/screens/android/drawable-land-mdpi/screen.png" />
-    <splash density="land-xhdpi" src="res/screens/android/drawable-land-xhdpi/screen.png" />
-    <splash density="port-hdpi" src="res/screens/android/drawable-hdpi/screen.png" />
-    <splash density="port-ldpi" src="res/screens/android/drawable-ldpi/screen.png" />
-    <splash density="port-mdpi" src="res/screens/android/drawable-mdpi/screen.png" />
-    <splash density="port-xhdpi" src="res/screens/android/drawable-xhdpi/screen.png" />
+    <splash density="land-hdpi" src="res/screen/android/drawable-land-hdpi/screen.png" />
+    <splash density="land-ldpi" src="res/screen/android/drawable-land-ldpi/screen.png" />
+    <splash density="land-mdpi" src="res/screen/android/drawable-land-mdpi/screen.png" />
+    <splash density="land-xhdpi" src="res/screen/android/drawable-land-xhdpi/screen.png" />
+    <splash density="port-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />
+    <splash density="port-ldpi" src="res/screen/android/drawable-ldpi/screen.png" />
+    <splash density="port-mdpi" src="res/screen/android/drawable-mdpi/screen.png" />
+    <splash density="port-xhdpi" src="res/screen/android/drawable-xhdpi/screen.png" />
     <name>Rock This Way</name>
     <description>
             A sample Apache Cordova application that responds to the deviceready event.
