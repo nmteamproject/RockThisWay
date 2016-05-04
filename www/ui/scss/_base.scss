@@ -712,7 +712,6 @@ body::after {
     text-align: left;
 }
 
-<<<<<<< HEAD
 .popup1:after {
 	top: 100%;
 	left: 50%;
@@ -777,17 +776,9 @@ body::after {
 	border-width: 20px;
 	margin-left: -20px;
     margin-top: -6%;
-=======
-.marker1 img,
-.marker2 img,
-.marker3 img, {
-    max-width: 20%;
-    height: auto;
-    width: auto;
 }
 
-
-header button.userButton{
+header button.userButton {
     background: none;
     position: absolute;
     left: 0.4em;
@@ -802,5 +793,4 @@ header button.userButton{
     border-radius: 0;
     border: none;
     box-shadow: none;
->>>>>>> 31f1cdd7b0c7a8bd5cc99a7b3be466609578e6e1
 }
