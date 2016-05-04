@@ -14,6 +14,7 @@
     <script src="cordova.js"></script>
     <script src="js/app.js"></script>
     <script src="bundle.js"></script>
+    <script src="exhibitInfo.js"></script>
     
     <script>
         $(function(){
@@ -356,33 +357,34 @@
             element.appendChild(heading);
             
             for(var i=0; i < 3; i++){
+                var exhibit = eval("exhibit" + i);
                 var container = document.createElement("div");
                 $(container).addClass("card card-3 exhibit");
                 $(container).css("margin-top", "5%");
                 element.appendChild(container);
                 
-                var container2 = document.createElement("div");
-                $(container2).addClass("half-card");
-                $(container2).css("margin-top", "5%");
-                container.appendChild(container2);
+                //var container2 = document.createElement("div");
+                //$(container2).addClass("half-card");
+                //$(container2).css("margin-top", "5%");
+                //container.appendChild(container2);
                                 
-                var para3 = document.createElement("p");
-                $(para3).css("text-align", "left");
-                container2.appendChild(para3);
+                //var para3 = document.createElement("p");
+                //$(para3).css("text-align", "left");
+                //container2.appendChild(para3);
                
-                var image = $('<img src="images/welcome.png">');
+                var image = $(pics[i]);
                 image.addClass("exhibitImage");
                 image.appendTo(container);
                 
-                var exhibitTitle2 = document.createTextNode("Exhibit Title");
-                para3.appendChild(exhibitTitle2);
+                //var exhibitTitle2 = document.createTextNode("Exhibit Title");
+                //para3.appendChild(exhibitTitle2);
                                 
                 var para = document.createElement("p");
                 $(para).addClass("exhibit");
                 $(para).css("text-align", "left");
                 container.appendChild(para);
                 
-                var exhibitTitle = document.createTextNode("Exhibit Title");
+                var exhibitTitle = document.createTextNode(exhibit[0].title);
                 para.appendChild(exhibitTitle);
                 
                 var para2 = document.createElement("p");
@@ -391,7 +393,7 @@
                 $(para2).css("text-align", "left");
                 container.appendChild(para2);
                 
-                var exhibitText = document.createTextNode("Exhibit Info");
+                var exhibitText = document.createTextNode(exhibit[0].info);
                 para2.appendChild(exhibitText);
                 
                 container.style.clear = "left";
@@ -417,7 +419,7 @@
                 popup.appendChild(container);
                 popups.appendChild(popup);
                
-                var image = $('<img src="images/welcome.png">');
+                var image = $('<img src="images/planBeatles.png">');
                 image.addClass("exhibitImage");
                 image.appendTo(container);
                 
@@ -428,7 +430,7 @@
                 $(para).css("text-align", "left");
                 container.appendChild(para);
                 
-                var exhibitText = document.createTextNode("Exhibit Info");
+                var exhibitText = document.createTextNode(exhibit0[0].title);
                 para.appendChild(exhibitText);
                 
                 $("#map").css({
@@ -456,7 +458,7 @@
                 popup.appendChild(container);
                 popups.appendChild(popup);
                
-                var image = $('<img src="images/welcome.png">');
+                var image = $('<img src="images/planAerosmith.png">');
                 image.addClass("exhibitImage");
                 image.appendTo(container);
                 
@@ -467,7 +469,7 @@
                 $(para).css("text-align", "left");
                 container.appendChild(para);
                 
-                var exhibitText = document.createTextNode("Exhibit Info");
+                var exhibitText = document.createTextNode(exhibit1[0].title);
                 para.appendChild(exhibitText);
                 
                 $("#map").css({
@@ -495,7 +497,7 @@
                 popup.appendChild(container);
                 popups.appendChild(popup);
                
-                var image = $('<img src="images/welcome.png">');
+                var image = $('<img src="images/planTaytay.png">');
                 image.addClass("exhibitImage");
                 image.appendTo(container);
                 
@@ -506,7 +508,7 @@
                 $(para).css("text-align", "left");
                 container.appendChild(para);
                 
-                var exhibitText = document.createTextNode("Exhibit Info");
+                var exhibitText = document.createTextNode(exhibit2[0].title);
                 para.appendChild(exhibitText);
                 
                 $("#map").css({
