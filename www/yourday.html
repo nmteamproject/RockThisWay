@@ -362,22 +362,10 @@
                 $(container).addClass("card card-3 exhibit");
                 $(container).css("margin-top", "5%");
                 element.appendChild(container);
-                
-                //var container2 = document.createElement("div");
-                //$(container2).addClass("half-card");
-                //$(container2).css("margin-top", "5%");
-                //container.appendChild(container2);
-                                
-                //var para3 = document.createElement("p");
-                //$(para3).css("text-align", "left");
-                //container2.appendChild(para3);
                
                 var image = $(pics[i]);
                 image.addClass("exhibitImage");
                 image.appendTo(container);
-                
-                //var exhibitTitle2 = document.createTextNode("Exhibit Title");
-                //para3.appendChild(exhibitTitle2);
                                 
                 var para = document.createElement("p");
                 $(para).addClass("exhibit");
@@ -393,8 +381,26 @@
                 $(para2).css("text-align", "left");
                 container.appendChild(para2);
                 
-                var exhibitText = document.createTextNode(exhibit[0].info);
+                var exhibitText = document.createTextNode(exhibit[0].info1);
                 para2.appendChild(exhibitText);
+                
+                var para3 = document.createElement("p");
+                $(para3).addClass("exhbit title");
+                $(para3).css("font-style", "normal");
+                $(para3).css("text-align", "left");
+                container.appendChild(para3);
+                
+                var exhibitText2 = document.createTextNode(exhibit[0].info2);
+                para3.appendChild(exhibitText2);
+                
+                var container2 = document.createElement("div");
+                $(container2).addClass("half-card");
+                $(container2).css("margin-top", "5%");
+                container.appendChild(container2);
+                                
+                var planIcon = $(planIcons[i]);
+                planIcon.addClass("planIcon");
+                planIcon.appendTo(container2);
                 
                 container.style.clear = "left";
             }

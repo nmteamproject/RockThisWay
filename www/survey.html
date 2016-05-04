@@ -274,6 +274,7 @@
             cContainer.addEventListener("click", skip);
         }
         
+        //displays your answers to review them
         function goToResults(){
             $('body').css("overflow", "visible");
             var element = document.getElementById("results");
@@ -283,7 +284,7 @@
             $(question).empty();
             
             var heading = document.createElement("h1");
-            var headingText = document.createTextNode("Edit Your Answers");
+            var headingText = document.createTextNode("Review Your Answers");
             heading.appendChild(headingText);
             answers.appendChild(heading);
             
