@@ -11,6 +11,18 @@ var questions = [
     "Pick an artifact"
 ];
 
+var icons = [
+    "images/surveyAssets/surveyIcon0.png",
+    "images/surveyAssets/surveyIcon1.png",
+    "images/surveyAssets/surveyIcon2.png",
+    "images/surveyAssets/surveyIcon3.png",
+    "images/surveyAssets/surveyIcon4.png",
+    "images/surveyAssets/surveyIcon5.png",
+    "images/surveyAssets/surveyIcon6.png",
+    "images/surveyAssets/surveyIcon7.png",
+    "images/surveyAssets/surveyIcon8.png",
+    "images/surveyAssets/surveyIcon9.png"
+];
 
 var q0Answers = [
     {

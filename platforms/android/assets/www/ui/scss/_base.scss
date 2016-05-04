@@ -593,7 +593,6 @@ body::before {
     /* Slighly more than the header's line-height. */
 }
 
-
 /* Add a bottom margin. */
 
 body::after {
@@ -651,17 +650,17 @@ body::after {
 }
 
 .exhibitImage {
-    border-radius: 10px 10px 0 0;
-    margin-top: -6.6%;
-    margin-left: -5.9%;
-    width: 112%;
+    margin-top: -7%;
+    margin-left: -9%;
+    width: 120%;
+    border-radius: 15px 15px 0 0;
 }
 
 .half-card {
-    width: 46%;
-    height: 33.1%;
+    width: 45%;
+    height: 37%;
     padding: 5% 5% 5% 5%;
-    background: white;
+    background: #f9f9f9;
     border-radius: 3px;
     right: 0;
     bottom: 0;
@@ -669,8 +668,14 @@ body::after {
     float: right;
     position: absolute;
     text-align: left;
-    border-radius: 0 0 10px 0;
+    border-radius: 0 0 5px 0;
     font-weight: bold;
+}
+
+.planIcon {
+    width: 100%;
+    margin-top: -3%;
+    margin-left: 3%;
 }
 
 #map {
@@ -758,7 +763,7 @@ body::after {
     position: absolute;
     top: 0;
     right: 39%;
-    margin-top: 24%;
+    margin-top: 23%;
     text-align: left;
 }
 

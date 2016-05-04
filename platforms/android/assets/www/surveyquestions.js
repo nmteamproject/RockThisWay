@@ -11,7 +11,6 @@ var questions = [
     "Pick an artifact"
 ];
 
-
 var q0Answers = [
     {
         "points": "0",
