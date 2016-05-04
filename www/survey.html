@@ -180,7 +180,7 @@
                     $(element).empty();
                     setupQuestion(currentStep);
                 } else if(currentStep == 10){
-                    calcResults();
+                    goToResults();
                     $("#questionNumber").empty();
                 }
             }
@@ -191,8 +191,14 @@
             var element = document.getElementById("answers");
             $(element).empty();
             
+            var results = document.getElementById("results");
+            $(results).empty();
+            
             var question = document.getElementById("questions");
             $(question).empty();
+            
+            var cont = document.getElementById("continue");
+            $(cont).empty();
             
             var line = document.createElement("li");
             $(line).addClass("results-inner");
@@ -265,14 +271,16 @@
             var continueText = document.createTextNode("CONTINUE");
             cPara.appendChild(continueText);
             
-            cContainer.addEventListener("click", goToResults);
+            cContainer.addEventListener("click", skip);
         }
         
         function goToResults(){
             $('body').css("overflow", "visible");
             var element = document.getElementById("results");
             var answers = document.getElementById("answers");
+            var question = document.getElementById("questions");
             $(answers).empty();
+            $(question).empty();
             
             var heading = document.createElement("h1");
             var headingText = document.createTextNode("Edit Your Answers");
@@ -323,7 +331,7 @@
             var continueText = document.createTextNode("CONTINUE");
             cPara.appendChild(continueText);
             
-            cContainer.addEventListener("click", skip);
+            cContainer.addEventListener("click", calcResults);
         }
         
         function skip(){

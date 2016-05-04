@@ -178,7 +178,7 @@ p {
 }
 
 .container {
-    background-image: url("/www/images/pre_survey.png");
+    background-image: url("../../images/pre_survey.png");
     background-size: cover;
     background-repeat: no-repeat;
     margin-top: -20%;
@@ -186,12 +186,25 @@ p {
     min-height: 100%;
 }
 
+/*  ----------------------------------------------------------
+				       Pre-Survey Buttons
+	---------------------------------------------------------- */
+
 #beginBtn {
-    margin-top: 125%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 24%;
+    margin-left: -3%;
 }
 
 #passBtn {
     font-style: italic;
     font-weight: lighter;
     padding-top: 3%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 12%;
+    margin-left: -3%;
 }

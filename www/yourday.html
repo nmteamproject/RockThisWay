@@ -387,34 +387,141 @@
             }
         }
         
-        var flipped = false;
-        //toggles between the plan screen and map screen
         function flipPage() {
-            //creating location markers and putting them in their own divs
-            var markers = document.getElementById("markers");
-            for(var i=0; i<3; i++) {
-                var image = $('<img src="ui/images/pick-location-marker.png">');
-                var marker = document.createElement("div");
-                
-                $(marker).addClass("marker" + (i+1));
-                markers.appendChild(marker);
-                image.appendTo(marker);
-                
-                marker.addEventListener("click", function(){console.log("hi")});
-            }
+            //toggles between the plan screen and map screen
             document.querySelector("#flip-toggle").classList.toggle("flip");
-            
-            if(!flipped) {
-                flipped = true;
-            } else {
-                flipped = false;
-            }
-            if(!flipped) {
-                $(markers).empty();
-                $(map).css("overflow", "hidden");
-            } else {
-                $(map).css("overflow", "visible");
-            }
+            //attach event listeners to markers to display popup
+            document.getElementById("marker1").addEventListener("click",
+            function(){
+                var popups = document.getElementById("popups");
+                $(popups).empty();
+                
+                var popup = document.createElement("div");
+                $(popup).addClass("popup1");
+                
+                var container = document.createElement("div");
+                $(container).addClass("card card-3 popup");
+                $(container).css("margin-top", "5%");
+                $(container).css("background-color", "white");
+                popup.appendChild(container);
+                popups.appendChild(popup);
+               
+                var image = $('<img src="images/welcome.png">');
+                image.addClass("exhibitImage");
+                image.appendTo(container);
+                
+                var para = document.createElement("p");
+                $(para).addClass("exhbit title");
+                $(para).css("color", "black");
+                $(para).css("font-style", "normal");
+                $(para).css("text-align", "left");
+                container.appendChild(para);
+                
+                var exhibitText = document.createTextNode("Exhibit Info");
+                para.appendChild(exhibitText);
+                
+                $("#map").css({
+                    'filter': 'blur(5px)',
+                    '-webkit-filter': 'blur(5px)',
+                    '-moz-filter': 'blur(5px)',
+                    '-o-filter': 'blur(5px)',
+                    '-ms-filter': 'blur(5px)'
+				})
+                
+                $(popup).hide().fadeIn('fast');
+            });
+            document.getElementById("marker2").addEventListener("click",
+            function(){
+                var popups = document.getElementById("popups");
+                $(popups).empty();
+                
+                var popup = document.createElement("div");
+                $(popup).addClass("popup2");
+                
+                var container = document.createElement("div");
+                $(container).addClass("card card-3 popup");
+                $(container).css("margin-top", "5%");
+                $(container).css("background-color", "white");
+                popup.appendChild(container);
+                popups.appendChild(popup);
+               
+                var image = $('<img src="images/welcome.png">');
+                image.addClass("exhibitImage");
+                image.appendTo(container);
+                
+                var para = document.createElement("p");
+                $(para).addClass("exhbit title");
+                $(para).css("color", "black");
+                $(para).css("font-style", "normal");
+                $(para).css("text-align", "left");
+                container.appendChild(para);
+                
+                var exhibitText = document.createTextNode("Exhibit Info");
+                para.appendChild(exhibitText);
+                
+                $("#map").css({
+                    'filter': 'blur(5px)',
+                    '-webkit-filter': 'blur(5px)',
+                    '-moz-filter': 'blur(5px)',
+                    '-o-filter': 'blur(5px)',
+                    '-ms-filter': 'blur(5px)'
+				})
+                
+                $(popup).hide().fadeIn('fast');
+            });
+            document.getElementById("marker3").addEventListener("click",
+            function(){
+                var popups = document.getElementById("popups");
+                $(popups).empty();
+                
+                var popup = document.createElement("div");
+                $(popup).addClass("popup3");
+                
+                var container = document.createElement("div");
+                $(container).addClass("card card-3 popup");
+                $(container).css("margin-top", "5%");
+                $(container).css("background-color", "white");
+                popup.appendChild(container);
+                popups.appendChild(popup);
+               
+                var image = $('<img src="images/welcome.png">');
+                image.addClass("exhibitImage");
+                image.appendTo(container);
+                
+                var para = document.createElement("p");
+                $(para).addClass("exhbit title");
+                $(para).css("color", "black");
+                $(para).css("font-style", "normal");
+                $(para).css("text-align", "left");
+                container.appendChild(para);
+                
+                var exhibitText = document.createTextNode("Exhibit Info");
+                para.appendChild(exhibitText);
+                
+                $("#map").css({
+                    'filter': 'blur(5px)',
+                    '-webkit-filter': 'blur(5px)',
+                    '-moz-filter': 'blur(5px)',
+                    '-o-filter': 'blur(5px)',
+                    '-ms-filter': 'blur(5px)'
+				})
+                
+                $(popup).hide().fadeIn('fast');
+            });
+            //tapping on map will get rid of all popups
+            document.getElementById("map").addEventListener("click",
+            function(){
+                var popups = document.getElementById("popups");
+                $(popups).empty();
+                
+                $("#map").css({
+                    'filter': 'blur(0px)',
+                    '-webkit-filter': 'blur(0px)',
+                    '-moz-filter': 'blur(0px)',
+                    '-o-filter': 'blur(0px)',
+                    '-ms-filter': 'blur(0px)'
+				})
+            });
         }
         
         app.initialize();
@@ -446,8 +553,13 @@
             </div>
             <div class="backPage">
                 <div id="map">
-                    <img src="images/rock-hall-map.png" width="351%"/>
-                    <div id="markers"></div>
+                    <img src="images/hall-map.png" width="100%"/>
+                </div>
+                <div id="markers">
+                    <img id="marker1" src="ui/images/pick-location-marker.png" width="8%"/>
+                    <img id="marker2" src="ui/images/pick-location-marker.png" width="8%"/>
+                    <img id="marker3" src="ui/images/pick-location-marker.png" width="8%"/>
+                    <div id="popups"></div>
                 </div>
             </div>
         </div>
