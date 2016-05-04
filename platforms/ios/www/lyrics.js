@@ -14,7 +14,7 @@ var songs = [
         song: "Dude (Looks Like a Lady)",
         verse: "cruise into a bar on the shore, her picture graced the grime on the door..."
     }
-]
+];
 
 var correctLyrics = [
     "and Im wondering what youre dreaming wondering if its me youre seeing",
@@ -65,7 +65,7 @@ var lyricCollection2 = [
     "bite",
     "baby",
     "maybe",
-    "you're",
+    "youre",
     "wrong",
     "but",
     "you",
@@ -73,7 +73,6 @@ var lyricCollection2 = [
     "its",
     "alright"
 ];
-
 
 var musicCollection = [
     "MissAThing",

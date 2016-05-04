@@ -14,14 +14,8 @@
     <script src="cordova.js"></script>
     <script src="js/app.js"></script>
     <script src="bundle.js"></script>
-
+    
     <script>
-        //script for testing Modals
-        function triggerModal() {
-            console.log("beacon Called");
-            //$("#myModal").modal()
-        }
-        
         $(function(){
             $('body').hide().fadeIn('slow');
             displayPlan();
@@ -239,16 +233,26 @@
                 // If the nearest beacon changes, the code on beacons.html will change to the following based on beacon.major
                 if (mNearestBeacon.major != previousBeacon) {
                     if (mNearestBeacon.major == 19175) {
-                        $('#modalTitle').text("Play Who Wants to be a Rockstar?");
+                        $('#modalTitle').text("Who Wants to be a Rockstar?");
                         $("#modalPlay").attr("onclick", "playGame(2)");
+                        
+                        $('#artistName').text("The Beatles");
+                        $('#artistImage').attr('src', 'images/planBeatles.png');
+                        $('#artistInfo').text("The Beatles were the most influential popular music group of the rock era. They affected the post-war baby boom generation of Britain, the United States and many other countries during the 1960s. Certainly they are the most popular group in rock history, with global sales exceeding 1.1 billion records.");
                         $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
                     } else if (mNearestBeacon.major == 18015) {
-                        $('#modalTitle').text("Play Against the Crowd");
+                        $('#modalTitle').text("Against the Crowd");
                         $("#modalPlay").attr("onclick", "playGame(3)");
+                        $('#artistImage').attr('src', 'images/planTaytay.png');
+                        $('#artistName').text("Taylor Swift");
+                        $('#artistInfo').text("Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.");
                         $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
                     } else if (mNearestBeacon.major == 50017) {
                         $("#modalPlay").attr("onclick", "playGame(1)");
-                        $('#modalTitle').text("Play Lyracle");
+                        $('#artistName').text("Aerosmith");
+                        $('#modalTitle').text("Lyracle");
+                        $('#artistImage').attr('src', 'images/planAerosmith.png');
+                        $('#artistInfo').text("Aerosmith is a long-running hard rock band, originally forming in Boston, Massachusetts in the early 1970s, and enjoying a later resurgence in popularity in the late 1980s and mid-1990s");
                         $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
                     } 
                     else if (mNearestBeacon.major == 112) {
@@ -259,7 +263,9 @@
                         $("#modalDescription").text("If you are leaving the exhibit please press the following button and give this phone to an exhibitor.");
                     }else {
                     }
-                    $("#myModal").modal();
+                    
+                    triggerModal();
+                    //$("#myModal").modal();
                 }
 
                 previousBeacon = mNearestBeacon.major;
@@ -323,18 +329,23 @@
             
         }
 
+        function goToUser(){
+            window.location.href = "user.html";
+        }
+        
         function playGame(game) {
             if (game == 1) {
-                window.location.href = "lyricgame.html";
+                window.location.href = "rules.html?game=1";
             }
             if (game == 2) {
-                window.location.href = "triviagame.html";
+                window.location.href = "rules.html?game=2";
             }
             if (game == 3) {
-                window.location.href = "againstthecrowd.html";
+                window.location.href = "rules.html?game=3";
             }
         }
 
+        //adds the CSS to display exhibit cards
         function displayPlan(){
             $('body').css("overflow", "visible");
             var element = document.getElementById("homeScreen");
@@ -363,7 +374,6 @@
                 image.addClass("exhibitImage");
                 image.appendTo(container);
                 
-                //var yourQuestion = questions[i];
                 var exhibitTitle2 = document.createTextNode("Exhibit Title");
                 para3.appendChild(exhibitTitle2);
                                 
@@ -372,7 +382,6 @@
                 $(para).css("text-align", "left");
                 container.appendChild(para);
                 
-                //var yourQuestion = questions[i];
                 var exhibitTitle = document.createTextNode("Exhibit Title");
                 para.appendChild(exhibitTitle);
                 
@@ -389,10 +398,44 @@
             }
         }
         
+        var flipped = false;
+        //toggles between the plan screen and map screen
         function flipPage() {
+            //creating location markers and putting them in their own divs
+            var markers = document.getElementById("markers");
+            for(var i=0; i<3; i++) {
+                var image = $('<img src="ui/images/pick-location-marker.png">');
+                var marker = document.createElement("div");
+                
+                $(marker).addClass("marker" + (i+1));
+                markers.appendChild(marker);
+                image.appendTo(marker);
+                
+                marker.addEventListener("click", function(){console.log("hi")});
+            }
             document.querySelector("#flip-toggle").classList.toggle("flip");
+            
+            if(!flipped) {
+                flipped = true;
+            } else {
+                flipped = false;
+            }
+            if(!flipped) {
+                $(markers).empty();
+                $(map).css("overflow", "hidden");
+            } else {
+                $(map).css("overflow", "visible");
+            }
         }
-
+        
+        
+        function triggerModal(){
+            document.getElementById('gameModal').style.display = "block";
+        }
+        function removeModal() {
+            document.getElementById('gameModal').style.display="none";
+        }
+        
         app.initialize();
     </script>
 
@@ -402,17 +445,35 @@
 
     <header>
 
-        <button class="back" onclick="history.back()">
-            <img src="ui/images/arrow-left.svg" />
+        <button class="userButton" onclick="goToUser()">
+            <img src="images/user.png"/>
         </button>
 
         <button class="swap" onclick="flipPage()">
-            <img src="ui/images/swap.png" />
+            <img src="ui/images/BaseMap.png" />
         </button>
 
         <img src="images/logo2.png" height="50px" />
     
     </header>
+
+    
+    
+    
+    <div id="gameModal">
+    
+        <img src="images/exitIcon.png" onclick="removeModal()">
+        
+        <img src="images/planTaytay.png" width="100%" id="artistImage">
+        <div id="artistName">Taylor Swift</div>
+        <div class="redDivider divider"></div>
+        <div class="modalText" id="artistInfo">Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.</div>
+        <div id="modalTitle">Against the Crowd</div>
+        <div class="modalText" id="modalDescription">Who thinks that they know Taylor Swift the best? Play with friends and family and see who knows the most!</div>
+        <button class="playButton" id="modalPlay">Play</button>
+    </div>
+    
+    
     
     <div class="flip-container" id="flip-toggle">
         <div class="flipper">
@@ -422,32 +483,13 @@
             </div>
             <div class="backPage">
                 <div id="map">
-                    <img src="images/map1.png" width="100%"/>
+                    <img src="images/rock-hall-map.png" width="351%"/>
+                    <div id="markers"></div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="modalTitle">Play Lyracle</h4>
-                </div>
-                <div class="modal-body">
-                    <p id="modalDescription">Play a game where you get a clip of a song, then you have to put the rest of the lyrics in order!</p>
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modalPlay" onclick="playGame(1)">Game</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
 
 </body>

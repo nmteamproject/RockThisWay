@@ -1,108 +1,67 @@
 var questions = [
     "What's the best Taylor Swift song?",
-    "How many albums will Taylor release in her career?",
-    "How old will Taylor be when she gets married?",
-    "What hair color would Taylor look best in?",
-    "Besides pop and country, what genre should Taylor try?"
+    "What is the name of a Taylor Swift album?",
+    "What genres has Taylor Swift attempted in her career?"
 ];
 
 
 var q0Answers = [
     {
         "answer":"Love Story",
-        "points": "60",
-        "keywords": ["love story", "love", "story"]
+        "points": "60"
     },
     {
         "answer":"Blank Space",
-        "points": "25",
-        "keywords": ["blank space"]
+        "points": "25"
     },
     {
         "answer":"You Belong With Me",
-        "points": "15",
-        "keywords": ["you belong with me", "belong with me"]
+        "points": "15"
     },
     {
         "answer":"Shake It Off",
-        "points": "15",
-        "keywords": ["shake it off"]
+        "points": "15"
     },
     {
         "answer":"22",
-        "points": "15",
-        "keywords": ["22"]
+        "points": "15"
     }
 ];
 
 var q1Answers = [
     {
-        "answer":"4",
-        "points": "60",
-        "keywords": ["", "", ""]
+        "answer":"1989",
+        "points": "60"
     },
     {
-        "answer":"3",
-        "points": "25",
-        "keywords": [""]
+        "answer":"Red",
+        "points": "25"
     },
     {
-        "answer":"2",
-        "points": "15",
-        "keywords": ["", ""]
+        "answer":"Fearless",
+        "points": "15"
+    },
+    {
+        "answer":"Speak Now",
+        "points": "15"
+    },
+    {
+        "answer":"Taylor Swift",
+        "points": "15"
     }
 ];
 
 var q2Answers = [
-    {
-        "points": "60",
-        "keywords": ["", "", ""]
+   {
+        "answer":"Pop",
+        "points": "60"
     },
     {
-        "points": "25",
-        "keywords": [""]
+        "answer":"Country",
+        "points": "25"
     },
     {
-        "points": "15",
-        "keywords": ["", ""]
-    }
-];
-
-var q3Answers = [
-    {
-        "points": "60",
-        "keywords": ["", "", ""]
-    },
-    {
-        "points": "25",
-        "keywords": [""]
-    },
-    {
-        "points": "15",
-        "keywords": ["", ""]
-    }
-];
-
-
-var q4Answers = [
-    {
-        "points": "60",
-        "keywords": ["", "", ""]
-    },
-    {
-        "points": "25",
-        "keywords": [""]
-    },
-    {
-        "points": "15",
-        "keywords": ["", ""]
-    },
-    {
-        "points": "5",
-        "keywords": ["", ""]
-    },
-    {
-        "points": "7",
-        "keywords": [""]
+        "answer":"Rap",
+        "points": "15"
     }
 ];

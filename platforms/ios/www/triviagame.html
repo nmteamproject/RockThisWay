@@ -25,6 +25,8 @@
 
         var tArrayLength = TriviaData.length;
 
+        localStorage.triviaScore = 0;
+        
         // Variables to track state of the game
         // i.e. number questions asked, current correct total and current question
         var questionsAsked = 0;
@@ -136,12 +138,22 @@
             }
             // final question asked - disable button and show final results
             if (questionsAsked == 10) {
-                alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
+                //alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
+                
                 stillCounting = 0;
+                
+                document.getElementById("end").removeAttribute("hidden");
+                document.getElementById("a1").setAttribute("hidden", "true");
+                document.getElementById("a2").setAttribute("hidden", "true");
+                document.getElementById("a3").setAttribute("hidden", "true");
+                document.getElementById("a4").setAttribute("hidden", "true");
+                //console.log("Shit ran");
                 //document.getElementById("ButtonContinue").disabled = true;
 
             }
 
+            localStorage.triviaScore = totalCorrect * 10;
+            document.getElementById("ScoreBoard").innerHTML = "Score " + totalCorrect * 10;
         }
 
 
@@ -164,9 +176,16 @@
             }
         }
 
-        tScore += totalCorrect * 10;
         if (localStorage.getItem("score") != undefined) {
             var points = parseInt(localStorage.score);
+        }
+        
+        function finish(){
+            window.location.href = "rules.html?game=4";
+        }
+        
+        function returnToPlan() {
+            window.location.href = "yourday.html";
         }
     </script>
 
@@ -177,8 +196,8 @@
 
 <body id="triviaGame">
 
-    <div id="gameHeader">
-    <img src="images/arrow.png" class="backButton" onclick="history.back()">
+    <div class="gameHeader">
+    <img src="images/arrow.png" class="backButton" onclick="returnToPlan()">
     
     Beatles Trivia
 </div>
@@ -189,7 +208,7 @@
         <div id="TimerElement">30</div>
 
         <div id="TriviaQuestions" style="color:black">
-
+        <div id="ScoreBoard" style="color:white">Score 0</div>
         </div>
 
 
@@ -198,6 +217,7 @@
             <button class="triviaAnswer" id="a2" onclick="processAnswer('2')">R</button>
             <button class="triviaAnswer" id="a3" onclick="processAnswer('3')">A</button>
             <button class="triviaAnswer" id="a4" onclick="processAnswer('4')">P</button>
+            <button class="triviaAnswer" id="end" onclick="finish()" hidden="true">Return to Plan</button>
         </div>
 
 
