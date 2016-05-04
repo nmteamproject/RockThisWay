@@ -134,19 +134,19 @@ p {
 .card {
     width: 92%;
     font-size: 1.5em;
-    padding: 5% 5% 5% 5%;
+    padding: 5% 5% 3% 3%;
     margin-left: 4%;
     margin-bottom: 4%;
     background: #27282b;
-    border-radius: 3px;
     display: block;
     float: left;
     position: relative;
+    overflow: hidden;
 }
 
 .card-3 {
     text-align: left;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 5px 5px 5px 5px;
     font-weight: bold;
 }
 
@@ -155,11 +155,13 @@ p {
     color: black;
     font-style: normal;
     font-weight: bolder;
+    font-size: 0.9em;
 }
 
 .title {
     font-style: italic;
     font-weight: lighter;
+    font-size: 0.7em;
 }
 
 #answers h1 {

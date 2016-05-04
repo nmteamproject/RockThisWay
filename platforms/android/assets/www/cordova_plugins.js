@@ -78,6 +78,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
         "id": "cordova-plugin-statusbar.statusbar",
         "clobbers": [
@@ -120,16 +127,6 @@ module.exports = [
             "cordova.plugins.notification.local.core",
             "plugin.notification.local.core"
         ]
-<<<<<<< Updated upstream
-    },
-    {
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "clobbers": [
-            "navigator.splashscreen"
-        ]
-=======
->>>>>>> Stashed changes
     }
 ];
 module.exports.metadata = 
@@ -139,15 +136,11 @@ module.exports.metadata =
     "cordova-plugin-app-event": "1.2.0",
     "cordova-plugin-camera": "2.1.0",
     "cordova-plugin-device": "1.1.1",
+    "cordova-plugin-splashscreen": "3.2.2",
     "cordova-plugin-statusbar": "2.1.2",
     "cordova-plugin-vibration": "2.1.0",
     "cordova-plugin-whitelist": "1.2.1",
-<<<<<<< Updated upstream
-    "de.appplant.cordova.plugin.local-notification": "0.8.4",
-    "cordova-plugin-splashscreen": "3.2.2"
-=======
     "de.appplant.cordova.plugin.local-notification": "0.8.4"
->>>>>>> Stashed changes
 };
 // BOTTOM OF METADATA
 });

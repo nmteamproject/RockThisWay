@@ -26,7 +26,7 @@
         var tArrayLength = TriviaData.length;
 
         localStorage.triviaScore = 0;
-        
+
         // Variables to track state of the game
         // i.e. number questions asked, current correct total and current question
         var questionsAsked = 0;
@@ -75,10 +75,14 @@
         }
 
         // moves cards off screen when you answer
-        function removeQuestion() {
+        function removeQuestion(correct) {
             var div = document.getElementsByClassName('TriviaQuestion');
-            div[div.length - questionsAsked].className += " animated bounceOutRight";
-            //div.pop();
+            if (correct == 1) {
+                div[div.length - questionsAsked].className += " animated bounceOutRight";
+            }else
+            if (correct == 2) {
+                div[div.length - questionsAsked].className += " animated bounceOutLeft";
+            }
 
         }
 
@@ -87,10 +91,9 @@
             selectionValid = false; // Flag to make sure question has not been asked yet
             while (selectionValid == false) {
 
-                currentQuestion = 0 + (questionsAsked); // randomly select starting question
+                currentQuestion = 9 - (questionsAsked); // randomly select starting question
 
                 //currentQuestion = Math.floor((Math.random() * 14) + 1); //Trying to fix bug were the questions are no randomly asked, they are asked in order of placement in array.
-                console.log(currentQuestion);
                 if (TriviaData[currentQuestion][2] == "no") {
                     selectionValid = true;
                 }
@@ -99,39 +102,40 @@
             TriviaData[currentQuestion][2] = "yes";
             setAnswers(currentQuestion);
         }
-        
-        function setAnswers(questionNumber)
-        {
+
+        function setAnswers(questionNumber) {
             document.getElementById('a1').innerHTML = TriviaData[questionNumber][3];
             document.getElementById('a2').innerHTML = TriviaData[questionNumber][4];
             document.getElementById('a3').innerHTML = TriviaData[questionNumber][5];
             document.getElementById('a4').innerHTML = TriviaData[questionNumber][6];
         }
 
-        function trackProgress()
-        {
-            document.getElementById('progress').innerHTML = "";
-            for (var i = 0; i < 10; i++) {
-                document.getElementById('progress').innerHTML += progress[i];
-            }
+        function trackProgress() {
+            document.getElementById('progress').innerHTML = "" + questionsAsked + "/10";
+
         }
 
 
         //Processes whether the answer was correct or not
         function processAnswer(myAnswer) {
-            console.log("called");
             questionsAsked++;
             if (TriviaData[currentQuestion][1] == myAnswer) {
                 // answer correct
                 totalCorrect = totalCorrect + 1;
                 timeLeft += 10;
-                progress[(questionsAsked - 1)] = "&#9745;";
+                var div = document.getElementsByClassName('TriviaQuestion');
+                div[div.length - questionsAsked].style.background = "linear-gradient(to right, #82dd43 1%,#329f18 100%)";
+                //progress[(questionsAsked - 1)] = "&#9745;";   #82dd43 → #329f18
                 trackProgress();
+                removeQuestion(1);
             } else {
-                progress[(questionsAsked - 1)] = "&#9746;";
+                var div = document.getElementsByClassName('TriviaQuestion');
+                div[div.length - questionsAsked].style.background = "linear-gradient(to right, #ab0d0d 1%,#600404 100%)";
+                //progress[(questionsAsked - 1)] = "&#9746;"; #ab0d0d → #600404
                 trackProgress();
+                removeQuestion(2);
             }
-            removeQuestion();
+
             if (questionsAsked < 10) {
 
                 setQuestion();
@@ -139,15 +143,14 @@
             // final question asked - disable button and show final results
             if (questionsAsked == 10) {
                 //alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
-                
+
                 stillCounting = 0;
-                
+
                 document.getElementById("end").removeAttribute("hidden");
                 document.getElementById("a1").setAttribute("hidden", "true");
                 document.getElementById("a2").setAttribute("hidden", "true");
                 document.getElementById("a3").setAttribute("hidden", "true");
                 document.getElementById("a4").setAttribute("hidden", "true");
-                //console.log("Shit ran");
                 //document.getElementById("ButtonContinue").disabled = true;
 
             }
@@ -179,11 +182,11 @@
         if (localStorage.getItem("score") != undefined) {
             var points = parseInt(localStorage.score);
         }
-        
-        function finish(){
+
+        function finish() {
             window.location.href = "rules.html?game=4";
         }
-        
+
         function returnToPlan() {
             window.location.href = "yourday.html";
         }
@@ -197,10 +200,8 @@
 <body id="triviaGame">
 
     <div class="gameHeader">
-    <img src="images/arrow.png" class="backButton" onclick="returnToPlan()">
-    
-    Beatles Trivia
-</div>
+        <img src="images/arrow.png" class="backButton" onclick="returnToPlan()"> Beatles Trivia
+    </div>
 
     <center>
 
@@ -208,7 +209,7 @@
         <div id="TimerElement">30</div>
 
         <div id="TriviaQuestions" style="color:black">
-        <div id="ScoreBoard" style="color:white">Score 0</div>
+            <div id="ScoreBoard" style="color:white">Score 0</div>
         </div>
 
 

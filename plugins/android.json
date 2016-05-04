@@ -13,6 +13,9 @@
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
+        },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         },
@@ -23,9 +26,6 @@
             "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         },
         "de.appplant.cordova.plugin.local-notification": {
-            "PACKAGE_NAME": "nmTeamProject.RockThisWay"
-        },
-        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "nmTeamProject.RockThisWay"
         }
     },

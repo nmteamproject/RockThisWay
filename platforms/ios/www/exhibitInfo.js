@@ -4,24 +4,33 @@ var pics = [
     '<img src="images/planTaytay.png">'
 ];
 
+var planIcons = [
+    '<img src="images/planIcon1.png">',
+    '<img src="images/planIcon2.png">',
+    '<img src="images/planIcon3.png">'
+];
+
 
 var exhibit0 = [
     {
-        "title": "The Beatles",
-        "info": "Learn about the legacy of The Beatles!"
+        "title": "THE BEATLES EXHIBIT",
+        "info1": "Learn about the legacy",
+        "info2": "of The Beatles!"
     }
 ];
 
 var exhibit1 = [
     {
-        "title": "Aerosmith",
-        "info": "Learn about the rock icons that are Aerosmith!"
+        "title": "HISTORY OF AEROSMITH",
+        "info1": "Learn about the rock icons",
+        "info2": "that are Aerosmith!"
     }
 ];
 
 var exhibit2 = [
     {
-        "title": "Taylor Swift",
-        "info": "She's got a blank space baby, and she'll write your name."
+        "title": "TAYLOR SWIFT",
+        "info1": "She's got a blank space baby,",
+        "info2": "and she'll write your name."
     }
 ];
