@@ -87,10 +87,9 @@
             selectionValid = false; // Flag to make sure question has not been asked yet
             while (selectionValid == false) {
 
-                currentQuestion = 0 + (questionsAsked); // randomly select starting question
+                currentQuestion = 9 - (questionsAsked); // randomly select starting question
 
                 //currentQuestion = Math.floor((Math.random() * 14) + 1); //Trying to fix bug were the questions are no randomly asked, they are asked in order of placement in array.
-                console.log(currentQuestion);
                 if (TriviaData[currentQuestion][2] == "no") {
                     selectionValid = true;
                 }
@@ -119,7 +118,9 @@
 
         //Processes whether the answer was correct or not
         function processAnswer(myAnswer) {
-            console.log("called");
+            console.log(TriviaData[currentQuestion][1]);
+            console.log(myAnswer);
+            
             questionsAsked++;
             if (TriviaData[currentQuestion][1] == myAnswer) {
                 // answer correct
