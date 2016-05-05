@@ -30,7 +30,7 @@
         function startQuestion() {
 
             if (questionNumber == 3) {
-                window.location.href = "user.html";
+                document.location = "user.html";
             }
 
             document.getElementById('strikes').innerHTML = "";
@@ -118,11 +118,11 @@
         }
 
         function finish(){
-            window.location.href = "rules.html?game=6";
+            document.location = "rules.html?game=6";
         }
         
         function returnToPlan() {
-            window.location.href = "yourday.html";
+            document.location = "yourday.html";
         }
     </script>
 

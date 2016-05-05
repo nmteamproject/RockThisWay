@@ -34,7 +34,7 @@
 
     <script>
         function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
+            if (!url) url = document.location;
             name = name.replace(/[\[\]]/g, "\\$&");
             var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)", "i"),
                 results = regex.exec(url);
@@ -50,7 +50,7 @@
             document.getElementById('gameTitle').innerHTML = "The Beatles Trivia";
             document.getElementById('gameDuration').innerHTML = "One Minute";
             document.getElementById('beginGame').onclick = function () {
-                window.location.href = "triviagame.html";
+                document.location = "triviagame.html";
             };
             document.getElementById('gameDescription').innerHTML = "Answer as many questions as possible within the time given.<br>The more questions you answer correctly, the more time and points you'll get! ";
             //document.getElementById('rulesPage').style.backgroundImage = "url(images/namecreation.png) no-repeat center center fixed";
@@ -58,14 +58,14 @@
             document.getElementById('gameTitle').innerHTML = "Aerosmith";
             document.getElementById('gameDuration').innerHTML = "Three Songs";
             document.getElementById('beginGame').onclick = function () {
-                window.location.href = "lyricgame.html";
+                document.location = "lyricgame.html";
             };
             document.getElementById('gameDescription').innerHTML = "Listen to clips from songs and follow them up by arranging the following lyrics in order. <br> The faster and less moves you do, the more points you'll get!";
         } else if (gameNumber == 3) {
             document.getElementById('gameTitle').innerHTML = "Against The Crowd";
             document.getElementById('gameDuration').innerHTML = "Three Rounds";
             document.getElementById('beginGame').onclick = function () {
-                window.location.href = "againstthecrowd.html";
+                document.location = "againstthecrowd.html";
             };
             document.getElementById('gameDescription').innerHTML = "Type in your best response for the question and see if the crowd agrees. <br> Earn points based on how well you're responses match the crowd's. Careful though, three strikes and you'll have to move on to the next question!";
         } 
@@ -79,7 +79,7 @@
             document.getElementById('gameDuration').innerHTML = "Points Awarded: "+localStorage.triviaScore;
             document.getElementById('beginGame').innerHTML = "Finish";
             document.getElementById('beginGame').onclick = function () {
-                window.location.href = "yourday.html";
+                document.location = "yourday.html";
             };
             document.getElementById('gameDescription').innerHTML = "";
         } else if (gameNumber == 5) {
@@ -88,7 +88,7 @@
             document.getElementById('gameDuration').innerHTML = "Points Awarded: "+localStorage.lyricScore;
             document.getElementById('beginGame').innerHTML = "Finish";
             document.getElementById('beginGame').onclick = function () {
-                window.location.href = "yourday.html";
+                document.location = "yourday.html";
             };
             document.getElementById('gameDescription').innerHTML = "";
         } else if (gameNumber == 6) {
@@ -97,7 +97,7 @@
             document.getElementById('gameDuration').innerHTML = "Points Awarded: "+localStorage.atcScore;
             document.getElementById('beginGame').innerHTML = "Finish";
             document.getElementById('beginGame').onclick = function () {
-                window.location.href = "yourday.html";
+                document.location = "yourday.html";
             };
             document.getElementById('gameDescription').innerHTML = "";
         }
