@@ -8,60 +8,60 @@ var questions = [
 var q0Answers = [
     {
         "answer":"Love Story",
-        "points": "60"
+        "points": "17"
     },
     {
         "answer":"Blank Space",
-        "points": "25"
+        "points": "13"
     },
     {
         "answer":"You Belong With Me",
-        "points": "15"
+        "points": "10"
     },
     {
         "answer":"Shake It Off",
-        "points": "15"
+        "points": "7"
     },
     {
         "answer":"22",
-        "points": "15"
+        "points": "3"
     }
 ];
 
 var q1Answers = [
     {
         "answer":"1989",
-        "points": "60"
+        "points": "20"
     },
     {
         "answer":"Red",
-        "points": "25"
+        "points": "10"
     },
     {
         "answer":"Fearless",
-        "points": "15"
+        "points": "6"
     },
     {
         "answer":"Speak Now",
-        "points": "15"
+        "points": "3"
     },
     {
         "answer":"Taylor Swift",
-        "points": "15"
+        "points": "1"
     }
 ];
 
 var q2Answers = [
    {
         "answer":"Pop",
-        "points": "60"
+        "points": "30"
     },
     {
         "answer":"Country",
-        "points": "25"
+        "points": "15"
     },
     {
         "answer":"Rap",
-        "points": "15"
+        "points": "5"
     }
 ];

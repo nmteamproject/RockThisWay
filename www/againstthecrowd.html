@@ -24,7 +24,7 @@
         var questionID = eval("q" + questionNumber + "Answers");
         var strikes = 0;
         var numberCorrect = 0;
-
+        var totalScore = 0;
         //document.getElementById('answer').addEventListener("click", clearAnswer);
 
         function startQuestion() {
@@ -62,8 +62,10 @@
                     document.getElementById(correctResponse).classList.add('correctAnswer');
                     numberCorrect++;
                     correct = true;
-                    var newPoints = parseInt(questionID[i].points)
-                    localStorage.atcScore += newPoints;
+                    var newPoints = parseInt(questionID[i].points);
+                    
+                    totalScore += parseInt(newPoints); 
+                    localStorage.atcScore = parseInt(totalScore);
                 }
             }
 

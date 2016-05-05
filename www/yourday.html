@@ -15,13 +15,12 @@
     <script src="js/app.js"></script>
     <script src="bundle.js"></script>
     <script src="exhibitInfo.js"></script>
-    
+
     <script>
-        $(function(){
+        $(function () {
             $('body').hide().fadeIn('slow');
             displayPlan();
         });
-
     </script>
 
 
@@ -109,7 +108,6 @@
             function onDeviceReady() {
                 startMonitoringAndRanging();
                 startNearestBeaconDisplayTimer();
-                displayRegionEvents();
             }
 
             function onAppToBackground() {
@@ -120,7 +118,6 @@
             function onAppToForeground() {
                 mAppInBackground = false;
                 startNearestBeaconDisplayTimer();
-                displayRegionEvents();
             }
 
             function startNearestBeaconDisplayTimer() {
@@ -254,8 +251,7 @@
                         $('#artistImage').attr('src', 'images/planAerosmith.png');
                         $('#artistInfo').text("Aerosmith is a long-running hard rock band, originally forming in Boston, Massachusetts in the early 1970s, and enjoying a later resurgence in popularity in the late 1980s and mid-1990s");
                         $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
-                    } 
-                    else if (mNearestBeacon.major == 112) {
+                    } else if (mNearestBeacon.major == 112) {
                         $("#modalPlay").attr("onclick", "leaveExhibits()");
                         $("#modalPlay").text("Leave");
                         $('#artistName').text("Leaving");
@@ -263,9 +259,8 @@
                         $('#artistImage').attr('src', 'images/exhibit.png');
                         $('#artistInfo').text("");
                         $("#modalDescription").text("If you are leaving the our exhibit, please press the following button and give this phone to an exhibitor.");
-                    }else {
-                    }
-                    
+                    } else {}
+
                     triggerModal();
                     //$("#myModal").modal();
                 }
@@ -285,23 +280,17 @@
                     var title = getEventDisplayString(event);
 
                     // Create notification.
-                    cordova.plugins.notification.local.schedule({
-                        id: ++mNotificationId,
-                        title: title
-                    });
-                } else {
-                    displayRegionEvents();
+                    if (mNearestBeacon.major != previousBeacon) {
+                        cordova.plugins.notification.local.schedule({
+                            id: ++mNotificationId,
+                            title: title
+                        });
+                    }
                 }
             }
 
-            function displayRegionEvents() {
-                // Displayed before it connects to beacons or while there is no beacon in range.
-                //uncomment bottom line if we need to change the home screen.
-
-            }
-
             function getEventDisplayString(event) {
-                return event.time + ': ' + mRegionStateNames[event.type] + ' ' + mRegionData[event.regionId];
+                return "New Exhibit!";
             }
 
             function getTimeNow() {
@@ -316,25 +305,25 @@
                 var d = new Date();
                 return format(d.getHours(), d.getMinutes(), d.getSeconds());
             }
-            
+
             return app;
 
         })();
-        
-        function leaveExhibits(){
+
+        function leaveExhibits() {
             window.location.href = "submitscore.html";
         }
-        
-        function goToExhibit(exhibit){
-            var link = "exhibit.html?exhibit="+exhibit;
+
+        function goToExhibit(exhibit) {
+            var link = "exhibit.html?exhibit=" + exhibit;
             window.location.href = link;
-            
+
         }
 
-        function goToUser(){
+        function goToUser() {
             window.location.href = "user.html";
         }
-        
+
         function playGame(game) {
             if (game == 1) {
                 window.location.href = "rules.html?game=1";
@@ -348,214 +337,215 @@
         }
 
         //adds the CSS to display exhibit cards
-        function displayPlan(){
+        function displayPlan() {
             $('body').css("overflow", "visible");
-            
+
             var body = document.getElementById("yourDay");
-            $(body).css("background-image", "url(\"" + sessionStorage.getItem("planBackground") +"\")");
-                        
+            $(body).css("background-image", "url(\"" + sessionStorage.getItem("planBackground") + "\")");
+
             var element = document.getElementById("homeScreen");
-            
+
             var heading = document.createElement("h1");
             var headingText = document.createTextNode("Today's Plan");
             heading.appendChild(headingText);
             element.appendChild(heading);
-            
-            for(var i=0; i < 3; i++){
+
+            for (var i = 0; i < 3; i++) {
                 var exhibit = eval("exhibit" + i);
                 var container = document.createElement("div");
                 $(container).addClass("card card-3 exhibit");
                 $(container).css("margin-top", "5%");
                 element.appendChild(container);
-               
+
                 var image = $(pics[i]);
                 image.addClass("exhibitImage");
                 image.appendTo(container);
-                                
+
                 var para = document.createElement("p");
                 $(para).addClass("exhibit");
                 $(para).css("text-align", "left");
                 container.appendChild(para);
-                
+
                 var exhibitTitle = document.createTextNode(exhibit[0].title);
                 para.appendChild(exhibitTitle);
-                
+
                 var para2 = document.createElement("p");
                 $(para2).addClass("exhbit title");
                 $(para2).css("font-style", "normal");
                 $(para2).css("text-align", "left");
                 container.appendChild(para2);
-                
+
                 var exhibitText = document.createTextNode(exhibit[0].info1);
                 para2.appendChild(exhibitText);
-                
+
                 var para3 = document.createElement("p");
                 $(para3).addClass("exhbit title");
                 $(para3).css("font-style", "normal");
                 $(para3).css("text-align", "left");
                 container.appendChild(para3);
-                
+
                 var exhibitText2 = document.createTextNode(exhibit[0].info2);
                 para3.appendChild(exhibitText2);
-                
+
                 var container2 = document.createElement("div");
                 $(container2).addClass("half-card");
                 $(container2).css("margin-top", "5%");
                 container.appendChild(container2);
-                                
+
                 var planIcon = $(planIcons[i]);
                 planIcon.addClass("planIcon");
                 planIcon.appendTo(container2);
-                
+
                 container.style.clear = "left";
             }
         }
-        
+
         function flipPage() {
             //toggles between the plan screen and map screen
             document.querySelector("#flip-toggle").classList.toggle("flip");
             //attach event listeners to markers to display popup
             document.getElementById("marker1").addEventListener("click",
-            function(){
-                var popups = document.getElementById("popups");
-                $(popups).empty();
-                
-                var popup = document.createElement("div");
-                $(popup).addClass("popup1");
-                
-                var container = document.createElement("div");
-                $(container).addClass("card card-3 popup");
-                $(container).css("margin-top", "5%");
-                $(container).css("background-color", "white");
-                popup.appendChild(container);
-                popups.appendChild(popup);
-               
-                var image = $('<img src="images/planBeatles.png">');
-                image.addClass("exhibitImage");
-                image.appendTo(container);
-                
-                var para = document.createElement("p");
-                $(para).addClass("exhbit title");
-                $(para).css("color", "black");
-                $(para).css("font-style", "normal");
-                $(para).css("text-align", "left");
-                container.appendChild(para);
-                
-                var exhibitText = document.createTextNode(exhibit0[0].title);
-                para.appendChild(exhibitText);
-                
-                $("#map").css({
-                    'filter': 'blur(5px)',
-                    '-webkit-filter': 'blur(5px)',
-                    '-moz-filter': 'blur(5px)',
-                    '-o-filter': 'blur(5px)',
-                    '-ms-filter': 'blur(5px)'
-				})
-                
-                $(popup).hide().fadeIn('fast');
-            });
+                function () {
+                    var popups = document.getElementById("popups");
+                    $(popups).empty();
+
+                    var popup = document.createElement("div");
+                    $(popup).addClass("popup1");
+
+                    var container = document.createElement("div");
+                    $(container).addClass("card card-3 popup");
+                    $(container).css("margin-top", "5%");
+                    $(container).css("background-color", "white");
+                    popup.appendChild(container);
+                    popups.appendChild(popup);
+
+                    var image = $('<img src="images/planBeatles.png">');
+                    image.addClass("exhibitImage");
+                    image.appendTo(container);
+
+                    var para = document.createElement("p");
+                    $(para).addClass("exhbit title");
+                    $(para).css("color", "black");
+                    $(para).css("font-style", "normal");
+                    $(para).css("text-align", "left");
+                    container.appendChild(para);
+
+                    var exhibitText = document.createTextNode(exhibit0[0].title);
+                    para.appendChild(exhibitText);
+
+                    $("#map").css({
+                        'filter': 'blur(5px)',
+                        '-webkit-filter': 'blur(5px)',
+                        '-moz-filter': 'blur(5px)',
+                        '-o-filter': 'blur(5px)',
+                        '-ms-filter': 'blur(5px)'
+                    })
+
+                    $(popup).hide().fadeIn('fast');
+                });
             document.getElementById("marker2").addEventListener("click",
-            function(){
-                var popups = document.getElementById("popups");
-                $(popups).empty();
-                
-                var popup = document.createElement("div");
-                $(popup).addClass("popup2");
-                
-                var container = document.createElement("div");
-                $(container).addClass("card card-3 popup");
-                $(container).css("margin-top", "5%");
-                $(container).css("background-color", "white");
-                popup.appendChild(container);
-                popups.appendChild(popup);
-               
-                var image = $('<img src="images/planAerosmith.png">');
-                image.addClass("exhibitImage");
-                image.appendTo(container);
-                
-                var para = document.createElement("p");
-                $(para).addClass("exhbit title");
-                $(para).css("color", "black");
-                $(para).css("font-style", "normal");
-                $(para).css("text-align", "left");
-                container.appendChild(para);
-                
-                var exhibitText = document.createTextNode(exhibit1[0].title);
-                para.appendChild(exhibitText);
-                
-                $("#map").css({
-                    'filter': 'blur(5px)',
-                    '-webkit-filter': 'blur(5px)',
-                    '-moz-filter': 'blur(5px)',
-                    '-o-filter': 'blur(5px)',
-                    '-ms-filter': 'blur(5px)'
-				})
-                
-                $(popup).hide().fadeIn('fast');
-            });
+                function () {
+                    var popups = document.getElementById("popups");
+                    $(popups).empty();
+
+                    var popup = document.createElement("div");
+                    $(popup).addClass("popup2");
+
+                    var container = document.createElement("div");
+                    $(container).addClass("card card-3 popup");
+                    $(container).css("margin-top", "5%");
+                    $(container).css("background-color", "white");
+                    popup.appendChild(container);
+                    popups.appendChild(popup);
+
+                    var image = $('<img src="images/planAerosmith.png">');
+                    image.addClass("exhibitImage");
+                    image.appendTo(container);
+
+                    var para = document.createElement("p");
+                    $(para).addClass("exhbit title");
+                    $(para).css("color", "black");
+                    $(para).css("font-style", "normal");
+                    $(para).css("text-align", "left");
+                    container.appendChild(para);
+
+                    var exhibitText = document.createTextNode(exhibit1[0].title);
+                    para.appendChild(exhibitText);
+
+                    $("#map").css({
+                        'filter': 'blur(5px)',
+                        '-webkit-filter': 'blur(5px)',
+                        '-moz-filter': 'blur(5px)',
+                        '-o-filter': 'blur(5px)',
+                        '-ms-filter': 'blur(5px)'
+                    })
+
+                    $(popup).hide().fadeIn('fast');
+                });
             document.getElementById("marker3").addEventListener("click",
-            function(){
-                var popups = document.getElementById("popups");
-                $(popups).empty();
-                
-                var popup = document.createElement("div");
-                $(popup).addClass("popup3");
-                
-                var container = document.createElement("div");
-                $(container).addClass("card card-3 popup");
-                $(container).css("margin-top", "5%");
-                $(container).css("background-color", "white");
-                popup.appendChild(container);
-                popups.appendChild(popup);
-               
-                var image = $('<img src="images/planTaytay.png">');
-                image.addClass("exhibitImage");
-                image.appendTo(container);
-                
-                var para = document.createElement("p");
-                $(para).addClass("exhbit title");
-                $(para).css("color", "black");
-                $(para).css("font-style", "normal");
-                $(para).css("text-align", "left");
-                container.appendChild(para);
-                
-                var exhibitText = document.createTextNode(exhibit2[0].title);
-                para.appendChild(exhibitText);
-                
-                $("#map").css({
-                    'filter': 'blur(5px)',
-                    '-webkit-filter': 'blur(5px)',
-                    '-moz-filter': 'blur(5px)',
-                    '-o-filter': 'blur(5px)',
-                    '-ms-filter': 'blur(5px)'
-				})
-                
-                $(popup).hide().fadeIn('fast');
-            });
+                function () {
+                    var popups = document.getElementById("popups");
+                    $(popups).empty();
+
+                    var popup = document.createElement("div");
+                    $(popup).addClass("popup3");
+
+                    var container = document.createElement("div");
+                    $(container).addClass("card card-3 popup");
+                    $(container).css("margin-top", "5%");
+                    $(container).css("background-color", "white");
+                    popup.appendChild(container);
+                    popups.appendChild(popup);
+
+                    var image = $('<img src="images/planTaytay.png">');
+                    image.addClass("exhibitImage");
+                    image.appendTo(container);
+
+                    var para = document.createElement("p");
+                    $(para).addClass("exhbit title");
+                    $(para).css("color", "black");
+                    $(para).css("font-style", "normal");
+                    $(para).css("text-align", "left");
+                    container.appendChild(para);
+
+                    var exhibitText = document.createTextNode(exhibit2[0].title);
+                    para.appendChild(exhibitText);
+
+                    $("#map").css({
+                        'filter': 'blur(5px)',
+                        '-webkit-filter': 'blur(5px)',
+                        '-moz-filter': 'blur(5px)',
+                        '-o-filter': 'blur(5px)',
+                        '-ms-filter': 'blur(5px)'
+                    })
+
+                    $(popup).hide().fadeIn('fast');
+                });
             //tapping on map will get rid of all popups
             document.getElementById("map").addEventListener("click",
-            function(){
-                var popups = document.getElementById("popups");
-                $(popups).empty();
-                
-                $("#map").css({
-                    'filter': 'blur(0px)',
-                    '-webkit-filter': 'blur(0px)',
-                    '-moz-filter': 'blur(0px)',
-                    '-o-filter': 'blur(0px)',
-                    '-ms-filter': 'blur(0px)'
-				})
-            });
+                function () {
+                    var popups = document.getElementById("popups");
+                    $(popups).empty();
+
+                    $("#map").css({
+                        'filter': 'blur(0px)',
+                        '-webkit-filter': 'blur(0px)',
+                        '-moz-filter': 'blur(0px)',
+                        '-o-filter': 'blur(0px)',
+                        '-ms-filter': 'blur(0px)'
+                    })
+                });
         }
-        
-        
-        function triggerModal(){
+
+
+        function triggerModal() {
             document.getElementById('gameModal').style.display = "block";
         }
+
         function removeModal() {
-            document.getElementById('gameModal').style.display="none";
+            document.getElementById('gameModal').style.display = "none";
         }
-        
+
         app.initialize();
     </script>
 
@@ -566,7 +556,7 @@
     <header>
 
         <button class="userButton" onclick="goToUser()">
-            <img src="images/user.png"/>
+            <img src="images/user.png" />
         </button>
 
         <button class="swap" onclick="flipPage()">
@@ -574,15 +564,15 @@
         </button>
 
         <img src="images/logo2.png" height="50px" />
-    
+
     </header>
 
-    
-    
+
+
     <div id="gameModal">
-    
+
         <img src="images/exitIcon.png" onclick="removeModal()">
-        
+
         <img src="images/planTaytay.png" width="100%" id="artistImage">
         <div id="artistName">Taylor Swift</div>
         <div class="redDivider divider"></div>
@@ -591,9 +581,9 @@
         <div class="modalText" id="modalDescription">Who thinks that they know Taylor Swift the best? Play with friends and family and see who knows the most!</div>
         <button class="playButton" id="modalPlay">Play</button>
     </div>
-    
-    
-    
+
+
+
     <div class="flip-container" id="flip-toggle">
         <div class="flipper">
             <div class="frontPage">
@@ -602,12 +592,12 @@
             </div>
             <div class="backPage">
                 <div id="map">
-                    <img src="images/hall-map.png" width="100%"/>
+                    <img src="images/hall-map.png" width="100%" />
                 </div>
                 <div id="markers">
-                    <img id="marker1" src="ui/images/pick-location-marker.png" width="8%"/>
-                    <img id="marker2" src="ui/images/pick-location-marker.png" width="8%"/>
-                    <img id="marker3" src="ui/images/pick-location-marker.png" width="8%"/>
+                    <img id="marker1" src="ui/images/pick-location-marker.png" width="8%" />
+                    <img id="marker2" src="ui/images/pick-location-marker.png" width="8%" />
+                    <img id="marker3" src="ui/images/pick-location-marker.png" width="8%" />
                     <div id="popups"></div>
                 </div>
             </div>
