@@ -54,6 +54,7 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#1D1A22" />
     <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="Orientation" value="portrait" />
     <author email="dev@cordova.apache.org" href="http://cordova.io">
             RIT New Media Team Project
         </author>
