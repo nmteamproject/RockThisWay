@@ -35,7 +35,8 @@ gulp.task('sass', function() {
         .src(sassInput)
         .pipe(sourcemaps.init())
         .pipe(sass(sassOptions).on('error', sass.logError))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write({ includeContent: false, sourceRoot: '.'}))
+        .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(autoprefixer())
         .pipe(gulp.dest(sassOutput)); 
 });
@@ -142,7 +143,7 @@ gulp.task('cordova-browser', ['cordova-clean'], function(callback) {
  * watch for browser changes
  */
 gulp.task('cordova-watch', function() {
-   gulp.watch('./www/bundle.js', ['cordova-browser']);
+   gulp.watch(['./www/bundle.js', './www/*.html', './www/ui/css/style.css'], ['cordova-browser']);
 });
 
 /**

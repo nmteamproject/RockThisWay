@@ -25,7 +25,6 @@
         <div id="songDetails">
             <div id="artist"></div>
             <div id="song"></div>
-            <div id="devTimerDebug">Derp, comment me out, derp</div>
         </div>
         <svg id="playTracker">
             <path id="arc1" fill="none" stroke="#e82828" stroke-width="3" />
@@ -91,7 +90,6 @@
         tick();
         timer = setTimeout(start, 1000);
         timeForGame++;
-        document.getElementById("devTimerDebug").innerHTML = timeForGame;
     }
 
     function stop() {

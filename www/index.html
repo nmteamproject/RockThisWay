@@ -15,7 +15,7 @@
     <p class="plan">Plan you Rock Hall experience for the day!</p>
     <p class="plan">Learn about your favorite artists</p>
     <p class="plan">Discover hidden artifacts</p>
-    <p class="plan">Compete against friends and family</p>
+    <p class="plan">Compete against friends and family</p> 
 
     <div id="homeBtn" onclick="takeSurvey()">
         <ul class="quiz-step step1 current">
@@ -29,21 +29,5 @@
     <script src="cordova.js"></script>
     <!-- all of our bundled js -->
     <script src="bundle.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $('body').hide().fadeIn('slow');
-        });
-        function takeSurvey() {
-            window.location.href = "pre_survey.html";
-        }
-        
-        
-        localStorage.removeItem("user");
-        localStorage.removeItem("score");
-        localStorage.atcScore = 0;
-        localStorage.triviaScore = 0;
-        localStorage.lyricScore = 0;
-        
-    </script>
 </body>
 </html>
