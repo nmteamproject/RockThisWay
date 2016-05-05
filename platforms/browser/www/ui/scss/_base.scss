@@ -13,6 +13,12 @@ body {
     background-size: cover;
 }
 
+.home {
+    .title__main {
+        margin-top: rem(80);
+    }
+}
+
 .main-content {
     font-style: italic;
     font-size: rem(13);
@@ -23,7 +29,8 @@ body {
 }
 
 .container {
-    width: 80%;
+    width: 100%;
+    padding: 0 rem(10);
     margin-left: auto;
     margin-right: auto;
 }
@@ -46,4 +53,12 @@ body {
     left: rem(10);
     width: rem(20);
     height: rem(20);
+}
+
+.logo {
+    height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: rem(30);
 }

@@ -1,0 +1,28 @@
+.card {
+    width: 100%;
+    background-color: #ececec;
+    color: #2e2e2e; 
+    border-radius: 5px;
+    @include clearfix();
+    &__bg {
+        border-radius: 5px 5px 0 0; 
+        height: rem(120);
+        width: 100%;
+    }
+    &__content {
+        padding: rem(5);
+        @include clearfix();
+        background-image: linear-gradient(to right, rgba(236,236,236,1) 0%,rgba(236,236,236,1) 60%,rgba(248,248,248,1) 60%,rgba(248,248,248,1) 100%);
+        &__left {
+            @include span-columns(8);
+        }
+        &__right {
+            @include span-columns(4);
+            padding: 0;
+        }
+        .icon-content {
+            @include span-columns(6);
+            text-align: center;
+        }
+    }
+}

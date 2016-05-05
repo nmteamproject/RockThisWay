@@ -1,0 +1,38 @@
+.main-header {
+    margin-bottom: rem(30);
+    .icon {
+        img {    
+            height: rem(25);
+        }
+        &.left {
+            position: fixed;
+            left: rem(20);
+            top: rem(20);
+            img {
+                padding: rem(1);
+            }
+        }
+        &.right {
+            position: fixed;
+            right: rem(20);
+            top: rem(20);
+        }
+    }
+    .main-title,
+    .sub-title {
+        text-align: center;
+        text-transform: uppercase;
+    }
+   .main-title {
+       font-size: rem(23);
+       letter-spacing: 3px;
+       color: #FFF;
+       font-family: 'antoniolight';
+   }
+   .sub-title {
+       font-size: rem(15);
+       letter-spacing: 2px;
+       font-family: 'antoniolight';
+       margin-top: rem(20);
+   }
+}
