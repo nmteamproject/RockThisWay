@@ -257,11 +257,12 @@
                         $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
                     } 
                     else if (mNearestBeacon.major == 112) {
-                        $("#modalPlay").hide();
-                        $("#modalExhibit").attr("onclick", "leaveExhibits()");
-                        $("#modalExhibit").text("Leave");
-                        $('#modalTitle').text("Leave Exhibit?");
-                        $("#modalDescription").text("If you are leaving the exhibit please press the following button and give this phone to an exhibitor.");
+                        $("#modalPlay").attr("onclick", "playGame(1)");
+                        $('#artistName').text("Leaving");
+                        $('#modalTitle').text("Are you Prepared to go?");
+                        $('#artistImage').attr('src', 'images/planAerosmith.png');
+                        $('#artistInfo').text("");
+                        $("#modalDescription").text("If you are leaving the our exhibit, please press the following button and give this phone to an exhibitor.");
                     }else {
                     }
                     

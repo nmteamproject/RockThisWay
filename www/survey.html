@@ -87,16 +87,23 @@
         var questionText;
         var questionAnswers = [];
         var questionIcons = [];
+        var surveyBackgrounds = [];
         setupQuestion(currentStep);
         
         //populate question
         function setupQuestion(currentStep){
             var questionIcon = document.getElementById("questionIcon");
-            //preload images
+            //preload icons and backgrounds
             for(var i=0; i<10; i++){
-                var image = new Image();
-                image.src = icons[i];
-                questionIcons[i] = image;
+                //icons
+                var iconImg = new Image();
+                iconImg.src = icons[i];
+                questionIcons[i] = iconImg;
+                
+                //backgrounds
+                var backImg = new Image();
+                backImg.src = background[i];
+                surveyBackgrounds[i] = backImg;
             }
             questionIcon.innerHTML = '<img src=\"'+ questionIcons[currentStep].src +'"\ width=\"50%\">';
             
@@ -184,7 +191,7 @@
                     $(questionIcon).empty();
                     goToResults();
                     $("#questionNumber").remove();
-                    $(body).css("background-image", "url(\"images/surveyAssets/surveyBackground_EditAnswers.png\")");
+                    $(body).css("background-image", "url(\"" + surveyBackgrounds[0].src +"\")");
                 }
             }
         }
@@ -223,7 +230,7 @@
                 desc.innerHTML = descText;
                 
                 var body = document.getElementById("survey");
-                $(body).css("background-image", "url(\"images/surveyAssets/resultsBackgroundRock.png\")");
+                $(body).css("background-image", "url(\"" + surveyBackgrounds[1].src +"\")");
             } else if(result == "Pop"){
                 var headingText = resultOptions[1].title;
                 heading.innerHTML = headingText;
@@ -236,7 +243,7 @@
                 desc.innerHTML = descText;
                 
                 var body = document.getElementById("survey");
-                $(body).css("background-image", "url(\"images/surveyAssets/resultsBackgroundPop.png\")");
+                $(body).css("background-image", "url(\"" + surveyBackgrounds[2].src +"\")");
             } else if(result == "Country"){
                 var headingText = resultOptions[2].title;
                 heading.innerHTML = headingText;
@@ -249,7 +256,7 @@
                 desc.innerHTML = descText;
                 
                 var body = document.getElementById("survey");
-                $(body).css("background-image", "url(\"images/surveyAssets/resultsBackgroundCountry.png\")");
+                $(body).css("background-image", "url(\"" + surveyBackgrounds[3].src +"\")");
             } else if(result == "Alternative"){
                 var headingText = resultOptions[3].title;
                 heading.innerHTML = headingText;
@@ -262,7 +269,7 @@
                 desc.innerHTML = descText;
                 
                 var body = document.getElementById("survey");
-                $(body).css("background-image", "url(\"images/surveyAssets/resultsBackgroundAlternative.png\")");
+                $(body).css("background-image", "url(\"" + surveyBackgrounds[4].src +"\")");
             }
             //retake button
             var cElement = document.getElementById("answers");

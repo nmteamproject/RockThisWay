@@ -56,8 +56,7 @@
         <allow-intent href="mailto:*" />
         <allow-intent href="geo:*" />
         <platform name="android">
-            <preference name="SplashScreenDelay" value="0" />
-            <preference name="FadeSplashScreen" value="false" />
+            <preference name="SplashScreenDelay" value="3000" />
             <preference name="SplashMaintainAspectRatio" value="true|false" />
             <preference name="SplashShowOnlyFirstTime" value="true|false" />
             <allow-intent href="market:*" />

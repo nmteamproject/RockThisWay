@@ -24,6 +24,14 @@ var icons = [
     "images/surveyAssets/surveyIcon9.png"
 ];
 
+var background = [
+    "images/surveyAssets/surveyBackground_EditAnswers.png",
+    "images/surveyAssets/resultsBackgroundRock.png",
+    "images/surveyAssets/resultsBackgroundPop.png",
+    "images/surveyAssets/resultsBackgroundCountry.png",
+    "images/surveyAssets/resultsBackgroundAlternative.png"
+];
+
 var q0Answers = [
     {
         "points": "0",
