@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Rock This Way</title>
+
+    <link href="ui/css/style.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+
+    <header>
+
+        <img src="images/logo2.png" height="50px" />
+
+    </header>
+
+    <div>Thank you for participating in our senior design project! Have a fantastic day at Imagine RIT!</div>
+    <br>
+    <br>
+    <div id="teamName">Team Name: </div>
+    <div id="teamScore">Team Score: </div>
+
+
+    <script src="cordova.js"></script>
+
+    <script src="js/bundle.js"></script>
+
+    <script src="js/app.js"></script>
+
+    <script>
+        //Will be script to show user's profile and score upon phone return.
+        var points = 0;
+        var atcScore = parseInt(localStorage.atcScore);
+        if (Number.isInteger(atcScore)) {
+            points += atcScore;
+        }
+        var triviaScore = parseInt(localStorage.triviaScore);
+        if (Number.isInteger(triviaScore)) {
+            points += triviaScore;
+        }
+        var lyricScore = parseInt(localStorage.lyricScore);
+        if (Number.isInteger(lyricScore)) {
+            points += lyricScore;
+        }
+        var user = localStorage.user;
+        
+        
+        document.getElementById('teamName').innerHTML = "Name: " + user;
+        document.getElementById('teamScore').innerHTML = "Score: " + points;
+    </script>
+
+
+</body>
+
+</html>

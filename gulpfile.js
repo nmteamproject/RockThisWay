@@ -113,10 +113,22 @@ gulp.task('build', ['sass', 'javascript'], function(callback) {
     }, callback);
 });
 
+/** 
+ * Clean the browser build
+ */
+gulp.task('cordova-clean', function() {
+    cordova.clean({
+        'platforms': ['browser'],
+        'options': {
+            argv: ['--release','--gradleArg=--no-daemon']
+        }
+    });
+});
+
 /**
  * Build for browser
  */
-gulp.task('cordova-browser', function(callback) {
+gulp.task('cordova-browser', ['cordova-clean'], function(callback) {
     cordova.build({
         'platforms': ['browser'],
         'options': {
@@ -130,11 +142,11 @@ gulp.task('cordova-browser', function(callback) {
  * watch for browser changes
  */
 gulp.task('cordova-watch', function() {
-   gulp.watch('./www/bundle.js', ['cordova-browser'])
+   gulp.watch('./www/bundle.js', ['cordova-browser']);
 });
 
 /**
- * Watch our sass and javascript
+ * Watch our sass and javascript and watch
  */
 gulp.task('watch', ['javascript-watch', 'cordova-watch'], function() {
    return gulp

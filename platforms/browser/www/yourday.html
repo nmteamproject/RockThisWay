@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Rock This Way</title>
+
+    <link href="ui/css/style.css" rel="stylesheet">
+
+    <script src="cordova.js"></script>
+    <script src="js/app.js"></script>
+    <script src="bundle.js"></script>
+    <script src="exhibitInfo.js"></script>
+    
+    <script>
+        $(function(){
+            $('body').hide().fadeIn('slow');
+            displayPlan();
+        });
+
+    </script>
+
+
+    <script>
+        //This Entire Script is for the iBeacons
+        var app = (function () {
+            // Application object.
+            var app = {};
+
+            // History of enter/exit events.
+            var mRegionEvents = [];
+
+            // Nearest ranged beacon.
+            var mNearestBeacon = null;
+
+            // Timer that displays nearby beacons.
+            var mNearestBeaconDisplayTimer = null;
+
+            // Background flag.
+            var mAppInBackground = false;
+
+            // Background notification id counter.
+            var mNotificationId = 0;
+
+            var previousBeacon;
+
+            // Mapping of region event state names.
+            // These are used in the event display string.
+            var mRegionStateNames = {
+                'CLRegionStateInside': 'Enter',
+                'CLRegionStateOutside': 'Exit'
+            };
+
+            //Looks for beacons that have the following properties.
+            //In order for a beacon to be detected, it has to be put into the following list
+            var mRegions = [
+                {
+                    id: 'region1',
+                    uuid: '7b44b47b-52a1-5381-90c2-f09b6838c5d4',
+                    major: 112,
+                    minor: 154
+		},
+                {
+                    id: 'region2',
+                    uuid: '7b44b47b-52a1-5381-90c2-f09b6838c5d4',
+                    major: 152,
+                    minor: 114
+		},
+                {
+                    id: 'region3',
+                    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+                    major: 19175,
+                    minor: 17780
+		},
+                {
+                    id: 'region4',
+                    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+                    major: 18015,
+                    minor: 60062
+		},
+                {
+                    id: 'region5',
+                    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+                    major: 50017,
+                    minor: 64202
+		}
+
+	];
+
+            //Name of the beacons in range.
+            var mRegionData = {
+                'region1': 'iPhone iBeacon',
+                'region2': 'iPhone iBeacon',
+                'region3': 'Green Estimote Beacon',
+                'region4': 'Ice Estimote Beacon',
+                'region5': 'Indigo Estimote Beacon'
+            };
+
+            app.initialize = function () {
+                document.addEventListener('deviceready', onDeviceReady, false);
+                document.addEventListener('pause', onAppToBackground, false);
+                document.addEventListener('resume', onAppToForeground, false);
+            };
+
+            function onDeviceReady() {
+                startMonitoringAndRanging();
+                startNearestBeaconDisplayTimer();
+                displayRegionEvents();
+            }
+
+            function onAppToBackground() {
+                mAppInBackground = true;
+                stopNearestBeaconDisplayTimer();
+            }
+
+            function onAppToForeground() {
+                mAppInBackground = false;
+                startNearestBeaconDisplayTimer();
+                displayRegionEvents();
+            }
+
+            function startNearestBeaconDisplayTimer() {
+                mNearestBeaconDisplayTimer = setInterval(displayNearestBeacon, 1000);
+            }
+
+            function stopNearestBeaconDisplayTimer() {
+                clearInterval(mNearestBeaconDisplayTimer);
+                mNearestBeaconDisplayTimer = null;
+            }
+
+            function startMonitoringAndRanging() {
+                function onDidDetermineStateForRegion(result) {
+                    saveRegionEvent(result.state, result.region.identifier);
+                    displayRecentRegionEvent();
+                }
+
+                function onDidRangeBeaconsInRegion(result) {
+                    updateNearestBeacon(result.beacons);
+                }
+
+                function onError(errorMessage) {
+                    console.log('Monitoring beacons did fail: ' + errorMessage);
+                }
+
+                // Request permission from user to access location info.
+                cordova.plugins.locationManager.requestAlwaysAuthorization();
+
+                // Create delegate object that holds beacon callback functions.
+                var delegate = new cordova.plugins.locationManager.Delegate();
+                cordova.plugins.locationManager.setDelegate(delegate);
+
+                // Set delegate functions.
+                delegate.didDetermineStateForRegion = onDidDetermineStateForRegion;
+                delegate.didRangeBeaconsInRegion = onDidRangeBeaconsInRegion;
+
+                // Start monitoring and ranging beacons.
+                startMonitoringAndRangingRegions(mRegions, onError);
+            }
+
+            function startMonitoringAndRangingRegions(regions, errorCallback) {
+                // Start monitoring and ranging regions.
+                for (var i in regions) {
+                    startMonitoringAndRangingRegion(regions[i], errorCallback);
+                }
+            }
+
+            function startMonitoringAndRangingRegion(region, errorCallback) {
+                // Create a region object.
+                var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(
+                    region.id,
+                    region.uuid,
+                    region.major,
+                    region.minor);
+
+                // Start ranging.
+                cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
+                    .fail(errorCallback)
+                    .done();
+
+                // Start monitoring.
+                cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+                    .fail(errorCallback)
+                    .done();
+            }
+
+            function saveRegionEvent(eventType, regionId) {
+                // Save event.
+                mRegionEvents.push({
+                    type: eventType,
+                    time: getTimeNow(),
+                    regionId: regionId
+                });
+
+                // Truncate if more than ten entries.
+                if (mRegionEvents.length > 10) {
+                    mRegionEvents.shift();
+                }
+            }
+
+            function getBeaconId(beacon) {
+                return beacon.uuid + ':' + beacon.major + ':' + beacon.minor;
+            }
+
+            function isSameBeacon(beacon1, beacon2) {
+                return getBeaconId(beacon1) == getBeaconId(beacon2);
+            }
+
+            function isNearerThan(beacon1, beacon2) {
+                return beacon1.accuracy > 0 && beacon2.accuracy > 0 && beacon1.accuracy < beacon2.accuracy;
+            }
+
+            function updateNearestBeacon(beacons) {
+                for (var i = 0; i < beacons.length; ++i) {
+                    var beacon = beacons[i];
+                    if (!mNearestBeacon) {
+                        mNearestBeacon = beacon;
+                    } else {
+                        if (isSameBeacon(beacon, mNearestBeacon) ||
+                            isNearerThan(beacon, mNearestBeacon)) {
+                            mNearestBeacon = beacon;
+                        }
+                    }
+                }
+            }
+
+            function displayNearestBeacon() {
+                if (!mNearestBeacon) {
+                    return;
+                }
+                // If the nearest beacon changes, the code on beacons.html will change to the following based on beacon.major
+                if (mNearestBeacon.major != previousBeacon) {
+                    if (mNearestBeacon.major == 19175) {
+                        $('#modalTitle').text("Who Wants to be a Rockstar?");
+                        $("#modalPlay").attr("onclick", "playGame(2)");
+                        
+                        $('#artistName').text("The Beatles");
+                        $('#artistImage').attr('src', 'images/planBeatles.png');
+                        $('#artistInfo').text("The Beatles were the most influential popular music group of the rock era. They affected the post-war baby boom generation of Britain, the United States and many other countries during the 1960s. Certainly they are the most popular group in rock history, with global sales exceeding 1.1 billion records.");
+                        $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
+                    } else if (mNearestBeacon.major == 18015) {
+                        $('#modalTitle').text("Against the Crowd");
+                        $("#modalPlay").attr("onclick", "playGame(3)");
+                        $('#artistImage').attr('src', 'images/planTaytay.png');
+                        $('#artistName').text("Taylor Swift");
+                        $('#artistInfo').text("Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.");
+                        $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
+                    } else if (mNearestBeacon.major == 50017) {
+                        $("#modalPlay").attr("onclick", "playGame(1)");
+                        $('#artistName').text("Aerosmith");
+                        $('#modalTitle').text("Lyracle");
+                        $('#artistImage').attr('src', 'images/planAerosmith.png');
+                        $('#artistInfo').text("Aerosmith is a long-running hard rock band, originally forming in Boston, Massachusetts in the early 1970s, and enjoying a later resurgence in popularity in the late 1980s and mid-1990s");
+                        $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
+                    } 
+                    else if (mNearestBeacon.major == 112) {
+                        $("#modalPlay").attr("onclick", "leaveExhibits()");
+                        $("#modalPlay").text("Leave");
+                        $('#artistName').text("Leaving");
+                        $('#modalTitle').text("Are you Prepared to go?");
+                        $('#artistImage').attr('src', 'images/exhibit.png');
+                        $('#artistInfo').text("");
+                        $("#modalDescription").text("If you are leaving the our exhibit, please press the following button and give this phone to an exhibitor.");
+                    }else {
+                    }
+                    
+                    triggerModal();
+                    //$("#myModal").modal();
+                }
+
+                previousBeacon = mNearestBeacon.major;
+
+
+            }
+
+            function displayRecentRegionEvent() {
+                if (mAppInBackground) {
+                    // Set notification title.
+                    var event = mRegionEvents[mRegionEvents.length - 1];
+                    if (!event) {
+                        return;
+                    }
+                    var title = getEventDisplayString(event);
+
+                    // Create notification.
+                    cordova.plugins.notification.local.schedule({
+                        id: ++mNotificationId,
+                        title: title
+                    });
+                } else {
+                    displayRegionEvents();
+                }
+            }
+
+            function displayRegionEvents() {
+                // Displayed before it connects to beacons or while there is no beacon in range.
+                //uncomment bottom line if we need to change the home screen.
+
+            }
+
+            function getEventDisplayString(event) {
+                return event.time + ': ' + mRegionStateNames[event.type] + ' ' + mRegionData[event.regionId];
+            }
+
+            function getTimeNow() {
+                function pad(n) {
+                    return (n < 10) ? '0' + n : n;
+                }
+
+                function format(h, m, s) {
+                    return pad(h) + ':' + pad(m) + ':' + pad(s);
+                }
+
+                var d = new Date();
+                return format(d.getHours(), d.getMinutes(), d.getSeconds());
+            }
+            
+            return app;
+
+        })();
+        
+        function leaveExhibits(){
+            window.location.href = "submitscore.html";
+        }
+        
+        function goToExhibit(exhibit){
+            var link = "exhibit.html?exhibit="+exhibit;
+            window.location.href = link;
+            
+        }
+
+        function goToUser(){
+            window.location.href = "user.html";
+        }
+        
+        function playGame(game) {
+            if (game == 1) {
+                window.location.href = "rules.html?game=1";
+            }
+            if (game == 2) {
+                window.location.href = "rules.html?game=2";
+            }
+            if (game == 3) {
+                window.location.href = "rules.html?game=3";
+            }
+        }
+
+        //adds the CSS to display exhibit cards
+        function displayPlan(){
+            $('body').css("overflow", "visible");
+            
+            var body = document.getElementById("yourDay");
+            $(body).css("background-image", "url(\"" + sessionStorage.getItem("planBackground") +"\")");
+                        
+            var element = document.getElementById("homeScreen");
+            
+            var heading = document.createElement("h1");
+            var headingText = document.createTextNode("Today's Plan");
+            heading.appendChild(headingText);
+            element.appendChild(heading);
+            
+            for(var i=0; i < 3; i++){
+                var exhibit = eval("exhibit" + i);
+                var container = document.createElement("div");
+                $(container).addClass("card card-3 exhibit");
+                $(container).css("margin-top", "5%");
+                element.appendChild(container);
+               
+                var image = $(pics[i]);
+                image.addClass("exhibitImage");
+                image.appendTo(container);
+                                
+                var para = document.createElement("p");
+                $(para).addClass("exhibit");
+                $(para).css("text-align", "left");
+                container.appendChild(para);
+                
+                var exhibitTitle = document.createTextNode(exhibit[0].title);
+                para.appendChild(exhibitTitle);
+                
+                var para2 = document.createElement("p");
+                $(para2).addClass("exhbit title");
+                $(para2).css("font-style", "normal");
+                $(para2).css("text-align", "left");
+                container.appendChild(para2);
+                
+                var exhibitText = document.createTextNode(exhibit[0].info1);
+                para2.appendChild(exhibitText);
+                
+                var para3 = document.createElement("p");
+                $(para3).addClass("exhbit title");
+                $(para3).css("font-style", "normal");
+                $(para3).css("text-align", "left");
+                container.appendChild(para3);
+                
+                var exhibitText2 = document.createTextNode(exhibit[0].info2);
+                para3.appendChild(exhibitText2);
+                
+                var container2 = document.createElement("div");
+                $(container2).addClass("half-card");
+                $(container2).css("margin-top", "5%");
+                container.appendChild(container2);
+                                
+                var planIcon = $(planIcons[i]);
+                planIcon.addClass("planIcon");
+                planIcon.appendTo(container2);
+                
+                container.style.clear = "left";
+            }
+        }
+        
+        function flipPage() {
+            //toggles between the plan screen and map screen
+            document.querySelector("#flip-toggle").classList.toggle("flip");
+            //attach event listeners to markers to display popup
+            document.getElementById("marker1").addEventListener("click",
+            function(){
+                var popups = document.getElementById("popups");
+                $(popups).empty();
+                
+                var popup = document.createElement("div");
+                $(popup).addClass("popup1");
+                
+                var container = document.createElement("div");
+                $(container).addClass("card card-3 popup");
+                $(container).css("margin-top", "5%");
+                $(container).css("background-color", "white");
+                popup.appendChild(container);
+                popups.appendChild(popup);
+               
+                var image = $('<img src="images/planBeatles.png">');
+                image.addClass("exhibitImage");
+                image.appendTo(container);
+                
+                var para = document.createElement("p");
+                $(para).addClass("exhbit title");
+                $(para).css("color", "black");
+                $(para).css("font-style", "normal");
+                $(para).css("text-align", "left");
+                container.appendChild(para);
+                
+                var exhibitText = document.createTextNode(exhibit0[0].title);
+                para.appendChild(exhibitText);
+                
+                $("#map").css({
+                    'filter': 'blur(5px)',
+                    '-webkit-filter': 'blur(5px)',
+                    '-moz-filter': 'blur(5px)',
+                    '-o-filter': 'blur(5px)',
+                    '-ms-filter': 'blur(5px)'
+				})
+                
+                $(popup).hide().fadeIn('fast');
+            });
+            document.getElementById("marker2").addEventListener("click",
+            function(){
+                var popups = document.getElementById("popups");
+                $(popups).empty();
+                
+                var popup = document.createElement("div");
+                $(popup).addClass("popup2");
+                
+                var container = document.createElement("div");
+                $(container).addClass("card card-3 popup");
+                $(container).css("margin-top", "5%");
+                $(container).css("background-color", "white");
+                popup.appendChild(container);
+                popups.appendChild(popup);
+               
+                var image = $('<img src="images/planAerosmith.png">');
+                image.addClass("exhibitImage");
+                image.appendTo(container);
+                
+                var para = document.createElement("p");
+                $(para).addClass("exhbit title");
+                $(para).css("color", "black");
+                $(para).css("font-style", "normal");
+                $(para).css("text-align", "left");
+                container.appendChild(para);
+                
+                var exhibitText = document.createTextNode(exhibit1[0].title);
+                para.appendChild(exhibitText);
+                
+                $("#map").css({
+                    'filter': 'blur(5px)',
+                    '-webkit-filter': 'blur(5px)',
+                    '-moz-filter': 'blur(5px)',
+                    '-o-filter': 'blur(5px)',
+                    '-ms-filter': 'blur(5px)'
+				})
+                
+                $(popup).hide().fadeIn('fast');
+            });
+            document.getElementById("marker3").addEventListener("click",
+            function(){
+                var popups = document.getElementById("popups");
+                $(popups).empty();
+                
+                var popup = document.createElement("div");
+                $(popup).addClass("popup3");
+                
+                var container = document.createElement("div");
+                $(container).addClass("card card-3 popup");
+                $(container).css("margin-top", "5%");
+                $(container).css("background-color", "white");
+                popup.appendChild(container);
+                popups.appendChild(popup);
+               
+                var image = $('<img src="images/planTaytay.png">');
+                image.addClass("exhibitImage");
+                image.appendTo(container);
+                
+                var para = document.createElement("p");
+                $(para).addClass("exhbit title");
+                $(para).css("color", "black");
+                $(para).css("font-style", "normal");
+                $(para).css("text-align", "left");
+                container.appendChild(para);
+                
+                var exhibitText = document.createTextNode(exhibit2[0].title);
+                para.appendChild(exhibitText);
+                
+                $("#map").css({
+                    'filter': 'blur(5px)',
+                    '-webkit-filter': 'blur(5px)',
+                    '-moz-filter': 'blur(5px)',
+                    '-o-filter': 'blur(5px)',
+                    '-ms-filter': 'blur(5px)'
+				})
+                
+                $(popup).hide().fadeIn('fast');
+            });
+            //tapping on map will get rid of all popups
+            document.getElementById("map").addEventListener("click",
+            function(){
+                var popups = document.getElementById("popups");
+                $(popups).empty();
+                
+                $("#map").css({
+                    'filter': 'blur(0px)',
+                    '-webkit-filter': 'blur(0px)',
+                    '-moz-filter': 'blur(0px)',
+                    '-o-filter': 'blur(0px)',
+                    '-ms-filter': 'blur(0px)'
+				})
+            });
+        }
+        
+        
+        function triggerModal(){
+            document.getElementById('gameModal').style.display = "block";
+        }
+        function removeModal() {
+            document.getElementById('gameModal').style.display="none";
+        }
+        
+        app.initialize();
+    </script>
+
+</head>
+
+<body id="yourDay">
+
+    <header>
+
+        <button class="userButton" onclick="goToUser()">
+            <img src="images/user.png"/>
+        </button>
+
+        <button class="swap" onclick="flipPage()">
+            <img src="ui/images/BaseMap.png" />
+        </button>
+
+        <img src="images/logo2.png" height="50px" />
+    
+    </header>
+
+    
+    
+    <div id="gameModal">
+    
+        <img src="images/exitIcon.png" onclick="removeModal()">
+        
+        <img src="images/planTaytay.png" width="100%" id="artistImage">
+        <div id="artistName">Taylor Swift</div>
+        <div class="redDivider divider"></div>
+        <div class="modalText" id="artistInfo">Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.</div>
+        <div id="modalTitle">Against the Crowd</div>
+        <div class="modalText" id="modalDescription">Who thinks that they know Taylor Swift the best? Play with friends and family and see who knows the most!</div>
+        <button class="playButton" id="modalPlay">Play</button>
+    </div>
+    
+    
+    
+    <div class="flip-container" id="flip-toggle">
+        <div class="flipper">
+            <div class="frontPage">
+                <ul id="homeScreen" class="dynamic">
+                </ul>
+            </div>
+            <div class="backPage">
+                <div id="map">
+                    <img src="images/hall-map.png" width="100%"/>
+                </div>
+                <div id="markers">
+                    <img id="marker1" src="ui/images/pick-location-marker.png" width="8%"/>
+                    <img id="marker2" src="ui/images/pick-location-marker.png" width="8%"/>
+                    <img id="marker3" src="ui/images/pick-location-marker.png" width="8%"/>
+                    <div id="popups"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

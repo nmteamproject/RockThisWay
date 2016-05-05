@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Rock This Way</title>
+    <link href="ui/css/style.css" rel="stylesheet">
+</head>
+
+<body id="home">
+    <br>
+    <p class="lead">WELCOME TO THE ROCK AND ROLL HALL OF FAME</p>
+    <div class="divider redDivider"></div>
+    <p class="plan">Plan you Rock Hall experience for the day!</p>
+    <p class="plan">Learn about your favorite artists</p>
+    <p class="plan">Discover hidden artifacts</p>
+    <p class="plan">Compete against friends and family</p>
+
+    <div id="homeBtn" onclick="takeSurvey()">
+        <ul class="quiz-step step1 current">
+            <div class="selected">
+                <p class="answer-text">PLAN YOUR DAY</p>
+            </div>
+        </ul>
+    </div>
+    
+    <!-- non blocking loading -->
+    <script src="cordova.js"></script>
+    <!-- all of our bundled js -->
+    <script src="bundle.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('body').hide().fadeIn('slow');
+        });
+        function takeSurvey() {
+            window.location.href = "pre_survey.html";
+        }
+        
+        
+        localStorage.removeItem("user");
+        localStorage.removeItem("score");
+        localStorage.atcScore = 0;
+        localStorage.triviaScore = 0;
+        localStorage.lyricScore = 0;
+        
+    </script>
+</body>
+</html>

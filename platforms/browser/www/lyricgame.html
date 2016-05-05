@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Rock This Way</title>
+    <link href="ui/css/style.css" rel="stylesheet">
+    <script src="lyrics.js"></script>
+    <script src="cordova.js"></script>
+    <script src="bundle.js"></script>
+    <script src="libs/sortable/Sortable.js"></script>
+</head>
+
+<body id="lyricGame">
+
+    <div class="gameHeader">
+        <img src="images/arrow.png" class="backButton" onclick="returnToPlan()"> Aerosmith's Lyrics
+    </div>
+
+    <div>
+        <div id="songDetails">
+            <div id="artist"></div>
+            <div id="song"></div>
+            <div id="devTimerDebug">Derp, comment me out, derp</div>
+        </div>
+        <svg id="playTracker">
+            <path id="arc1" fill="none" stroke="#e82828" stroke-width="3" />
+        </svg>
+        <center>
+
+            <button class="lyricButton" onclick="showLyrics()"><img src="images/lyricGameUI/lyricLyricButton.png" height="40px"></button>
+
+            <button id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="images/lyricGameUI/lyricPlayButton.png" height="70px"></button>
+
+            <button class="lyricButton" onclick="loadWordBank()"><img src="images/lyricGameUI/lyricRestartButton.png" height="40px"></button>
+        </center>
+        <div id="verse" class="directions">Complete the lyrics</div>
+        <div></div>
+    </div>
+    <center>
+        <div id="game">
+
+
+            <div id="lyrics">
+
+            </div>
+            <div id="wordBank">
+            </div>
+        </div>
+
+    </center>
+
+    <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
+
+</body>
+
+
+
+<script type="text/javascript">
+    window.onload = loadWordBank;
+
+    var lyricNumber = 0;
+    var swapCount = 0;
+    var swapLyric;
+    var playingMusic = false;
+    var soundFile;
+    var timer = null;
+    
+    //Vars for timer function
+    var conCount = 1;
+    var timeForGame = 0;
+    var finalScore = 0;
+    var staticTimerGrab = 0; //Grabs the time when the quiz completes and saves it off as a static int.
+
+    //localStorage.lyricScore = 0;
+
+    // Timer for song length UI
+    function tick() {
+
+        var songTime = (soundFile.currentTime / soundFile.duration) * 359;
+
+
+        document.getElementById("arc1").setAttribute("d", describeArc(57, 50, 37, 0, songTime));
+    }
+
+    function start() {
+        tick();
+        timer = setTimeout(start, 1000);
+        timeForGame++;
+        document.getElementById("devTimerDebug").innerHTML = timeForGame;
+    }
+
+    function stop() {
+        staticTimerGrab = timeForGame;
+        clearTimeout(timer);
+    }
+
+    // Code to draw circle 
+    function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+        var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+
+        return {
+            x: centerX + (radius * Math.cos(angleInRadians)),
+            y: centerY + (radius * Math.sin(angleInRadians))
+        };
+    }
+
+    function describeArc(x, y, radius, startAngle, endAngle) {
+
+        var start = polarToCartesian(x, y, radius, endAngle);
+        var end = polarToCartesian(x, y, radius, startAngle);
+
+        var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+
+        var d = [
+            "M", start.x, start.y,
+            "A", radius, radius, 0, arcSweep, 0, end.x, end.y
+        ].join(" ");
+
+        return d;
+    }
+
+
+
+    // Adds lyric to answer key
+    function addLyric(clickedVal) {
+        var lyric = "<button class='lyric' onclick='swap(this)' value='" + clickedVal + "'>" + clickedVal + "</button>";
+
+
+        var currentLyrics = document.getElementById("lyrics").innerHTML;
+        document.getElementById("lyrics").innerHTML = currentLyrics + "" + lyric;
+    }
+
+
+    // Called when user submits lyrics
+    function checkLyrics() {
+        var fullString = document.getElementById("lyrics").querySelectorAll(".lyric");
+        var answerLyrics;
+        for (i = 0; i < fullString.length; i++) {
+            if (fullString[i].style.display != "none") {
+                answerLyrics = answerLyrics + " " + fullString[i].value;
+            }
+        }
+
+        var answer = answerLyrics.substr(10, answerLyrics.length);
+        //console.log(answer);
+
+        if (answer == correctLyrics[lyricNumber]) {
+            document.getElementById("lyrics").innerHTML = answer;
+            document.getElementById("wordBank").innerHTML = "You got the Correct answer!";
+            document.getElementById("sumbitLyricsButton").innerHTML = "Next";
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
+
+        } else {
+            if (document.getElementById("lyrics").innerHTML != "") {
+                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#636363\">Incorrect, Try again</text></svg>')";
+            }
+            loadWordBank();
+        }
+    }
+
+    // Plays music segment
+    function playMusic(song) {
+        console.log("called");
+        if (playingMusic == true) {
+            stop();
+            soundFile.pause();
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>";
+            playingMusic = false;
+        } else {
+
+            start();
+            soundFile.play();
+            playingMusic = true;
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPauseButton.png' height='70px'>";
+        }
+    }
+
+
+    // Loads the page and word bank | Also called to reset Word Bank
+    function loadWordBank() {
+        //Makes Dragging UI
+        document.getElementById("lyrics").style.border = "3px solid #636363";
+        Sortable.create(lyrics, {
+            group: 'foo',
+            onStart: function (evt) {
+                document.getElementById("lyrics").style.border = "3px dashed #636363";
+            },
+
+            // dragging ended
+            onEnd: function (evt) {
+                document.getElementById("lyrics").style.border = "3px solid #636363";
+
+
+            }
+        });
+        Sortable.create(wordBank, {
+            group: 'foo',
+            onStart: function (evt) {
+                document.getElementById("lyrics").style.border = "3px dashed #636363";
+            },
+
+            // dragging ended
+            onEnd: function (evt) {
+                document.getElementById("lyrics").style.border = "3px solid #636363";
+
+                if (document.getElementById("lyrics").innerHTML != "") {
+                    document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
+                }
+
+            }
+        });
+        document.getElementById("lyrics").innerHTML = "";
+
+        soundFile = new Audio('songs/' + musicCollection[lyricNumber] + '.mp3');
+
+        document.getElementById("playMusicButton").value = musicCollection[lyricNumber];
+        document.getElementById("song").innerHTML = songs[lyricNumber].song;
+        document.getElementById("artist").innerHTML = (songs[lyricNumber].artist) + "'";
+
+        var bank = eval("lyricCollection" + lyricNumber);
+        var fullBank = "";
+
+        for (i = 0; i < bank.length; i++) {
+            fullBank += "<button class='lyric' onclick='this.style.display=&quot;none&quot;; [addLyric(this.value)];' value='" + bank[i] + "'>" + bank[i] + "</button> "
+        }
+
+        document.getElementById("wordBank").innerHTML = fullBank;
+    }
+
+    function nextLyrics() {
+
+        lyricNumber++;
+
+        if (lyricNumber != 3) {
+            loadWordBank();
+            document.getElementById("sumbitLyricsButton").innerHTML = "Submit";
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'checkLyrics()');
+        }else{
+            if(staticTimerGrab < 135){
+                var tempInt2 = 135 - timeForGame;
+                localStorage.lyricScore = tempInt2;
+            }
+            else{
+                localStorage.lyricScore = 0;
+            }
+            document.getElementById("sumbitLyricsButton").innerHTML = "Finish";
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'finish()');
+        }
+    }
+
+    function finish(){
+        window.location.href = "rules.html?game=5";
+    }
+    
+    function showLyrics() {
+        document.getElementById('verse').innerHTML = songs[lyricNumber].verse;
+    }
+
+    function returnToPlan() {
+        window.location.href = "yourday.html";
+    }
+</script>
+
+
+</html>
