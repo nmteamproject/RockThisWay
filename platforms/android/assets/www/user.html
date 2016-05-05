@@ -19,14 +19,9 @@
 <body id="nameCreation">
 
     <div id="creationPage">
-        
-
     </div>
-
-    <div id="userPage">
-        <div id="teamName"></div>
-
-    </div>
+    
+    <button onclick="submitUserName()" class="submitButton" id="sumbitNameButton">Submit</button>
 
     <script src="cordova.js"></script>
 
@@ -38,8 +33,6 @@
         window.onload = loadPage;
 
         function loadPage() {
-            //document.getElementById('creationPage').style.display = "none";
-            //document.getElementById('userPage').style.display = "none";
            
             if (localStorage.getItem("user") != undefined) {
                 displayUser();
@@ -57,8 +50,8 @@
 
 
         function displayUser() {
-
-            var user = localStorage.user
+            
+            var user =  localStorage.getItem("user");
             
             var points = 0;
             
@@ -92,18 +85,17 @@
             }
             
             localStorage.points = points;
-
             
-            
-            //document.getElementById('creationPage').style.display = "none";
-            //document.getElementById('userPage').style.display = "initial";
+            document.getElementById('sumbitNameButton').setAttribute('onclick','returnToPlan()');
+            document.getElementById('sumbitNameButton').innerHTML = "Return";
 
             document.getElementById('teamName').innerHTML = user;
+            document.getElementById('testName').innerHTML = testUser;
             document.getElementById('teamScore').innerHTML = points;
         }
 
         function submitUserName() {
-
+            
             localStorage.user = document.getElementById('userName').value;
             displayUser();
 
