@@ -9,8 +9,10 @@
 
 	<title>Rock This Way</title>
     
+    <script src="https://use.typekit.net/giv3oua.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <link href="ui/css/style.css" rel="stylesheet">
-
+    
 	<script src="cordova.js"></script>
     <script src="surveyquestions.js"></script>
     <script src="js/bundle.js"></script>
@@ -30,7 +32,7 @@
         <p id="passBtn">Nah, I'll Pass</p>
     </div>
     
-    <script language="javascript" type="text/javascript">
+    <script type="text/javascript">
         $(function(){
             $('body').hide().fadeIn('slow');
         });
@@ -44,11 +46,11 @@
         })
         
         function goToSurvey(){
-            window.location.href = "survey.html";
+            document.location = "survey.html";
         }
         
         function skip(){
-            window.location.href = "yourday.html";
+            document.location = "yourday.html";
         }
     </script>
 </body>

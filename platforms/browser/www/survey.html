@@ -10,7 +10,9 @@
 	<title>Rock This Way</title>
     
     <link href="ui/css/style.css" rel="stylesheet">
-
+    <script src="https://use.typekit.net/giv3oua.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    
 	<script src="cordova.js"></script>
     <script src="surveyquestions.js"></script>
     <script src="exhibitInfo.js"></script>
@@ -379,11 +381,11 @@
         }
         
         function retake(){
-            window.location.href = "survey.html";
+            document.location = "survey.html";
         }
         
         function skip(){
-            window.location.href = "yourday.html";
+            document.location = "yourday.html";
         }
     </script>
 </body>

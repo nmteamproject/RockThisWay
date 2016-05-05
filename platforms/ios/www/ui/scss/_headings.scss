@@ -1,0 +1,26 @@
+.title {
+    &__main {
+        color: $medium-gray;
+        font-size: rem(25);
+        text-transform: uppercase; 
+        position: relative;
+        font-weight: normal;
+        text-indent: -9px;
+        margin-bottom: rem(100);
+        margin-top: 40%;
+        &:first-line {
+            font-size: rem(90);
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -40px;
+            background-color: $red;
+            width: rem(40);
+            height: rem(10); 
+        }
+    }
+}

@@ -15,7 +15,7 @@ var gutil = require('gulp-util');
 var gulpIgnore = require('gulp-ignore');
 
 // Settings
-var sassInput = './www/ui/scss/**/**.scss';
+var sassInput = './www/ui/scss/**/*.scss';
 var sassOutput = './www/ui/css';
 var sassOptions = {
     errLogToConsole: true,
@@ -42,8 +42,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('sass-watch', function() {
-   return gulp
-        .watch(sassInput, ['sass']);
+   return gulp.watch(sassInput, ['sass']);
 });
 
 /**

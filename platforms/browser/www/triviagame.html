@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="background:#c6e2ff">
+<html>
 
 <head>
 
@@ -13,7 +13,9 @@
         @import 'ui/css/style.css';
         /*        @import 'ui/css/animate.css';*/
     </style>
-
+    <script src="https://use.typekit.net/giv3oua.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    
     <script src="cordova.js"></script>
     <script src="libs/jquery/jquery.js"></script>
     <script src="libs/evothings/evothings.js"></script>
@@ -176,11 +178,11 @@
         }
 
         function finish() {
-            window.location.href = "rules.html?game=4";
+            document.location = "rules.html?game=4";
         }
 
         function returnToPlan() {
-            window.location.href = "yourday.html";
+            document.location = "yourday.html";
         }
     </script>
 

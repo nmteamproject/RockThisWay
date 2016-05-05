@@ -8,11 +8,12 @@
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Rock This Way</title>
+    <script src="https://use.typekit.net/giv3oua.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <link href="ui/css/style.css" rel="stylesheet">
     <script src="lyrics.js"></script>
     <script src="cordova.js"></script>
     <script src="bundle.js"></script>
-    <script src="libs/sortable/Sortable.js"></script>
 </head>
 
 <body id="lyricGame">
@@ -249,7 +250,7 @@
     }
     
     function finish(){
-        window.location.href = "rules.html?game=5";
+        document.location = "rules.html?game=5";
     }
     
     function showLyrics() {
@@ -257,7 +258,7 @@
     }
 
     function returnToPlan() {
-        window.location.href = "yourday.html";
+        document.location = "yourday.html";
     }
     
     setInterval(function(){

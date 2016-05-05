@@ -10,47 +10,25 @@
 	<title>Rock This Way</title>
     
     <link href="ui/css/style.css" rel="stylesheet">
-
+    <script src="https://use.typekit.net/giv3oua.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    
 	<script src="cordova.js"></script>
     <script src="surveyquestions.js"></script>
     <script src="js/bundle.js"></script>
 </head>
 
-<body>
+<body class="pre-survey">
+    <a class="close-btn" href="yourday.html"><img src="ui/images/icons/close.png" alt="exit"></a>
+    <main class="container">
+        <h1 class="title__main-white">Take the<br> Survey</h1>
+        
+        <p class="main-content">This will help us create the best experience tailored to your musical tastes!</p>
+        <p class="question-count">10 <br>questions</p>
+    </main>
     
-    <div class="container">
-        <p>Take the Survey</p>
-        <p class="title">This will help us create the best experience tailored to your musical tastes!</p>
-        <p>10 Questions</p>
-        <ul id="beginBtn" class="quiz-step step1 current">
-            <div class="selected">
-                <p class="answer-text">BEGIN</p>
-            </div>
-        </ul>
-        <p id="passBtn">Nah, I'll Pass</p>
-    </div>
-    
-    <script type="text/javascript">
-        $(function(){
-            $('body').hide().fadeIn('slow');
-        });
-        
-        $("#beginBtn").click(function(){
-            goToSurvey();
-        })
-        
-        $("#passBtn").click(function(){
-            skip();
-        })
-        
-        function goToSurvey(){
-            document.location = "survey.html";
-        }
-        
-        function skip(){
-            document.location = "yourday.html";
-        }
-    </script>
+    <a class="button bottom-secondary" href="yourday.html">Nah, I'll Pass</a>
+    <a class="button bottom-cta blue" href="survey.html">Begin</a>
 </body>
 
 </html>

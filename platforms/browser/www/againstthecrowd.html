@@ -9,8 +9,10 @@
 
     <title>Rock This Way</title>
 
+    <script src="https://use.typekit.net/giv3oua.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    
     <link href="ui/css/style.css" rel="stylesheet">
-
     <script src="cordova.js"></script>
     <script src="bundle.js"></script>
     <script src="crowdanswers.js"></script>
@@ -30,7 +32,7 @@
         function startQuestion() {
 
             if (questionNumber == 3) {
-                window.location.href = "user.html";
+                document.location = "user.html";
             }
 
             document.getElementById('strikes').innerHTML = "";
@@ -49,7 +51,7 @@
         function submit() {
 
             var correct = false;
-            var answer = $('#answer').val().toLowerCase();
+            var answer = document.getElementById('answer').value.toLowerCase();
             for (var i = 0; i < questionID.length; i++) {
                 if (answer.toLowerCase() == questionID[i].answer.toLowerCase()) {
                     var correctResponse = "crowdQ" + i;
@@ -118,11 +120,11 @@
         }
 
         function finish(){
-            window.location.href = "rules.html?game=6";
+            document.location = "rules.html?game=6";
         }
         
         function returnToPlan() {
-            window.location.href = "yourday.html";
+            document.location = "yourday.html";
         }
     </script>
 

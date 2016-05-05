@@ -1,0 +1,49 @@
+.title {
+    &__main {
+        color: $medium-gray;
+        font-size: rem(15); 
+        text-transform: uppercase; 
+        position: relative;
+        font-weight: normal;
+        text-indent: -3px;
+        margin-bottom: rem(60);
+        margin-top: 40%;
+        letter-spacing: 1px;
+        font-family: 'antoniolight'; 
+        &:first-line {
+            font-size: rem(50);
+            font-weight: bold;
+            letter-spacing: 4px; 
+            font-family: 'antonioregular';
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -35px;
+            background-color: $red;
+            width: rem(20);
+            height: rem(5); 
+        }
+    }
+    &__main-white {
+        color: $medium-gray;
+        font-size: rem(50); 
+        text-transform: uppercase; 
+        position: relative;
+        font-weight: normal;
+        text-indent: -3px;
+        margin-bottom: rem(60);
+        margin-top: 40%;
+        letter-spacing: .5px;
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -35px;
+            background-color: #FFF;
+            width: rem(20);
+            height: rem(5); 
+        }
+    }
+}
