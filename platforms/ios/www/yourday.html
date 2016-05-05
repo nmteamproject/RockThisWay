@@ -351,6 +351,10 @@
         //adds the CSS to display exhibit cards
         function displayPlan(){
             $('body').css("overflow", "visible");
+            
+            var body = document.getElementById("yourDay");
+            $(body).css("background-image", "url(\"" + sessionStorage.getItem("planBackground") +"\")");
+                        
             var element = document.getElementById("homeScreen");
             
             var heading = document.createElement("h1");
@@ -558,7 +562,7 @@
 
 </head>
 
-<body>
+<body id="yourDay">
 
     <header>
 

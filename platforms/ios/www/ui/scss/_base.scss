@@ -656,9 +656,14 @@ body::after {
     border-radius: 15px 15px 0 0;
 }
 
+#yourDay {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .half-card {
     width: 45%;
-    height: 37%;
+    height: 35%;
     padding: 5% 5% 5% 5%;
     background: #f9f9f9;
     border-radius: 3px;
