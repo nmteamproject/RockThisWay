@@ -20,8 +20,35 @@
 
     <div id="creationPage">
         
+<<<<<<< HEAD
+
+=======
+        <div class="pagetitle">Create Your Own Gamertag</div>
+        <input id="userName" type="text" placeholder="Your name here">
+        <div class="divider"></div>
+        <div class="details">This name will follow you throughout your exhibits. At the end look for your name on the leaderboards!</div>
+        
+        
 
     </div>
+
+
+
+    <div id="userPage">
+        <div id="teamName"></div>
+        <div class="divider redDivider"></div>
+        <div>Trivia: The Beatles</div>
+        <div class="points" id="triviaPoints">Didnt Play Yet</div>
+        <div>Lyracle: Aerosmith</div>
+        <div class="points" id="lyricPoints">Didnt Play Yet</div>
+        <div>Against the Crowd: Taylor Swift</div>
+        <div class="points" id="atcPoints">Didnt Play Yet</div>
+        <div class="points">Total</div>
+        <div id="teamScore" class="points"></div>
+>>>>>>> 2d16dc695cb794fd18983cb1f2d1b6670fb93968
+    </div>
+    
+    <button onclick="submitUserName()" class="submitButton" id="sumbitNameButton">Submit</button>
 
     <script src="cordova.js"></script>
 
@@ -51,7 +78,10 @@
 
         function displayUser() {
 
-            var user = localStorage.user
+            document.getElementById('creationPage').style.display = "none";
+            document.getElementById('userPage').style.display = "initial";
+            
+            var user =  localStorage.getItem("user");
             
             var points = 0;
             
@@ -85,13 +115,20 @@
             }
             
             localStorage.points = points;
+<<<<<<< HEAD
+=======
+            
+            document.getElementById('sumbitNameButton').setAttribute('onclick','returnToPlan()');
+            document.getElementById('sumbitNameButton').innerHTML = "Return";
+>>>>>>> 2d16dc695cb794fd18983cb1f2d1b6670fb93968
 
             document.getElementById('teamName').innerHTML = user;
+            document.getElementById('testName').innerHTML = testUser;
             document.getElementById('teamScore').innerHTML = points;
         }
 
         function submitUserName() {
-
+            
             localStorage.user = document.getElementById('userName').value;
             displayUser();
 
