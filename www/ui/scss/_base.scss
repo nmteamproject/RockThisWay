@@ -140,6 +140,7 @@
                             Trivia Game
 	---------------------------------------------------------- */
 
+//.TriviaQuestion is called in JS
 .TriviaQuestion {
     background: white;
     padding: 5px;
@@ -218,6 +219,8 @@
     z-index: 3;
 }
 
+
+//.lyric is added in JS
 .lyric {
     font-family: sans-serif;
     border: thin solid #04dada;
@@ -315,6 +318,7 @@ text-align: center;
     
 }
 
+// .answerText called in JS
 .answerText{
     height: 45px;
     line-height: 45px;
@@ -322,6 +326,7 @@ text-align: center;
     padding-left: 20px;
     float: left;
 }
+// .answerText called in JS
 .answerPoints{
     height: 45px;
     line-height: 45px;
@@ -358,7 +363,7 @@ text-align: center;
     padding: 5px;
 }
 
-
+// .correctAnswer called in JS
 .correctAnswer{
     width: 80vw;
     margin-bottom: 2px;
@@ -366,6 +371,7 @@ text-align: center;
     background: linear-gradient(to right, #134644 0%,#145351 100%);
 }
 
+// .crowdQuestion called in JS
 .crowdQuestion {
     margin-bottom: 2px;
     opacity: 0.6;
@@ -499,6 +505,7 @@ header img.logotype {
 								User Page
 	---------------------------------------------------------- */
 
+//Page Content created in JS, So techinically all of these
 #nameCreation{
      background-image: url(../../images/namecreation.png);
     background-repeat: no-repeat;

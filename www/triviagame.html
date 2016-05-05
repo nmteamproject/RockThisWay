@@ -123,15 +123,9 @@
                 // answer correct
                 totalCorrect = totalCorrect + 1;
                 timeLeft += 10;
-                var div = document.getElementsByClassName('TriviaQuestion');
-                div[div.length - questionsAsked].style.background = "linear-gradient(to right, #82dd43 1%,#329f18 100%)";
-                //progress[(questionsAsked - 1)] = "&#9745;";   #82dd43 → #329f18
                 trackProgress();
                 removeQuestion(1);
             } else {
-                var div = document.getElementsByClassName('TriviaQuestion');
-                div[div.length - questionsAsked].style.background = "linear-gradient(to right, #ab0d0d 1%,#600404 100%)";
-                //progress[(questionsAsked - 1)] = "&#9746;"; #ab0d0d → #600404
                 trackProgress();
                 removeQuestion(2);
             }
@@ -151,8 +145,6 @@
                 document.getElementById("a2").setAttribute("hidden", "true");
                 document.getElementById("a3").setAttribute("hidden", "true");
                 document.getElementById("a4").setAttribute("hidden", "true");
-                //document.getElementById("ButtonContinue").disabled = true;
-
             }
 
             localStorage.triviaScore = totalCorrect * 10;
