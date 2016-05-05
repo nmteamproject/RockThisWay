@@ -15,7 +15,7 @@ var gutil = require('gulp-util');
 var gulpIgnore = require('gulp-ignore');
 
 // Settings
-var sassInput = './www/ui/scss/*.scss';
+var sassInput = './www/ui/scss/**/**.scss';
 var sassOutput = './www/ui/css';
 var sassOptions = {
     errLogToConsole: true,
@@ -41,6 +41,10 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(sassOutput)); 
 });
 
+gulp.task('sass-watch', function() {
+   return gulp
+        .watch(sassInput, ['sass']);
+});
 
 /**
  * Watch our browserify modules
@@ -149,9 +153,8 @@ gulp.task('cordova-watch', function() {
 /**
  * Watch our sass and javascript and watch
  */
-gulp.task('watch', ['javascript-watch', 'cordova-watch'], function() {
+gulp.task('watch', ['sass-watch', 'javascript-watch', 'cordova-watch'], function() {
    return gulp
-        .watch(sassInput, ['sass'])
         .on('change', function(e) {
             console.log('File ' + e.path + ' was ' + e.type + ', running tasks...');
         })

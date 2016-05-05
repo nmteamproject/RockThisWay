@@ -8,26 +8,34 @@
     <link href="ui/css/style.css" rel="stylesheet">
 </head>
 
-<body id="home">
-    <br>
+<body>
     <p class="lead">WELCOME TO THE ROCK AND ROLL HALL OF FAME</p>
-    <div class="divider redDivider"></div>
     <p class="plan">Plan you Rock Hall experience for the day!</p>
     <p class="plan">Learn about your favorite artists</p>
     <p class="plan">Discover hidden artifacts</p>
     <p class="plan">Compete against friends and family</p> 
 
-    <div id="homeBtn" onclick="takeSurvey()">
+    <!--<div id="homeBtn" onclick="takeSurvey()">
         <ul class="quiz-step step1 current">
             <div class="selected">
                 <p class="answer-text">PLAN YOUR DAY</p>
             </div>
         </ul>
-    </div>
+    </div>-->
+    <a class="button bottom-cta blue" href="pre_survey.html">Plan Your Day</a>
     
-    <!-- non blocking loading -->
     <script src="cordova.js"></script>
-    <!-- all of our bundled js -->
     <script src="bundle.js"></script>
+    <script>
+        function cleanOnStart() {
+            localStorage.removeItem("user");
+            localStorage.removeItem("score");
+            localStorage.atcScore = 0;
+            localStorage.triviaScore = 0;
+            localStorage.lyricScore = 0;
+        }
+        
+        document.addEventListener('DOMContentLoaded', cleanOnStart);
+    </script>
 </body>
 </html>

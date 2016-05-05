@@ -1,16 +1,20 @@
-var $ = require('jquery');
+import $ from 'jquery';
+import jQuery from 'jquery';
+// export for others scripts to use
+window.$ = $;
+window.jQuery = jQuery;
+
 import { evothings } from './../libs/evothings/evothings';
 import { sortable } from './../libs/sortable/Sortable';
 import './app';
 var attachFastClick = require('fastclick'); 
 
-// avoid the 300ms click delay on mobile devices
-attachFastClick(document.body); 
-
-$(function() {
-    localStorage.removeItem("user");
-    localStorage.removeItem("score");
-    localStorage.atcScore = 0;
-    localStorage.triviaScore = 0;
-    localStorage.lyricScore = 0;
+$(document).ready(function() {
+    // clear localStorage on home page load
+    // if (window.location.pathname = '/index.html') {    
+    //     cleanOnStart();
+    // }
+    
+    // avoid the 300ms click delay on mobile devices
+    attachFastClick(document.body);
 });
