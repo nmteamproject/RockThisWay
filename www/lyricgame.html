@@ -232,7 +232,7 @@
 
         if (lyricNumber != 3) {
             loadWordBank();
-            document.getElementById('verse').innerHTML = songs[lyricNumber].verse;
+            document.getElementById('verse').innerHTML = "Complete the lyrics";
             document.getElementById("sumbitLyricsButton").innerHTML = "Submit";
             document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'checkLyrics()');
         }else{
@@ -259,6 +259,13 @@
     function returnToPlan() {
         window.location.href = "yourday.html";
     }
+    
+    setInterval(function(){
+        if(soundFile.paused){
+            playingMusic = false;
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>";
+        }
+    }, 500);
 </script>
 
 
