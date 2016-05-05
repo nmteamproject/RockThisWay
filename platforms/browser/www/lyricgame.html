@@ -82,7 +82,6 @@
 
         var songTime = (soundFile.currentTime / soundFile.duration) * 359;
 
-
         document.getElementById("arc1").setAttribute("d", describeArc(57, 50, 37, 0, songTime));
     }
 
@@ -122,8 +121,6 @@
         return d;
     }
 
-
-
     // Adds lyric to answer key
     function addLyric(clickedVal) {
         var lyric = "<button class='lyric' onclick='swap(this)' value='" + clickedVal + "'>" + clickedVal + "</button>";
@@ -145,9 +142,10 @@
         }
 
         var answer = answerLyrics.substr(10, answerLyrics.length);
-        //console.log(answer);
 
         if (answer == correctLyrics[lyricNumber]) {
+            soundFile.pause();
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>";
             document.getElementById("lyrics").innerHTML = answer;
             document.getElementById("wordBank").innerHTML = "You got the Correct answer!";
             document.getElementById("sumbitLyricsButton").innerHTML = "Next";
@@ -163,14 +161,12 @@
 
     // Plays music segment
     function playMusic(song) {
-        console.log("called");
         if (playingMusic == true) {
             stop();
             soundFile.pause();
             document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>";
             playingMusic = false;
         } else {
-
             start();
             soundFile.play();
             playingMusic = true;
@@ -231,11 +227,12 @@
     }
 
     function nextLyrics() {
-
+        
         lyricNumber++;
 
         if (lyricNumber != 3) {
             loadWordBank();
+            document.getElementById('verse').innerHTML = "Complete the lyrics";
             document.getElementById("sumbitLyricsButton").innerHTML = "Submit";
             document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'checkLyrics()');
         }else{
@@ -250,7 +247,7 @@
             document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'finish()');
         }
     }
-
+    
     function finish(){
         window.location.href = "rules.html?game=5";
     }
@@ -262,6 +259,13 @@
     function returnToPlan() {
         window.location.href = "yourday.html";
     }
+    
+    setInterval(function(){
+        if(soundFile.paused){
+            playingMusic = false;
+            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>";
+        }
+    }, 500);
 </script>
 
 
