@@ -49,7 +49,7 @@
         function submit() {
 
             var correct = false;
-            var answer = $('#answer').val().toLowerCase();
+            var answer = document.getElementById('answer').value.toLowerCase();
             for (var i = 0; i < questionID.length; i++) {
                 if (answer.toLowerCase() == questionID[i].answer.toLowerCase()) {
                     var correctResponse = "crowdQ" + i;
