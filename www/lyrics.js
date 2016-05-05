@@ -23,55 +23,33 @@ var correctLyrics = [
 ];
 
 var lyricCollection0 = [
-    "and",
-    "Im",
-    "youre", 
-    "dreaming",
-    "wondering", 
-    "what",
-    "wondering", 
-    "if", 
-    "its",
-    "me", 
-    "youre", 
-    "seeing"
+    "its me",
+    "wondering if", 
+    "what youre dreaming",
+    "youre seeing",
+    "and Im wondering"
+
 ];
 
 var lyricCollection1 = [
-    "sing",
-    "with",
-    "me",
-    "just",
-    "for",
-    "today",
-    "maybe",
-    "tomorrow",
-    "the",
-    "good",
-    "lord",
-    "will",
-    "take",
-    "you",
-    "away"
+    "maybe tomorrow",
+    "just for today",
+    "you away",
+    "the good lord",
+    "will take",
+    "sing with me"
 ];
 
 var lyricCollection2 = [
-    "shes",
-    "a long",
-    "lost",
-    "love",
-    "at",
-    "first",
-    "bite",
-    "baby",
-    "maybe",
-    "youre",
-    "wrong",
-    "but",
-    "you",
-    "know",
-    "its",
-    "alright"
+    
+    "lost love",
+    "shes a long",
+    "baby maybe",
+    "its alright",
+    "youre wrong",
+    "but you know",
+    "at first bite"
+    
 ];
 
 var musicCollection = [
