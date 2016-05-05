@@ -123,12 +123,22 @@ p {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#32e8f2', endColorstr='#2a636d',GradientType=1 );
 }
 
+#questionIcon {
+    width: 40%;
+    margin-left: 40%;
+    margin-top: 10%;
+}
+
+.surveryTitle {
+    margin-top: -15%;
+}
+
 #questionNumber {
     color: gray ;
 }
 
 .questionNum {
-    color: white;
+    color: #32e8f2;
 }
 
 .card {
@@ -186,6 +196,22 @@ p {
     margin-top: -20%;
     margin-bottom: -20%;
     min-height: 100%;
+}
+
+#survey {
+    background-image: url("../../images/surveyAssets/surveyBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: -1.7%;
+}
+
+body#survey:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 0;
+    bottom: 0px;
+    position: absolute;
 }
 
 /*  ----------------------------------------------------------

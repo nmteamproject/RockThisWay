@@ -16,23 +16,13 @@
     <script src="js/bundle.js"></script>
 </head>
 
-<body>
+<body id="survey">
 
-    <header>
-        <button class="back" onclick="history.back()">
-            <img src="ui/images/arrow-left.svg" />
-        </button>
-
-        Survey
-
-    </header>
-    
-    <div id="questionNumber">
-        <p><span class="questionNum">1</span>/10</p>
-    </div>
+    <p class="surveyTitle">Survey</p>
 
     <div id="quizzie">
         <ul class="quiz-step step1 current">
+            <div id="questionIcon"></div>
             <div id="questions">
 
             </div>
@@ -48,6 +38,9 @@
                 
             </div>
         </ul>
+        <div id="questionNumber">
+            <p><span class="questionNum">1</span>/10</p>
+        </div>
         <div id="break">
         <br>
         </div>
@@ -72,21 +65,17 @@
 
         // Quiz result options in a separate object for flexibility
         var resultOptions = [
-            {   title: 'Rocker Route',
-                desc: '<p>You are a hardcore rocker at heart and love classic rock and roll!</p><br>' +
-                '<img src=\"images/rock.jpg\"><br>' +
+            {   title: 'FOREVER ROCK AND ROLL',
+                desc: '<p>Your plan will show you the best Rock and Roll exhibits from classic to modern!</p><br>' +
                 '<button class=\"selected\"'},
-            {   title: 'Pop Route',
-                desc: '<p>You love all popular music and like to stay contemporary!</p><br>' +
-                '<img src=\"images/pop.jpg\"><br>' +
+            {   title: 'POPULAR AND CONTEMPORARY',
+                desc: '<p>You will see more contemporary artists that have already made their way into the Rock Hall!</p><br>' +
                 '<button class=\"selected\"'},
-            {   title: 'Country Route',
-                desc: '<p>You like to sit back and listen to the soothing twang of country music!</p><br>' +
-                '<img src=\"images/country.jpg\"><br>' +
+            {   title: 'COUNTRY LOVE',
+                desc: '<p>Your plan will show you the roots and inspiration of Rock and Roll, good ol\' country music!</p><br>' +
                 '<button class=\"selected\"'},
-            {   title: 'Alternative Route',
-                desc: '<p>You like to stray away from the norm and listen to something a little out of the box!</p><br>' +
-                '<img src=\"images/alternative.jpg\"><br>' +
+            {   title: 'SOMETHING DIFFERENT',
+                desc: '<p>You love anything and everything a little out of the box. You will see the greatest examples of Alternative music!</p><br>' +
                 '<button class=\"selected\"'}
         ];
         
@@ -97,17 +86,34 @@
         var result;
         var questionText;
         var questionAnswers = [];
+        var questionIcons = [];
+        var surveyBackgrounds = [];
         setupQuestion(currentStep);
         
         //populate question
         function setupQuestion(currentStep){
+            var questionIcon = document.getElementById("questionIcon");
+            //preload icons and backgrounds
+            for(var i=0; i<10; i++){
+                //icons
+                var iconImg = new Image();
+                iconImg.src = icons[i];
+                questionIcons[i] = iconImg;
+                
+                //backgrounds
+                var backImg = new Image();
+                backImg.src = background[i];
+                surveyBackgrounds[i] = backImg;
+            }
+            questionIcon.innerHTML = '<img src=\"'+ questionIcons[currentStep].src +'"\ width=\"50%\">';
+            
             var currentQuestion = eval("q" + currentStep + "Answers");
             document.getElementById("questions").innerHTML = 
                 "<li class=\"question\">" + 
                     "<div class=\"question-wrap\">" + 
                         "<p>" + questions[currentStep] + "</p>" + 
                     "</div>" +
-                "</li>"
+                "</li>";
                     
             for(var i=0; i < currentQuestion.length; i++){
                 //question buttons
@@ -180,14 +186,19 @@
                     $(element).empty();
                     setupQuestion(currentStep);
                 } else if(currentStep == 10){
+                    var questionIcon = document.getElementById("questionIcon");
+                    var body = document.getElementById("survey");
+                    $(questionIcon).empty();
                     goToResults();
-                    $("#questionNumber").empty();
+                    $("#questionNumber").remove();
+                    $(body).css("background-image", "url(\"" + surveyBackgrounds[0].src +"\")");
                 }
             }
         }
         
         // display scoring results
         function calcResults() {
+            $("#break").remove();
             var element = document.getElementById("answers");
             $(element).empty();
             
@@ -204,13 +215,6 @@
             $(line).addClass("results-inner");
             element.appendChild(line);
             
-            var para = document.createElement("p");
-            $(para).addClass("answer-text");
-            line.appendChild(para);
-            
-            var text = document.createTextNode("Your result is:");
-            para.appendChild(text);
-            
             var heading = document.createElement("h1");
             line.appendChild(heading);
             
@@ -224,6 +228,9 @@
 
                 var descText = resultOptions[0].desc;
                 desc.innerHTML = descText;
+                
+                var body = document.getElementById("survey");
+                $(body).css("background-image", "url(\"" + surveyBackgrounds[1].src +"\")");
             } else if(result == "Pop"){
                 var headingText = resultOptions[1].title;
                 heading.innerHTML = headingText;
@@ -234,6 +241,9 @@
 
                 var descText = resultOptions[1].desc;
                 desc.innerHTML = descText;
+                
+                var body = document.getElementById("survey");
+                $(body).css("background-image", "url(\"" + surveyBackgrounds[2].src +"\")");
             } else if(result == "Country"){
                 var headingText = resultOptions[2].title;
                 heading.innerHTML = headingText;
@@ -244,6 +254,9 @@
 
                 var descText = resultOptions[2].desc;
                 desc.innerHTML = descText;
+                
+                var body = document.getElementById("survey");
+                $(body).css("background-image", "url(\"" + surveyBackgrounds[3].src +"\")");
             } else if(result == "Alternative"){
                 var headingText = resultOptions[3].title;
                 heading.innerHTML = headingText;
@@ -254,7 +267,28 @@
 
                 var descText = resultOptions[3].desc;
                 desc.innerHTML = descText;
+                
+                var body = document.getElementById("survey");
+                $(body).css("background-image", "url(\"" + surveyBackgrounds[4].src +"\")");
             }
+            //retake button
+            var cElement = document.getElementById("answers");
+            var cLine = document.createElement("li");
+            cElement.appendChild(cLine);
+            
+            var cContainer = document.createElement("div");
+            $(cContainer).addClass("answerSelected");
+            cLine.appendChild(cContainer);
+            
+            var cPara = document.createElement("p");
+            $(cPara).addClass("answer-text");
+            cContainer.appendChild(cPara);
+            
+            var continueText = document.createTextNode("RETAKE SURVEY");
+            cPara.appendChild(continueText);
+            
+            cContainer.addEventListener("click", retake);
+            
             //continue button
             var cElement = document.getElementById("answers");
             var cLine = document.createElement("li");
@@ -333,6 +367,10 @@
             cPara.appendChild(continueText);
             
             cContainer.addEventListener("click", calcResults);
+        }
+        
+        function retake(){
+            window.location.href = "survey.html";
         }
         
         function skip(){

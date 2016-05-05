@@ -257,10 +257,11 @@
                         $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
                     } 
                     else if (mNearestBeacon.major == 112) {
-                        $("#modalPlay").attr("onclick", "playGame(1)");
+                        $("#modalPlay").attr("onclick", "leaveExhibits()");
+                        $("#modalPlay").text("Leave");
                         $('#artistName').text("Leaving");
                         $('#modalTitle').text("Are you Prepared to go?");
-                        $('#artistImage').attr('src', 'images/planAerosmith.png');
+                        $('#artistImage').attr('src', 'images/exhibit.png');
                         $('#artistInfo').text("");
                         $("#modalDescription").text("If you are leaving the our exhibit, please press the following button and give this phone to an exhibitor.");
                     }else {
@@ -573,7 +574,6 @@
     
     </header>
 
-    
     
     
     <div id="gameModal">
