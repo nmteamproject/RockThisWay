@@ -55,6 +55,17 @@ body {
     }
 }
 
+.round-count {
+    @extend .question-count;
+    color: $blue;
+    letter-spacing: 7px;
+    font-size: rem(16);
+    &:first-line {
+        font-size: rem(30);
+        letter-spacing: 2px;
+    }
+}
+
 .close-btn {
     position: fixed;
     top: rem(10);

@@ -27,3 +27,9 @@
 .user {
     background-image: url('../images/backgrounds/user.png');
 }
+
+.against-the-crowd {
+    &.rules {
+        background-image: url('../images/backgrounds/atc-1.png');
+    }
+}

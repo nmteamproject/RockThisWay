@@ -71,5 +71,13 @@
             font-size: inherit;
             letter-spacing: inherit;    
         }
+        &.white {
+            margin-bottom: rem(40);
+            letter-spacing: 4px;
+            &:after {
+                background-color: #FFF;
+                bottom: -20px; 
+            }
+        }
     }
 }

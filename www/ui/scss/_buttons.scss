@@ -21,6 +21,9 @@
             &.red {
                 background-image: linear-gradient(to right, rgba(160,43,35,1) 0%,rgba(237,95,60,1) 100%);
             }
+            &.green {
+                background-image: linear-gradient(to right, rgba(130,221,67,1) 0%,rgba(49,142,72,1) 100%);
+            }
         }
         &-secondary {
             position: fixed;
