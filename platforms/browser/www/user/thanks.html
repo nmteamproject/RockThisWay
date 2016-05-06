@@ -9,8 +9,14 @@
 
     <title>Rock This Way</title>
     <script src="https://use.typekit.net/giv3oua.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    
+    <script>
+        try {
+            Typekit.load({
+                async: true
+            });
+        } catch (e) {}
+    </script>
+
     <link href="../ui/css/style.css" rel="stylesheet">
 </head>
 
@@ -21,13 +27,23 @@
         <h1 class="title--alt">
            Thanks for playing!
         </h1>
-        
+
         <p class="main-content">Please return your phone before leaving!</p>
+
+        <p class="time-count">
+            Name: <span id="name"></span>
+            <br>Score: <span id="score"></span>
+        </p>
     </main>
-    
+
 
     <script src="../cordova.js"></script>
     <script src="../bundle.js"></script>
-
+    <script>
+        document.getElementById('name').innerHTML = localStorage.getItem('user');
+        var total = parseInt(localStorage.getItem('triviaScore')) + parseInt(localStorage.getItem('lyricScore')) + parseInt(localStorage.getItem('atcScore'));
+        document.getElementById('totalPoints').innerHTML = total;
+    </script>
 </body>
+
 </html>
