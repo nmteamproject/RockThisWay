@@ -58,4 +58,17 @@
             font-size: inherit;
         }
     }
+    &--alt {
+        @extend .title__main;
+        font-size: rem(32); 
+        text-indent: 0;
+        font-weight: bold;
+        letter-spacing: 2px; 
+        font-family: 'antonioregular';
+        margin-top: rem(180);
+        &:first-line {
+            font-size: inherit;
+            letter-spacing: inherit;    
+        }
+    }
 }

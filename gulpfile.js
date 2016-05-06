@@ -146,7 +146,7 @@ gulp.task('cordova-browser', ['cordova-clean'], function(callback) {
  * watch for browser changes
  */
 gulp.task('cordova-watch', function() {
-   gulp.watch(['./www/bundle.js', './www/*.html', './www/ui/css/style.css'], ['cordova-browser']);
+   gulp.watch(['./www/bundle.js', './www/**/*.html', './www/ui/css/style.css'], ['cordova-browser']);
 });
 
 /**

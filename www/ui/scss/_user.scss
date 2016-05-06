@@ -1,0 +1,14 @@
+.user {
+    .main-content {
+        margin-bottom: rem(30);
+    }
+}
+
+input[type="text"] {
+    background-color: #000; 
+    border-radius: 0;
+    font-style: italic;
+    font-size: rem(14);
+    padding: rem(12);
+    color: #FFF;
+}
