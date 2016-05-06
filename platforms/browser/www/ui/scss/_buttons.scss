@@ -18,6 +18,9 @@
             &.blue {
                 background: linear-gradient(to right, #05dbdb 0%,#178d8e 100%);
             }
+            &.red {
+                background-image: linear-gradient(to right, rgba(160,43,35,1) 0%,rgba(237,95,60,1) 100%);
+            }
         }
         &-secondary {
             position: fixed;

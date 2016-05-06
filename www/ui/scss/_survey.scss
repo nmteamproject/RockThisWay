@@ -64,3 +64,68 @@
         }
     }
 }
+
+.survey-edit-options {
+    li {
+        border: 2px solid #252525;
+        margin-bottom: rem(20);
+        padding: rem(10);
+        p {
+            font-style: italic;
+            font-weight: 100;
+        }
+        &.selected {
+            border: none;
+            label {
+                color: rgba($light-gray, .4);
+                &:before {
+                    color: $light-gray;
+                }
+            }
+        }
+    }
+    input[type="checkbox"] {
+        float: left;
+        display: none;
+    }
+    input[type=checkbox]:checked + label:after {
+        content: "\2713";
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+        font-size: rem(18);
+        color: #f3f3f3;
+        background-color: $red;
+        text-align: center;
+        padding-top: 2px;
+        line-height: 15px;
+    }
+    label {
+        color: #fff;
+        font-weight: normal;
+        line-height: 1.3;
+        cursor: pointer;
+        position: relative;
+        padding-left: rem(35); 
+        font-size: rem(14);
+        &:before {
+            content: 'You Answered';
+            text-transform: uppercase;
+            font-family: 'antoniolight';
+            font-size: rem(11);
+            letter-spacing: 2px;
+            color: $light-gray;
+            display: block;
+        }
+        &:after {
+            content: "";
+            display: inline-block;
+            border-radius: 2px;
+            width: rem(26); 
+            height: rem(26);
+            margin-right: 10px;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            border: 2px solid $red;
+        }
+    }
+}

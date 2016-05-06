@@ -37,3 +37,10 @@
        margin-top: rem(20);
    }
 }
+
+.main-header--survey {
+    @extend .main-header;
+    .sub-title {
+        margin-bottom: rem(20);
+    }
+}
