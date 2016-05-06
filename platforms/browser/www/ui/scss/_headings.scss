@@ -46,4 +46,16 @@
             height: rem(5); 
         }
     }
+    &--small {
+        @extend .title__main;
+        font-size: rem(22);
+        text-indent: 0;
+        font-weight: bold;
+        letter-spacing: 4px; 
+        font-family: 'antonioregular';
+        margin-top: rem(230);
+        &:first-line {
+            font-size: inherit;
+        }
+    }
 }
