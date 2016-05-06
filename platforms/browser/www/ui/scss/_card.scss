@@ -59,3 +59,46 @@
         }
     }
 }
+
+.card-stack {
+    background-color: #FFF;
+    padding: rem(15);
+    border-radius: 4px;
+    transform-origin: 50% 50%;
+    border: 1px solid rgba($light-gray, .5);
+    position: relative;
+    margin-bottom: rem(30);
+    font-size: rem(14);
+    h3 {
+        color: $dark-gray;
+        font-family: 'antoniolight';
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: rem(16); 
+    }
+    &:before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transform: rotate(7deg);
+        background-color: #FFF;
+        border: 1px solid rgba($light-gray, .5);
+    }
+    &:after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transform: rotate(-3deg);
+        background-color: #FFF;
+        border: 1px solid rgba($light-gray, .5);
+    }
+}

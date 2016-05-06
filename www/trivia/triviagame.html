@@ -9,19 +9,12 @@
 
     <title>Rock This Way</title>
 
-    <style>
-        @import 'ui/css/style.css';
-        /*        @import 'ui/css/animate.css';*/
-    </style>
+    <link href="../ui/css/style.css" rel="stylesheet">
+     
     <script src="https://use.typekit.net/giv3oua.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    
-    <script src="cordova.js"></script>
-    <script src="libs/jquery/jquery.js"></script>
-    <script src="libs/evothings/evothings.js"></script>
-    <script src="triviasheet.js"></script>
-
-
+   
+    <!--<script src="triviasheet.js"></script>
     <script language="javascript" type="text/javascript">
         // Array of trivia data
 
@@ -184,42 +177,53 @@
         function returnToPlan() {
             document.location = "yourday.html";
         }
-    </script>
-
+    </script>-->
 </head>
 
-
-
-
-<body id="triviaGame">
-
-    <div class="gameHeader">
+<body class="trivia game">
+    <header class="main-header">
+        <h2 class="sub-title">The Beatles Trivia</h2>
+    </header>
+    
+    <main class="container">
+        <p class="timer">00:01:00</p>
+        <div class="card-stack">
+            <h3>History</h3>
+            <p>The Beatles were the most influential popular music group of the rock era, with global sales exceeding 1.1 billion records.</p>
+        </div>
+    
+        <ul class="options-list"> 
+            <li>1967</li>
+            <li class="selected">1970</li>
+            <li>1975</li>
+            <li class="selected wrong">1981</li>
+        </ul>
+    
+        <p class="trivia-count blue">1/10</p>
+    </main>
+    <!--<div class="gameHeader">
         <img src="images/arrow.png" class="backButton" onclick="returnToPlan()"> Beatles Trivia
-    </div>
+    </div>-->
 
-    <center>
-
-        <br>Time Remaining
+        <!--<p>Time Remaining</p>
         <div id="TimerElement">30</div>
 
         <div id="TriviaQuestions" style="color:black">
             <div id="ScoreBoard" style="color:white">Score 0</div>
-        </div>
+        </div>-->
 
-
+<!--
         <div id="triviaInput">
             <button class="triviaAnswer" id="a1" onclick="processAnswer('1')">C</button>
             <button class="triviaAnswer" id="a2" onclick="processAnswer('2')">R</button>
             <button class="triviaAnswer" id="a3" onclick="processAnswer('3')">A</button>
             <button class="triviaAnswer" id="a4" onclick="processAnswer('4')">P</button>
             <button class="triviaAnswer" id="end" onclick="finish()" hidden="true">Return to Plan</button>
-        </div>
+        </div>-->
 
-
-
-        <div id="progress"></div>
-
-    </center>
+        <!--<div id="progress"></div>-->
+    
+    <script src="../cordova.js"></script>
+    <script src="../bundle.js"></script>
 </body>
-
 </html>

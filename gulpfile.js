@@ -121,18 +121,13 @@ gulp.task('build', ['sass', 'javascript'], function(callback) {
  * Clean the browser build
  */
 gulp.task('cordova-clean', function() {
-    cordova.clean({
-        'platforms': ['browser'],
-        'options': {
-            argv: ['--release','--gradleArg=--no-daemon']
-        }
-    });
+    cordova.clean();
 });
 
 /**
  * Build for browser
  */
-gulp.task('cordova-browser', ['cordova-clean'], function(callback) {
+gulp.task('cordova-browser', function(callback) {
     cordova.build({
         'platforms': ['browser'],
         'options': {
