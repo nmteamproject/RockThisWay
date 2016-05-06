@@ -74,6 +74,22 @@ body {
     }
 }
 
+.trivia-count {
+    font-family: 'antoniolight';
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: rem(5);
+}
+
+.timer {
+    font-family: 'antonioregular';
+    color: #FFF;
+    font-size: rem(32);
+    text-align: center;
+    letter-spacing: 6px;
+}
+
 .close-btn {
     position: fixed;
     top: rem(10);
@@ -104,4 +120,23 @@ body {
 
 .blue {
     color: $blue;
+}
+
+
+.options-list {
+    text-align: center;
+    li {
+        border: 2px solid #252525;
+        border-bottom: none; 
+        padding: rem(20) 0;
+        color: #FFF;
+        font-size: rem(17);
+        transition: all .2s linear;
+        &:last-child {
+            border-bottom: 2px solid #252525;
+        }
+        &.selected {
+            background-image: linear-gradient(to right, rgba(160,43,35,1) 0%,rgba(237,95,60,1) 100%);
+        }
+    }
 }
