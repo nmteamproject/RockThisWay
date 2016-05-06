@@ -4,19 +4,15 @@
         "icon": "record",
         "answers": [
             {
-                "points": "0",
                 "answer": "Yes"
             },
             {
-                "points": "0",
                 "answer": "No"
             },
             {
-                "points": "0",
                 "answer": "Maybe"
             },
             {
-                "points": "0",
                 "answer": "Not sure"
             }
         ]
@@ -26,19 +22,15 @@
         "icon": "record",
         "answers": [
             {
-                "points": "1",
                 "answer": "Rock"
             },
             {
-                "points": "2",
                 "answer": "Pop"
             },
             {
-                "points": "3",
                 "answer": "Alternative"
             },
             {
-                "points": "4",
                 "answer": "Country"
             }
         ]
@@ -48,19 +40,15 @@
         "icon": "record",
         "answers": [
             {
-                "points": "3",
                 "answer": "60s"
             },
             {
-                "points": "1",
                 "answer": "70s"
             },
             {
-                "points": "1",
                 "answer": "80s"
             },
             {
-                "points": "2",
                 "answer": "90s"
             }
         ]
@@ -70,19 +58,15 @@
         "icon": "record",
         "answers": [
             {
-                "points": "1",
                 "answer": "\"Jump\" by Van Halen"
             },
             {
-                "points": "2",
                 "answer": "\"Like a Virgin\" by Madonna"
             },
             {
-                "points": "2",
                 "answer": "\"Hotline Bling\" by Drake"
             },
             {
-                "points": "4",
                 "answer": "\"Ring of Fire\" by Johnny Cash"
             }
         ]
@@ -92,19 +76,15 @@
         "icon": "record",
         "answers": [
             {
-                "points": "1",
                 "answer": "Aerosmith"
             },
             {
-                "points": "2",
                 "answer": "Beyonce"
             },
             {
-                "points": "4",
                 "answer": "Nirvana"
             },
             {
-                "points": "1",
                 "answer": "Green Day"
             }
         ]
@@ -114,19 +94,15 @@
         "icon": "record",
         "answers": [
             {
-                "points": "1",
                 "answer": "Guitar"
             },
             {
-                "points": "1",
                 "answer": "Bass"
             },
             {
-                "points": "1",
                 "answer": "Drums"
             },
             {
-                "points": "4",
                 "answer": "Piano"
             }
         ]
@@ -136,19 +112,15 @@
         "icon": "record",
         "answers": [
             {
-                "points": "4",
                 "answer": "Kurt Cobain's Guitar"
             },
             {
-                "points": "2",
                 "answer": "Michael Jackson's Glove"
             },
             {
-                "points": "3",
                 "answer": "Taylor Swift's Lyric Sheets"
             },
             {
-                "points": "1",
                 "answer": "Elvis Presley's Custom Motorcycle"
             }
         ]

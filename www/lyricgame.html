@@ -11,9 +11,6 @@
     <script src="https://use.typekit.net/giv3oua.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <link href="ui/css/style.css" rel="stylesheet">
-    <script src="lyrics.js"></script>
-    <script src="cordova.js"></script>
-    <script src="bundle.js"></script>
 </head>
 
 <body id="lyricGame">
@@ -26,26 +23,20 @@
         <div id="songDetails">
             <div id="artist"></div>
             <div id="song"></div>
-<<<<<<< HEAD
-           <!--div id="devTimerDebug">Derp, comment me out, derp</div-->
-=======
->>>>>>> 18b451709eaa491a9c59ed8287a5b93be81b0ec1
         </div>
         <svg id="playTracker">
             <path id="arc1" fill="none" stroke="#e82828" stroke-width="3" />
         </svg>
-        <center>
 
             <button class="lyricButton" onclick="showLyrics()"><img src="images/lyricGameUI/lyricLyricButton.png" height="40px"></button>
 
             <button id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="images/lyricGameUI/lyricPlayButton.png" height="70px"></button>
 
             <button class="lyricButton" onclick="loadWordBank()"><img src="images/lyricGameUI/lyricRestartButton.png" height="40px"></button>
-        </center>
+>
         <div id="verse" class="directions">Complete the lyrics</div>
-        <div></div>
+
     </div>
-    <center>
         <div id="game">
 
 
@@ -56,15 +47,13 @@
             </div>
         </div>
 
-    </center>
-
     <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
-
-</body>
-
-
-
-<script type="text/javascript">
+    
+    <script src="lyrics.js"></script>
+    <script src="cordova.js"></script>
+    <script src="bundle.js"></script>
+    
+    <script type="text/javascript">
     window.onload = loadWordBank;
 
     var lyricNumber = 0;
@@ -94,10 +83,6 @@
         tick();
         timer = setTimeout(start, 1000);
         timeForGame++;
-<<<<<<< HEAD
-        //document.getElementById("devTimerDebug").innerHTML = timeForGame; Debug line
-=======
->>>>>>> 18b451709eaa491a9c59ed8287a5b93be81b0ec1
     }
 
     function stop() {
@@ -276,6 +261,5 @@
         }
     }, 500);
 </script>
-
-
+</body>
 </html>
