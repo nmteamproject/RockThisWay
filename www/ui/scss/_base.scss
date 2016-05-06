@@ -66,6 +66,14 @@ body {
     }
 }
 
+.time-count {
+    @extend .round-count;
+    letter-spacing: 3px; 
+    &:first-line {
+        letter-spacing: 5px;
+    }
+}
+
 .close-btn {
     position: fixed;
     top: rem(10);

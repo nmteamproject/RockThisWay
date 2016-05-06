@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no
+		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Rock This Way</title>
+
+    <style>
+        @import 'ui/css/style.css';
+        /*        @import 'ui/css/animate.css';*/
+    </style>
+    <script src="https://use.typekit.net/giv3oua.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    
+    <script src="cordova.js"></script>
+    <script src="libs/jquery/jquery.js"></script>
+    <script src="libs/evothings/evothings.js"></script>
+    <script src="triviasheet.js"></script>
+
+
+    <script language="javascript" type="text/javascript">
+        // Array of trivia data
+
+        var tArrayLength = TriviaData.length;
+
+        localStorage.triviaScore = 0;
+
+        // Variables to track state of the game
+        // i.e. number questions asked, current correct total and current question
+        var questionsAsked = 0;
+        var totalCorrect = 0;
+        var currentQuestion;
+        var selectionValid = false;
+
+        var progress = [];
+
+        // Load up first question
+        window.onload = setup;
+
+        var counting = setInterval(timerCountdown, 1000);
+
+        //Sets up the timer.
+        var timeLeft = 30;
+
+        //Flag to disable timer at game completion.
+        var stillCounting = 1;
+
+        //Trivia Score
+        var tScore = 0;
+
+        // Sets up all question cards
+        function setup() {
+            setQuestion();
+            for (var i = 0; i < TriviaData.length; i++) {
+                progress[i] = "&#9744;";
+
+                document.getElementById('TriviaQuestions').innerHTML += "<div class='TriviaQuestion'>" + TriviaData[(i)][0] + "</div>";
+
+
+            }
+
+            var div = document.getElementsByClassName('TriviaQuestion');
+            for (var i = 0; i < div.length; i++) {
+                var deg = Math.floor(Math.random() * 11) - 5;
+                div[i].style.webkitTransform = 'rotate(' + deg + 'deg)';
+                div[i].style.mozTransform = 'rotate(' + deg + 'deg)';
+                div[i].style.msTransform = 'rotate(' + deg + 'deg)';
+                div[i].style.oTransform = 'rotate(' + deg + 'deg)';
+                div[i].style.transform = 'rotate(' + deg + 'deg)';
+            }
+
+            trackProgress();
+        }
+
+        // moves cards off screen when you answer
+        function removeQuestion(correct) {
+            var div = document.getElementsByClassName('TriviaQuestion');
+            if (correct == 1) {
+                div[div.length - questionsAsked].className += " animated bounceOutRight";
+            }else
+            if (correct == 2) {
+                div[div.length - questionsAsked].className += " animated bounceOutLeft";
+            }
+
+        }
+
+        // Sets question text and indicator so that we know the question has been displayed
+        function setQuestion() {
+            selectionValid = false; // Flag to make sure question has not been asked yet
+            while (selectionValid == false) {
+
+                currentQuestion = 9 - (questionsAsked); // randomly select starting question
+
+                //currentQuestion = Math.floor((Math.random() * 14) + 1); //Trying to fix bug were the questions are no randomly asked, they are asked in order of placement in array.
+                if (TriviaData[currentQuestion][2] == "no") {
+                    selectionValid = true;
+                }
+            }
+            //document.getElementById("TriviaQuestion").innerHTML = TriviaData[currentQuestion][0];
+            TriviaData[currentQuestion][2] = "yes";
+            setAnswers(currentQuestion);
+        }
+
+        function setAnswers(questionNumber) {
+            document.getElementById('a1').innerHTML = TriviaData[questionNumber][3];
+            document.getElementById('a2').innerHTML = TriviaData[questionNumber][4];
+            document.getElementById('a3').innerHTML = TriviaData[questionNumber][5];
+            document.getElementById('a4').innerHTML = TriviaData[questionNumber][6];
+        }
+
+        function trackProgress() {
+            document.getElementById('progress').innerHTML = "" + questionsAsked + "/10";
+
+        }
+
+
+        //Processes whether the answer was correct or not
+        function processAnswer(myAnswer) {
+            questionsAsked++;
+            if (TriviaData[currentQuestion][1] == myAnswer) {
+                // answer correct
+                totalCorrect = totalCorrect + 1;
+                timeLeft += 10;
+                trackProgress();
+                removeQuestion(1);
+            } else {
+                trackProgress();
+                removeQuestion(2);
+            }
+
+            if (questionsAsked < 10) {
+
+                setQuestion();
+            }
+            // final question asked - disable button and show final results
+            if (questionsAsked == 10) {
+                //alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
+
+                stillCounting = 0;
+
+                document.getElementById("end").removeAttribute("hidden");
+                document.getElementById("a1").setAttribute("hidden", "true");
+                document.getElementById("a2").setAttribute("hidden", "true");
+                document.getElementById("a3").setAttribute("hidden", "true");
+                document.getElementById("a4").setAttribute("hidden", "true");
+            }
+
+            localStorage.triviaScore = totalCorrect * 10;
+            document.getElementById("ScoreBoard").innerHTML = "Score " + totalCorrect * 10;
+        }
+
+
+        //The countdown timer, getting questions correct adds ten seconds.
+        function timerCountdown() {
+
+
+            if (stillCounting == 1) {
+                timeLeft--;
+                document.getElementById("TimerElement").innerHTML = timeLeft;
+            }
+            if (stillCounting == 0) {
+                var staticTime = timeLeft;
+                document.getElementById("TimerElement").innerHTML = staticTime;
+            }
+
+            if (timeLeft <= 0) {
+                timeLeft = 1;
+                //alert("Out of time!");
+            }
+        }
+
+        if (localStorage.getItem("score") != undefined) {
+            var points = parseInt(localStorage.score);
+        }
+
+        function finish() {
+            document.location = "rules.html?game=4";
+        }
+
+        function returnToPlan() {
+            document.location = "yourday.html";
+        }
+    </script>
+
+</head>
+
+
+
+
+<body id="triviaGame">
+
+    <div class="gameHeader">
+        <img src="images/arrow.png" class="backButton" onclick="returnToPlan()"> Beatles Trivia
+    </div>
+
+    <center>
+
+        <br>Time Remaining
+        <div id="TimerElement">30</div>
+
+        <div id="TriviaQuestions" style="color:black">
+            <div id="ScoreBoard" style="color:white">Score 0</div>
+        </div>
+
+
+        <div id="triviaInput">
+            <button class="triviaAnswer" id="a1" onclick="processAnswer('1')">C</button>
+            <button class="triviaAnswer" id="a2" onclick="processAnswer('2')">R</button>
+            <button class="triviaAnswer" id="a3" onclick="processAnswer('3')">A</button>
+            <button class="triviaAnswer" id="a4" onclick="processAnswer('4')">P</button>
+            <button class="triviaAnswer" id="end" onclick="finish()" hidden="true">Return to Plan</button>
+        </div>
+
+
+
+        <div id="progress"></div>
+
+    </center>
+</body>
+
+</html>
