@@ -1,0 +1,26 @@
+.trivia-count {
+    font-family: 'antoniolight';
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: rem(5);
+}
+
+.timer {
+    font-family: 'antonioregular';
+    color: #FFF;
+    font-size: rem(32);
+    text-align: center;
+    letter-spacing: 6px;
+}
+
+.trivia {
+    .options-list li { 
+        &.selected {
+            background-image: linear-gradient(to bottom, rgba(130,221,67,1) 0%,rgba(50,159,24,1) 100%);
+            &.wrong {
+                background-image: linear-gradient(to bottom, rgba(171,13,13,1) 0%,rgba(96,4,4,1) 100%); 
+            }
+        }
+    }
+}
