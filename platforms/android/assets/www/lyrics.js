@@ -2,17 +2,17 @@ var songs = [
     {
         artist: "Aerosmith",
         song: "Don't Wanna Miss a Thing",
-        verse: "Lieing close to you, feeling your heart beating..."
+        verse: "Lying close to you, feeling your heart beating..."
     },
     {
         artist: "Aerosmith",
         song: "Dream On",
-        verse: "sing with me, sing for the year sing for the laughter, sing for the tear..."
+        verse: "Sing with me, sing for the year sing for the laughter, sing for the tear..."
     },
     {
         artist: "Aerosmith",
         song: "Dude (Looks Like a Lady)",
-        verse: "cruise into a bar on the shore, her picture graced the grime on the door..."
+        verse: "Cruise into a bar on the shore, her picture graced the grime on the door..."
     }
 ];
 
