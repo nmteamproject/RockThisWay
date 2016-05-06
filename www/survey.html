@@ -19,11 +19,31 @@
     <script src="js/bundle.js"></script>
 </head>
 
-<body id="survey">
+<body class="survey">
+    <header class="main-header">
+        <h2 class="sub-title">Survey</h2>
+    </header>
+    
+    <main class="container">
+        <header class="survey-header">
+            <img class="header-image" src="ui/images/icons/record.png" alt="record">
+            <a class="back" href="#"><img class="disabled" src="ui/images/icons/arrow.png"></a>
+            <a class="next" href="#"><img src="ui/images/icons/arrow.png"></a>
+            <h1>Pick an Artist</h1>
+        </header>
+        
+        <ul class="survey-options">
+            <li>Walk the Moon</li>
+            <li class="selected">Beyonce</li>
+            <li>Elvis Presely</li>
+            <li>Rolling Stones</li>
+        </ul>
+    </main>
+    
+    <p class="page-count"><span class="blue">3</span>/7</p>
+    <a class="button bottom-cta blue" href="#">Next</a>
 
-    <p class="surveyTitle">Survey</p>
-
-    <div id="quizzie">
+    <!--<div id="quizzie">
         <ul class="quiz-step step1 current">
             <div id="questionIcon"></div>
             <div id="questions">
@@ -47,9 +67,9 @@
         <div id="break">
         <br>
         </div>
-    </div>
+    </div>-->
     
-    <script language="javascript" type="text/javascript">
+    <!--<script language="javascript" type="text/javascript">
         $(function(){
             $('body').hide().fadeIn('slow');
         });
@@ -387,7 +407,6 @@
         function skip(){
             document.location = "yourday.html";
         }
-    </script>
+    </script>-->
 </body>
-
 </html>
