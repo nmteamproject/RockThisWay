@@ -109,40 +109,56 @@
 
         }
 
-
         //Processes whether the answer was correct or not
         function processAnswer(myAnswer) {
-            questionsAsked++;
+            var answer = document.getElementById("a" + myAnswer);
+            var correctAnswer = document.getElementById("a" + TriviaData[currentQuestion][1]);
             if (TriviaData[currentQuestion][1] == myAnswer) {
-                // answer correct
-                totalCorrect = totalCorrect + 1;
-                timeLeft += 10;
-                trackProgress();
-                removeQuestion(1);
+                //turn answer green
+                $(answer).addClass("selected");
             } else {
-                trackProgress();
-                removeQuestion(2);
+                //turn answer red
+                $(answer).addClass("selected wrong");
+                $(correctAnswer).addClass("selected");
             }
+            
+            setTimeout(function(){
+                for(var i=0; i<4; i++){
+                    var ans = document.getElementById("a" + (i+1));
+                    $(ans).removeClass("selected");
+                    $(ans).removeClass("selected wrong");
+                }
 
-            if (questionsAsked < 10) {
+                questionsAsked++;
+                if (TriviaData[currentQuestion][1] == myAnswer) {
+                    // answer correct
+                    totalCorrect = totalCorrect + 1;
+                    timeLeft += 10;
+                    trackProgress();
+                    removeQuestion(1);
+                } else {
+                    trackProgress();
+                    removeQuestion(2);
+                }
 
-                setQuestion();
-            }
-            // final question asked - disable button and show final results
-            if (questionsAsked == 10) {
-                //alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
+                if (questionsAsked < 10) {
 
-                stillCounting = 0;
+                    setQuestion();
+                }
+                // final question asked - disable button and show final results
+                if (questionsAsked == 10) {
+                    //alert("Quiz complete! You got " + totalCorrect + " correct out of 10.");
 
-                document.getElementById("end").removeAttribute("hidden");
-                document.getElementById("a1").setAttribute("hidden", "true");
-                document.getElementById("a2").setAttribute("hidden", "true");
-                document.getElementById("a3").setAttribute("hidden", "true");
-                document.getElementById("a4").setAttribute("hidden", "true");
-            }
+                    stillCounting = 0;
 
-            localStorage.triviaScore = totalCorrect * 10;
-            document.getElementById("ScoreBoard").innerHTML = "Score " + totalCorrect * 10;
+                    document.location = "gameend.html";
+                    localStorage.setItem("triviaScore", totalCorrect * 10);
+                    localStorage.setItem("questionsCorrect", totalCorrect);
+                }
+
+                localStorage.triviaScore = totalCorrect * 10;
+                document.getElementById("ScoreBoard").innerHTML = "Score " + totalCorrect * 10;
+            },1000);
         }
 
 
@@ -160,7 +176,9 @@
             }
 
             if (timeLeft <= 0) {
-                finish();
+                localStorage.setItem("triviaScore", totalCorrect * 10);
+                localStorage.setItem("questionsCorrect", totalCorrect);
+                document.location = "gameend.html";
             }
         }
 
@@ -187,14 +205,14 @@
     <main class="container">
         <p class="timer">Time Remaining:</p>
         <p id="TimerElement" class="timer">30</p>
-        <div>
+        <div class="triviaQuestions">
             <div id=TriviaQuestions></div>
         </div>
         <ul class="options-list"> 
             <li id="a1" onclick="processAnswer('1')"></li>
-            <li class="selected" id="a2" onclick="processAnswer('2')"></li>
+            <li id="a2" onclick="processAnswer('2')"></li>
             <li id="a3" onclick="processAnswer('3')"></li>
-            <li class="selected wrong" id="a4" onclick="processAnswer('4')"></li>
+            <li id="a4" onclick="processAnswer('4')"></li>
         </ul>
         <p id="ScoreBoard" class="trivia-count blue">Score 0</p>
         <br>
