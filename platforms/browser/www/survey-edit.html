@@ -12,48 +12,31 @@
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
     
 	<script src="cordova.js"></script>
-    <script src="surveyquestions.js"></script>
-    <script src="exhibitInfo.js"></script>
     <script src="bundle.js"></script>
 </head>
 
 <body class="survey-edit">
-    <header class="main-header--survey">
-        <h2 class="sub-title">Survey</h2>
-        <h1 class="main-title">Edit Your Answers</h1>
-    </header>
     
-    <main class="container">
-        <ul class="survey-edit-options">
-            <li class="selected">
-                <p>Pick an artist</p>
-                <input id="1" type="checkbox">
-                <label for="1">Walk the Moon</label>
-            </li>
-            <li>
-                <p>What's your favorite decade?</p>
-                <input id="2" type="checkbox">
-                <label for="2">The 80's</label>
-            </li>
-            <li class="selected">
-                <p>Pick an instrument</p>
-                <input id="3" type="checkbox">
-                <label for="3">Electric Guitar</label>
-            </li>
-            <li>
-                <p>Pick a genre of music</p>
-                <input id="4" type="checkbox">
-                <label for="4">Metal</label>
-            </li>
-            <li class="selected">
-                <p>Pick a genre of music</p>
-                <input id="5" type="checkbox">
-                <label for="5">Metal</label>
-            </li>
-        </ul>
-    </main>
-   
-    <a class="button bottom-cta red" href="#">Retake</a>
+    <script id="survey-edit-template" type="text/x-handlebars-template">
+        <header class="main-header--survey">
+            <h2 class="sub-title">Survey</h2>
+            <h1 class="main-title">Edit Your Answers</h1>
+        </header>
+    
+        <main class="container">
+            <ul class="survey-edit-options">
+                {{#each questions}}
+                    <li>
+                        <p>{{this.question}}</p>
+                        <input id="{{@index}}" type="checkbox" value="{{@index}}">
+                        <label for="{{@index}}">Walk the Moon</label>
+                    </li>
+                {{/each}}
+            </ul>
+        </main>
+    
+        <a class="button bottom-cta red" href="survey.html">Retake</a>
+    </script>
 
     <!--<div id="quizzie">
         <ul class="quiz-step step1 current">

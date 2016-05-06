@@ -1,182 +1,27 @@
 import $ from 'jquery';
 var Handlebars = require('handlebars');
 
-const questions = [
-    {
-        "question": "Been here before?",
-        "icon": "record",
-        "answers": [
-            {
-                "points": "0",
-                "answer": "Yes"
-            },
-            {
-                "points": "0",
-                "answer": "No"
-            },
-            {
-                "points": "0",
-                "answer": "Maybe"
-            },
-            {
-                "points": "0",
-                "answer": "Not sure"
-            }
-        ]
-    },
-    {
-        "question": "Pick a genre",
-        "icon": "record",
-        "answers": [
-            {
-                "points": "1",
-                "answer": "Rock"
-            },
-            {
-                "points": "2",
-                "answer": "Pop"
-            },
-            {
-                "points": "3",
-                "answer": "Alternative"
-            },
-            {
-                "points": "4",
-                "answer": "Country"
-            }
-        ]
-    },
-    {
-        "question": "Pick a decade",
-        "icon": "record",
-        "answers": [
-            {
-                "points": "3",
-                "answer": "60s"
-            },
-            {
-                "points": "1",
-                "answer": "70s"
-            },
-            {
-                "points": "1",
-                "answer": "80s"
-            },
-            {
-                "points": "2",
-                "answer": "90s"
-            }
-        ]
-    },
-    {
-        "question": "Pick a song",
-        "icon": "record",
-        "answers": [
-            {
-                "points": "1",
-                "answer": "\"Jump\" by Van Halen"
-            },
-            {
-                "points": "2",
-                "answer": "\"Like a Virgin\" by Madonna"
-            },
-            {
-                "points": "2",
-                "answer": "\"Hotline Bling\" by Drake"
-            },
-            {
-                "points": "4",
-                "answer": "\"Ring of Fire\" by Johnny Cash"
-            }
-        ]
-    },
-    {
-        "question": "Pick an artist",
-        "icon": "record",
-        "answers": [
-            {
-                "points": "1",
-                "answer": "Aerosmith"
-            },
-            {
-                "points": "2",
-                "answer": "Beyonce"
-            },
-            {
-                "points": "4",
-                "answer": "Nirvana"
-            },
-            {
-                "points": "1",
-                "answer": "Green Day"
-            }
-        ]
-    },
-    {
-        "question": "Pick an instrument",
-        "icon": "record",
-        "answers": [
-            {
-                "points": "1",
-                "answer": "Guitar"
-            },
-            {
-                "points": "1",
-                "answer": "Bass"
-            },
-            {
-                "points": "1",
-                "answer": "Drums"
-            },
-            {
-                "points": "4",
-                "answer": "Piano"
-            }
-        ]
-    },
-    {
-        "question": "Pick an artifact",
-        "icon": "record",
-        "answers": [
-            {
-                "points": "4",
-                "answer": "Kurt Cobain's Guitar"
-            },
-            {
-                "points": "2",
-                "answer": "Michael Jackson's Glove"
-            },
-            {
-                "points": "3",
-                "answer": "Taylor Swift's Lyric Sheets"
-            },
-            {
-                "points": "1",
-                "answer": "Elvis Presley's Custom Motorcycle"
-            }
-        ]
-    }
-];
+const questions = require('./survey-questions');
 
-const results = [
-    {   
+const results = {
+    "rock": {
         title: "Forver Rock and Roll",
         desc: "Your plan will show you the best Rock and Roll exhibits from classic to modern!"
     },
-    {   
+    "contemporary": {         
         title: "Popular and Contemporary",
         desc: "You will see more contemporary artists that have already made their way into the Rock Hall!"
     },
-    {   
+    "country": {        
         title: "Country Love",
-        desc: "Your plan will show you the roots and inspiration of Rock and Roll, good ol\' country music!"
+        desc: "Your plan will show you the roots and inspiration of Rock and Roll, good ol\' country music!" 
     },
-    {   
+    "alternative": {           
         title: "Something Different",
-        desc: "You love anything and everything a little out of the box. You will see the greatest examples of Alternative music!"
+        desc: "You love anything and everything a little out of the box. You will see the greatest examples of Alternative music!" 
     }
-];
-
+};
+    
 export let questionCount = questions.length;
 
 let surveyScript;
@@ -185,18 +30,59 @@ let $root;
 
 let currentQuestion = 0;
 let isFirstQuestion = true;
+let isLastQuestion = false;
+let isEditing = false;
 
-export function loadQuestion(question) {
-    isFirstQuestion = (question === 0) ? true : false;
+function loadQuestion(question) {
+    if (question === 0) {
+        isFirstQuestion = true;
+    } else {
+        isFirstQuestion = false;
+    }
     
-    let data = questions[question]; 
-    data['isFirstQuestion'] = isFirstQuestion;
-    $root.html(surveyTemplate(data));
+    // if we're on the last question    
+    if (currentQuestion >= questionCount - 1) {
+        if (!isEditing) {    
+            // first time they hit the last question activate edit page
+            isEditing = true;
+            initEditPage();
+        } else {
+            // else take them to the results
+            //$('.bottom-cta').attr('href', 'survey-results.html');
+        }
+    } else {
+        // else render the question
+        let data = questions[question];
+        data.isFirstQuestion = isFirstQuestion;
+        data.currentQuestion = currentQuestion + 1; // add one because of zero index
+        data.questionCount = questionCount;
+    
+        $root.html(surveyTemplate(data)); 
+    }
 }
 
-function selectQuestion() {
+function selectAnswer() {
     $(this).siblings().removeClass('selected');
     $(this).addClass('selected');
+    // save the answer
+    questions[currentQuestion]["savedAnswer"] = $(this).text();
+}
+
+let questionsToEdit = [];
+
+export function initEditPage() {
+    let editSurveyScript = $('#survey-edit-template').html();
+    let editSurveyTemplate = Handlebars.compile(editSurveyScript);
+    let data = {};
+    // fill in for any questions that weren't answered
+    for (let i = 0; i < questions.length; i++) {
+        if (!questions[i]["savedAnswer"]) {
+            questions[i]["savedAnswer"] = "You didn't answer!"
+        }
+    }
+    data.questions = questions;
+    // render the edit template
+    $root.html(editSurveyTemplate(data));
 }
 
 export function initSurvey($templateRoot, $templateId) {
@@ -206,9 +92,23 @@ export function initSurvey($templateRoot, $templateId) {
     surveyTemplate = Handlebars.compile(surveyScript);
     
     // Setup event listeners
-    $templateRoot.on('click', 'li', selectQuestion);
-    $('.bottom-cta').on('click', function() {
-        loadQuestion(currentQuestion + 1);
+    $root.on('click', 'li', selectAnswer); 
+    $root.on('click', '.next', function() {
+        // go to next question
+        currentQuestion++;
+        loadQuestion(currentQuestion);
+    }); 
+    $root.on('click', '.back', function() {
+        if (!isFirstQuestion) {
+            // go to previous question
+            currentQuestion--; 
+            loadQuestion(currentQuestion); 
+        }
+    });
+    $root.on('click', '.bottom-cta:not(.red)',  function() {
+        // go to next question (unless it's the retake button)
+        currentQuestion++;
+        loadQuestion(currentQuestion);
     });
     
     loadQuestion(0);

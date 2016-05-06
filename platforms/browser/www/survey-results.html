@@ -10,26 +10,27 @@
     <link href="ui/css/style.css" rel="stylesheet">
     <script src="https://use.typekit.net/giv3oua.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    
-	<script src="cordova.js"></script>
-    <script src="surveyquestions.js"></script>
-    <script src="exhibitInfo.js"></script>
-    <script src="bundle.js"></script>
 </head>
 
 <body class="survey-results">
-    <header class="main-header">
-        <h2 class="sub-title">Survey Results</h2>
-    </header>
+    <script id="survey-results-template" type="text/x-handlebars-template">
+        <header class="main-header">
+            <h2 class="sub-title">Survey Results</h2>
+        </header>
+        
+        <main class="container small">
+        
+                <h1 class="title--small">{{title}}</h1>
+                <p class="main-content">
+                    {{desc}}
+                </p>
+        </main>
     
-    <main class="container small">
-        <h1 class="title--small">Forever<br>Rock and Roll</h1>
-        <p class="main-content">
-            Your plan will show you the best rock and roll exhibits from classical to modern!
-        </p>
-    </main>
-   
-    <a class="button bottom-cta blue" href="yourday.html">See Plan</a>
+        <a class="button bottom-cta blue" href="yourday.html">See Plan</a>
+    </script>
+    
+    <script src="cordova.js"></script>
+    <script src="bundle.js"></script>
 
     <!--<div id="quizzie">
         <ul class="quiz-step step1 current">

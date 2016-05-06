@@ -1,0 +1,156 @@
+[
+    {
+        "question": "Been here before?",
+        "icon": "record",
+        "answers": [
+            {
+                "points": "0",
+                "answer": "Yes"
+            },
+            {
+                "points": "0",
+                "answer": "No"
+            },
+            {
+                "points": "0",
+                "answer": "Maybe"
+            },
+            {
+                "points": "0",
+                "answer": "Not sure"
+            }
+        ]
+    },
+    {
+        "question": "Pick a genre",
+        "icon": "record",
+        "answers": [
+            {
+                "points": "1",
+                "answer": "Rock"
+            },
+            {
+                "points": "2",
+                "answer": "Pop"
+            },
+            {
+                "points": "3",
+                "answer": "Alternative"
+            },
+            {
+                "points": "4",
+                "answer": "Country"
+            }
+        ]
+    },
+    {
+        "question": "Pick a decade",
+        "icon": "record",
+        "answers": [
+            {
+                "points": "3",
+                "answer": "60s"
+            },
+            {
+                "points": "1",
+                "answer": "70s"
+            },
+            {
+                "points": "1",
+                "answer": "80s"
+            },
+            {
+                "points": "2",
+                "answer": "90s"
+            }
+        ]
+    },
+    {
+        "question": "Pick a song",
+        "icon": "record",
+        "answers": [
+            {
+                "points": "1",
+                "answer": "\"Jump\" by Van Halen"
+            },
+            {
+                "points": "2",
+                "answer": "\"Like a Virgin\" by Madonna"
+            },
+            {
+                "points": "2",
+                "answer": "\"Hotline Bling\" by Drake"
+            },
+            {
+                "points": "4",
+                "answer": "\"Ring of Fire\" by Johnny Cash"
+            }
+        ]
+    },
+    {
+        "question": "Pick an artist",
+        "icon": "record",
+        "answers": [
+            {
+                "points": "1",
+                "answer": "Aerosmith"
+            },
+            {
+                "points": "2",
+                "answer": "Beyonce"
+            },
+            {
+                "points": "4",
+                "answer": "Nirvana"
+            },
+            {
+                "points": "1",
+                "answer": "Green Day"
+            }
+        ]
+    },
+    {
+        "question": "Pick an instrument",
+        "icon": "record",
+        "answers": [
+            {
+                "points": "1",
+                "answer": "Guitar"
+            },
+            {
+                "points": "1",
+                "answer": "Bass"
+            },
+            {
+                "points": "1",
+                "answer": "Drums"
+            },
+            {
+                "points": "4",
+                "answer": "Piano"
+            }
+        ]
+    },
+    {
+        "question": "Pick an artifact",
+        "icon": "record",
+        "answers": [
+            {
+                "points": "4",
+                "answer": "Kurt Cobain's Guitar"
+            },
+            {
+                "points": "2",
+                "answer": "Michael Jackson's Glove"
+            },
+            {
+                "points": "3",
+                "answer": "Taylor Swift's Lyric Sheets"
+            },
+            {
+                "points": "1",
+                "answer": "Elvis Presley's Custom Motorcycle"
+            }
+        ]
+    }
+];
