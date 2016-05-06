@@ -49,14 +49,21 @@ function loadQuestion(question) {
     currentQuestion = question;
 
     console.log("rendering question");
-    // render the question
-    let data = questions[question];
+    console.log("currentQuestion: " + currentQuestion);
+    console.log("questionCount " + questionCount);
     
-    data.isFirstQuestion = isFirstQuestion;
-    data.currentQuestion = parseInt(question) + 1; // add one because of zero index 
-    data.questionCount = questionCount;
-    
-    $root.html(surveyTemplate(data));     
+    if (isEditing && currentQuestion >= questionCount-1) {
+        // render the results
+    } else {
+        // render the question
+        let data = questions[question];
+        
+        data.isFirstQuestion = isFirstQuestion;
+        data.currentQuestion = parseInt(question) + 1; // add one because of zero index 
+        data.questionCount = questionCount;
+        
+        $root.html(surveyTemplate(data));     
+    }
 }
 
 function selectAnswer() {
@@ -91,6 +98,7 @@ export function initEditPage() {
         
         // if the box was checked
         if ($(this).is(":checked")) {
+            $(this).parent().addClass('selected');
             // save it to our questions
             if (!questionsToEdit[val]) {
                 questionsToEdit[val] = true;
@@ -98,6 +106,8 @@ export function initEditPage() {
         } else {
             // if the box is being unchecked
             // delete it from our questions
+            $(this).parent().removeClass('selected'); 
+            
             if (questionsToEdit[val]) {
                 questionsToEdit[val] = false;
             }
