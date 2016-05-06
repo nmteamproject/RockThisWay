@@ -11,6 +11,7 @@ body {
     background-color: #222;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom: rem(60);
 }
 
 .home {
@@ -61,4 +62,16 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: rem(30);
+}
+
+.floor {
+    font-size: rem(20);
+    font-family: 'antoniolight';
+    text-transform: uppercase;
+    color: #FFF;
+    letter-spacing: 2px;
+}
+
+.red {
+    color: $red;
 }

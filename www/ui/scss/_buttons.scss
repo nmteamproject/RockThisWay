@@ -2,6 +2,7 @@
     text-align: center;
     color: #FFF;
     display: inline-block;
+    z-index: 10;
     &.bottom {
         &-cta {
         position: fixed;

@@ -3,26 +3,59 @@
     background-color: #ececec;
     color: #2e2e2e; 
     border-radius: 5px;
+    margin-bottom: rem(15);
+    position: relative; 
+    height: rem(220);
     @include clearfix();
     &__bg {
         border-radius: 5px 5px 0 0; 
-        height: rem(120);
         width: 100%;
+        position: absolute;
+        top: 0;
     }
     &__content {
-        padding: rem(5);
+        padding: rem(10);
+        padding-bottom: 0;
         @include clearfix();
+        border-radius: 0 0 5px 5px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        z-index: 1;
         background-image: linear-gradient(to right, rgba(236,236,236,1) 0%,rgba(236,236,236,1) 60%,rgba(248,248,248,1) 60%,rgba(248,248,248,1) 100%);
         &__left {
-            @include span-columns(8);
+            @include span-columns(7);
+            color: #2e2e2e;
+            h3 {
+                text-transform: uppercase;
+                font-size: rem(18);
+                margin-bottom: rem(5);
+            }
+            p {
+                font-size: rem(12);
+                width: rem(160);
+            }
         }
         &__right {
-            @include span-columns(4);
+            @include span-columns(5);
             padding: 0;
         }
         .icon-content {
             @include span-columns(6);
+            margin-top: rem(10);
             text-align: center;
+            &:first-child {
+                padding-left: rem(20);
+            }
+            img {
+                height: rem(30);
+            }
+            p {
+                font-family: 'antoniolight';
+                text-transform: uppercase;
+                color: #393939; 
+                letter-spacing: .5px;
+            }
         }
     }
 }

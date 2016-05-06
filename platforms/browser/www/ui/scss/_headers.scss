@@ -1,21 +1,22 @@
 .main-header {
-    margin-bottom: rem(30);
+    margin-bottom: rem(40);
+    position: relative;
     .icon {
         img {    
             height: rem(25);
         }
         &.left {
-            position: fixed;
+            position: absolute;
             left: rem(20);
-            top: rem(20);
+            top: rem(10);
             img {
                 padding: rem(1);
             }
         }
         &.right {
-            position: fixed;
-            right: rem(20);
-            top: rem(20);
+            position: absolute;
+            right: rem(20); 
+            top: rem(10);
         }
     }
     .main-title,
