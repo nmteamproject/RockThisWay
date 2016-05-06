@@ -1,7 +1,7 @@
 [
     {
         "question": "Been here before?",
-        "icon": "record",
+        "icon": "hand",
         "answers": [
             {
                 "answer": "Yes"
@@ -19,7 +19,7 @@
     },
     {
         "question": "Pick a genre",
-        "icon": "record",
+        "icon": "guitar",
         "answers": [
             {
                 "answer": "Rock"
@@ -55,7 +55,7 @@
     },
     {
         "question": "Pick a song",
-        "icon": "record",
+        "icon": "headphones",
         "answers": [
             {
                 "answer": "\"Jump\" by Van Halen"
@@ -73,7 +73,7 @@
     },
     {
         "question": "Pick an artist",
-        "icon": "record",
+        "icon": "mic",
         "answers": [
             {
                 "answer": "Aerosmith"
@@ -91,7 +91,7 @@
     },
     {
         "question": "Pick an instrument",
-        "icon": "record",
+        "icon": "drumsticks",
         "answers": [
             {
                 "answer": "Guitar"
@@ -109,7 +109,7 @@
     },
     {
         "question": "Pick an artifact",
-        "icon": "record",
+        "icon": "amp",
         "answers": [
             {
                 "answer": "Kurt Cobain's Guitar"

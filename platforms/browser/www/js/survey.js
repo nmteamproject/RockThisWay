@@ -127,14 +127,14 @@ function next() {
         console.log("editMarker: " + editMarker);
 
         editMarker++;
-        if (editMarker >= questionsToEdit.length-1) {
+        if (editMarker >= questionsToEdit.length) {
             console.log('last question');
         } else {
             currentQuestion = questionsToEdit[editMarker];
             progress();
         }
     } else {
-        if (currentQuestion >= questions.length-1) {   
+        if (currentQuestion >= questions.length) {   
             console.log("last question");
         } else {
             progress();
