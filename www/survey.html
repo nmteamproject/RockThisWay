@@ -10,11 +10,6 @@
     <link href="ui/css/style.css" rel="stylesheet">
     <script src="https://use.typekit.net/giv3oua.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    
-	<script src="cordova.js"></script>
-    <script src="surveyquestions.js"></script>
-    <script src="exhibitInfo.js"></script>
-    <script src="js/bundle.js"></script>
 </head>
 
 <body class="survey">
@@ -23,24 +18,33 @@
     </header>
     
     <main class="container">
-        <header class="survey-header">
-            <img class="header-image" src="ui/images/icons/record.png" alt="record">
-            <a class="back" href="#"><img class="disabled" src="ui/images/icons/arrow.png"></a>
-            <a class="next" href="#"><img src="ui/images/icons/arrow.png"></a>
-            <h1>Pick an Artist</h1>
-        </header>
+        <script id="survey-template" type="text/x-handlebars-template">​
         
-        <ul class="survey-options">
-            <li>Walk the Moon</li>
-            <li class="selected">Beyonce</li>
-            <li>Elvis Presely</li>
-            <li>Rolling Stones</li>
-        </ul>
+            <header class="survey-header">
+                <img class="header-image" src="ui/images/icons/{{icon}}.png" alt="record">
+                {{#if isFirstQuestion}}
+                    <a class="back" href="#"><img class="disabled" src="ui/images/icons/arrow.png"></a>
+                {{else}} 
+                    <a class="back" href="#"><img src="ui/images/icons/arrow.png"></a>
+                {{/if}}
+                <a class="next" href="#"><img src="ui/images/icons/arrow.png"></a>
+                <h1>{{ question }}</h1>
+            </header>
+            
+            <ul class="survey-options">
+                {{#each answers}}
+                    <li>{{this.answer}}</li>
+                {{/each}}
+            </ul>
+            
+        </script>
     </main>
     
     <p class="page-count"><span class="blue">3</span>/7</p>
     <a class="button bottom-cta blue" href="#">Next</a>
-
+    
+    <script src="cordova.js"></script>
+    <script src="bundle.js"></script>
     <!--<div id="quizzie">
         <ul class="quiz-step step1 current">
             <div id="questionIcon"></div>

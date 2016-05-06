@@ -6,15 +6,14 @@ window.jQuery = jQuery;
 
 import { evothings } from './../libs/evothings/evothings';
 import { sortable } from './../libs/sortable/Sortable';
-import './app';
-var attachFastClick = require('fastclick'); 
+// var attachFastClick = require('fastclick'); 
+import * as survey from './survey.js'; 
 
 $(document).ready(function() {
-    // clear localStorage on home page load
-    // if (window.location.pathname = '/index.html') {    
-    //     cleanOnStart();
-    // }
-    
     // avoid the 300ms click delay on mobile devices
-    attachFastClick(document.body);
-});
+    //attachFastClick(document.body); 
+    console.log('ready');
+    var $surveyScript = $('#survey-template');
+    var $root = $('.container'); 
+    survey.initSurvey($root, $surveyScript);
+}); 

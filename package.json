@@ -7,6 +7,7 @@
     "cordova": "^6.1.1",
     "cordova-lib": "^6.1.1",
     "fastclick": "^1.0.6",
+    "handlebars": "^4.0.5",
     "jquery": "^2.2.3"
   },
   "devDependencies": {
