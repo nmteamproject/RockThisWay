@@ -8,42 +8,18 @@
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Rock This Way</title>
-
+    <script src="https://use.typekit.net/giv3oua.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <link href="ui/css/style.css" rel="stylesheet">
-
-
-
+    
 
 </head>
 
 <body id="nameCreation">
-
     <div id="creationPage">
-        
-        <div class="pagetitle">Create Your Own Gamertag</div>
-        <input id="userName" type="text" placeholder="Your name here">
-        <div class="divider"></div>
-        <div class="details">This name will follow you throughout your exhibits. At the end look for your name on the leaderboards!</div>
-        
-        <button onclick="submitUserName()" class="submitButton" id="sumbitLyricsButton">Submit</button>
-
     </div>
-
-
-
-    <div id="userPage">
-        <div id="teamName"></div>
-        <div class="divider redDivider"></div>
-        <div>Trivia: The Beatles</div>
-        <div class="points" id="triviaPoints">Didnt Play Yet</div>
-        <div>Lyracle: Aerosmith</div>
-        <div class="points" id="lyricPoints">Didnt Play Yet</div>
-        <div>Against the Crowd: Taylor Swift</div>
-        <div class="points" id="atcPoints">Didnt Play Yet</div>
-        <div class="points">Total</div>
-        <div id="teamScore" class="points"></div>
-        <button onclick="returnToPlan()" class="submitButton" id="sumbitLyricsButton">Return</button>
-    </div>
+    
+    <button onclick="submitUserName()" class="submitButton" id="sumbitNameButton">Submit</button>
 
     <script src="cordova.js"></script>
 
@@ -52,8 +28,6 @@
     <script src="js/app.js"></script>
 
     <script>
-        document.getElementById('creationPage').style.display = "none";
-        document.getElementById('userPage').style.display = "none";
         window.onload = loadPage;
 
         function loadPage() {
@@ -61,19 +35,36 @@
             if (localStorage.getItem("user") != undefined) {
                 displayUser();
             } else {
-                document.getElementById('creationPage').style.display = "initial";
+                document.getElementById('creationPage').innerHTML = 
+                "<div class=\"pagetitle\">Create Your Own Gamertag</div>" +
+                "<input id=\"userName\" type=\"text\" placeholder=\"Your name here\">" +
+                "<div class=\"divider\"></div>" +
+                "<div class=\"details\">This name will follow you throughout your exhibits. At the end look for your name on the leaderboards!</div>" +
+
+                "<button onclick=\"submitUserName()\" class=\"submitButton\" id=\"sumbitLyricsButton\">Submit</button>";
             }
         }
 
 
 
         function displayUser() {
-
-            var user = localStorage.user
+            
+            var user =  localStorage.getItem("user");
             
             var points = 0;
             
-            
+            document.getElementById('creationPage').innerHTML = 
+                "<div id=\"teamName\"></div>" +
+                "<div class=\"divider redDivider\"></div>" +
+                "<div>Trivia: The Beatles</div>" +
+                "<div class=\"points\" id=\"triviaPoints\">Didn't Play Yet</div>" +
+                "<div>Lyracle: Aerosmith</div>" +
+                "<div class=\"points\" id=\"lyricPoints\">Didn't Play Yet</div>" +
+                "<div>Against the Crowd: Taylor Swift</div>" +
+                "<div class=\"points\" id=\"atcPoints\">Didn't Play Yet</div>" +
+                "<div class=\"points\">Total</div>" +
+                "<div id=\"teamScore\" class=\"points\"></div>" +
+                "<button onclick=\"returnToPlan()\" class=\"submitButton\" id=\"sumbitLyricsButton\">Return</button>";
             
             var atcScore = parseInt(localStorage.atcScore);
             if (Number.isInteger(atcScore)){
@@ -92,25 +83,24 @@
             }
             
             localStorage.points = points;
-
             
-            
-            document.getElementById('creationPage').style.display = "none";
-            document.getElementById('userPage').style.display = "initial";
+            document.getElementById('sumbitNameButton').setAttribute('onclick','returnToPlan()');
+            document.getElementById('sumbitNameButton').innerHTML = "Return";
 
             document.getElementById('teamName').innerHTML = user;
+            document.getElementById('testName').innerHTML = testUser;
             document.getElementById('teamScore').innerHTML = points;
         }
 
         function submitUserName() {
-
+            
             localStorage.user = document.getElementById('userName').value;
             displayUser();
 
         }
 
         function returnToPlan() {
-            window.location.href = "yourday.html";
+            document.location = "yourday.html";
         }
     </script>
 

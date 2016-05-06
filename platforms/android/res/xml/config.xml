@@ -34,7 +34,7 @@
     <icon density="xhdpi" height="96" platform="android" src="res/icons/android/mipmap-xhdpi/ic_launcher.png" width="96" />
     <icon density="xxhdpi" height="144" platform="android" src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" width="144" />
     <icon density="xxxhdpi" height="192" platform="android" src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" width="192" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="1500" />
     <preference name="SplashMaintainAspectRatio" value="true|false" />
     <preference name="SplashShowOnlyFirstTime" value="true|false" />
     <allow-intent href="market:*" />
@@ -54,6 +54,7 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#1D1A22" />
     <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="Orientation" value="portrait" />
     <author email="dev@cordova.apache.org" href="http://cordova.io">
             RIT New Media Team Project
         </author>

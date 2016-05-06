@@ -13,6 +13,7 @@
 
 	<script src="cordova.js"></script>
     <script src="surveyquestions.js"></script>
+    <script src="exhibitInfo.js"></script>
     <script src="js/bundle.js"></script>
 </head>
 
@@ -231,6 +232,8 @@
                 
                 var body = document.getElementById("survey");
                 $(body).css("background-image", "url(\"" + surveyBackgrounds[1].src +"\")");
+
+                sessionStorage.setItem("planBackground", surveyBackgrounds[1].src);
             } else if(result == "Pop"){
                 var headingText = resultOptions[1].title;
                 heading.innerHTML = headingText;
@@ -244,6 +247,8 @@
                 
                 var body = document.getElementById("survey");
                 $(body).css("background-image", "url(\"" + surveyBackgrounds[2].src +"\")");
+                
+                sessionStorage.setItem("planBackground", surveyBackgrounds[2].src);
             } else if(result == "Country"){
                 var headingText = resultOptions[2].title;
                 heading.innerHTML = headingText;
@@ -257,6 +262,8 @@
                 
                 var body = document.getElementById("survey");
                 $(body).css("background-image", "url(\"" + surveyBackgrounds[3].src +"\")");
+                
+                sessionStorage.setItem("planBackground", surveyBackgrounds[3].src);
             } else if(result == "Alternative"){
                 var headingText = resultOptions[3].title;
                 heading.innerHTML = headingText;
@@ -270,6 +277,8 @@
                 
                 var body = document.getElementById("survey");
                 $(body).css("background-image", "url(\"" + surveyBackgrounds[4].src +"\")");
+                
+                sessionStorage.setItem("planBackground", surveyBackgrounds[4].src);
             }
             //retake button
             var cElement = document.getElementById("answers");

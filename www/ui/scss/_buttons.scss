@@ -1,0 +1,30 @@
+.button {
+    text-align: center;
+    color: #FFF;
+    display: inline-block;
+    z-index: 10;
+    &.bottom {
+        &-cta {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: rem(60);
+        text-transform: uppercase;
+        letter-spacing: 8px; 
+        font-weight: 500;
+        padding-top: 20px;
+        font-size: rem(13);
+            &.blue {
+                background: linear-gradient(to right, #05dbdb 0%,#178d8e 100%);
+            }
+        }
+        &-secondary {
+            position: fixed;
+            left: 50%;
+            bottom: rem(80);
+            transform: translateX(-50%);
+            font-style: italic;
+        }
+    }
+}

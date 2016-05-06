@@ -15,7 +15,7 @@ var gutil = require('gulp-util');
 var gulpIgnore = require('gulp-ignore');
 
 // Settings
-var sassInput = './www/ui/scss/*.scss';
+var sassInput = './www/ui/scss/**/*.scss';
 var sassOutput = './www/ui/css';
 var sassOptions = {
     errLogToConsole: true,
@@ -35,11 +35,15 @@ gulp.task('sass', function() {
         .src(sassInput)
         .pipe(sourcemaps.init())
         .pipe(sass(sassOptions).on('error', sass.logError))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write({ includeContent: false, sourceRoot: '.'}))
+        .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(autoprefixer())
         .pipe(gulp.dest(sassOutput)); 
 });
 
+gulp.task('sass-watch', function() {
+   return gulp.watch(sassInput, ['sass']);
+});
 
 /**
  * Watch our browserify modules
@@ -113,10 +117,22 @@ gulp.task('build', ['sass', 'javascript'], function(callback) {
     }, callback);
 });
 
+/** 
+ * Clean the browser build
+ */
+gulp.task('cordova-clean', function() {
+    cordova.clean({
+        'platforms': ['browser'],
+        'options': {
+            argv: ['--release','--gradleArg=--no-daemon']
+        }
+    });
+});
+
 /**
  * Build for browser
  */
-gulp.task('cordova-browser', function(callback) {
+gulp.task('cordova-browser', ['cordova-clean'], function(callback) {
     cordova.build({
         'platforms': ['browser'],
         'options': {
@@ -130,15 +146,14 @@ gulp.task('cordova-browser', function(callback) {
  * watch for browser changes
  */
 gulp.task('cordova-watch', function() {
-   gulp.watch('./www/bundle.js', ['cordova-browser'])
+   gulp.watch(['./www/bundle.js', './www/*.html', './www/ui/css/style.css'], ['cordova-browser']);
 });
 
 /**
- * Watch our sass and javascript
+ * Watch our sass and javascript and watch
  */
-gulp.task('watch', ['javascript-watch', 'cordova-watch'], function() {
+gulp.task('watch', ['sass-watch', 'javascript-watch', 'cordova-watch'], function() {
    return gulp
-        .watch(sassInput, ['sass'])
         .on('change', function(e) {
             console.log('File ' + e.path + ' was ' + e.type + ', running tasks...');
         })
