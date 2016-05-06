@@ -12,8 +12,9 @@ import * as survey from './survey.js';
 $(document).ready(function() {
     // avoid the 300ms click delay on mobile devices
     attachFastClick(document.body); 
-    console.log('ready');
-    var $surveyScript = $('#survey-template');
-    var $root = $('#content'); 
-    survey.initSurvey($root, $surveyScript);
+    
+    // if we're on the survey page launch the survey script
+    if (location.pathname.match(/survey/gi)) {
+        survey.initSurvey();
+    }
 }); 

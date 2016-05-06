@@ -1,8 +1,6 @@
 import $ from 'jquery';
 var Handlebars = require('handlebars');
 
-const questions = require('./survey-questions');
-
 const results = {
     "rock": {
         title: "Forver Rock and Roll",
@@ -21,8 +19,6 @@ const results = {
         desc: "You love anything and everything a little out of the box. You will see the greatest examples of Alternative music!" 
     }
 };
-    
-export let questionCount = questions.length;
 
 let surveyScript;
 let surveyTemplate;
@@ -33,47 +29,54 @@ let isFirstQuestion = true;
 let isLastQuestion = false;
 let isEditing = false;
 
+let questions = require('./survey-questions'); 
+
+export let questionCount = questions.length;
+
+// list of indexes of questions that were selected to edit
+let questionsToEdit = {};
+
 function loadQuestion(question) {
+    console.log("loading question: " + question);
+    
     if (question === 0) {
         isFirstQuestion = true;
     } else {
         isFirstQuestion = false;
     }
     
-    // if we're on the last question    
-    if (currentQuestion >= questionCount - 1) {
-        if (!isEditing) {    
-            // first time they hit the last question activate edit page
-            isEditing = true;
-            initEditPage();
-        } else {
-            // else take them to the results
-            //$('.bottom-cta').attr('href', 'survey-results.html');
-        }
-    } else {
-        // else render the question
-        let data = questions[question];
-        data.isFirstQuestion = isFirstQuestion;
-        data.currentQuestion = currentQuestion + 1; // add one because of zero index
-        data.questionCount = questionCount;
+    // update currentQuestion
+    currentQuestion = question;
+
+    console.log("rendering question");
+    // render the question
+    let data = questions[question];
     
-        $root.html(surveyTemplate(data)); 
-    }
+    data.isFirstQuestion = isFirstQuestion;
+    data.currentQuestion = parseInt(question) + 1; // add one because of zero index 
+    data.questionCount = questionCount;
+    
+    $root.html(surveyTemplate(data));     
 }
 
 function selectAnswer() {
-    $(this).siblings().removeClass('selected');
+    // if we're in edit mode we can select more than one
+    if (!isEditing) {
+        $(this).siblings().removeClass('selected');
+        // save the answer
+        questions[currentQuestion]["savedAnswer"] = $(this).text();
+    }
     $(this).addClass('selected');
-    // save the answer
-    questions[currentQuestion]["savedAnswer"] = $(this).text();
 }
 
-let questionsToEdit = [];
-
 export function initEditPage() {
+    // set up template
     let editSurveyScript = $('#survey-edit-template').html();
     let editSurveyTemplate = Handlebars.compile(editSurveyScript);
+    
+    // set up data
     let data = {};
+    
     // fill in for any questions that weren't answered
     for (let i = 0; i < questions.length; i++) {
         if (!questions[i]["savedAnswer"]) {
@@ -81,35 +84,98 @@ export function initEditPage() {
         }
     }
     data.questions = questions;
-    // render the edit template
+    
+    // set up event listeners
+    $root.on('change', 'input[type="checkbox"]', function() {
+        let val = $(this).val();
+        
+        // if the box was checked
+        if ($(this).is(":checked")) {
+            // save it to our questions
+            if (!questionsToEdit[val]) {
+                questionsToEdit[val] = true;
+            }
+        } else {
+            // if the box is being unchecked
+            // delete it from our questions
+            if (questionsToEdit[val]) {
+                questionsToEdit[val] = false;
+            }
+        }
+    });
+    $root.on('click', '.bottom-cta:not(.blue)',  function() {
+        console.log("retake");
+        // once we hit retake go back to survey
+        initSurvey();
+    });
+    
+    // render the template
     $root.html(editSurveyTemplate(data));
 }
 
-export function initSurvey($templateRoot, $templateId) {
+function first(obj) {
+    for (var a in obj) return a;
+}
+
+export function initSurvey() {
     // Setup template
-    $root = $templateRoot;
-    surveyScript = $templateId.html();
+    $root = $('#content'); 
+    surveyScript = $('#survey-template').html();
+    
     surveyTemplate = Handlebars.compile(surveyScript);
     
     // Setup event listeners
-    $root.on('click', 'li', selectAnswer); 
-    $root.on('click', '.next', function() {
-        // go to next question
-        currentQuestion++;
-        loadQuestion(currentQuestion);
-    }); 
-    $root.on('click', '.back', function() {
-        if (!isFirstQuestion) {
-            // go to previous question
-            currentQuestion--; 
-            loadQuestion(currentQuestion); 
-        }
-    });
-    $root.on('click', '.bottom-cta:not(.red)',  function() {
-        // go to next question (unless it's the retake button)
-        currentQuestion++;
-        loadQuestion(currentQuestion);
-    });
+    if (!isEditing) {
+        $root.on('click', 'li', selectAnswer); 
+        $root.on('click', '.next', function() {
+            // go to next question
+            currentQuestion++;
+            loadQuestion(currentQuestion);
+        }); 
+        $root.on('click', '.back', function() {
+            if (!isFirstQuestion) {
+                // go to previous question
+                currentQuestion--; 
+                loadQuestion(currentQuestion); 
+            }
+        });
+        $root.on('click', '.bottom-cta:not(.red)',  function() {
+            // go to next question (unless it's the retake button)
+            console.log("clicked");
+            
+            console.log(currentQuestion);
+            console.log(questionCount);
+            // if we're on the last question    
+            if (currentQuestion >= questionCount-1) {
+                if (!isEditing) {    
+                    // first time they hit the last question activate edit page
+                    isEditing = true;
+                    initEditPage();
+                } else {
+                    // else take them to the results
+                    console.log("results");
+                }
+            } else {
+                currentQuestion++; 
+                loadQuestion(currentQuestion);
+            }
+        });
+    }
     
-    loadQuestion(0);
+    // Load the first question
+    startSurvey();
+}
+
+function startSurvey() {
+    console.log("starting");
+    // if we're editing, 
+    // filter the questions just the ones selected to edit
+    if (isEditing) {
+        questions = questions.filter(function(el, index) {
+            if (questionsToEdit[index]) {
+                return true;
+            }
+        });
+    };
+    loadQuestion(first(questions)); 
 }
