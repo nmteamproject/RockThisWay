@@ -27,7 +27,7 @@
             Results
         </p>
         
-        <p class="time-count">
+        <p class="time-count" id="pointsAwarded">
             <br>Points Awarded<br>#
         </p>
     </main>
@@ -37,5 +37,8 @@
     
     <script src="../cordova.js"></script>
     <script src="../bundle.js"></script>
+    <script>
+        document.getElementById("pointsAwarded").innerHTML = "<br>Points Awarded <br>" + localStorage.getItem("lyricScore");
+    </script>
 </body>
 </html>
