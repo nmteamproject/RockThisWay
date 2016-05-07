@@ -79,11 +79,14 @@ function checkLyrics() {
         }
     }
 
-    var answer = answerLyrics.substr(10, answerLyrics.length);
+    if(answerLyrics != undefined){
+        var answer = answerLyrics.substr(10, answerLyrics.length);
+    }
+   
 
     if (answer == correctLyrics[lyricNumber]) {
         soundFile.pause();
-        document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>";
+        document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png'>";
         document.getElementById("lyrics").innerHTML = answer;
         document.getElementById("wordBank").innerHTML = "You got the Correct answer!";
         document.getElementById("sumbitLyricsButton").innerHTML = "Next";
@@ -102,13 +105,13 @@ function playMusic(song) {
     if (playingMusic == true) {
         stop();
         soundFile.pause();
-        document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPlayButton.png' height='70px'>";
+        document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPlayButton.png'>";
         playingMusic = false;
     } else {
         start();
         soundFile.play();
         playingMusic = true;
-        document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPauseButton.png' height='70px'>";
+        document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPauseButton.png'>";
     }
 }
 
