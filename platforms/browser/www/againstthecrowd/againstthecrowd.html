@@ -13,24 +13,33 @@
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
     
     <link href="../ui/css/style.css" rel="stylesheet">
-    <script src="../cordova.js"></script>
-    <script src="../bundle.js"></script>
     <script src="crowdanswers.js"></script>
     
 </head>
 
 
 <body id="atcGame" class="against-the-crowd rules">
-
-        <div id="question"></div>
+    <header class="main-header">
+        <h2 class="sub-title">Against the Crowd</h2>
+    </header>
+    
+    <main class="container">
+        <h2 class="atc-subtitle">We surveyed 100 Rock Fans</h2> 
+        
+        <div class="question" id="question"></div>
+        
         <input id="answer" type="text" placeholder="Response" onclick="clearAnswer()">
         
         <div>
             <div id="questionAnswers"></div>
             <div id="pointsAwarded"></div>
-            <button id="submit" class="button bottom-cta green">Submit</button>
         </div>
-<script src="../js/atc-code.js"></script>
+        
+        <a id="submit" class="button bottom-cta green">Submit</a>
+    </main>
+    
+    <script src="../cordova.js"></script>
+    <script src="../bundle.js"></script>
+    <script src="../js/atc-code.js"></script>
 </body>
-
 </html>

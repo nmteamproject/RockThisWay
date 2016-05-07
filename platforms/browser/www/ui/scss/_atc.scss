@@ -1,0 +1,49 @@
+.atc-subtitle {
+    @extend .title--small;
+    font-family: 'antoniolight'; 
+    font-weight: normal;
+    font-size: rem(18);
+    margin-top: 0; 
+    &:first-line {
+        font-family: 'antoniolight'; 
+        font-weight: normal;
+        font-size: rem(18);
+    }
+    &:after {
+        background-color: #FFF;
+    } 
+} 
+
+.question {
+    color: #FFF;
+    margin-bottom: rem(20);
+}
+
+.crowdQuestion {
+    width: 100%;
+    text-align: center;
+    font-family: 'antonioregular';
+    color: #c7c7c7;
+    height: rem(50);
+    border: 1px solid #252525;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to bottom, rgba(64,64,64,.6) 0%,rgba(37,37,37,.6) 100%);
+    margin-bottom: rem(2);
+    &:first-child {
+        margin-top: rem(20);
+    }
+    &.correctAnswer {
+        background-image: linear-gradient(to bottom, rgba(#134644, .1) 0%,rgba(#145351, .1) 100%);
+        border: 1px solid #1b8e8e;
+        font-family: $base-font-family;
+        .answerText {
+            float: left;
+        }
+        .answerPoints {
+            font-weight: bold;
+            float: right;
+        }
+    }
+}

@@ -29,8 +29,7 @@ function startQuestion() {
     if (questionNumber == 3) {
         document.location = "user.html";
     }
-
-    document.getElementById('strikes').innerHTML = "";
+    
     document.getElementById('submit').innerHTML = "Submit";
     
     asking = true;
