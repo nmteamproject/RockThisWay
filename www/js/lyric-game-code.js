@@ -103,7 +103,7 @@ function checkLyrics() {
         if (strikes == 3) {
             document.getElementById("wordBank").innerHTML = "You got the answer wrong three times.";
             document.getElementById("game").className += "answer-screen";
-            document.getElementById("lyrics").innerHTML = "answer";
+            document.getElementById("lyrics").innerHTML = correctLyrics[lyricNumber];
             document.getElementById("sumbitLyricsButton").innerHTML = "Next";
             document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
 
