@@ -25,7 +25,7 @@ let surveyTemplate;
 let $root;
 
 let currentQuestion = 0;
-let isFirstQuestion = true;
+let isFirstQuestion = true; 
 let isLastQuestion = false;
 
 // are we in edit mode
