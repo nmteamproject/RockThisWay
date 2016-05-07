@@ -86,7 +86,7 @@ function checkLyrics() {
 
     if (answer == correctLyrics[lyricNumber]) {
         soundFile.pause();
-        document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png'>";
+        document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPlayButton.png'>";
         document.getElementById("lyrics").innerHTML = answer;
         document.getElementById("wordBank").innerHTML = "You got the Correct answer!";
         document.getElementById("sumbitLyricsButton").innerHTML = "Next";
