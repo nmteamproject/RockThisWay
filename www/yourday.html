@@ -389,21 +389,21 @@
                     if (mNearestBeacon.major != previousBeacon) {
                         console.log("nearest Beacon Changed");
                         if (mNearestBeacon.major == 19175) {
-                            $('#modalTitle').text("Who Wants to be a Rockstar?");
+                            $('#modalPlay').text("Who Wants to be a Rockstar?");
                             $("#modalLink").attr("href", "trivia/rules.html");
                             $('#artistName').text("The Beatles");
                             $('#artistImage').attr('src', 'images/planBeatles.png');
                             $('#artistInfo').text("The Beatles were the most influential popular music group of the rock era. They affected the post-war baby boom generation of Britain, the United States and many other countries during the 1960s. Certainly they are the most popular group in rock history, with global sales exceeding 1.1 billion records.");
                             $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
                         } else if (mNearestBeacon.major == 18015) {
-                            $('#modalTitle').text("Against the Crowd");
+                            $('#modalPlay').text("Against the Crowd");
                             $("#modalLink").attr("href", "againstthecrowd/rules.html");
                             $('#artistImage').attr('src', 'images/planTaytay.png');
                             $('#artistName').text("Taylor Swift");
                             $('#artistInfo').text("Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.");
                             $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
                         } else if (mNearestBeacon.major == 50017) {
-                            $("#modalLink").attr("href", "lyrics/rules.html");
+                            $("#modalPlay").attr("href", "lyrics/rules.html");
                             $('#artistName').text("Aerosmith");
                             $('#modalTitle').text("Lyracle");
                             $('#artistImage').attr('src', 'images/planAerosmith.png');
