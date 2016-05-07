@@ -6,15 +6,21 @@ window.jQuery = jQuery;
 
 import { evothings } from './../libs/evothings/evothings';
 import { sortable } from './../libs/sortable/Sortable';
-import './app';
 var attachFastClick = require('fastclick'); 
+import * as survey from './survey.js'; 
+import * as trivia from './trivia.js'; 
 
 $(document).ready(function() {
-    // clear localStorage on home page load
-    // if (window.location.pathname = '/index.html') {    
-    //     cleanOnStart();
-    // }
-    
     // avoid the 300ms click delay on mobile devices
-    attachFastClick(document.body);
-});
+    attachFastClick(document.body); 
+    
+    // if we're on the survey page launch the survey script
+    if (location.pathname.match(/survey/gi)) {
+        survey.initSurvey();
+    }
+    
+    // if we're on the trivia page launch the survey script
+    if (location.pathname.match(/trivia/gi)) {
+        trivia.initTrivia();
+    }
+}); 

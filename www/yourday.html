@@ -1,332 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <title>Rock This Way</title>
-    
+
     <script src="https://use.typekit.net/giv3oua.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    
+    <script>
+        try {
+            Typekit.load({
+                async: true
+            });
+        } catch (e) {}
+    </script>
+
     <link href="ui/css/style.css" rel="stylesheet">
-    
+
     <script src="cordova.js"></script>
     <script src="bundle.js"></script>
-    
-    <script>
-        //This Entire Script is for the iBeacons
-        var app = (function () {
-            // Application object.
-            var app = {};
-
-            // History of enter/exit events.
-            var mRegionEvents = [];
-
-            // Nearest ranged beacon.
-            var mNearestBeacon = null;
-
-            // Timer that displays nearby beacons.
-            var mNearestBeaconDisplayTimer = null;
-
-            // Background flag.
-            var mAppInBackground = false;
-
-            // Background notification id counter.
-            var mNotificationId = 0;
-
-            var previousBeacon;
-
-            // Mapping of region event state names.
-            // These are used in the event display string.
-            var mRegionStateNames = {
-                'CLRegionStateInside': 'Enter',
-                'CLRegionStateOutside': 'Exit'
-            };
-
-            //Looks for beacons that have the following properties.
-            //In order for a beacon to be detected, it has to be put into the following list
-            var mRegions = [
-                {
-                    id: 'region1',
-                    uuid: '7b44b47b-52a1-5381-90c2-f09b6838c5d4',
-                    major: 112,
-                    minor: 154
-                },
-                        {
-                            id: 'region2',
-                            uuid: '7b44b47b-52a1-5381-90c2-f09b6838c5d4',
-                            major: 152,
-                            minor: 114
-                },
-                        {
-                            id: 'region3',
-                            uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
-                            major: 19175,
-                            minor: 17780
-                },
-                        {
-                            id: 'region4',
-                            uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
-                            major: 18015,
-                            minor: 60062
-                },
-                        {
-                            id: 'region5',
-                            uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
-                            major: 50017,
-                            minor: 64202
-                }
-
-            ];
-
-            //Name of the beacons in range.
-            var mRegionData = {
-                'region1': 'iPhone iBeacon',
-                'region2': 'iPhone iBeacon',
-                'region3': 'Green Estimote Beacon',
-                'region4': 'Ice Estimote Beacon',
-                'region5': 'Indigo Estimote Beacon'
-            };
-
-            app.initialize = function () {
-                document.addEventListener('deviceready', onDeviceReady, false);
-                document.addEventListener('pause', onAppToBackground, false);
-                document.addEventListener('resume', onAppToForeground, false);
-            };
-
-            function onDeviceReady() {
-                startMonitoringAndRanging();
-                startNearestBeaconDisplayTimer();
-            }
-
-            function onAppToBackground() {
-                mAppInBackground = true;
-                stopNearestBeaconDisplayTimer();
-            }
-
-            function onAppToForeground() {
-                mAppInBackground = false;
-                startNearestBeaconDisplayTimer();
-            }
-
-            function startNearestBeaconDisplayTimer() {
-                mNearestBeaconDisplayTimer = setInterval(displayNearestBeacon, 1000);
-            }
-
-            function stopNearestBeaconDisplayTimer() {
-                clearInterval(mNearestBeaconDisplayTimer);
-                mNearestBeaconDisplayTimer = null;
-            }
-
-            function startMonitoringAndRanging() {
-                function onDidDetermineStateForRegion(result) {
-                    saveRegionEvent(result.state, result.region.identifier);
-                    displayRecentRegionEvent();
-                }
-
-                function onDidRangeBeaconsInRegion(result) {
-                    updateNearestBeacon(result.beacons);
-                }
-
-                function onError(errorMessage) {
-                    console.log('Monitoring beacons did fail: ' + errorMessage);
-                }
-
-                // Request permission from user to access location info.
-                cordova.plugins.locationManager.requestAlwaysAuthorization();
-
-                // Create delegate object that holds beacon callback functions.
-                var delegate = new cordova.plugins.locationManager.Delegate();
-                cordova.plugins.locationManager.setDelegate(delegate);
-
-                // Set delegate functions.
-                delegate.didDetermineStateForRegion = onDidDetermineStateForRegion;
-                delegate.didRangeBeaconsInRegion = onDidRangeBeaconsInRegion;
-
-                // Start monitoring and ranging beacons.
-                startMonitoringAndRangingRegions(mRegions, onError);
-            }
-
-            function startMonitoringAndRangingRegions(regions, errorCallback) {
-                // Start monitoring and ranging regions.
-                for (var i in regions) {
-                    startMonitoringAndRangingRegion(regions[i], errorCallback);
-                }
-            }
-
-            function startMonitoringAndRangingRegion(region, errorCallback) {
-                // Create a region object.
-                var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(
-                    region.id,
-                    region.uuid,
-                    region.major,
-                    region.minor);
-
-                // Start ranging.
-                cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
-                    .fail(errorCallback)
-                    .done();
-
-                // Start monitoring.
-                cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
-                    .fail(errorCallback)
-                    .done();
-            }
-
-            function saveRegionEvent(eventType, regionId) {
-                // Save event.
-                mRegionEvents.push({
-                    type: eventType,
-                    time: getTimeNow(),
-                    regionId: regionId
-                });
-
-                // Truncate if more than ten entries.
-                if (mRegionEvents.length > 10) {
-                    mRegionEvents.shift();
-                }
-            }
-
-            function getBeaconId(beacon) {
-                return beacon.uuid + ':' + beacon.major + ':' + beacon.minor;
-            }
-
-            function isSameBeacon(beacon1, beacon2) {
-                return getBeaconId(beacon1) == getBeaconId(beacon2);
-            }
-
-            function isNearerThan(beacon1, beacon2) {
-                return beacon1.accuracy > 0 && beacon2.accuracy > 0 && beacon1.accuracy < beacon2.accuracy;
-            }
-
-            function updateNearestBeacon(beacons) {
-                for (var i = 0; i < beacons.length; ++i) {
-                    var beacon = beacons[i];
-                    if (!mNearestBeacon) {
-                        mNearestBeacon = beacon;
-                    } else {
-                        if (isSameBeacon(beacon, mNearestBeacon) ||
-                            isNearerThan(beacon, mNearestBeacon)) {
-                            mNearestBeacon = beacon;
-                        }
-                    }
-                }
-            }
-
-            function displayNearestBeacon() {
-                if (!mNearestBeacon) {
-                    return;
-                }
-                // If the nearest beacon changes, the code on beacons.html will change to the following based on beacon.major
-                if (mNearestBeacon.major != previousBeacon) {
-                    if (mNearestBeacon.major == 19175) {
-                        $('#modalTitle').text("Who Wants to be a Rockstar?");
-                        $("#modalPlay").attr("onclick", "playGame(2)");
-                        $('#artistName').text("The Beatles");
-                        $('#artistImage').attr('src', 'images/planBeatles.png');
-                        $('#artistInfo').text("The Beatles were the most influential popular music group of the rock era. They affected the post-war baby boom generation of Britain, the United States and many other countries during the 1960s. Certainly they are the most popular group in rock history, with global sales exceeding 1.1 billion records.");
-                        $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
-                    } else if (mNearestBeacon.major == 18015) {
-                        $('#modalTitle').text("Against the Crowd");
-                        $("#modalPlay").attr("onclick", "playGame(3)");
-                        $('#artistImage').attr('src', 'images/planTaytay.png');
-                        $('#artistName').text("Taylor Swift");
-                        $('#artistInfo').text("Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.");
-                        $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
-                    } else if (mNearestBeacon.major == 50017) {
-                        $("#modalPlay").attr("onclick", "playGame(1)");
-                        $('#artistName').text("Aerosmith");
-                        $('#modalTitle').text("Lyracle");
-                        $('#artistImage').attr('src', 'images/planAerosmith.png');
-                        $('#artistInfo').text("Aerosmith is a long-running hard rock band, originally forming in Boston, Massachusetts in the early 1970s, and enjoying a later resurgence in popularity in the late 1980s and mid-1990s");
-                        $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
-                    } else if (mNearestBeacon.major == 112) {
-                        $("#modalPlay").attr("onclick", "leaveExhibits()");
-                        $("#modalPlay").text("Leave");
-                        $('#artistName').text("Leaving");
-                        $('#modalTitle').text("Are you Prepared to go?");
-                        $('#artistImage').attr('src', 'images/exhibit.png');
-                        $('#artistInfo').text("");
-                        $("#modalDescription").text("If you are leaving the our exhibit, please press the following button and give this phone to an exhibitor.");
-                    } else {}
-
-                    triggerModal();
-                    //$("#myModal").modal();
-                }
-
-                previousBeacon = mNearestBeacon.major;
 
 
-            }
-
-            function displayRecentRegionEvent() {
-                if (mAppInBackground) {
-                    // Set notification title.
-                    var event = mRegionEvents[mRegionEvents.length - 1];
-                    if (!event) {
-                        return;
-                    }
-                    var title = getEventDisplayString(event);
-
-                    // Create notification.
-                    if (mNearestBeacon.major != previousBeacon) {
-                        cordova.plugins.notification.local.schedule({
-                            id: ++mNotificationId,
-                            title: title
-                        });
-                    }
-                }
-            }
-
-            function getEventDisplayString(event) {
-                return "New Exhibit!";
-            }
-
-            function getTimeNow() {
-                function pad(n) {
-                    return (n < 10) ? '0' + n : n;
-                }
-
-                function format(h, m, s) {
-                    return pad(h) + ':' + pad(m) + ':' + pad(s);
-                }
-
-                var d = new Date();
-                return format(d.getHours(), d.getMinutes(), d.getSeconds());
-            }
-
-            return app;
-
-        })();
-    </script>
 
 </head>
 
 <body class="your-day">
 
     <header class="main-header">
-<<<<<<< HEAD
+
         <a href="user/name-creation.html" class="icon left">
-=======
 
-        <a class="icon left" href="user/name-creation.html">
-
->>>>>>> b521949ac827fbbf75b6532752ba1c701c077953
             <img src="ui/images/icons/user.png" alt="user">
         </a>
-        
+
         <h2 class="sub-title">Your Plan</h2>
         <h1 class="main-title">Alternative</h1>
-        
+
         <a class="icon right">
             <img src="ui/images/icons/pin.png" alt="base map">
         </a>
     </header>
-    
+
     <main class="container">
         <h3 class="floor">Floor <span class="red">01</span></h3>
-        
+
         <article class="card">
             <img class="card__bg" src="ui/images/backgrounds/card-beatles.png" alt="beatles">
             <div class="card__content">
@@ -337,7 +55,7 @@
                 <div class="card__content__right">
                     <div class="icon-content">
                         <img src="ui/images/icons/time.png" alt="time">
-                        <p>5 min</p> 
+                        <p>5 min</p>
                     </div>
                     <div class="icon-content">
                         <img src="ui/images/icons/category.png" alt="category">
@@ -346,7 +64,7 @@
                 </div>
             </div>
         </article>
-        
+
         <article class="card">
             <img class="card__bg" src="ui/images/backgrounds/card-aerosmith.png" alt="aerosmith">
             <div class="card__content">
@@ -357,7 +75,7 @@
                 <div class="card__content__right">
                     <div class="icon-content">
                         <img src="ui/images/icons/time.png" alt="time">
-                        <p>5 min</p> 
+                        <p>5 min</p>
                     </div>
                     <div class="icon-content">
                         <img src="ui/images/icons/category.png" alt="category">
@@ -366,7 +84,7 @@
                 </div>
             </div>
         </article>
-        
+
         <article class="card">
             <img class="card__bg" src="ui/images/backgrounds/card-tswift.png" alt="taylor swift">
             <div class="card__content">
@@ -377,7 +95,7 @@
                 <div class="card__content__right">
                     <div class="icon-content">
                         <img src="ui/images/icons/time.png" alt="time">
-                        <p>10 min</p> 
+                        <p>10 min</p>
                     </div>
                     <div class="icon-content">
                         <img src="ui/images/icons/category.png" alt="category">
@@ -387,7 +105,7 @@
             </div>
         </article>
     </main>
-    
+
     <!-- Modals -->
     <article class="modal beatles">
         <h1>The Beatles</h1>
@@ -395,11 +113,11 @@
             The Beatles are classic rock. Before they sold out 90's pitchfork four loko DIY lo-fi, mixtap gentrify plaid kitsch artisan kale chips meggings church-key.
         </p>
         <div class="modal__cta">
-            
+
         </div>
     </article>
 
-<!--
+
     <div id="gameModal">
 
         <img src="images/exitIcon.png" onclick="removeModal()">
@@ -410,10 +128,12 @@
         <div class="modalText" id="artistInfo">Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.</div>
         <div id="modalTitle">Against the Crowd</div>
         <div class="modalText" id="modalDescription">Who thinks that they know Taylor Swift the best? Play with friends and family and see who knows the most!</div>
-        <button class="playButton" id="modalPlay">Play</button>
-    </div>-->
+        <a href="#" id="modalLink">
+        <button class="playButton" id="modalPlay">Play</button></a>
+    </div>
 
-<!--
+    <!--
+
 
     <div class="flip-container" id="flip-toggle">
         <div class="flipper">
@@ -433,7 +153,321 @@
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
+-->
+
+
+    <script>
+    
+            //This Entire Script is for the iBeacons
+            var app = (function () {
+                // Application object.
+                var app = {};
+
+                // History of enter/exit events.
+                var mRegionEvents = [];
+
+                // Nearest ranged beacon.
+                var mNearestBeacon = null;
+
+                // Timer that displays nearby beacons.
+                var mNearestBeaconDisplayTimer = null;
+
+                // Background flag.
+                var mAppInBackground = false;
+
+                // Background notification id counter.
+                var mNotificationId = 0;
+
+                var previousBeacon;
+
+                // Mapping of region event state names.
+                // These are used in the event display string.
+                var mRegionStateNames = {
+                    'CLRegionStateInside': 'Enter',
+                    'CLRegionStateOutside': 'Exit'
+                };
+
+                //Looks for beacons that have the following properties.
+                //In order for a beacon to be detected, it has to be put into the following list
+                var mRegions = [
+                    {
+                        id: 'region1',
+                        uuid: '7b44b47b-52a1-5381-90c2-f09b6838c5d4',
+                        major: 112,
+                        minor: 154
+                },
+                    {
+                        id: 'region2',
+                        uuid: '7b44b47b-52a1-5381-90c2-f09b6838c5d4',
+                        major: 152,
+                        minor: 114
+                },
+                    {
+                        id: 'region3',
+                        uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+                        major: 19175,
+                        minor: 17780
+                },
+                    {
+                        id: 'region4',
+                        uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+                        major: 18015,
+                        minor: 60062
+                },
+                    {
+                        id: 'region5',
+                        uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+                        major: 50017,
+                        minor: 64202
+                }
+
+            ];
+
+                //Name of the beacons in range.
+                var mRegionData = {
+                    'region1': 'iPhone iBeacon',
+                    'region2': 'iPhone iBeacon',
+                    'region3': 'Green Estimote Beacon',
+                    'region4': 'Ice Estimote Beacon',
+                    'region5': 'Indigo Estimote Beacon'
+                };
+
+
+                document.addEventListener('deviceready', onDeviceReady, false);
+                document.addEventListener('pause', onAppToBackground, false);
+                document.addEventListener('resume', onAppToForeground, false);
+
+
+                function onDeviceReady() {
+                    startMonitoringAndRanging();
+                    startNearestBeaconDisplayTimer();
+                }
+
+                function onAppToBackground() {
+                    mAppInBackground = true;
+                    stopNearestBeaconDisplayTimer();
+                }
+
+                function onAppToForeground() {
+                    mAppInBackground = false;
+                    startNearestBeaconDisplayTimer();
+                }
+
+                function startNearestBeaconDisplayTimer() {
+                    console.log('start timer');
+                    mNearestBeaconDisplayTimer = setInterval(displayNearestBeacon, 1000);
+                }
+
+                function stopNearestBeaconDisplayTimer() {
+                    clearInterval(mNearestBeaconDisplayTimer);
+                    mNearestBeaconDisplayTimer = null;
+                }
+
+                function startMonitoringAndRanging() {
+                    function onDidDetermineStateForRegion(result) {
+                        saveRegionEvent(result.state, result.region.identifier);
+                        displayRecentRegionEvent();
+                    }
+
+                    function onDidRangeBeaconsInRegion(result) {
+                        updateNearestBeacon(result.beacons);
+                    }
+
+                    function onError(errorMessage) {
+                        console.log('Monitoring beacons did fail: ' + errorMessage);
+                    }
+
+                    // Request permission from user to access location info.
+                    cordova.plugins.locationManager.requestAlwaysAuthorization();
+
+                    // Create delegate object that holds beacon callback functions.
+                    var delegate = new cordova.plugins.locationManager.Delegate();
+                    cordova.plugins.locationManager.setDelegate(delegate);
+
+                    // Set delegate functions.
+                    delegate.didDetermineStateForRegion = onDidDetermineStateForRegion;
+                    delegate.didRangeBeaconsInRegion = onDidRangeBeaconsInRegion;
+
+                    // Start monitoring and ranging beacons.
+                    startMonitoringAndRangingRegions(mRegions, onError);
+                }
+
+                function startMonitoringAndRangingRegions(regions, errorCallback) {
+                    // Start monitoring and ranging regions.
+                    for (var i in regions) {
+                        startMonitoringAndRangingRegion(regions[i], errorCallback);
+                    }
+                }
+
+                function startMonitoringAndRangingRegion(region, errorCallback) {
+                    // Create a region object.
+                    var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(
+                        region.id,
+                        region.uuid,
+                        region.major,
+                        region.minor);
+
+                    // Start ranging.
+                    cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
+                        .fail(errorCallback)
+                        .done();
+
+                    // Start monitoring.
+                    cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+                        .fail(errorCallback)
+                        .done();
+                }
+
+                function saveRegionEvent(eventType, regionId) {
+                    // Save event.
+                    mRegionEvents.push({
+                        type: eventType,
+                        time: getTimeNow(),
+                        regionId: regionId
+                    });
+
+                    // Truncate if more than ten entries.
+                    if (mRegionEvents.length > 10) {
+                        mRegionEvents.shift();
+                    }
+                }
+
+                function getBeaconId(beacon) {
+                    return beacon.uuid + ':' + beacon.major + ':' + beacon.minor;
+                }
+
+                function isSameBeacon(beacon1, beacon2) {
+                    return getBeaconId(beacon1) == getBeaconId(beacon2);
+                }
+
+                function isNearerThan(beacon1, beacon2) {
+                    return beacon1.accuracy > 0 && beacon2.accuracy > 0 && beacon1.accuracy < beacon2.accuracy;
+                }
+
+                function updateNearestBeacon(beacons) {
+                    for (var i = 0; i < beacons.length; ++i) {
+                        var beacon = beacons[i];
+                        if (!mNearestBeacon) {
+                            mNearestBeacon = beacon;
+                        } else {
+                            if (isSameBeacon(beacon, mNearestBeacon) ||
+                                isNearerThan(beacon, mNearestBeacon)) {
+                                mNearestBeacon = beacon;
+                            }
+                        }
+                    }
+                }
+
+                function displayNearestBeacon() {
+
+                    console.log("called Beacon");
+                    if (!mNearestBeacon) {
+                        return;
+                    }
+                    // If the nearest beacon changes, the code on beacons.html will change to the following based on beacon.major
+                    if (mNearestBeacon.major != previousBeacon) {
+                        console.log("nearest Beacon Changed");
+                        if (mNearestBeacon.major == 19175) {
+                            $('#modalTitle').text("Who Wants to be a Rockstar?");
+                            $("#modalLink").attr("href", "trivia/rules.html");
+                            $('#artistName').text("The Beatles");
+                            $('#artistImage').attr('src', 'images/planBeatles.png');
+                            $('#artistInfo').text("The Beatles were the most influential popular music group of the rock era. They affected the post-war baby boom generation of Britain, the United States and many other countries during the 1960s. Certainly they are the most popular group in rock history, with global sales exceeding 1.1 billion records.");
+                            $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
+                        } else if (mNearestBeacon.major == 18015) {
+                            $('#modalTitle').text("Against the Crowd");
+                            $("#modalLink").attr("href", "againstthecrowd/rules.html");
+                            $('#artistImage').attr('src', 'images/planTaytay.png');
+                            $('#artistName').text("Taylor Swift");
+                            $('#artistInfo').text("Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.");
+                            $("#modalDescription").text("Put your guesses up against others at the Rock Hall! We'll as you a question and you say what you think the answer should be. The more popular your answer is, the more points you get.");
+                        } else if (mNearestBeacon.major == 50017) {
+                            $("#modalLink").attr("href", "lyrics/rules.html");
+                            $('#artistName').text("Aerosmith");
+                            $('#modalTitle').text("Lyracle");
+                            $('#artistImage').attr('src', 'images/planAerosmith.png');
+                            $('#artistInfo').text("Aerosmith is a long-running hard rock band, originally forming in Boston, Massachusetts in the early 1970s, and enjoying a later resurgence in popularity in the late 1980s and mid-1990s");
+                            $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
+                        } else if (mNearestBeacon.major == 112) {
+                            $("#modalPlay").attr("onclick", "leaveExhibits()");
+                            $("#modalPlay").text("Leave");
+                            $('#artistName').text("Leaving");
+                            $('#modalTitle').text("Are you Prepared to go?");
+                            $('#artistImage').attr('src', 'images/exhibit.png');
+                            $('#artistInfo').text("");
+                            $("#modalDescription").text("If you are leaving the our exhibit, please press the following button and give this phone to an exhibitor.");
+                        } else {}
+
+                        triggerModal();
+                        //$("#myModal").modal();
+                    }
+
+                    previousBeacon = mNearestBeacon.major;
+
+
+                }
+
+                function displayRecentRegionEvent() {
+                    if (mAppInBackground) {
+                        // Set notification title.
+                        var event = mRegionEvents[mRegionEvents.length - 1];
+                        if (!event) {
+                            return;
+                        }
+                        var title = getEventDisplayString(event);
+
+                        // Create notification.
+                        if (mNearestBeacon.major != previousBeacon) {
+                            cordova.plugins.notification.local.schedule({
+                                id: ++mNotificationId,
+                                title: title
+                            });
+                        }
+                    }
+                }
+
+                function triggerModal() {
+                    document.getElementById('gameModal').style.display = "initial";
+                }
+
+                function removeModal() {
+                    document.getElementById('gameModal').style.display = "none";
+                }
+
+
+                function playGame(game){
+                    if(game == 1){
+                        document.location = "trivia/rules.html";
+                    }else if(game == 2){
+                        document.location = "lyrics/rules.html";
+                    }else if(game == 3){
+                        document.location = "againstthecrowd/rules.html";
+                    }         
+                }
+                
+                function getEventDisplayString(event) {
+                    return "New Exhibit!";
+                }
+
+                function getTimeNow() {
+                    function pad(n) {
+                        return (n < 10) ? '0' + n : n;
+                    }
+
+                    function format(h, m, s) {
+                        return pad(h) + ':' + pad(m) + ':' + pad(s);
+                    }
+
+                    var d = new Date();
+                    return format(d.getHours(), d.getMinutes(), d.getSeconds());
+                }
+
+                return app;
+
+            })();
+    </script>
 
 </body>
+
 </html>

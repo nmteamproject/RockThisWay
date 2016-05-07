@@ -1,0 +1,30 @@
+.user {
+    .main-content {
+        margin-bottom: rem(30);
+    }
+    
+    h2 {
+        color: #FFF;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: 'antoniolight';
+        font-size: rem(18);
+        margin-bottom: rem(10);
+    }
+    h3 {
+        font-size: rem(14);
+        font-family: $base-font-family;
+        font-weight: normal;
+        font-style: italic;
+        color: #FFF;
+    }
+}
+
+input[type="text"] {
+    background-color: #000; 
+    border-radius: 0;
+    font-style: italic;
+    font-size: rem(14);
+    padding: rem(12);
+    color: #FFF;
+}

@@ -11,17 +11,122 @@ body {
     background-color: #222;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom: rem(60);
 }
 
-.features {
-    font-style: italic;
-    li {
-        margin-bottom: rem(20);
+.home {
+    .title__main {
+        margin-top: rem(80);
     }
 }
 
+.main-content {
+    font-style: italic;
+    font-size: rem(13);
+    letter-spacing: 1px;
+    li {
+        margin-bottom: rem(15);
+    }
+}
+.survey-results .main-content {
+    width: 70%;
+}
+
 .container {
-    width: 80%;
+    width: 100%;
+    padding: 0 rem(10);
     margin-left: auto;
     margin-right: auto;
+    &.small {
+        width: 80%;
+    }
+}
+
+.question-count {
+    color: $red;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: rem(13);
+    line-height: 1.2;
+    margin-top: rem(20);
+    &:first-line {
+        font-size: rem(60);
+        letter-spacing: 6px; 
+    }
+}
+
+.round-count {
+    @extend .question-count;
+    color: $blue;
+    letter-spacing: 7px;
+    font-size: rem(16);
+    &:first-line {
+        font-size: rem(30);
+        letter-spacing: 2px;
+    }
+}
+
+.time-count {
+    @extend .round-count;
+    letter-spacing: 3px; 
+    &:first-line {
+        letter-spacing: 5px;
+    }
+}
+
+.close-btn {
+    position: fixed;
+    top: rem(10);
+    left: rem(10);
+    width: rem(20);
+    height: rem(20);
+}
+
+.backButton {
+    position: absolute;
+    transform: rotate(180deg);
+}
+
+.logo {
+    height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: rem(30);
+}
+
+.floor {
+    font-size: rem(20);
+    font-family: 'antoniolight';
+    text-transform: uppercase;
+    color: #FFF;
+    letter-spacing: 2px;
+}
+
+.red {
+    color: $red;
+}
+
+.blue {
+    color: $blue;
+}
+
+
+.options-list {
+    text-align: center;
+    margin-top: 50%;
+    li {
+        border: 2px solid #252525;
+        border-bottom: none; 
+        padding: rem(20) 0;
+        color: #FFF;
+        font-size: rem(17);
+        transition: all .2s linear;
+        &:last-child {
+            border-bottom: 2px solid #252525;
+        }
+        &.selected {
+            background-image: linear-gradient(to right, rgba(160,43,35,1) 0%,rgba(237,95,60,1) 100%);
+        }
+    }
 }
