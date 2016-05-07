@@ -14,10 +14,21 @@
 
 .survey {
     background-image: url('../images/backgrounds/survey.png'); 
-}
-
-.survey-edit {
-    background-image: url('../images/backgrounds/survey-edit.png'); 
+    &.edit {
+        background-image: url('../images/backgrounds/survey-edit.png'); 
+    }
+    &.rock {
+        background-image: url('../images/backgrounds/survey-rock.png'); 
+    }
+    &.pop {
+        background-image: url('../images/backgrounds/survey-pop.png'); 
+    }
+    &.country {
+        background-image: url('../images/backgrounds/survey-country.png'); 
+    }
+    &.alternative {
+        background-image: url('../images/backgrounds/survey-alternative.png'); 
+    }
 }
 
 .survey-results {
