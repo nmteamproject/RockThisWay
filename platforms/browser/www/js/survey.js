@@ -104,7 +104,7 @@ export function initEditPage() {
             // if we didn't pick any options, go straight to results
             let result = calculateResult();
             let data = results[result];
-            initResults(data); 
+            initResults(data, result); 
         }
     });
     
@@ -120,18 +120,19 @@ export function initEditPage() {
     // render the template
     data.questions = questions;
     $root.html(editSurveyTemplate(data));
+    
+    $(document.body).addClass('edit');
 }
 
-function next(e) {
-    console.log("next");
+function next() {
+    $(document.body).removeClass('edit'); 
+    
     if (isEditing) {
         editMarker++;
-        console.log("editMarker: " + editMarker);
         currentQuestion = questionsToEdit[editMarker];
         progress();
     } else {
         if (currentQuestion >= questions.length - 1) {   
-            // console.log("last non-edit question");
             isLastQuestion = true;
             initEditPage();
         } else {
@@ -176,7 +177,7 @@ function startSurvey() {
  * Render a question
  */
 function loadQuestion(question, isFirst) {
-    console.log("rendering question: " + question);
+    // console.log("rendering question: " + question);
     
     isFirstQuestion = isFirst;
    
@@ -196,13 +197,15 @@ function loadQuestion(question, isFirst) {
 /**
  * Start the results page
  */
-function initResults(data) {
-    console.log("starting results page");
+function initResults(data, result) {
+    // console.log("starting results page");
     
     let resultsScript = $('#survey-results-template').html();
     let resultsTemplate = Handlebars.compile(resultsScript);
     
     $root.html(resultsTemplate(data));
+    
+    $(document.body).addClass(result); 
 }
 
 /**
@@ -236,7 +239,7 @@ function clickEventHandler() {
         isLastQuestion = true;
         let result = calculateResult();
         let data = results[result];
-        initResults(data);
+        initResults(data, result);
     } else {  
         next();
     }
@@ -246,6 +249,7 @@ function clickEventHandler() {
  * Assign our result
  */
 function calculateResult() {
+    $(document.body).removeClass('edit'); 
     if (!questions[1].savedAnswer || questions[1].savedAnswer === "You didn't answer!") {
         return "rock";
     }
