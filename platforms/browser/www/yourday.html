@@ -35,10 +35,7 @@
         <h2 class="sub-title">Your Plan</h2>
 
         <h1 id="resultText" class="main-title"></h1>
-        
-        <a class="icon right">
-            <img src="ui/images/icons/pin.png" alt="base map">
-        </a>
+       
     </header>
 
     <main class="container">
@@ -117,7 +114,7 @@
     </article>-->
     
     <div class="modal" id="gameModal">
-        <img class="close-btn" src="images/exitIcon.png" onclick="removeModal()">
+        <img class="close-btn" src="images/exitIcon.png" id="exitModal">
         <div class="modal-img-contain">  
             <img class="modal__img" src="images/planTaytay.png" width="100%" id="artistImage">
         </div>
@@ -126,7 +123,8 @@
         <div class="modalText main-content" id="artistInfo">Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.</div>
         <div class="modal-subtitle" id="modalTitle">Against the Crowd</div>
         <div class="modalText main-content" id="modalDescription">Who thinks that they know Taylor Swift the best? Play with friends and family and see who knows the most!</div>
-        <a class="playButton button bottom-cta red" id="modalPlay">Play</a>
+
+        <a href="#" class="playButton button bottom-cta red" id="modalPlay">Play</a>
     </div>
     </article>
     
@@ -135,7 +133,8 @@
         $(resultText).html(sessionStorage.getItem("result"));
         
         var resultBg = document.getElementById("resultBg");
-        $(resultBg).css("background-image", "url('ui/images/backgrounds/survey-" + sessionStorage.getItem("result") + ".png')");
+        
+        $(resultBg).addClass(sessionStorage.getItem("result"));
     </script>
 
     <!--<div id="gameModal">
@@ -178,9 +177,10 @@
 
 
     <script>
-    
+            
             //This Entire Script is for the iBeacons
             var app = (function () {
+                removeModal();
                 // Application object.
                 var app = {};
 
@@ -410,12 +410,12 @@
                             $('#artistInfo').text("Aerosmith is a long-running hard rock band, originally forming in Boston, Massachusetts in the early 1970s, and enjoying a later resurgence in popularity in the late 1980s and mid-1990s");
                             $("#modalDescription").text("A Lyric game where we give you part of a song, and you must put the lyrics that follow in order!");
                         } else if (mNearestBeacon.major == 112) {
-                            $("#modalPlay").attr("onclick", "leaveExhibits()");
+                            $("#modalPlay").attr("href", "lyrics/rules.html");
                             $("#modalPlay").text("Leave");
                             $('#artistName').text("Leaving");
                             $('#modalTitle').text("Are you Prepared to go?");
                             $('#artistImage').attr('src', 'images/exhibit.png');
-                            $('#artistInfo').text("");
+                            $('#artistInfo').text("<br><br>");
                             $("#modalDescription").text("If you are leaving the our exhibit, please press the following button and give this phone to an exhibitor.");
                         } else {}
 
@@ -448,9 +448,14 @@
                 }
 
                 function triggerModal() {
-                    document.getElementById('gameModal').style.display = "initial";
+                    document.getElementById('gameModal').style.display = "block";
                 }
 
+                
+                document.getElementById('exitModal').addEventListener('click',function(){
+                    document.getElementById('gameModal').style.display = "none";
+                });
+                
                 function removeModal() {
                     document.getElementById('gameModal').style.display = "none";
                 }
