@@ -1,0 +1,77 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ececec;
+    z-index: 100;
+    padding: rem(20);
+    width: 80%;
+    height: 80%;
+    overflow: hidden;
+    &-img-contain {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        @include clearfix();
+         &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: rem(50);
+            background-image: linear-gradient(to bottom, rgba(234,234,234,0) 0%,rgba(234,234,234,1) 100%); 
+            z-index: 200;
+        }
+    }
+    &__img {
+        // position: absolute;
+        // top: 0;
+        // left: 50%;
+        // transform: translateX(-50%);
+    }
+    .main-content {
+        line-height: 1.3;
+        font-weight: normal; 
+    }
+}
+
+#artistName {
+    @extend .title__main;
+    z-index: 500;
+    color: #2e2e2e;
+    font-size: rem(40);
+    font-weight: bold;
+    line-height: 1.2;
+    font-family: 'antonioregular';
+    letter-spacing: 1px;
+    margin-bottom: rem(35);
+    margin-top: rem(80); 
+    &:first-line {
+        font-size: rem(40);
+        letter-spacing: 1px;
+    }
+    &:after {
+        margin-bottom: rem(15);
+    }
+}
+
+.close-btn {
+    z-index: 500;
+}
+
+.modal-subtitle {
+    color: $red;
+    text-transform: uppercase;
+    font-family: 'antonioregular';
+    margin-top: rem(40);
+    letter-spacing: 1px;
+    margin-bottom: rem(5);
+}
+
+.button.bottom-cta {
+    padding-top: rem(10);
+}

@@ -306,13 +306,7 @@
 <body class="your-day">
 
     <header class="main-header">
-<<<<<<< HEAD
-        <a href="user/name-creation.html" class="icon left">
-=======
-
-        <a class="icon left" href="user/name-creation.html">
-
->>>>>>> b521949ac827fbbf75b6532752ba1c701c077953
+        <a class="icon left"" href="user/name-creation.html">
             <img src="ui/images/icons/user.png" alt="user">
         </a>
         
@@ -389,7 +383,7 @@
     </main>
     
     <!-- Modals -->
-    <article class="modal beatles">
+    <!--<article class="modal beatles">
         <h1>The Beatles</h1>
         <p class="main-content">
             The Beatles are classic rock. Before they sold out 90's pitchfork four loko DIY lo-fi, mixtap gentrify plaid kitsch artisan kale chips meggings church-key.
@@ -397,7 +391,20 @@
         <div class="modal__cta">
             
         </div>
-    </article>
+    </article>-->
+    
+    <div class="modal" id="gameModal">
+        <img class="close-btn" src="images/exitIcon.png" onclick="removeModal()">
+        <div class="modal-img-contain">  
+            <img class="modal__img" src="images/planTaytay.png" width="100%" id="artistImage">
+        </div>
+        <div id="artistName">Taylor <br>Swift</div>
+        <div class="redDivider divider"></div>
+        <div class="modalText main-content" id="artistInfo">Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.</div>
+        <div class="modal-subtitle" id="modalTitle">Against the Crowd</div>
+        <div class="modalText main-content" id="modalDescription">Who thinks that they know Taylor Swift the best? Play with friends and family and see who knows the most!</div>
+        <button class="playButton button bottom-cta red" id="modalPlay">Play</button>
+    </div>
 
 <!--
     <div id="gameModal">

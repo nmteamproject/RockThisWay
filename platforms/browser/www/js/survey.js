@@ -15,7 +15,7 @@ const results = {
         desc: "Your plan will show you the roots and inspiration of Rock and Roll, good ol\' country music!" 
     },
     "alternative": {           
-        title: "Something Different",
+        title: "Alternative Grunge",
         desc: "You love anything and everything a little out of the box. You will see the greatest examples of Alternative music!" 
     }
 };
