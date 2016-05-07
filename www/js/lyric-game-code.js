@@ -132,6 +132,8 @@ function playMusic(song) {
 
 // Loads the page and word bank | Also called to reset Word Bank
 function loadWordBank() {
+    
+    document.getElementById("game").className = "";
     //Makes Dragging UI
     //document.getElementById("lyrics").style.border = "3px solid #636363";
     Sortable.create(lyrics, {
