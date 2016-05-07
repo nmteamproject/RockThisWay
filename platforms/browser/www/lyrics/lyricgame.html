@@ -22,13 +22,14 @@
             <div class="song" id="song"></div>
         </div>
 
+        <div class="controls">
+            <a class="lyricButton show" onclick="showLyrics()"><img src="../images/lyricGameUI/lyricLyricButton.png"></a>
 
-        <a class="lyricButton" onclick="showLyrics()"><img src="../images/lyricGameUI/lyricLyricButton.png"></a>
+            <a class="play" id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="../images/lyricGameUI/lyricPlayButton.png"></a> 
 
-        <a id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="../images/lyricGameUI/lyricPlayButton.png"></a>
-
-        <a class="lyricButton" onclick="loadWordBank()"><img src="../images/lyricGameUI/lyricRestartButton.png"></a>
-
+            <a class="lyricButton restart" onclick="loadWordBank()"><img src="../images/lyricGameUI/lyricRestartButton.png"></a>
+        </div>
+        
         <div id="verse" class="directions">Complete the lyrics</div>
         
         <div id="game">

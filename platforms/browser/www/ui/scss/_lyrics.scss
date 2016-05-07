@@ -15,11 +15,12 @@
     text-align: center;
     .artist {
         font-family: 'antoniolight';
-        letter-spacing: 2px;
+        letter-spacing: 3px;
         text-transform: uppercase;
     }
     .song {
         color: #FFF;
+        font-size: rem(14);
     }
 }
 
@@ -31,4 +32,31 @@
     .lyric {
         color: #FFF;
     }
+}
+
+.play img {
+    height: rem(60);
+}
+
+.show img,
+.restart img {
+    position: relative;
+    top: rem(-10);
+    height: rem(33);
+}
+
+.controls {
+    text-align: center;
+    margin-top: rem(20);
+    margin-bottom: rem(10);
+    img {
+        margin: 0 rem(4);
+    }
+}
+
+.directions {
+    text-align: center;
+    font-size: rem(14); 
+    margin-bottom: rem(5);
+    font-style: italic;
 }
