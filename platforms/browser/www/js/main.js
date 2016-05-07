@@ -5,7 +5,7 @@ window.$ = $;
 window.jQuery = jQuery;
 
 import { evothings } from './../libs/evothings/evothings';
-import { sortable } from './../libs/sortable/Sortable';
+import { Sortable } from './../libs/sortable/Sortable'; 
 var attachFastClick = require('fastclick'); 
 import * as survey from './survey.js'; 
 import * as trivia from './trivia.js'; 

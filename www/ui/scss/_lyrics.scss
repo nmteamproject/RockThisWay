@@ -2,4 +2,33 @@
     border-radius: 0;
     border: 1px solid rgba($blue, .8);
     background-color: transparent;
-} 
+    font-size: rem(14);
+    color: $medium-gray;
+    padding: rem(8);
+    font-weight: normal;
+    margin: rem(5);
+    margin-right: rem(5);
+    margin-left: 0;
+}
+
+.song-details {
+    text-align: center;
+    .artist {
+        font-family: 'antoniolight';
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    .song {
+        color: #FFF;
+    }
+}
+
+.word-box {
+    min-height: rem(60); 
+    padding: rem(10);
+    border: 2px solid $dark-gray;
+    margin-bottom: rem(20); 
+    .lyric {
+        color: #FFF;
+    }
+}

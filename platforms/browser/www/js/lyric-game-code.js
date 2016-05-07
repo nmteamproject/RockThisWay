@@ -13,7 +13,7 @@ var timeForGame = 0;
 var finalScore = 0;
 var staticTimerGrab = 0; //Grabs the time when the quiz completes and saves it off as a static int.
 
-//localStorage.lyricScore = 0;
+localStorage.lyricScore = 0;
 
 // Timer for song length UI
 function tick() {
@@ -116,16 +116,16 @@ function playMusic(song) {
 // Loads the page and word bank | Also called to reset Word Bank
 function loadWordBank() {
     //Makes Dragging UI
-    document.getElementById("lyrics").style.border = "3px solid #636363";
+    //document.getElementById("lyrics").style.border = "3px solid #636363";
     Sortable.create(lyrics, {
         group: 'foo',
         onStart: function (evt) {
-            document.getElementById("lyrics").style.border = "3px dashed #636363";
+           // document.getElementById("lyrics").style.border = "3px dashed #636363";
         },
 
         // dragging ended
         onEnd: function (evt) {
-            document.getElementById("lyrics").style.border = "3px solid #636363";
+           // document.getElementById("lyrics").style.border = "3px solid #636363";
 
 
         }
@@ -133,12 +133,12 @@ function loadWordBank() {
     Sortable.create(wordBank, {
         group: 'foo',
         onStart: function (evt) {
-            document.getElementById("lyrics").style.border = "3px dashed #636363";
+            //document.getElementById("lyrics").style.border = "3px dashed #636363";
         },
 
         // dragging ended
         onEnd: function (evt) {
-            document.getElementById("lyrics").style.border = "3px solid #636363";
+            //document.getElementById("lyrics").style.border = "3px solid #636363";
 
             if (document.getElementById("lyrics").innerHTML != "") {
 //                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
@@ -152,7 +152,7 @@ function loadWordBank() {
 
     document.getElementById("playMusicButton").value = musicCollection[lyricNumber];
     document.getElementById("song").innerHTML = songs[lyricNumber].song;
-    document.getElementById("artist").innerHTML = (songs[lyricNumber].artist) + "'";
+    document.getElementById("artist").innerHTML = songs[lyricNumber].artist;
 
     var bank = eval("lyricCollection" + lyricNumber);
     var fullBank = "";

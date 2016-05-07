@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -13,43 +11,34 @@
     <link href="../ui/css/style.css" rel="stylesheet">
 </head>
 
-<body id="lyricGame">
+<body class="lyric-game" id="lyricGame">
     <header class="main-header">
-        <h3 class="sub-title">Elvis's Lyrics</h3>
+        <h3 class="sub-title">Aerosmith Lyrics</h3>
     </header>
     
     <main class="container">
-        
-    </main>
-
-    <div>
-        <div id="songDetails">
+        <div class="song-details" id="songDetails">
             <div class="artist" id="artist"></div>
             <div class="song" id="song"></div>
         </div>
-<!--
-        <svg id="playTracker">
-            <path id="arc1" fill="none" stroke="#e82828" stroke-width="3" />
-        </svg>
--->
 
-            <a class="lyricButton" onclick="showLyrics()"><img src="../images/lyricGameUI/lyricLyricButton.png"></a>
 
-            <a id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="../images/lyricGameUI/lyricPlayButton.png" height="70px"></a>
+        <a class="lyricButton" onclick="showLyrics()"><img src="../images/lyricGameUI/lyricLyricButton.png"></a>
 
-            <a class="lyricButton" onclick="loadWordBank()"><img src="../images/lyricGameUI/lyricRestartButton.png"></a>
+        <a id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="../images/lyricGameUI/lyricPlayButton.png"></a>
+
+        <a class="lyricButton" onclick="loadWordBank()"><img src="../images/lyricGameUI/lyricRestartButton.png"></a>
 
         <div id="verse" class="directions">Complete the lyrics</div>
-
-    </div>
+        
+        <div id="game">
+            <div class="word-box" id="lyrics">
+            </div> 
+            <div class="word-bank" id="wordBank">
+            </div>
+        </div>
+    </main>
     
-    <div id="game">
-        <div id="lyrics">
-        </div>
-        <div id="wordBank">
-        </div>
-    </div>
-
     <a class="button bottom-cta blue submitButtom" onclick="checkLyrics()" id="sumbitLyricsButton">Submit</a>
     
     <script src="lyrics.js"></script>

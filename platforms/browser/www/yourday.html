@@ -102,16 +102,7 @@
         </article>
     </main>
 
-    <!-- Modals -->
-    <!--<article class="modal beatles">
-        <h1>The Beatles</h1>
-        <p class="main-content">
-            The Beatles are classic rock. Before they sold out 90's pitchfork four loko DIY lo-fi, mixtap gentrify plaid kitsch artisan kale chips meggings church-key.
-        </p>
-        <div class="modal__cta">
-
-        </div>
-    </article>-->
+ 
     
     <div class="modal" id="gameModal">
         <img class="close-btn" src="images/exitIcon.png" id="exitModal">
@@ -136,45 +127,6 @@
         
         $(resultBg).addClass(sessionStorage.getItem("result"));
     </script>
-
-    <!--<div id="gameModal">
-
-        <img src="images/exitIcon.png" onclick="removeModal()">
-
-        <img src="images/planTaytay.png" width="100%" id="artistImage">
-        <div id="artistName">Taylor Swift</div>
-        <div class="redDivider divider"></div>
-        <div class="modalText" id="artistInfo">Taylor Swift is an American country-pop singer-songwriter. In 2006, she released her debut single Tim McGraw, which peaked at number six on the Billboard country charts.</div>
-        <div id="modalTitle">Against the Crowd</div>
-        <div class="modalText" id="modalDescription">Who thinks that they know Taylor Swift the best? Play with friends and family and see who knows the most!</div>
-        <a href="#" id="modalLink">
-        <button class="playButton" id="modalPlay">Play</button></a>
-    </div>-->
-
-    <!--
-
-
-    <div class="flip-container" id="flip-toggle">
-        <div class="flipper">
-            <div class="frontPage">
-                <ul id="homeScreen" class="dynamic">
-                </ul>
-            </div>
-            <div class="backPage">
-                <div id="map">
-                    <img src="images/hall-map.png" width="100%" />
-                </div>
-                <div id="markers">
-                    <img id="marker1" src="ui/images/pick-location-marker.png" width="8%" />
-                    <img id="marker2" src="ui/images/pick-location-marker.png" width="8%" />
-                    <img id="marker3" src="ui/images/pick-location-marker.png" width="8%" />
-                    <div id="popups"></div>
-                </div>
-            </div>
-        </div>
-    </div>
--->
-
 
     <script>
             
@@ -389,14 +341,14 @@
                     if (mNearestBeacon.major != previousBeacon) {
                         console.log("nearest Beacon Changed");
                         if (mNearestBeacon.major == 19175) {
-                            $('#modalPlay').text("Who Wants to be a Rockstar?");
+                            $('#modalTitle').text("Who Wants to be a Rockstar?");
                             $("#modalLink").attr("href", "trivia/rules.html");
                             $('#artistName').text("The Beatles");
                             $('#artistImage').attr('src', 'images/planBeatles.png');
                             $('#artistInfo').text("The Beatles were the most influential popular music group of the rock era. They affected the post-war baby boom generation of Britain, the United States and many other countries during the 1960s. Certainly they are the most popular group in rock history, with global sales exceeding 1.1 billion records.");
                             $("#modalDescription").text("Play a fast paced True or False Trivia game! See how many answers you can get right before time runs out.");
                         } else if (mNearestBeacon.major == 18015) {
-                            $('#modalPlay').text("Against the Crowd");
+                            $('#modalTitle').text("Against the Crowd");
                             $("#modalLink").attr("href", "againstthecrowd/rules.html");
                             $('#artistImage').attr('src', 'images/planTaytay.png');
                             $('#artistName').text("Taylor Swift");
