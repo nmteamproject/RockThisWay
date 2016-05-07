@@ -6,6 +6,8 @@ var swapLyric;
 var playingMusic = false;
 var soundFile;
 var timer = null;
+var strikes = 0;
+
 
 //Vars for timer function
 var conCount = 1;
@@ -61,7 +63,7 @@ function stop() {
 
 // Adds lyric to answer key
 function addLyric(clickedVal) {
-    var lyric = "<button class='lyric' onclick='swap(this)' value='" + clickedVal + "'>" + clickedVal + "</button>";
+    var lyric = "<button class='lyric' value='" + clickedVal + "'>" + clickedVal + "</button>";
 
 
     var currentLyrics = document.getElementById("lyrics").innerHTML;
@@ -79,24 +81,36 @@ function checkLyrics() {
         }
     }
 
-    if(answerLyrics != undefined){
+    if (answerLyrics != undefined) {
         var answer = answerLyrics.substr(10, answerLyrics.length);
     }
-   
+
 
     if (answer == correctLyrics[lyricNumber]) {
         soundFile.pause();
         document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPlayButton.png'>";
         document.getElementById("lyrics").innerHTML = answer;
         document.getElementById("wordBank").innerHTML = "You got the Correct answer!";
+        document.getElementById("game").className += "answer-screen";
         document.getElementById("sumbitLyricsButton").innerHTML = "Next";
         document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
 
     } else {
         if (document.getElementById("lyrics").innerHTML != "") {
-//            document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#636363\">Incorrect, Try again</text></svg>')";
+            //            document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#636363\">Incorrect, Try again</text></svg>')";
         }
-        loadWordBank();
+        strikes++;
+        if (strikes == 3) {
+            document.getElementById("wordBank").innerHTML = "You got the answer wrong three times.";
+            document.getElementById("game").className += "answer-screen";
+            document.getElementById("lyrics").innerHTML = correctLyrics[lyricNumber];
+            document.getElementById("sumbitLyricsButton").innerHTML = "Next";
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
+            strikes = 0;
+        } else {
+            loadWordBank();
+        }
+
     }
 }
 
@@ -118,17 +132,19 @@ function playMusic(song) {
 
 // Loads the page and word bank | Also called to reset Word Bank
 function loadWordBank() {
+    
+    document.getElementById("game").className = "";
     //Makes Dragging UI
     //document.getElementById("lyrics").style.border = "3px solid #636363";
     Sortable.create(lyrics, {
         group: 'foo',
         onStart: function (evt) {
-           // document.getElementById("lyrics").style.border = "3px dashed #636363";
+            // document.getElementById("lyrics").style.border = "3px dashed #636363";
         },
 
         // dragging ended
         onEnd: function (evt) {
-           // document.getElementById("lyrics").style.border = "3px solid #636363";
+            // document.getElementById("lyrics").style.border = "3px solid #636363";
 
 
         }
@@ -144,7 +160,7 @@ function loadWordBank() {
             //document.getElementById("lyrics").style.border = "3px solid #636363";
 
             if (document.getElementById("lyrics").innerHTML != "") {
-//                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
+                //                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
             }
 
         }

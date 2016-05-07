@@ -60,3 +60,15 @@
     margin-bottom: rem(5);
     font-style: italic;
 }
+
+.answer-screen {
+    .word-box {
+        color: #FFF;
+        font-style: italic
+    }
+    .word-bank {
+        text-align: center;
+        color: $blue;
+        margin-top: rem(40);
+    }
+}
