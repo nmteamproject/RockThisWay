@@ -106,7 +106,7 @@ function checkLyrics() {
             document.getElementById("lyrics").innerHTML = correctLyrics[lyricNumber];
             document.getElementById("sumbitLyricsButton").innerHTML = "Next";
             document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
-
+            strikes = 0;
         } else {
             loadWordBank();
         }
