@@ -74,22 +74,6 @@ body {
     }
 }
 
-.trivia-count {
-    font-family: 'antoniolight';
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: rem(5);
-}
-
-.timer {
-    font-family: 'antonioregular';
-    color: #FFF;
-    font-size: rem(32);
-    text-align: center;
-    letter-spacing: 6px;
-}
-
 .close-btn {
     position: fixed;
     top: rem(10);

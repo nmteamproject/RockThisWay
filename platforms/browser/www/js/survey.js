@@ -42,10 +42,11 @@ let questionsToEdit = [];
 function selectAnswer() {
     // if we're in edit mode we can select more than one
     if (!isEditing) {
-        $(this).siblings().removeClass('selected');
+
     }
-    $(this).addClass('selected');
+    $(this).siblings().removeClass('selected');
     
+    $(this).addClass('selected');
     // save the answer
     questions[currentQuestion]["savedAnswer"] = $(this).text();
 }
@@ -57,7 +58,10 @@ function selectAnswerToEdit() {
     if ($(this).is(":checked")) {
         // if the box was checked
         // save it to our questions
-        questionsToEdit.push(val.toString());
+        if (questionsToEdit.indexOf(val) === -1) {
+            console.log('adding'); 
+            questionsToEdit.push(val);
+        } 
         
         // and add styling
         $(this).parent().addClass('selected');
@@ -66,7 +70,11 @@ function selectAnswerToEdit() {
     } else {
         // if the box is being unchecked
         // delete it from our questions
-        questionsToEdit[val] = false; 
+        if (questionsToEdit.indexOf(val) !== -1) {
+            console.log('removing');
+            let index = questionsToEdit.indexOf(val);
+            questionsToEdit.splice(index, 1);
+        }
        
         console.log('removed a question to edit: ' + questionsToEdit);
         // and remove styling
@@ -84,7 +92,14 @@ export function initEditPage() {
     
     // set up event listeners
     $root.on('change', 'input[type="checkbox"]', selectAnswerToEdit);
-    $root.on('click', '.bottom-cta:not(.blue)',  initSurvey);
+    $root.on('click', '.bottom-cta:not(.blue)',  function() {
+        if (questionsToEdit.length > 0) {
+           initSurvey(); 
+        }
+        else {
+           initResults()
+        }
+    });
     
     // set up data
     let data = {};
@@ -125,21 +140,23 @@ function next() {
     if (isEditing) {
         console.log("questionsToEdit.length: " + questionsToEdit.length);
         console.log("editMarker: " + editMarker);
-
-        editMarker++;
         if (editMarker >= questionsToEdit.length) {
-            console.log('last question');
+            console.log("done"); 
+            $('.bottom-cta').unbind();
+            initResults(); 
         } else {
             currentQuestion = questionsToEdit[editMarker];
             progress();
+            editMarker++;
         }
     } else {
-        if (currentQuestion >= questions.length) {   
+        if (currentQuestion >= questions.length-1) {   
             console.log("last question");
+            initEditPage();
         } else {
-            progress();
             currentQuestion++;
-        }
+            progress();
+        } 
     }
 }
 
@@ -152,28 +169,23 @@ function back() {
 }
 
 function progress() { 
-    if (currentQuestion >= questions.length) {
-        // start editing
-        initEditPage();
-    } else { 
-        // else go to next question 
-        loadQuestion(currentQuestion);
-    }
+    // else go to next question 
+    loadQuestion(currentQuestion);
 }
 
 function startSurvey() {
     console.log("Are we editing? " + isEditing);
     console.log("starting survey");
-    next(); 
+    // next(); 
     // // if we're editing
-    // if (isEditing) {
-    //    // load the first question we've selected to edit
-    //    console.log("editMarker: " + editMarker);
-    //    loadQuestion(questionsToEdit[editMarker], true); 
-    // } else {
-    //    // or just the first one
-    //    loadQuestion(0, true);
-    // }
+    if (isEditing) {
+       // load the first question we've selected to edit
+       console.log("editMarker: " + editMarker);
+       loadQuestion(questionsToEdit[editMarker], true); 
+    } else {
+       // or just the first one
+       loadQuestion(0, true);
+    }
 }
 
 function loadQuestion(question, isFirst) {
@@ -196,8 +208,13 @@ function loadQuestion(question, isFirst) {
     data.questionCount = questionCount;
     
     $root.html(surveyTemplate(data));
+}
+
+function initResults() {
+    console.log("results");
+    let resultsScript = $('#survey-results-template').html();
     
-    if (isEditing && editMarker >= questionsToEdit.length-1) {
-        console.log("done"); 
-    }
+    let resultsTemplate = Handlebars.compile(resultsScript);
+    
+    $root.html(resultsTemplate());
 }
