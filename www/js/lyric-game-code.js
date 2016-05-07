@@ -63,6 +63,7 @@ function stop() {
 
 // Adds lyric to answer key
 function addLyric(clickedVal) {
+    document.getElementById('lyrics').className = "word-box";
     var lyric = "<button class='lyric' value='" + clickedVal + "'>" + clickedVal + "</button>";
 
 
@@ -124,6 +125,8 @@ function checkLyrics() {
 
             strikes = 0;
         } else {
+            document.getElementById('lyrics').className += " wrong-answer";
+            
             loadWordBank();
         }
 
@@ -155,11 +158,13 @@ function loadWordBank() {
     Sortable.create(lyrics, {
         group: 'foo',
         onStart: function (evt) {
+            document.getElementById('lyrics').className = "word-box";
             // document.getElementById("lyrics").style.border = "3px dashed #636363";
         },
 
         // dragging ended
         onEnd: function (evt) {
+            document.getElementById('lyrics').className = "word-box";
             // document.getElementById("lyrics").style.border = "3px solid #636363";
 
 
@@ -168,11 +173,13 @@ function loadWordBank() {
     Sortable.create(wordBank, {
         group: 'foo',
         onStart: function (evt) {
+            document.getElementById('lyrics').className = "word-box";
             //document.getElementById("lyrics").style.border = "3px dashed #636363";
         },
 
         // dragging ended
         onEnd: function (evt) {
+            document.getElementById('lyrics').className = "word-box";
             //document.getElementById("lyrics").style.border = "3px solid #636363";
 
             if (document.getElementById("lyrics").innerHTML != "") {
