@@ -23,12 +23,12 @@
     <main class="container small">
         <h1 class="title--alt white">Complete</h1>
         
-        <p class="main-content">
-            Results 
+        <p id="triviaResults" class="main-content">
+            Results<br> 
         </p>
        
         
-        <p class="time-count">
+        <p id="pointsAwarded" class="time-count">
             <br>Points Awarded <br>#
         </p>
     </main>
@@ -37,5 +37,11 @@
     
     <script src="../cordova.js"></script>
     <script src="../bundle.js"></script>
+    
+    <script>
+        document.getElementById("triviaResults").innerHTML = "Results<br>" + localStorage.getItem("questionsCorrect") + "/10 Correct";
+        document.getElementById("pointsAwarded").innerHTML = "<br>Points Awarded <br>" + localStorage.getItem("triviaScore");
+    </script>
+    
 </body>
 </html>

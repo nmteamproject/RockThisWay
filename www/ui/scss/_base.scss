@@ -82,6 +82,11 @@ body {
     height: rem(20);
 }
 
+.backButton {
+    position: absolute;
+    transform: rotate(180deg);
+}
+
 .logo {
     height: 50px;
     display: block;
@@ -109,6 +114,7 @@ body {
 
 .options-list {
     text-align: center;
+    margin-top: 50%;
     li {
         border: 2px solid #252525;
         border-bottom: none; 

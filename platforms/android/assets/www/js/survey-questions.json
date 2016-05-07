@@ -1,0 +1,128 @@
+[
+    {
+        "question": "Been here before?",
+        "icon": "hand",
+        "answers": [
+            {
+                "answer": "Yes"
+            },
+            {
+                "answer": "No"
+            },
+            {
+                "answer": "Maybe"
+            },
+            {
+                "answer": "Not sure"
+            }
+        ]
+    },
+    {
+        "question": "Pick a genre",
+        "icon": "guitar",
+        "answers": [
+            {
+                "answer": "Rock"
+            },
+            {
+                "answer": "Pop"
+            },
+            {
+                "answer": "Alternative"
+            },
+            {
+                "answer": "Country"
+            }
+        ]
+    },
+    {
+        "question": "Pick a decade",
+        "icon": "record",
+        "answers": [
+            {
+                "answer": "60s"
+            },
+            {
+                "answer": "70s"
+            },
+            {
+                "answer": "80s"
+            },
+            {
+                "answer": "90s"
+            }
+        ]
+    },
+    {
+        "question": "Pick a song",
+        "icon": "headphones",
+        "answers": [
+            {
+                "answer": "\"Jump\" by Van Halen"
+            },
+            {
+                "answer": "\"Like a Virgin\" by Madonna"
+            },
+            {
+                "answer": "\"Hotline Bling\" by Drake"
+            },
+            {
+                "answer": "\"Ring of Fire\" by Johnny Cash"
+            }
+        ]
+    },
+    {
+        "question": "Pick an artist",
+        "icon": "mic",
+        "answers": [
+            {
+                "answer": "Aerosmith"
+            },
+            {
+                "answer": "Beyonce"
+            },
+            {
+                "answer": "Nirvana"
+            },
+            {
+                "answer": "Green Day"
+            }
+        ]
+    },
+    {
+        "question": "Pick an instrument",
+        "icon": "drumsticks",
+        "answers": [
+            {
+                "answer": "Guitar"
+            },
+            {
+                "answer": "Bass"
+            },
+            {
+                "answer": "Drums"
+            },
+            {
+                "answer": "Piano"
+            }
+        ]
+    },
+    {
+        "question": "Pick an artifact",
+        "icon": "amp",
+        "answers": [
+            {
+                "answer": "Kurt Cobain's Guitar"
+            },
+            {
+                "answer": "Michael Jackson's Glove"
+            },
+            {
+                "answer": "Taylor Swift's Lyric Sheets"
+            },
+            {
+                "answer": "Elvis Presley's Custom Motorcycle"
+            }
+        ]
+    }
+];
