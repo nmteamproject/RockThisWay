@@ -91,7 +91,7 @@ function checkLyrics() {
         document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPlayButton.png'>";
         document.getElementById("lyrics").innerHTML = answer;
         document.getElementById("wordBank").innerHTML = "You got the Correct answer!";
-        document.getElementById("game").className += " answer-screen";
+        document.getElementById("game").className += "answer-screen";
         document.getElementById("sumbitLyricsButton").innerHTML = "Next";
         document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
 
@@ -102,7 +102,7 @@ function checkLyrics() {
         strikes++;
         if (strikes == 3) {
             document.getElementById("wordBank").innerHTML = "You got the answer wrong three times.";
-            document.getElementById("game").className += " answer-screen";
+            document.getElementById("game").className += "answer-screen";
             document.getElementById("lyrics").innerHTML = "answer";
             document.getElementById("sumbitLyricsButton").innerHTML = "Next";
             document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
