@@ -57,7 +57,7 @@ function submit() {
 
             document.getElementById(correctResponse).classList.add('animated');
             document.getElementById(correctResponse).classList.add('flipInY');
-            document.getElementById(correctResponse).classList.remove('crowdQuestion');
+            //document.getElementById(correctResponse).classList.remove('crowdQuestion');
             document.getElementById(correctResponse).classList.add('correctAnswer');
             numberCorrect++;
             correct = true;

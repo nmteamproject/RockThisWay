@@ -91,7 +91,7 @@ function checkLyrics() {
 
     } else {
         if (document.getElementById("lyrics").innerHTML != "") {
-            document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#636363\">Incorrect, Try again</text></svg>')";
+//            document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#636363\">Incorrect, Try again</text></svg>')";
         }
         loadWordBank();
     }
@@ -141,7 +141,7 @@ function loadWordBank() {
             document.getElementById("lyrics").style.border = "3px solid #636363";
 
             if (document.getElementById("lyrics").innerHTML != "") {
-                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
+//                document.getElementById("lyrics").style.backgroundImage = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"35%\" y=\"55%\" font-size=\"20\" fill=\"#c1c1c1\"></text></svg>')";
             }
 
         }
