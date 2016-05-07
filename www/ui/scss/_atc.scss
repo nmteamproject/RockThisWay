@@ -35,11 +35,13 @@
         margin-top: rem(20);
     }
     &.correctAnswer {
-        background-image: linear-gradient(to bottom, rgba(#134644, .1) 0%,rgba(#145351, .1) 100%);
+        background-image: linear-gradient(to bottom, rgba(#134644, 1) 0%,rgba(#145351, 1) 100%);
         border: 1px solid #1b8e8e;
         font-family: $base-font-family;
+        padding: 0 rem(20);
+        text-align: left;
         .answerText {
-            float: left;
+            flex-grow: 4;
         }
         .answerPoints {
             font-weight: bold;
