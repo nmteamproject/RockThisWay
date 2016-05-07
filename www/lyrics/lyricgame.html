@@ -24,8 +24,8 @@
 
     <div>
         <div id="songDetails">
-            <div id="artist"></div>
-            <div id="song"></div>
+            <div class="artist" id="artist"></div>
+            <div class="song" id="song"></div>
         </div>
 <!--
         <svg id="playTracker">
@@ -42,17 +42,15 @@
         <div id="verse" class="directions">Complete the lyrics</div>
 
     </div>
-        <div id="game">
-
-
-            <div id="lyrics">
-
-            </div>
-            <div id="wordBank">
-            </div>
+    
+    <div id="game">
+        <div id="lyrics">
         </div>
+        <div id="wordBank">
+        </div>
+    </div>
 
-    <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
+    <a class="button bottom-cta blue submitButtom" onclick="checkLyrics()" id="sumbitLyricsButton">Submit</a>
     
     <script src="lyrics.js"></script>
     <script src="../cordova.js"></script>

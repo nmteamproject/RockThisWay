@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -15,8 +13,6 @@
 </head>
 
 <body class="user">
-    <!--<div id="creationPage">
-    </div>-->
     <main class="container small">
         <h1 class="title--alt"> <span id="name"></span>
         </h1>
@@ -35,12 +31,10 @@
     </main>
     
     <a class="button bottom-cta blue" href="thanks.html">Next</a>
-    <!--<button onclick="submitUserName()" class="submitButton" id="sumbitNameButton">Submit</button>-->
 
     <script src="../cordova.js"></script>
     <script src="../bundle.js"></script>
     <script>
-        
         var total = 0;
         document.getElementById('name').innerHTML = localStorage.getItem('user');
         document.getElementById('triviaPoints').innerHTML = localStorage.getItem('triviaScore');
@@ -51,8 +45,5 @@
         document.getElementById('totalPoints').innerHTML = total;
         
     </script>
-    
-
 </body>
-
 </html>
