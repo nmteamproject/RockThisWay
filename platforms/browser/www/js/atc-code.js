@@ -12,15 +12,15 @@ var asking = true;
 var next = false;
 var moveon = false;
 
-document.getElementById("submit").addEventListener("click", function(){
-    if (asking){
+document.getElementById("submit").addEventListener("click", function () {
+    if (asking) {
         submit();
-    }else if (next){
+    } else if (next) {
         startQuestion();
-    }else if (moveon){
+    } else if (moveon) {
         document.location = "gameend.html"
     }
-    
+
 });
 
 
@@ -31,7 +31,7 @@ function startQuestion() {
     }
     
     document.getElementById('submit').innerHTML = "Submit";
-    
+
     asking = true;
     next = false;
     document.getElementById('question').innerHTML = questions[questionNumber];
@@ -56,7 +56,6 @@ function submit() {
 
             document.getElementById(correctResponse).classList.add('animated');
             document.getElementById(correctResponse).classList.add('flipInY');
-            //document.getElementById(correctResponse).classList.remove('crowdQuestion');
             document.getElementById(correctResponse).classList.add('correctAnswer');
             numberCorrect++;
             correct = true;
@@ -77,8 +76,10 @@ function submit() {
             var correctResponse = "crowdQ" + i;
 
             document.getElementById(correctResponse).innerHTML = "<div class='answerText'>" + questionID[i].answer + "</div> &nbsp <div class='answerPoints'>" + questionID[i].points + "</div>";
-            document.getElementById(correctResponse).classList = "correctAnswer animated flipInY";
 
+            document.getElementById(correctResponse).classList.add('animated');
+            document.getElementById(correctResponse).classList.add('flipInY');
+            document.getElementById(correctResponse).classList.add('correctAnswer');
 
         }
 

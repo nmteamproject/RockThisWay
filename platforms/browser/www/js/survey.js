@@ -46,8 +46,8 @@ let questionsToEdit = [];
  * Event listener for selecting an answer
  */
 function selectAnswer() {
+    // style it
     $(this).siblings().removeClass('selected');
-    
     $(this).addClass('selected');
     // save the answer
     questions[currentQuestion]["savedAnswer"] = $(this).text();
@@ -68,8 +68,6 @@ function selectAnswerToEdit() {
         
         // and add styling
         $(this).parent().addClass('selected');
-        
-        // console.log('selected a question to edit: ' + questionsToEdit); 
     } else {
         // if the box is being unchecked
         // delete it from our questions
@@ -78,12 +76,14 @@ function selectAnswerToEdit() {
             questionsToEdit.splice(index, 1);
         }
        
-        // console.log('removed a question to edit: ' + questionsToEdit);
         // and remove styling
         $(this).parent().removeClass('selected'); 
     }
 }
 
+/**
+ * Start Edit Mode
+ */
 export function initEditPage() {
     // we are now editing
     isEditing = true;
@@ -157,14 +157,10 @@ function progress() {
 }
 
 function startSurvey() {
-    // console.log("Are we editing? " + isEditing);
-    // console.log("starting survey");
-    // // if we're editing
+    // if we're editing
     isFirstQuestion = true;
     if (isEditing) { 
        editMarker = 0;
-       // console.log("questionsToEdit.length: " + questionsToEdit.length);
-       // console.log("editMarker: " + editMarker);
        // load the first question we've selected to edit
        loadQuestion(questionsToEdit[editMarker], true); 
     } else {
@@ -177,8 +173,6 @@ function startSurvey() {
  * Render a question
  */
 function loadQuestion(question, isFirst) {
-    // console.log("rendering question: " + question);
-    
     isFirstQuestion = isFirst;
    
     // update currentQuestion
@@ -198,8 +192,6 @@ function loadQuestion(question, isFirst) {
  * Start the results page
  */
 function initResults(data, result) {
-    // console.log("starting results page");
-    
     let resultsScript = $('#survey-results-template').html();
     let resultsTemplate = Handlebars.compile(resultsScript);
     
