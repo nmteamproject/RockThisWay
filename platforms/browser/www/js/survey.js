@@ -6,7 +6,7 @@ const results = {
         title: "Forver Rock and Roll",
         desc: "Your plan will show you the best Rock and Roll exhibits from classic to modern!"
     },
-    "contemporary": {         
+    "pop": {         
         title: "Popular and Contemporary",
         desc: "You will see more contemporary artists that have already made their way into the Rock Hall!"
     },
@@ -27,11 +27,14 @@ let $root;
 let currentQuestion = 0;
 let isFirstQuestion = true;
 let isLastQuestion = false;
+
+// are we in edit mode
 let isEditing = false;
 
 // keep track of how far we've gone in edit array
 let editMarker = 0;
 
+// list of our questions
 let questions = require('./survey-questions'); 
 
 export let questionCount = questions.length;
@@ -39,11 +42,10 @@ export let questionCount = questions.length;
 // list of indexes of questions that were selected to edit
 let questionsToEdit = [];
 
+/**
+ * Event listener for selecting an answer
+ */
 function selectAnswer() {
-    // if we're in edit mode we can select more than one
-    if (!isEditing) {
-
-    }
     $(this).siblings().removeClass('selected');
     
     $(this).addClass('selected');
@@ -51,32 +53,32 @@ function selectAnswer() {
     questions[currentQuestion]["savedAnswer"] = $(this).text();
 }
 
+/** 
+ * Event listener for checking answers to edit
+ */
 function selectAnswerToEdit() {
     let val = $(this).val();
-    console.log(val);
    
     if ($(this).is(":checked")) {
         // if the box was checked
         // save it to our questions
         if (questionsToEdit.indexOf(val) === -1) {
-            console.log('adding'); 
             questionsToEdit.push(val);
         } 
         
         // and add styling
         $(this).parent().addClass('selected');
         
-        console.log('selected a question to edit: ' + questionsToEdit); 
+        // console.log('selected a question to edit: ' + questionsToEdit); 
     } else {
         // if the box is being unchecked
         // delete it from our questions
         if (questionsToEdit.indexOf(val) !== -1) {
-            console.log('removing');
             let index = questionsToEdit.indexOf(val);
             questionsToEdit.splice(index, 1);
         }
        
-        console.log('removed a question to edit: ' + questionsToEdit);
+        // console.log('removed a question to edit: ' + questionsToEdit);
         // and remove styling
         $(this).parent().removeClass('selected'); 
     }
@@ -92,12 +94,17 @@ export function initEditPage() {
     
     // set up event listeners
     $root.on('change', 'input[type="checkbox"]', selectAnswerToEdit);
-    $root.on('click', '.bottom-cta:not(.blue)',  function() {
+    $root.on('click', '.bottom-cta.red',  function() {
+        // for red button
         if (questionsToEdit.length > 0) {
-           initSurvey(); 
+            // if we pick some options
+            initSurvey(); 
         }
         else {
-           initResults()
+            // if we didn't pick any options, go straight to results
+            let result = calculateResult();
+            let data = results[result];
+            initResults(data); 
         }
     });
     
@@ -115,43 +122,17 @@ export function initEditPage() {
     $root.html(editSurveyTemplate(data));
 }
 
-function first(obj) {
-    for (var a in obj) return a;
-}
-
-export function initSurvey() {
-    // Setup template
-    $root = $('#content'); 
-    surveyScript = $('#survey-template').html();
-    
-    surveyTemplate = Handlebars.compile(surveyScript);
-    
-    // Setup event listeners
-    $root.on('click', '.survey-options li', selectAnswer); 
-    $root.on('click', '.next', next); 
-    $root.on('click', '.back', back); 
-    $root.on('click', '.bottom-cta:not(.red)',  next);
-    
-    // Load the first question
-    startSurvey();
-}
-
-function next() {
+function next(e) {
+    console.log("next");
     if (isEditing) {
-        console.log("questionsToEdit.length: " + questionsToEdit.length);
+        editMarker++;
         console.log("editMarker: " + editMarker);
-        if (editMarker >= questionsToEdit.length) {
-            console.log("done"); 
-            $('.bottom-cta').unbind();
-            initResults(); 
-        } else {
-            currentQuestion = questionsToEdit[editMarker];
-            progress();
-            editMarker++;
-        }
+        currentQuestion = questionsToEdit[editMarker];
+        progress();
     } else {
-        if (currentQuestion >= questions.length-1) {   
-            console.log("last question");
+        if (currentQuestion >= questions.length - 1) {   
+            // console.log("last non-edit question");
+            isLastQuestion = true;
             initEditPage();
         } else {
             currentQuestion++;
@@ -160,6 +141,7 @@ function next() {
     }
 }
 
+// TODO: make work for edit mode
 function back() {
     if (!isFirstQuestion) {
         // go to previous question
@@ -174,13 +156,15 @@ function progress() {
 }
 
 function startSurvey() {
-    console.log("Are we editing? " + isEditing);
-    console.log("starting survey");
-    // next(); 
+    // console.log("Are we editing? " + isEditing);
+    // console.log("starting survey");
     // // if we're editing
-    if (isEditing) {
+    isFirstQuestion = true;
+    if (isEditing) { 
+       editMarker = 0;
+       // console.log("questionsToEdit.length: " + questionsToEdit.length);
+       // console.log("editMarker: " + editMarker);
        // load the first question we've selected to edit
-       console.log("editMarker: " + editMarker);
        loadQuestion(questionsToEdit[editMarker], true); 
     } else {
        // or just the first one
@@ -188,17 +172,16 @@ function startSurvey() {
     }
 }
 
+/**
+ * Render a question
+ */
 function loadQuestion(question, isFirst) {
-    console.log("loading question: " + question);
+    console.log("rendering question: " + question);
     
     isFirstQuestion = isFirst;
    
     // update currentQuestion
     currentQuestion = question;
-
-    console.log("currentQuestion: " + currentQuestion);
-    
-    console.log("rending question");
     
     // render the question 
     let data = questions[question];
@@ -210,11 +193,61 @@ function loadQuestion(question, isFirst) {
     $root.html(surveyTemplate(data));
 }
 
-function initResults() {
-    console.log("results");
-    let resultsScript = $('#survey-results-template').html();
+/**
+ * Start the results page
+ */
+function initResults(data) {
+    console.log("starting results page");
     
+    let resultsScript = $('#survey-results-template').html();
     let resultsTemplate = Handlebars.compile(resultsScript);
     
-    $root.html(resultsTemplate());
+    $root.html(resultsTemplate(data));
+}
+
+/**
+ * Start the survey page
+ */
+export function initSurvey() {
+    // Setup template
+    $root = $('#content'); 
+    surveyScript = $('#survey-template').html();
+    
+    surveyTemplate = Handlebars.compile(surveyScript);
+    
+    // Setup event listeners
+    $root.on('click', '.survey-options li', selectAnswer); 
+    $root.off('click', '.next', clickEventHandler); 
+    $root.on('click', '.next', clickEventHandler); 
+    $root.on('click', '.back', back); 
+    $root.off('click', '.bottom-cta.blue',  clickEventHandler);
+    $root.on('click', '.bottom-cta.blue',  clickEventHandler);
+    
+    // Load the first question
+    startSurvey();
+}
+
+/**
+ * Event handler for whenever the button is clicked
+ */
+function clickEventHandler() {
+    if (isEditing && editMarker >= questionsToEdit.length - 1) {
+        // if we're editing and at the last question
+        isLastQuestion = true;
+        let result = calculateResult();
+        let data = results[result];
+        initResults(data);
+    } else {  
+        next();
+    }
+}
+
+/**
+ * Assign our result
+ */
+function calculateResult() {
+    if (!questions[1].savedAnswer || questions[1].savedAnswer === "You didn't answer!") {
+        return "rock";
+    }
+    return questions[1].savedAnswer.toLowerCase();
 }
