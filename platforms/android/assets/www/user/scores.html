@@ -18,106 +18,40 @@
     <!--<div id="creationPage">
     </div>-->
     <main class="container small">
-        <h1 class="title--alt">
-            &ldquo;Person's Name&rdquo;
+        <h1 class="title--alt"> <span id="name"></span>
         </h1>
         
         <h2>Beatles Trivia</h2>
-        <p class="main-content">50 points</p>
+        <p class="main-content"  id="triviaPoints"># points</p>
         
         <h2>Aerosmith Lyrics</h2>
-        <p class="main-content">40 points</p>
+        <p class="main-content"  id="lyricPoints"># points</p>
         
         <h2>Against the Crowd</h2>
-        <p class="main-content">40 points</p>
+        <p class="main-content"  id="atcPoints"># points</p>
         
         <h3>Total</h3>
-        <p class="main-content"><strong>130 points</strong></p>
+        <p class="main-content"  id="totalPoints"><strong># points</strong></p>
     </main>
     
-    <a class="button bottom-cta blue" href="#">Next</a>
+    <a class="button bottom-cta blue" href="thanks.html">Next</a>
     <!--<button onclick="submitUserName()" class="submitButton" id="sumbitNameButton">Submit</button>-->
 
     <script src="../cordova.js"></script>
     <script src="../bundle.js"></script>
-
-    <!--<script>
-        window.onload = loadPage;
-
-        function loadPage() {
-           
-            if (localStorage.getItem("user") != undefined) {
-                displayUser();
-            } else {
-                document.getElementById('creationPage').innerHTML = 
-                "<div class=\"pagetitle\">Create Your Own Gamertag</div>" +
-                "<input id=\"userName\" type=\"text\" placeholder=\"Your name here\">" +
-                "<div class=\"divider\"></div>" +
-                "<div class=\"details\">This name will follow you throughout your exhibits. At the end look for your name on the leaderboards!</div>" +
-
-                "<button onclick=\"submitUserName()\" class=\"submitButton\" id=\"sumbitLyricsButton\">Submit</button>";
-            }
-        }
-
-
-
-        function displayUser() {
-            
-            var user =  localStorage.getItem("user");
-            
-            var points = 0;
-            
-            document.getElementById('creationPage').innerHTML = 
-                "<div id=\"teamName\"></div>" +
-                "<div class=\"divider redDivider\"></div>" +
-                "<div>Trivia: The Beatles</div>" +
-                "<div class=\"points\" id=\"triviaPoints\">Didn't Play Yet</div>" +
-                "<div>Lyracle: Aerosmith</div>" +
-                "<div class=\"points\" id=\"lyricPoints\">Didn't Play Yet</div>" +
-                "<div>Against the Crowd: Taylor Swift</div>" +
-                "<div class=\"points\" id=\"atcPoints\">Didn't Play Yet</div>" +
-                "<div class=\"points\">Total</div>" +
-                "<div id=\"teamScore\" class=\"points\"></div>" +
-                "<button onclick=\"returnToPlan()\" class=\"submitButton\" id=\"sumbitLyricsButton\">Return</button>";
-            
-            var atcScore = parseInt(localStorage.atcScore);
-            if (Number.isInteger(atcScore)){
-                document.getElementById('atcPoints').innerHTML = atcScore;
-                points += atcScore;
-            }
-            var triviaScore = parseInt(localStorage.triviaScore);
-            if (Number.isInteger(triviaScore)){
-                document.getElementById('triviaPoints').innerHTML = triviaScore;
-                points += triviaScore;
-            }
-            var lyricScore = parseInt(localStorage.lyricScore);
-            if (Number.isInteger(lyricScore)){
-                document.getElementById('lyricPoints').innerHTML = lyricScore;
-                points += lyricScore;
-            }
-            
-            localStorage.points = points;
-            
-            document.getElementById('sumbitNameButton').setAttribute('onclick','returnToPlan()');
-            document.getElementById('sumbitNameButton').innerHTML = "Return";
-
-            document.getElementById('teamName').innerHTML = user;
-            document.getElementById('testName').innerHTML = testUser;
-            document.getElementById('teamScore').innerHTML = points;
-        }
-
-        function submitUserName() {
-            
-            localStorage.user = document.getElementById('userName').value;
-            displayUser();
-
-        }
-
-        function returnToPlan() {
-            document.location = "yourday.html";
-        }
-    </script>-->
-
+    <script>
+        
+        var total = 0;
+        document.getElementById('name').innerHTML = localStorage.getItem('user');
+        document.getElementById('triviaPoints').innerHTML = localStorage.getItem('triviaScore');
+        document.getElementById('lyricPoints').innerHTML = localStorage.getItem('lyricScore');
+        document.getElementById('atcPoints').innerHTML = localStorage.getItem('atcScore');
+        
+        total = parseInt(localStorage.getItem('triviaScore')) + parseInt(localStorage.getItem('lyricScore')) + parseInt(localStorage.getItem('atcScore'));
+        document.getElementById('totalPoints').innerHTML = total;
+        
+    </script>
+    
 
 </body>
 

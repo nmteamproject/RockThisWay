@@ -25,9 +25,10 @@
 
 </head>
 
-<body class="your-day">
+<body id="resultBg" class="your-day">
 
     <header class="main-header">
+
 
         <a href="user/name-creation.html" class="icon left">
 
@@ -35,8 +36,9 @@
         </a>
 
         <h2 class="sub-title">Your Plan</h2>
-        <h1 class="main-title">Alternative</h1>
 
+        <h1 id="resultText" class="main-title"></h1>
+        
         <a class="icon right">
             <img src="ui/images/icons/pin.png" alt="base map">
         </a>
@@ -116,6 +118,14 @@
 
         </div>
     </article>
+    
+    <script>
+        var resultText = document.getElementById("resultText");
+        $(resultText).html(sessionStorage.getItem("result"));
+        
+        var resultBg = document.getElementById("resultBg");
+        $(resultBg).css("background-image", "url('ui/images/backgrounds/survey-" + sessionStorage.getItem("result") + ".png')");
+    </script>
 
 
     <div id="gameModal">

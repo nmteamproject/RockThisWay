@@ -6,12 +6,32 @@
     bottom: rem(5);
 }
 
+.triviaQuestions {
+    font-weight: lighter;
+    font-size: rem(26);
+}
+
+#ScoreBoard {
+    bottom: rem(30);
+}
+
 .timer {
     font-family: 'antonioregular';
     color: #FFF;
     font-size: rem(32);
     text-align: center;
     letter-spacing: 6px;
+}
+
+.TriviaQuestion {
+     background: white;
+     padding: 5px;
+     height: 150px;
+     width:90vw;
+     display: table-cell;
+     vertical-align: middle;
+     border: 1px solid;
+     position: absolute;
 }
 
 .trivia {

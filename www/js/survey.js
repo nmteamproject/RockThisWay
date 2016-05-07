@@ -253,5 +253,6 @@ function calculateResult() {
     if (!questions[1].savedAnswer || questions[1].savedAnswer === "You didn't answer!") {
         return "rock";
     }
+    sessionStorage.setItem("result", questions[1].savedAnswer.toLowerCase());
     return questions[1].savedAnswer.toLowerCase();
 }

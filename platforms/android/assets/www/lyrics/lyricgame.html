@@ -10,30 +10,29 @@
     <title>Rock This Way</title>
     <script src="https://use.typekit.net/giv3oua.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    <link href="ui/css/style.css" rel="stylesheet">
+    <link href="../ui/css/style.css" rel="stylesheet">
 </head>
 
 <body id="lyricGame">
 
-    <div class="gameHeader">
-        <img src="images/arrow.png" class="backButton" onclick="returnToPlan()"> Aerosmith's Lyrics
-    </div>
 
     <div>
         <div id="songDetails">
             <div id="artist"></div>
             <div id="song"></div>
         </div>
+<!--
         <svg id="playTracker">
             <path id="arc1" fill="none" stroke="#e82828" stroke-width="3" />
         </svg>
+-->
 
-            <button class="lyricButton" onclick="showLyrics()"><img src="images/lyricGameUI/lyricLyricButton.png" height="40px"></button>
+            <button class="lyricButton" onclick="showLyrics()"><img src="../images/lyricGameUI/lyricLyricButton.png" height="40px"></button>
 
-            <button id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="images/lyricGameUI/lyricPlayButton.png" height="70px"></button>
+            <button id="playMusicButton" onclick="playMusic(this.value)" value=""><img src="../images/lyricGameUI/lyricPlayButton.png" height="70px"></button>
 
-            <button class="lyricButton" onclick="loadWordBank()"><img src="images/lyricGameUI/lyricRestartButton.png" height="40px"></button>
->
+            <button class="lyricButton" onclick="loadWordBank()"><img src="../images/lyricGameUI/lyricRestartButton.png" height="40px"></button>
+
         <div id="verse" class="directions">Complete the lyrics</div>
 
     </div>
@@ -50,8 +49,9 @@
     <button onclick="checkLyrics()" class="submitButton" id="sumbitLyricsButton">Submit</button>
     
     <script src="lyrics.js"></script>
-    <script src="cordova.js"></script>
-    <script src="bundle.js"></script>
+    <script src="../cordova.js"></script>
+    <script src="../bundle.js"></script>
+    <script src="../libs/sortable/Sortable.js"></script>
     
     <script type="text/javascript">
     window.onload = loadWordBank;
@@ -76,7 +76,7 @@
 
         var songTime = (soundFile.currentTime / soundFile.duration) * 359;
 
-        document.getElementById("arc1").setAttribute("d", describeArc(57, 50, 37, 0, songTime));
+        //document.getElementById("arc1").setAttribute("d", describeArc(57, 50, 37, 0, songTime));
     }
 
     function start() {
@@ -158,13 +158,13 @@
         if (playingMusic == true) {
             stop();
             soundFile.pause();
-            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>";
+            document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPlayButton.png' height='70px'>";
             playingMusic = false;
         } else {
             start();
             soundFile.play();
             playingMusic = true;
-            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPauseButton.png' height='70px'>";
+            document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPauseButton.png' height='70px'>";
         }
     }
 
@@ -257,7 +257,7 @@
     setInterval(function(){
         if(soundFile.paused){
             playingMusic = false;
-            document.getElementById('playMusicButton').innerHTML = "<img src='images/lyricGameUI/lyricPlayButton.png' height='70px'>";
+            document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPlayButton.png' height='70px'>";
         }
     }, 500);
 </script>

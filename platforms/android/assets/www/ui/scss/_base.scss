@@ -74,28 +74,17 @@ body {
     }
 }
 
-.trivia-count {
-    font-family: 'antoniolight';
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: rem(5);
-}
-
-.timer {
-    font-family: 'antonioregular';
-    color: #FFF;
-    font-size: rem(32);
-    text-align: center;
-    letter-spacing: 6px;
-}
-
 .close-btn {
     position: fixed;
     top: rem(10);
     left: rem(10);
     width: rem(20);
     height: rem(20);
+}
+
+.backButton {
+    position: absolute;
+    transform: rotate(180deg);
 }
 
 .logo {
@@ -125,6 +114,7 @@ body {
 
 .options-list {
     text-align: center;
+    margin-top: 50%;
     li {
         border: 2px solid #252525;
         border-bottom: none; 
