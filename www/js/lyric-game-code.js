@@ -7,7 +7,7 @@ var playingMusic = false;
 var soundFile;
 var timer = null;
 var strikes = 0;
-
+var score = 0;
 
 //Vars for timer function
 var conCount = 1;
@@ -93,7 +93,16 @@ function checkLyrics() {
         document.getElementById("wordBank").innerHTML = "You got the Correct answer!";
         document.getElementById("game").className += "answer-screen";
         document.getElementById("sumbitLyricsButton").innerHTML = "Next";
-        document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
+        score += 50;
+
+        if (lyricNumber == 2) {
+            localStorage.lyricScore = score;
+            document.getElementById("sumbitLyricsButton").innerHTML = "Finish";
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'finish()');
+        } else {
+            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
+        }
+
 
     } else {
         if (document.getElementById("lyrics").innerHTML != "") {
@@ -105,7 +114,14 @@ function checkLyrics() {
             document.getElementById("game").className += "answer-screen";
             document.getElementById("lyrics").innerHTML = correctLyrics[lyricNumber];
             document.getElementById("sumbitLyricsButton").innerHTML = "Next";
-            document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
+            if (lyricNumber == 2) {
+                localStorage.lyricScore = score;
+                document.getElementById("sumbitLyricsButton").innerHTML = "Finish";
+                document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'finish()');
+            } else {
+                document.getElementById("sumbitLyricsButton").setAttribute('onclick', 'nextLyrics()');
+            }
+
             strikes = 0;
         } else {
             loadWordBank();
@@ -132,7 +148,7 @@ function playMusic(song) {
 
 // Loads the page and word bank | Also called to reset Word Bank
 function loadWordBank() {
-    
+
     document.getElementById("game").className = "";
     //Makes Dragging UI
     //document.getElementById("lyrics").style.border = "3px solid #636363";
