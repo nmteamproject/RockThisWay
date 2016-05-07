@@ -59,10 +59,6 @@
     }
 }
 
-.close-btn {
-    z-index: 500;
-}
-
 .modal-subtitle {
     color: $red;
     text-transform: uppercase;
@@ -70,8 +66,4 @@
     margin-top: rem(40);
     letter-spacing: 1px;
     margin-bottom: rem(5);
-}
-
-.button.bottom-cta {
-    padding-top: rem(10);
 }
