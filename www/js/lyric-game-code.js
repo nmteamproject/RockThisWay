@@ -197,9 +197,9 @@ function returnToPlan() {
     document.location = "yourday.html";
 }
 
-setInterval(function () {
-    if (soundFile.paused) {
-        playingMusic = false;
-        document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPlayButton.png' height='70px'>";
-    }
-}, 500);
+//setInterval(function () {
+//    if (soundFile.paused) {
+//        playingMusic = false;
+//        document.getElementById('playMusicButton').innerHTML = "<img src='../images/lyricGameUI/lyricPlayButton.png' height='70px'>";
+//    }
+//}, 500);
