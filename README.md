@@ -62,10 +62,11 @@ Beacon Setup:
         }
  - Then change in the displayNearestBeacon function to make your app react to the change in beacon locations
 
-To edit content for games, change the following files to edit the corresponding games
-    - lyrics/lyrics.js
-    - trivia/triviasheet.js
-    - againstthecrowd/crowdanswers.js
+Content:
+  To edit content for games, change the following files to edit the corresponding games
+ - lyrics/lyrics.js
+ - trivia/triviasheet.js
+ - againstthecrowd/crowdanswers.js
 
 
 
