@@ -14,6 +14,27 @@ Watch your sass, js, and html files, and then rebuild the browser (manually refr
 
     gulp
     
+Beacon Setup:
+ - go to  yourday.html
+ - locate the main script portion
+ - locate the variable "mRegions"
+ - To add a beacon to your app, include it's id, uuid, major value, and minor value in the following structure:
+    
+        {
+            id: 'region1',
+            uuid: '7b44b47b-52a1-5381-90c2-f09b6838c5d4',
+            major: 112,
+            minor: 154
+        }
+ - Then change in the displayNearestBeacon function to make your app react to the change in beacon locations
+
+
+To edit content for games, change the following files to edit the corresponding games
+ - lyrics/lyrics.js
+ - trivia/triviasheet.js
+ - againstthecrowd/crowdanswers.js
+
+    
 ## Build
 Setting up cordova Application:
 
@@ -46,27 +67,6 @@ Adding app to a device:
  - Open the app file in either Android Studios or xCode depending on platform
  - Plug in device
  - Run applicaion
-
- 
-Beacon Setup:
- - go to  yourday.html
- - locate the main script portion
- - locate the variable "mRegions"
- - To add a beacon to your app, include it's id, uuid, major value, and minor value in the following structure:
-    
-        {
-            id: 'region1',
-            uuid: '7b44b47b-52a1-5381-90c2-f09b6838c5d4',
-            major: 112,
-            minor: 154
-        }
- - Then change in the displayNearestBeacon function to make your app react to the change in beacon locations
-
-
-To edit content for games, change the following files to edit the corresponding games
- - lyrics/lyrics.js
- - trivia/triviasheet.js
- - againstthecrowd/crowdanswers.js
 
 
 
