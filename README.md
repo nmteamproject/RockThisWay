@@ -52,7 +52,7 @@ Beacon Setup:
  - go to  yourday.html
  - locate the main script portion
  - locate the variable "mRegions"
- - To add a beacon to your app, include it's id, uuid, major valu, and minor value in the following structure:
+ - To add a beacon to your app, include it's id, uuid, major value, and minor value in the following structure:
     
         {
             id: 'region1',
