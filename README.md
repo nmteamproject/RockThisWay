@@ -68,6 +68,25 @@ Adding app to a device:
  - Plug in device
  - Run applicaion
 
+## Plugins:
+Javascript plugins:
+ - Sortable.js: https://github.com/RubaXa/Sortable
+ - JQuery: https://jquery.com/
+
+CSS Plugins: 
+ - Animate.css: https://daneden.github.io/animate.css/
+
+Cordova Plugins:
+ - Statusbar: cordova-plugin-statusbar
+ - Vibration: cordova-plugin-vibration
+ - Splashscreen: cordova-plugin-splashscreen
+ - Whitelist: cordova-plugin-whitelist
+ - Event Notification: de.appplant.cordova.plugin.local-notification
+ - iBeacons: com.unarin.cordova.beacon
+
+Gulp: https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+
+SASS: http://sass-lang.com/documentation/file.SASS_REFERENCE.html
 
 
 
